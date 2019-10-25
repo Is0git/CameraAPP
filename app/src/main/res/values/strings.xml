@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">CameraAPP</string>
     <string name="login">Login</string>
-    <string name="don_t_have_an_account_create_your_account">Don\'t have an account? <font color ='#ffffff'>Create your account.</font> </string>
+    <string name="don_t_have_an_account_create_your_account">Don\'t have an account? <font color ='#f65a5b'>  Create your account.</font> </string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember Me</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="or_login_with">Or Login with</string>
 
 </resources>

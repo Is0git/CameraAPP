@@ -11,4 +11,5 @@
     <color name="colorLightGrey">#e7e7e7</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorLightGrey</color>
     <color name="colorMidDarkText">#262626</color>
+    <color name="colorGrey">#757576</color>
 </resources>
