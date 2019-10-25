@@ -5,6 +5,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:fillViewport="true"
+
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,6 +69,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:inputType="textPassword"
                     android:textSize="@dimen/login_text_input_size"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
