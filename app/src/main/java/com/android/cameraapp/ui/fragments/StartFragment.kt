@@ -23,6 +23,8 @@ class StartFragment : Fragment() {
     ): View? {
         binding = StartFragmentBinding.inflate(inflater, container, false)
         binding.homeButton.setOnClickListener {  onHomeButtonClick()}
+
+        binding.cameraButton.setOnClickListener { navigation.navigate(R.id.action_startFragment_to_cameraFragment) }
         return binding.root
     }
 

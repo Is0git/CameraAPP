@@ -20,9 +20,10 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.main_fragment_container)
         setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setNavigationOnClickListener { navController.navigateUp() }
-        binding.toolbar.setupWithNavController(navController)
-        binding.toolbar.setTitleTextAppearance(applicationContext, R.style.toolbarStyle)
+        binding.toolbar.apply {
+            setupWithNavController(navController)
+            setTitleTextAppearance(applicationContext, R.style.toolbarStyle)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
