@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="onClickLogin"
+            type="com.android.cameraapp.ui.fragments.LoginFragment" />
+    </data>
     <ScrollView
         android:layout_width="match_parent"
         android:fillViewport="true"
@@ -146,13 +151,14 @@
                 android:layout_width="0dp"
                 android:layout_height="65dp"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:elevation="5dp"
                 android:stateListAnimator="@null"
                 android:text="@string/login"
                 android:translationZ="2dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@id/barrier3"
                 tools:targetApi="lollipop" />

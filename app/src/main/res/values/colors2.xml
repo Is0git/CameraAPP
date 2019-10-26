@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorTextHeaderSmall">#c6c9cb</color>
     <color name="colorTextHeaderBig">#ffffff</color>
     <color name="colorTextHeaderMed">#f5f6f6</color>
+    <color name="colorTextUser">#212229</color>
+    <color name="colorHomeLightGrey">#a9abb8</color>
+    <color name="colorHomeDark">#323339</color>
+
 
     <color name="colorPrimary2">#fafafa</color>
     <color name="colorPrimaryVariant2">#ffffff</color>

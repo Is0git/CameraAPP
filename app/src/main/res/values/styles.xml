@@ -40,7 +40,11 @@
         <item name="colorAccent">@color/colorAccent2</item>
         <item name="colorSecondary">@color/colorSecondary2</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant2</item>
+        <item name="colorSurface">@color/colorSurface</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant2</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="toolbarStyle" parent="TextAppearance.MaterialComponents.Body1">
+       <item name="android:textSize">0sp</item>
     </style>
 </resources>
