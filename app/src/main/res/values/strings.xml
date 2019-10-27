@@ -12,5 +12,8 @@
     <string name="photos">Photos</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="repeat_password">Repeat password</string>
 
 </resources>

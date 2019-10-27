@@ -24,6 +24,8 @@
                 android:layout_height="340dp"
                 android:background="@drawable/login_fragment_shape"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:rotationY="180"
+                tools:rotationY="180"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -31,10 +33,12 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="112dp"
+                android:layout_width="180dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="60dp"
-                android:background="@drawable/login_text"
+                android:background="@drawable/register"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
@@ -54,7 +58,8 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/myriadpro"
                 android:scaleY="1.1"
-                android:text="@string/don_t_have_an_account_create_your_account"
+                android:text="Connect to opportunity and build your library!"
+                android:textAlignment="textEnd"
                 android:textColor="@color/colorTextDark"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
@@ -81,12 +86,32 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/repeatPassword"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayout"
+                app:layout_constraintStart_toStartOf="@id/guideline2"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
+                style="@style/TextInputStyle"
+                android:layout_marginTop="35dp"
+                android:hint="@string/repeat_password"
+                app:counterTextColor="@color/colorSecondaryVariant"
+                app:endIconDrawable="@drawable/ic_repeat_black_24dp"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/login_text_input_size" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/user_name_layout"
                 style="@style/TextInputStyle"
                 android:layout_marginTop="50dp"
-                android:hint="@string/username"
+                android:hint="@string/email"
                 app:counterTextColor="@color/colorSecondaryVariant"
-                app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
+                app:endIconDrawable="@drawable/ic_email_black_24dp"
                 app:endIconMode="custom"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="@id/guideline2"
@@ -94,6 +119,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:inputType="textEmailAddress"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/login_text_input_size" />
 
@@ -112,35 +138,19 @@
                 android:layout_height="wrap_content"
                 app:barrierDirection="top" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/forgot_password"
-                android:textAlignment="textEnd"
-                android:textColor="@color/colorMidDarkText"
-                android:textSize="@dimen/regular_text_size"
-                app:layout_constraintBottom_toBottomOf="@+id/checkBox"
-                app:layout_constraintEnd_toEndOf="@id/guideline4"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/checkBox"
-                app:layout_constraintTop_toTopOf="@+id/checkBox" />
-
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:buttonTint="@color/colorTextDark"
-                android:text="@string/remember_me"
+                android:text="I agree to terms and coditions"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorMidDarkText"
                 android:textSize="@dimen/regular_text_size"
-                app:layout_constraintEnd_toStartOf="@+id/textView2"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="@id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/repeatPassword"
                 app:useMaterialThemeColors="true"
                 tools:targetApi="lollipop" />
 
@@ -152,14 +162,17 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
+                android:backgroundTint="@color/colorAccent"
                 android:elevation="5dp"
                 android:stateListAnimator="@null"
-                android:text="@string/login"
+                android:text="@string/register"
                 android:translationZ="2dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline6"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@id/barrier3"
+                app:layout_constraintVertical_bias="0.052"
                 tools:targetApi="lollipop" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -167,97 +180,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="checkBox,textView2"
+                app:constraint_referenced_ids="checkBox"
                 tools:layout_editor_absoluteY="785dp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:text="@string/or_login_with"
-                android:textColor="@color/colorGrey"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/materialButton15"
-                app:layout_constraintEnd_toEndOf="@+id/loginButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/loginButton"
-                app:layout_constraintTop_toBottomOf="@+id/loginButton"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintVertical_chainStyle="spread" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton16"
-                style="@style/AuthButton"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
-                android:elevation="5dp"
-                android:stateListAnimator="@null"
-                android:translationZ="2dp"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
-                app:iconGravity="textStart"
-                app:icon="@drawable/facebook_icon"
-                app:iconSize="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/materialButton15"
-                app:layout_constraintEnd_toStartOf="@+id/materialButton15"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="@+id/loginButton"
-                app:layout_constraintTop_toTopOf="@+id/materialButton15"
-                tools:targetApi="lollipop" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton15"
-                style="@style/AuthButton"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="44dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:elevation="5dp"
-                android:stateListAnimator="@null"
-                android:translationZ="2dp"
-                app:icon="@drawable/twitter_icon"
-                app:iconSize="30dp"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
-                app:iconGravity="textStart"
-                app:layout_constraintBottom_toTopOf="@+id/guideline6"
-                app:layout_constraintEnd_toStartOf="@+id/materialButton17"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/materialButton16"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:layout_constraintVertical_bias="0.0"
-                tools:targetApi="lollipop" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton17"
-                style="@style/AuthButton"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:backgroundTint="@color/colorAccent"
-                android:elevation="5dp"
-                android:stateListAnimator="@null"
-                android:translationZ="2dp"
-                app:icon="@drawable/google_icon"
-                app:iconSize="30dp"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
-                app:iconGravity="textStart"
-                app:layout_constraintBottom_toBottomOf="@+id/materialButton15"
-                app:layout_constraintEnd_toEndOf="@+id/loginButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/materialButton15"
-                app:layout_constraintTop_toTopOf="@+id/materialButton15"
-                tools:targetApi="lollipop" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline6"
@@ -271,7 +195,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="top"
-                app:constraint_referenced_ids="materialButton15,materialButton16,materialButton17"
                 tools:layout_editor_absoluteY="846dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

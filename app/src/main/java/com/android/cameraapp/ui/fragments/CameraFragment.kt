@@ -29,12 +29,17 @@ class CameraFragment : Fragment() {
     ): View? {
         if((activity as MainActivity).binding.toolbar.visibility == View.INVISIBLE) (activity as MainActivity).binding.toolbar.visibility = View.VISIBLE
         binding = CameraFragmentBinding.inflate(inflater, container, false)
+        binding.texture.post {startCamera()}
+
+        binding.texture.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            updateTransform()
+        }
         return binding.root
     }
 
 
     private fun startCamera() {
-        val metrics = DisplayMetrics().also { texture.display.getRealMetrics(it) }
+        val metrics = DisplayMetrics().also { binding.texture.display.getRealMetrics(it) }
         val screenSize = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Size(metrics.widthPixels, metrics.heightPixels)
         } else {
@@ -51,12 +56,14 @@ class CameraFragment : Fragment() {
             setTargetResolution(screenSize)
             setTargetAspectRatio(screenAspectRatio)
             setTargetRotation(activity!!.windowManager.defaultDisplay.rotation)
-            setTargetRotation(texture.display.rotation)
+            setTargetRotation(binding.texture.display.rotation)
         }.build()
 
         val preview = Preview(previewConfig)
         preview.setOnPreviewOutputUpdateListener {
-            texture.surfaceTexture = it.surfaceTexture
+            val parent = binding.texture.parent as ViewGroup
+            parent.removeView(binding.texture)
+            binding.texture.surfaceTexture = it.surfaceTexture
             updateTransform()
         }
 
@@ -66,7 +73,7 @@ class CameraFragment : Fragment() {
             .apply {
                 setLensFacing(lensFacing)
                 setTargetAspectRatio(screenAspectRatio)
-                setTargetRotation(texture.display.rotation)
+                setTargetRotation(binding.texture.display.rotation)
                 setCaptureMode(ImageCapture.CaptureMode.MAX_QUALITY)
             }.build()
 
@@ -103,17 +110,9 @@ class CameraFragment : Fragment() {
 
     private fun updateTransform() {
         val matrix = Matrix()
-        val centerX = texture.width / 2f
-        val centerY = texture.height / 2f
+        val centerX = binding.texture.width / 2f
+        val centerY = binding.texture.height / 2f
 
-        val rotationDegrees = when (texture.display.rotation) {
-            Surface.ROTATION_0 -> 0
-            Surface.ROTATION_90 -> 90
-            Surface.ROTATION_180 -> 180
-            Surface.ROTATION_270 -> 270
-            else -> return
-        }
-        matrix.postRotate(-rotationDegrees.toFloat(), centerX, centerY)
-        texture.setTransform(matrix)
+
     }
 }
