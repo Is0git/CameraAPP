@@ -24,8 +24,8 @@ class LoginFragment : Fragment(), LoginFragmentListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = LoginFragmentBinding.inflate(inflater, container, false)
-        binding.homeFragmentListener = this
-
+        binding.loginFragmentListener = this
+        setRegistrationAnimation()
         return binding.root
     }
 
