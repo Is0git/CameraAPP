@@ -101,7 +101,7 @@
         android:fontFamily="@font/myriadpro"
         android:text="2124"
         android:textAlignment="textEnd"
-        android:textColor="@color/colorSecondary2"
+        android:textColor="@color/colorAccent2"
         android:textSize="@dimen/home_name_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/following_number"
