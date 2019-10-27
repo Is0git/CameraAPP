@@ -1,5 +1,7 @@
 package com.android.cameraapp.ui.fragments
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator.INFINITE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,11 @@ class LoginFragment : Fragment() {
             loginButton.setOnClickListener { navigateToStart() }
             createAccount.setOnClickListener { navigateToRegistration() }
         }
+                ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0f, 1f, 0f).apply {
+            duration = 2500
+            repeatCount = INFINITE
+
+        }.start()
         return binding.root
     }
 
