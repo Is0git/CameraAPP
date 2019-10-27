@@ -141,6 +141,7 @@
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="0sp"
+                android:layout_marginTop="30dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorTextDark"
                 android:text="I agree to terms and coditions"

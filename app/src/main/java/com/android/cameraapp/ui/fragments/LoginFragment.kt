@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
-import com.android.cameraapp.MainActivity
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.LoginFragmentBinding
 
@@ -22,7 +19,10 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = LoginFragmentBinding.inflate(inflater, container, false)
-        binding.loginButton.setOnClickListener { navigateToStart() }
+        binding.apply {
+            loginButton.setOnClickListener { navigateToStart() }
+            createAccount.setOnClickListener { navigateToRegistration() }
+        }
         return binding.root
     }
 
@@ -30,7 +30,12 @@ class LoginFragment : Fragment() {
         navigator = Navigation.findNavController(view)
 
     }
+
     private fun navigateToStart() {
         navigator.navigate(R.id.action_loginFragment_to_startFragment)
+    }
+
+    private fun navigateToRegistration() {
+        navigator.navigate(R.id.action_loginFragment_to_registrationFragment)
     }
 }
