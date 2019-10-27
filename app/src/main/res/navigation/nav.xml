@@ -15,7 +15,7 @@
             app:enterAnim="@anim/exit_scale_animation"
             app:exitAnim="@anim/enter_scale_animation"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="true" />
         <action
             app:enterAnim="@anim/slide_left_animation"
             app:exitAnim="@anim/slide_right_animation"
@@ -29,6 +29,10 @@
         android:name="com.android.cameraapp.ui.fragments.StartFragment"
         android:label="StartFragment" >
         <action
+            app:enterAnim="@anim/exit_scale_animation"
+            app:exitAnim="@anim/enter_scale_animation"
+            app:popEnterAnim="@anim/pop_enter_scale_animation"
+            app:popExitAnim="@anim/pop_exit_scale_animation"
             android:id="@+id/action_startFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action

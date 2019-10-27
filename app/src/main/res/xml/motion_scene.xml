@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <OnSwipe
+            app:touchAnchorId="@id/circleImageView"
+            motion:dragDirection="dragUp"
+            motion:touchAnchorSide="top" />
+    </Transition>
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/circleImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/background"
+            app:civ_border_color="@color/colorSurface"
+            app:civ_border_width="5dp"
+            motion:layout_constraintEnd_toStartOf="@+id/guideline5"
+            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_constraintStart_toStartOf="@+id/guideline"
+            motion:layout_constraintTop_toTopOf="@+id/guideline7" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/circleImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/background"
+            app:civ_border_color="@color/colorSurface"
+            app:civ_border_width="5dp"
+            motion:layout_constraintEnd_toStartOf="@+id/guideline5"
+            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginBottom="500dp"
+            motion:layout_constraintBottom_toTopOf="parent" />
+    </ConstraintSet>
+
+
+</MotionScene>

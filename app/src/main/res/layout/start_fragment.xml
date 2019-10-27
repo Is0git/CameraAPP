@@ -2,14 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:fillViewport="true"
-        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:showPaths="true"
+            app:layoutDescription="@xml/motion_scene"
             android:background="@drawable/background"
             android:orientation="vertical">
 
@@ -20,10 +18,7 @@
                 android:src="@drawable/background"
                 app:civ_border_color="@color/colorSurface"
                 app:civ_border_width="5dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline5"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/guideline7" />
+                 />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -124,7 +119,7 @@
                 app:layout_constraintStart_toEndOf="@+id/home_button"
                 app:layout_constraintTop_toTopOf="@+id/home_button" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
 
 </layout>
