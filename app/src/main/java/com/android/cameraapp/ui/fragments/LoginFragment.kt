@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.fragments
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator.INFINITE
 import android.os.Bundle
@@ -11,8 +12,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.LoginFragmentBinding
+import com.android.cameraapp.ui.listeners.LoginFragmentListener
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LoginFragmentListener {
+
     private lateinit var binding: LoginFragmentBinding
     private lateinit var navigator: NavController
     override fun onCreateView(
@@ -21,15 +24,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = LoginFragmentBinding.inflate(inflater, container, false)
-        binding.apply {
-            loginButton.setOnClickListener { navigateToStart() }
-            createAccount.setOnClickListener { navigateToRegistration() }
-        }
-                ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0f, 1f, 0f).apply {
-            duration = 2500
-            repeatCount = INFINITE
+        binding.homeFragmentListener = this
 
-        }.start()
         return binding.root
     }
 
@@ -45,4 +41,26 @@ class LoginFragment : Fragment() {
     private fun navigateToRegistration() {
         navigator.navigate(R.id.action_loginFragment_to_registrationFragment)
     }
+
+    fun setRegistrationAnimation() {
+        val objectAnimatorPointer =
+            ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0f, 1f, 0f)
+                .also { it.repeatCount = INFINITE }
+        val objectAnimatorTextView =
+            ObjectAnimator.ofFloat(binding.createAccount, "alpha", 0f, 1f, 0f).also { it.repeatCount = INFINITE }
+        val animatorSet = AnimatorSet().apply {
+            playTogether(objectAnimatorPointer, objectAnimatorTextView)
+            duration = 2500
+            start()
+        }
+    }
+
+    override fun onCreateAccountClick(view:View) {
+        navigateToRegistration()
+    }
+
+    override fun onLoginClick(view:View) {
+        navigateToStart()
+    }
+
 }

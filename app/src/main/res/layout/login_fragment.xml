@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="onClickLogin"
-            type="com.android.cameraapp.ui.fragments.LoginFragment" />
+            name="homeFragmentListener"
+            type="com.android.cameraapp.ui.listeners.LoginFragmentListener" />
     </data>
 
     <ScrollView
@@ -51,18 +51,37 @@
                 app:layout_constraintGuide_begin="41dp" />
 
             <TextView
-                android:id="@+id/create_account"
+                android:id="@+id/no_account"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/myriadpro"
                 android:scaleY="1.1"
-                android:text="@string/don_t_have_an_account_create_your_account"
+                android:text="@string/don_t_have_an_account"
                 android:textColor="@color/colorTextDark"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@id/guideline4"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/create_account"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/create_account"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myriadpro"
+                android:scaleY="1.1"
+                android:text="@string/create_your_own_account"
+                android:textAlignment="textEnd"
+                android:onClick="@{homeFragmentListener::onCreateAccountClick}"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/no_account"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/no_account"
+                app:layout_constraintTop_toTopOf="@id/no_account" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
@@ -86,14 +105,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/user_name_layout"
                 style="@style/TextInputStyle"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/username"
                 app:counterTextColor="@color/colorSecondaryVariant"
                 app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
                 app:endIconMode="custom"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="@id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/create_account">
+                app:layout_constraintTop_toTopOf="@id/barrier5"
+                tools:layout_editor_absoluteY="187dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -137,6 +157,7 @@
                 android:rotationX="180"
                 android:rotationY="180"
                 android:tint="@color/colorAccent2"
+                android:onClick="@{homeFragmentListener::onCreateAccountClick}"
                 app:layout_constraintBottom_toTopOf="@+id/create_account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -175,6 +196,7 @@
                 android:elevation="5dp"
                 android:stateListAnimator="@null"
                 android:text="@string/login"
+                android:onClick="@{homeFragmentListener::onLoginClick}"
                 android:translationZ="2dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -299,6 +321,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="create_account,dash_arrow_back" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="no_account,create_account"
+                tools:layout_editor_absoluteY="1276dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
