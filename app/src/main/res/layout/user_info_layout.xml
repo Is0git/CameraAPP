@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:textAlignment="center">
 
 
     <TextView
         android:id="@+id/photos_taken_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/myriadpro"
         android:text="1204"
@@ -19,28 +21,29 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/followers_number"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/photos_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/photos"
         android:textColor="@color/colorHomeLightGrey"
         android:textSize="@dimen/location_textSize"
-        app:layout_constraintEnd_toEndOf="@+id/photos_taken_number"
+        app:layout_constraintEnd_toStartOf="@+id/followers_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/photos_taken_number"
         app:layout_constraintTop_toBottomOf="@id/photos_taken_number" />
 
     <TextView
         android:id="@+id/followers_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/myriadpro"
         android:text="564"
+        android:textAlignment="textStart"
         android:textColor="@color/colorSecondaryVariant2"
         android:textSize="@dimen/home_name_text_size"
         android:textStyle="bold"
@@ -51,22 +54,24 @@
 
     <TextView
         android:id="@+id/followers_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/followers"
+        android:textAlignment="textStart"
         android:textColor="@color/colorHomeLightGrey"
         android:textSize="@dimen/location_textSize"
-        app:layout_constraintEnd_toEndOf="@id/followers_number"
+        app:layout_constraintEnd_toStartOf="@+id/following_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/followers_number"
         app:layout_constraintTop_toBottomOf="@id/followers_number" />
 
     <TextView
         android:id="@+id/following_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/myriadpro"
         android:text="1245"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/home_name_text_size"
         android:textStyle="bold"
@@ -77,23 +82,25 @@
 
     <TextView
         android:id="@+id/following_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/following"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorHomeLightGrey"
         android:textSize="@dimen/location_textSize"
-        app:layout_constraintEnd_toEndOf="@id/following_number"
+        app:layout_constraintEnd_toStartOf="@+id/likes_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/following_number"
         app:layout_constraintTop_toBottomOf="@id/following_number" />
 
     <TextView
         android:id="@+id/likes_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/myriadpro"
         android:text="2124"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorSecondary2"
         android:textSize="@dimen/home_name_text_size"
         android:textStyle="bold"
@@ -104,9 +111,10 @@
 
     <TextView
         android:id="@+id/likes_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Likes"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorHomeLightGrey"
         android:textSize="@dimen/location_textSize"
         app:layout_constraintEnd_toEndOf="@id/likes_number"
