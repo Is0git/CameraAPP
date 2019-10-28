@@ -11,6 +11,6 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
-            tools:listitem="@layout/followers_recyclerview"/>
+            tools:listitem="@layout/likes_recyclerview"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

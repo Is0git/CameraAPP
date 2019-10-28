@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
             android:singleLine="true"
-            android:text="@string/now_follows_you"
+            android:text="@string/like"
             android:textColor="@color/colorGrey"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintBottom_toBottomOf="parent"

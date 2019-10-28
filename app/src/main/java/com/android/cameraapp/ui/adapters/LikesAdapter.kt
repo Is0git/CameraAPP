@@ -9,18 +9,21 @@ class LikesAdapter : RecyclerView.Adapter<LikesAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikesAdapter.MyViewHolder {
-       val binding = FollowersRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            FollowersRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-       return 20
+        return 20
     }
 
     override fun onBindViewHolder(holder: LikesAdapter.MyViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
-    class MyViewHolder(val binding: FollowersRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    class MyViewHolder(val binding: FollowersRecyclerviewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
     }
 }
