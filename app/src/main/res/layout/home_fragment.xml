@@ -1,136 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="@color/colorPrimary2"
+        app:layoutDescription="@xml/home_motion_scene">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="56dp"
+            android:transitionName="user_image"
+            android:elevation="4dp"
+            android:src="@drawable/background"
+            app:civ_border_color="@color/colorSurface"
+            app:civ_border_width="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="69dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="69dp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="Magnus Kekhuis"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextUser"
+            android:textSize="@dimen/home_name_text_size" />
+
+        <TextView
+            android:id="@+id/user_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="Massachusetts, USA"
+            android:textAlignment="center"
+            android:textColor="@color/colorHomeLightGrey"
+            android:textSize="@dimen/location_textSize" />
+
+        <TextView
+            android:id="@+id/user_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/myriadpro"
+            android:lineSpacingExtra="@dimen/description_text_spacing"
+            android:text="In the tumultuos business of cutting in and atteding to a wahle, there is much run."
+            android:textAlignment="center"
+            android:textColor="@color/colorHomeDark" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/top_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary2">
+            android:minHeight="200dp"
+            app:cardCornerRadius="@dimen/materialCard_corner_radius"
+            tools:layout_editor_absoluteX="0dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar_image"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="56dp"
-                android:elevation="4dp"
-                android:src="@drawable/background"
-                app:civ_border_color="@color/colorSurface"
-                app:civ_border_width="5dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="69dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="69dp" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="8dp" />
 
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Magnus Kekhuis"
-                android:textColor="@color/colorTextUser"
-                android:textAlignment="center"
-                android:fontFamily="@font/quicksand"
-                android:textSize="@dimen/home_name_text_size"
-                app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toBottomOf="@+id/avatar_image" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/on_top_card"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="100dp"
+            android:backgroundTint="@color/colorPrimary2"
+            android:minHeight="200dp"
+            app:cardCornerRadius="@dimen/materialCard_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/top_card"
+            tools:targetApi="lollipop">
 
-            <TextView
-                android:id="@+id/user_location"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Massachusetts, USA"
-                android:textSize="@dimen/location_textSize"
-                android:textColor="@color/colorHomeLightGrey"
-                android:textAlignment="center"
-                android:fontFamily="@font/quicksand"
-                app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toBottomOf="@+id/user_name" />
-
-            <TextView
-                android:id="@+id/user_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/myriadpro"
-                android:textColor="@color/colorHomeDark"
-                android:lineSpacingExtra="@dimen/description_text_spacing"
-                android:text="In the tumultuos business of cutting in and atteding to a wahle, there is much run."
-                app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                app:layout_constraintHorizontal_bias="0.498"
-                android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toBottomOf="@+id/user_location" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/top_card"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/data_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:minHeight="200dp"
-                app:cardCornerRadius="@dimen/materialCard_corner_radius"
-                app:layout_constraintTop_toBottomOf="@+id/user_description"
-                tools:layout_editor_absoluteX="0dp">
+                android:layout_height="match_parent" />
+        </com.google.android.material.card.MaterialCardView>
 
-<!--                <include-->
-<!--                    android:id="@+id/user_info"-->
-<!--                    layout="@layout/user_info_layout"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_marginTop="25dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_gravity="center_horizontal" />-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="45dp" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/toolbar"
-                    android:layout_height="wrap_content"/>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="100dp"
-                android:backgroundTint="@color/colorPrimary2"
-                android:minHeight="200dp"
-                app:cardCornerRadius="@dimen/materialCard_corner_radius"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/top_card"
-                tools:targetApi="lollipop">
-
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/data_viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </com.google.android.material.card.MaterialCardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

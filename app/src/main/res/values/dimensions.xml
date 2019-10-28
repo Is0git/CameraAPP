@@ -9,4 +9,5 @@
     <dimen name="location_textSize">16sp</dimen>
     <dimen name="description_text_spacing">10dp</dimen>
     <dimen name="materialCard_corner_radius">27dp</dimen>
+    <dimen name="smallest_text">12sp</dimen>
 </resources>

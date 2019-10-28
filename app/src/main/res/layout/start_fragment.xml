@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -14,9 +15,13 @@
             android:id="@+id/circleImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:transitionName="user_image"
             android:src="@drawable/background"
             app:civ_border_color="@color/colorSurface"
-            app:civ_border_width="5dp" />
+            app:civ_border_width="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/topText"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="35dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -28,11 +33,14 @@
         <TextView
             android:id="@+id/topText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
             android:text="The monkey-rope is found in all whalers"
             android:textColor="@color/colorTextHeaderSmall"
-            android:textSize="@dimen/regular_text_size" />
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/midText"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView"
+            tools:layout_editor_absoluteX="35dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
@@ -46,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="159dp" />
+            app:layout_constraintGuide_percent="0.11" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
@@ -57,23 +65,29 @@
 
         <TextView
 
+            android:id="@+id/midText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
             android:lineSpacingExtra="10dp"
             android:text="In the tumultuous business of cuttin."
             android:textColor="@color/colorTextHeaderBig"
             android:textSize="@dimen/header_text_big"
-            android:id="@+id/midText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            app:layout_constraintBottom_toTopOf="@+id/bottomText"
+            app:layout_constraintTop_toBottomOf="@+id/topText"
+            tools:layout_editor_absoluteX="35dp" />
 
         <TextView
             android:id="@+id/bottomText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
             android:text="--------------- Sea world"
             android:textColor="@color/colorTextHeaderMed"
-            android:textSize="@dimen/regular_text_size" />
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/home_button"
+            app:layout_constraintTop_toBottomOf="@+id/midText"
+            tools:layout_editor_absoluteX="35dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/home_button"
@@ -82,18 +96,23 @@
             android:layout_height="62dp"
             android:backgroundTint="@color/colorAccent2"
             android:fontFamily="@font/myriadpro"
-            android:text="HOME SCREEN" />
+            android:text="HOME SCREEN"
+            app:layout_constraintBottom_toBottomOf="@id/guideline8"
+            app:layout_constraintTop_toBottomOf="@+id/bottomText"
+            tools:layout_editor_absoluteX="35dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/camera_button"
             style="@style/AppButton"
             android:layout_width="58dp"
-            android:outlineSpotShadowColor="@color/colorHomeDark"
-            android:outlineAmbientShadowColor="@color/colorHomeDark"
             android:layout_height="63dp"
             android:fontFamily="@font/myriadpro"
             android:gravity="top"
-            android:text="CAMERA" />
+            android:outlineAmbientShadowColor="@color/colorHomeDark"
+            android:outlineSpotShadowColor="@color/colorHomeDark"
+            android:text="CAMERA"
+            app:layout_constraintTop_toTopOf="@+id/home_button"
+            tools:layout_editor_absoluteX="279dp" />
 
 
         <View
@@ -103,5 +122,4 @@
             android:background="@color/colorHomeDark" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
-
 </layout>
