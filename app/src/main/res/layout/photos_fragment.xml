@@ -9,6 +9,6 @@
         android:id="@+id/photos_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:itemCount="25"
+        tools:itemCount="24"
         tools:listitem="@layout/photos_list_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
