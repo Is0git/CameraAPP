@@ -10,4 +10,6 @@
     <dimen name="description_text_spacing">10dp</dimen>
     <dimen name="materialCard_corner_radius">27dp</dimen>
     <dimen name="smallest_text">12sp</dimen>
+    <dimen name="home_recyclerView_name">16sp</dimen>
+    <dimen name="home_recyclerView_subText">14sp</dimen>
 </resources>
