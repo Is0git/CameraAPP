@@ -15,6 +15,7 @@ class HomeViewPagerAdapter(manager: FragmentManager, val context:Context) : Frag
        return when(position) {
            0 -> PhotoViewPagerFragment()
            1 -> FollowersFragment()
+           2 -> FollowersFragment()
            3 -> LikesFragment()
            else -> LoginFragment()
        }

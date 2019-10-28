@@ -19,5 +19,6 @@
     <string name="create_your_own_account">Create your own account.</string>
     <string name="like">like</string>
     <string name="now_follows_you">Now follows you!</string>
+    <string name="you_are_now_following">You are now following!</string>
 
 </resources>
