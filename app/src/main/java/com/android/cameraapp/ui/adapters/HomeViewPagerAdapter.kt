@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.android.cameraapp.R
+import com.android.cameraapp.ui.fragments.FollowersFragment
 import com.android.cameraapp.ui.fragments.LikesFragment
 import com.android.cameraapp.ui.fragments.LoginFragment
 import com.android.cameraapp.ui.fragments.PhotoViewPagerFragment
@@ -13,6 +14,7 @@ class HomeViewPagerAdapter(manager: FragmentManager, val context:Context) : Frag
     override fun getItem(position: Int): Fragment {
        return when(position) {
            0 -> PhotoViewPagerFragment()
+           1 -> FollowersFragment()
            3 -> LikesFragment()
            else -> LoginFragment()
        }

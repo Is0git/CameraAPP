@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.cameraapp.databinding.FollowersFragmentBinding
 import com.android.cameraapp.databinding.LikesFragmentBinding
+import com.android.cameraapp.ui.adapters.FollowersAdapter
 import com.android.cameraapp.ui.adapters.LikesAdapter
 
 class FollowersFragment : Fragment() {
@@ -17,7 +18,7 @@ class FollowersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FollowersFragmentBinding.inflate(inflater, container, false)
-        binding.followersRecyclerView.adapter = LikesAdapter()
+        binding.followersRecyclerView.adapter = FollowersAdapter()
         return binding.root
     }
 }

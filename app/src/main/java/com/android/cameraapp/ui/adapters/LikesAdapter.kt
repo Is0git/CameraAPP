@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.databinding.FollowersRecyclerviewBinding
+import com.android.cameraapp.databinding.LikesRecyclerviewBinding
 
 class LikesAdapter : RecyclerView.Adapter<LikesAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikesAdapter.MyViewHolder {
         val binding =
-            FollowersRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            LikesRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
@@ -22,7 +23,7 @@ class LikesAdapter : RecyclerView.Adapter<LikesAdapter.MyViewHolder>() {
 
     }
 
-    class MyViewHolder(val binding: FollowersRecyclerviewBinding) :
+    class MyViewHolder(val binding: LikesRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }
