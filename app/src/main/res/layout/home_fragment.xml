@@ -95,13 +95,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/user_description"
                 tools:layout_editor_absoluteX="0dp">
 
-                <include
-                    android:id="@+id/user_info"
-                    layout="@layout/user_info_layout"
+<!--                <include-->
+<!--                    android:id="@+id/user_info"-->
+<!--                    layout="@layout/user_info_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginTop="25dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center_horizontal" />-->
+
+                <com.google.android.material.tabs.TabLayout
                     android:layout_width="match_parent"
-                    android:layout_marginTop="25dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal" />
+                    android:id="@+id/toolbar"
+                    android:layout_height="wrap_content"/>
 
 
             </com.google.android.material.card.MaterialCardView>
@@ -120,14 +125,10 @@
                 app:layout_constraintTop_toTopOf="@+id/top_card"
                 tools:targetApi="lollipop">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:id="@+id/photos_recyclerView"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/data_viewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:itemCount="25"
-                    tools:listitem="@layout/photos_list_layout" />
+                    android:layout_height="match_parent"/>
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

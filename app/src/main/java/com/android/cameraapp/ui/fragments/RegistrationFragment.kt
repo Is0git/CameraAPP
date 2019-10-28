@@ -26,7 +26,7 @@ class RegistrationFragment : Fragment() {
         binding.dashArrowBack.setOnClickListener { navigator.navigateUp() }
 
         //flick animation
-        ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0f, 1f, 0f).apply {
+        ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0.1f, 1f, 0.1f).apply {
             duration = 2500
             repeatCount = INFINITE
 

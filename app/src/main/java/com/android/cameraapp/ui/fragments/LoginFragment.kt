@@ -44,10 +44,10 @@ class LoginFragment : Fragment(), LoginFragmentListener {
 
     fun setRegistrationAnimation() {
         val objectAnimatorPointer =
-            ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0f, 1f, 0f)
+            ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0.1f, 1f, 0.1f)
                 .also { it.repeatCount = INFINITE }
         val objectAnimatorTextView =
-            ObjectAnimator.ofFloat(binding.createAccount, "alpha", 0f, 1f, 0f).also { it.repeatCount = INFINITE }
+            ObjectAnimator.ofFloat(binding.createAccount, "alpha", 0.1f, 1f, 0.1f).also { it.repeatCount = INFINITE }
         val animatorSet = AnimatorSet().apply {
             playTogether(objectAnimatorPointer, objectAnimatorTextView)
             duration = 2500
@@ -62,5 +62,7 @@ class LoginFragment : Fragment(), LoginFragmentListener {
     override fun onLoginClick(view:View) {
         navigateToStart()
     }
+
+
 
 }

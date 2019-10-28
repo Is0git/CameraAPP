@@ -88,6 +88,8 @@
             android:id="@+id/camera_button"
             style="@style/AppButton"
             android:layout_width="58dp"
+            android:outlineSpotShadowColor="@color/colorHomeDark"
+            android:outlineAmbientShadowColor="@color/colorHomeDark"
             android:layout_height="63dp"
             android:fontFamily="@font/myriadpro"
             android:gravity="top"
