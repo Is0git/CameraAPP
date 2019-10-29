@@ -5,7 +5,7 @@
     <data>
         <variable
             name="onClickLogin"
-            type="com.android.cameraapp.ui.fragments.LoginFragment" />
+            type="com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment" />
     </data>
     <ScrollView
         android:layout_width="match_parent"

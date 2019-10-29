@@ -1,4 +1,4 @@
-package com.android.cameraapp.ui.fragments
+package com.android.cameraapp.ui.base_activity.photos_fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.android.cameraapp.databinding.PhotosFragmentBinding
-import com.android.cameraapp.ui.adapters.PhotosAdapter
-import java.sql.Struct
 
-class PhotoViewPagerFragment : Fragment() {
+class PhotosFragment : Fragment() {
     lateinit var binding: PhotosFragmentBinding
 
     override fun onCreateView(
@@ -90,6 +86,10 @@ class PhotoViewPagerFragment : Fragment() {
             "https://fsa.zobj.net/crop.php?r=bH4C9LIr2dJlKebIulWa2KLxNCtswrhpREnyfXHr-gjRNZVqQGhAPMPKSWfIzOpsEZcqV6lj98CJRJVx5KrYWxv46DxjLINR4APaZJbMg4BWBltdX4xEa3rdyE5i13A1tuG3Ybo2jC6XtJUUsMpNFIZTp7W9FapaKxSwhCo7IED-yF1STvxoIqsHzEE",
             "https://i.imgur.com/ZerwVp3.jpg",
             "https://www.setaswall.com/wp-content/uploads/2017/10/Blue-Wallpaper-1080x1920-380x676.jpg")
-        binding.photosRecyclerView.adapter = PhotosAdapter(list, activity?.applicationContext!!)
+        binding.photosRecyclerView.adapter =
+            PhotosAdapter(
+                list,
+                activity?.applicationContext!!
+            )
     }
 }

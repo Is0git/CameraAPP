@@ -1,4 +1,4 @@
-package com.android.cameraapp.ui.fragments
+package com.android.cameraapp.ui.base_activity.login_fragment
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -12,9 +12,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.LoginFragmentBinding
-import com.android.cameraapp.ui.listeners.LoginFragmentListener
 
-class LoginFragment : Fragment(), LoginFragmentListener {
+class LoginFragment : Fragment(),
+    LoginFragmentListener {
 
     private lateinit var binding: LoginFragmentBinding
     private lateinit var navigator: NavController

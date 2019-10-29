@@ -1,9 +1,7 @@
-package com.android.cameraapp.ui.fragments
+package com.android.cameraapp.ui.base_activity.registration_fragment
 
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.animation.ValueAnimator.INFINITE
-import android.animation.ValueAnimator.RESTART
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

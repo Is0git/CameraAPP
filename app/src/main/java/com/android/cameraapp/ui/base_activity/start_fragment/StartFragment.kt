@@ -1,4 +1,4 @@
-package com.android.cameraapp.ui.fragments
+package com.android.cameraapp.ui.base_activity.start_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.ui.NavigationUI
-import com.android.cameraapp.MainActivity
-import com.android.cameraapp.R
+import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.databinding.StartFragmentBinding
-
-import android.transition.ChangeBounds
-import android.transition.ChangeImageTransform
-import android.transition.TransitionSet
 
 
 class StartFragment : Fragment() {
@@ -48,6 +41,6 @@ class StartFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if((activity as MainActivity).binding.toolbar.visibility == View.VISIBLE) (activity as MainActivity).binding.toolbar.visibility = View.INVISIBLE
+        if((activity as BaseActivity).binding.toolbar.visibility == View.VISIBLE) (activity as BaseActivity).binding.toolbar.visibility = View.INVISIBLE
     }
 }

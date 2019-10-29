@@ -1,17 +1,19 @@
-package com.android.cameraapp.ui.adapters
+package com.android.cameraapp.ui.base_activity.likes_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.cameraapp.databinding.FollowersRecyclerviewBinding
+import com.android.cameraapp.databinding.LikesRecyclerviewBinding
 
-class FollowersAdapter : RecyclerView.Adapter<FollowersAdapter.MyViewHolder>() {
+class LikesAdapter : RecyclerView.Adapter<LikesAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
-            FollowersRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+            LikesRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(
+            binding
+        )
     }
 
     override fun getItemCount(): Int {
@@ -22,7 +24,7 @@ class FollowersAdapter : RecyclerView.Adapter<FollowersAdapter.MyViewHolder>() {
 
     }
 
-    class MyViewHolder(val binding: FollowersRecyclerviewBinding) :
+    class MyViewHolder(val binding: LikesRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }

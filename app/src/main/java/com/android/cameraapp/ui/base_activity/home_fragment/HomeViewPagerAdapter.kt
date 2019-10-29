@@ -1,16 +1,19 @@
-package com.android.cameraapp.ui.adapters
+package com.android.cameraapp.ui.base_activity.home_fragment
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.android.cameraapp.R
-import com.android.cameraapp.ui.fragments.*
+import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
+import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
+import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragment
+import com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment
+import com.android.cameraapp.ui.base_activity.photos_fragment.PhotosFragment
 
 class HomeViewPagerAdapter(manager: FragmentManager, val context:Context) : FragmentPagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(position: Int): Fragment {
        return when(position) {
-           0 -> PhotoViewPagerFragment()
+           0 -> PhotosFragment()
            1 -> FollowersFragment()
            2 -> FollowingFragment()
            3 -> LikesFragment()

@@ -1,9 +1,8 @@
-package com.android.cameraapp.ui.adapters
+package com.android.cameraapp.ui.base_activity.following_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.cameraapp.databinding.FollowersRecyclerviewBinding
 import com.android.cameraapp.databinding.FollowingRecyclerviewBinding
 
 class FollowingAdapter : RecyclerView.Adapter<FollowingAdapter.MyViewHolder>() {
@@ -12,7 +11,9 @@ class FollowingAdapter : RecyclerView.Adapter<FollowingAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
             FollowingRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+        return MyViewHolder(
+            binding
+        )
     }
 
     override fun getItemCount(): Int {

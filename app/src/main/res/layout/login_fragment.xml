@@ -7,7 +7,7 @@
 
         <variable
             name="loginFragmentListener"
-            type="com.android.cameraapp.ui.listeners.LoginFragmentListener" />
+            type="com.android.cameraapp.ui.base_activity.login_fragment.LoginFragmentListener" />
     </data>
 
     <ScrollView

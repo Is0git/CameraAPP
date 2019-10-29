@@ -1,4 +1,4 @@
-package com.android.cameraapp
+package com.android.cameraapp.ui.base_activity
 
 import android.os.Bundle
 import android.view.Menu
@@ -8,9 +8,10 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class BaseActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var appBarConfiguration: AppBarConfiguration
