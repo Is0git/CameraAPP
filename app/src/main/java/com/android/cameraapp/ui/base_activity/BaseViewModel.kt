@@ -11,7 +11,7 @@ class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewMo
 
     lateinit var states: LiveData<UserAuthStates>
 
-    fun logIn(email:String, password:String) = repository.logIn(email, password)
+    fun logIn(email:String?, password:String?) = repository.logIn(email, password)
 
     fun getUserNetworkStates() : LiveData<UserAuthStates> {
         states = repository.user_state

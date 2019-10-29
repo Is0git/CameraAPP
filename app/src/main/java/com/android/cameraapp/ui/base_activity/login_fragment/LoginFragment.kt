@@ -69,8 +69,9 @@ class LoginFragment : DaggerFragment(),
     }
 
     override fun onLoginClick(view:View) {
-//        navigateToStart()
-        baseViewModel.logIn("dis0x.stream@gmail.com",   "test123")
+        val username:String? = binding.usernameEditText.text.toString()
+        val password:String? = binding.passwordEditText.text.toString()
+        baseViewModel.logIn(username, password)
     }
 
 

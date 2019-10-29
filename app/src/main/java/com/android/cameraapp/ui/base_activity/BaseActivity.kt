@@ -55,4 +55,5 @@ class BaseActivity : DaggerAppCompatActivity() {
 
 }
 
-//FIGURE OUT how to inject nav controller in repository, because AndroidInjector is before setContentView. Implementing has injector and putting after setContentView makes Dagger act weird!!!
+//FIGURE OUT how to inject nav controller in repository cause AndroidInjector is before setContentView and NavController needs view.
+// Implementing HasInjector and putting  injector after setContentView makes Dagger act weird!!!

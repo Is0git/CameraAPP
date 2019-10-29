@@ -13,7 +13,7 @@ class BaseRepository @Inject constructor(
     val auth: FirebaseAuth,
     val application: Application
 ) {
-    lateinit var listener: FirebaseAuth.AuthStateListener
+    var listener: FirebaseAuth.AuthStateListener
     var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
 
     init {
@@ -28,10 +28,12 @@ class BaseRepository @Inject constructor(
 
     }
 
-    fun logIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener { ToastHandler.showToast(application, "LOGGED IN") }
-            .addOnFailureListener { ToastHandler.showToast(application, "${it.message}") }
+    fun logIn(email: String?, password: String?) {
+        if (email.isNullOrBlank() || password.isNullOrBlank()) ToastHandler.showToast(application, "You need to fill all fields") else {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener { ToastHandler.showToast(application, "LOGGED IN") }
+                .addOnFailureListener { ToastHandler.showToast(application, "${it.message}") }
+        }
     }
 
     fun removeListener() {
