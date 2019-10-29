@@ -10,9 +10,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Module(includes = [FragmentsBuilder::class])
+@Module
 abstract class ActivityBuilder {
-    @ContributesAndroidInjector(modules = [FirebaseAuthModule::class, NavigationModule::class, BaseViewModelModule::class])
+    @ContributesAndroidInjector(modules = [FirebaseAuthModule::class, NavigationModule::class, BaseViewModelModule::class, FragmentsBuilder::class])
     @BaseActivityScope
     abstract fun baseActivity() : BaseActivity
 }
