@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            app:enterAnim="@anim/slide_left_animation"
+            app:exitAnim="@anim/slide_right_animation"
+            app:popEnterAnim="@anim/pop_back_left_animation"
+            app:popExitAnim="@anim/pop_back_right_animation"
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.android.cameraapp.ui.base_activity.registration_fragment.RegistrationFragment"
+        android:label="RegistrationFragment" />
+</navigation>
