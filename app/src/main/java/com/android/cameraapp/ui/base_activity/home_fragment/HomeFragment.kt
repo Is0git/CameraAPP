@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.HomeFragmentBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class HomeFragment : DaggerFragment() {
     lateinit var binding: HomeFragmentBinding
@@ -26,6 +29,8 @@ class HomeFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
+
+
         setViewPagerWithToolbar()
         return binding.root
     }

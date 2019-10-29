@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator.INFINITE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class LoginFragment : DaggerFragment(),
         binding = LoginFragmentBinding.inflate(inflater, container, false)
         binding.loginFragmentListener = this
         setRegistrationAnimation()
+        Log.d("VTAG", "TAG")
         return binding.root
     }
 

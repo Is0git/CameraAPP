@@ -10,12 +10,16 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.databinding.StartFragmentBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 
 class StartFragment : DaggerFragment() {
 
   lateinit var binding: StartFragmentBinding
+    @Inject
+    lateinit var auth: FirebaseAuth
     lateinit var navigation: NavController
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +28,7 @@ class StartFragment : DaggerFragment() {
     ): View? {
         binding = StartFragmentBinding.inflate(inflater, container, false)
         binding.homeButton.setOnClickListener {  onHomeButtonClick()}
-
+        binding.circleImageView.setOnClickListener { auth.signOut() }
 
         return binding.root
     }

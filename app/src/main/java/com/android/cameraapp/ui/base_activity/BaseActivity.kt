@@ -33,6 +33,7 @@ class BaseActivity : DaggerAppCompatActivity() {
 
             navController = findNavController(R.id.main_fragment_container)
         setSupportActionBar(binding.toolbar)
+
         binding.toolbar.apply {
             setupWithNavController(navController)
             setTitleTextAppearance(applicationContext, R.style.toolbarStyle)
@@ -45,9 +46,10 @@ class BaseActivity : DaggerAppCompatActivity() {
     }
 
     private fun resolveStates(states:UserAuthStates) {
-        when(states) {
-            UserAuthStates.NOT_LOGGED_IN ->  navController.setGraph(R.navigation.auth_graph)
-            UserAuthStates.LOGGED_IN ->  navController.setGraph(R.navigation.main_nav)
+        when {
+            // It has to check if we aren't using same graph in order to prevent wasting resources duplicating fragments
+            states == UserAuthStates.NOT_LOGGED_IN && navController.graph.id != R.id.auth_nav  ->  navController.setGraph(R.navigation.auth_nav)
+            states == UserAuthStates.LOGGED_IN &&  navController.graph.id != R.id.nav ->  navController.setGraph(R.navigation.main_nav)
         }
     }
 

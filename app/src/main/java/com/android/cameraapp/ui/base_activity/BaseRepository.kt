@@ -2,10 +2,7 @@ package com.android.cameraapp.ui.base_activity
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import com.android.cameraapp.R
 import com.android.cameraapp.di.scopes.BaseActivityScope
 import com.android.cameraapp.util.ToastHandler
 import com.android.cameraapp.util.UserAuthStates
@@ -18,19 +15,18 @@ class BaseRepository @Inject constructor(
     val application: Application
 ) {
     lateinit var listener: FirebaseAuth.AuthStateListener
-    var user_state:MutableLiveData<UserAuthStates> = MutableLiveData()
+    var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
+
     init {
+        //Changing main_nav graphs depending on if user is logged in or
 
-        Log.d("REPO", "CREATE")
-        //Changing main_nav graphs depending on if user is logged in or not
+        auth.addAuthStateListener {
 
+            if (it.currentUser == null ) user_state.postValue(UserAuthStates.NOT_LOGGED_IN) else user_state.postValue(
+                UserAuthStates.LOGGED_IN
+            )
 
-            auth.addAuthStateListener {
-                Log.d("REPO", "CREATEDr")
-                if (it.currentUser == null) user_state.postValue(UserAuthStates.NOT_LOGGED_IN) else user_state.postValue(UserAuthStates.LOGGED_IN)
-
-            }
-
+        }
 
 
     }
