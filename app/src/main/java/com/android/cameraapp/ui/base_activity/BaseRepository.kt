@@ -36,7 +36,7 @@ class BaseRepository @Inject constructor(
             .addOnFailureListener { ToastHandler.showToast(application, "${it.message}") }
     }
 
-    fun unsubscribeListener() {
+    fun removeListener() {
         auth.removeAuthStateListener(listener)
     }
 }
