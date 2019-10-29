@@ -11,6 +11,7 @@
         <ImageView
             android:id="@+id/AuthorName"
             android:layout_width="match_parent"
+            android:background="@drawable/background"
             android:layout_height="250dp"
             android:adjustViewBounds="true"
             tools:ignore="ContentDescription" />
