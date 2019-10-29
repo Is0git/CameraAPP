@@ -29,29 +29,9 @@ class PhotosAdapter(val data: List<String>, val context: Context) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         Log.d("TEST", "${data[position]}")
         Glide.with(context).load(data[position]).centerCrop()
-            .addListener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    Log.d("TAG", "FALSE")
-                    return true
-                }
 
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    Log.d("TAG", "SUCCESS")
-                    return true
-                }
 
-            }).into(holder.binding.AuthorName)
+            .into(holder.binding.AuthorName)
     }
 
     class MyViewHolder(val binding: PhotosListLayoutBinding) :

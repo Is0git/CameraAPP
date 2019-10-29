@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="100dp"
-            android:backgroundTint="@color/colorPrimary2"
+            android:backgroundTint="@color/colorLightGrey"
             android:minHeight="200dp"
             app:cardCornerRadius="@dimen/materialCard_corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"

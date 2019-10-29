@@ -6,20 +6,16 @@
         app:autoTransition="none"
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@id/start"
+        app:motionInterpolator="easeIn"
         app:duration="1200">
         <OnSwipe
             app:dragDirection="dragUp"
-            app:moveWhenScrollAtTop="false"
-            app:touchAnchorId="@id/top_card"
+
+            app:maxAcceleration="100"
+            app:touchAnchorId="@id/on_top_card"
             app:touchAnchorSide="top" />
 
-        <KeyFrameSet>
-            <KeyAttribute
-                android:scaleX="5"
-                android:scaleY="5"
-                motion:framePosition="50"
-                motion:motionTarget="@id/top_card"/>
-        </KeyFrameSet>
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">

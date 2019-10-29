@@ -5,16 +5,14 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    app:cardCornerRadius="10dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="10dp"
     android:background="@color/colorPrimary2"
-    android:layout_height="wrap_content">
+    android:layout_height="250dp">
 
         <ImageView
             android:id="@+id/AuthorName"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:adjustViewBounds="true"
             tools:ignore="ContentDescription" />
 
 

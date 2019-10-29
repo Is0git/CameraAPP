@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         navController = findNavController(R.id.main_fragment_container)
         setSupportActionBar(binding.toolbar)
-
         binding.toolbar.apply {
             setupWithNavController(navController)
             setTitleTextAppearance(applicationContext, R.style.toolbarStyle)
