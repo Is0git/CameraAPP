@@ -1,7 +1,6 @@
 package com.android.cameraapp.ui.base_activity
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.di.scopes.BaseActivityScope
 import com.android.cameraapp.util.ToastHandler
@@ -19,14 +18,12 @@ class BaseRepository @Inject constructor(
 
     init {
         //Changing main_nav graphs depending on if user is logged in or
-
-        auth.addAuthStateListener {
-
-            if (it.currentUser == null ) user_state.postValue(UserAuthStates.NOT_LOGGED_IN) else user_state.postValue(
+        listener = FirebaseAuth.AuthStateListener {
+            if (it.currentUser == null) user_state.postValue(UserAuthStates.NOT_LOGGED_IN) else user_state.postValue(
                 UserAuthStates.LOGGED_IN
             )
-
         }
+        auth.addAuthStateListener(listener)
 
 
     }

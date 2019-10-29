@@ -35,7 +35,6 @@ class LoginFragment : DaggerFragment(),
         binding = LoginFragmentBinding.inflate(inflater, container, false)
         binding.loginFragmentListener = this
         setRegistrationAnimation()
-        Log.d("VTAG", "TAG")
         return binding.root
     }
 
