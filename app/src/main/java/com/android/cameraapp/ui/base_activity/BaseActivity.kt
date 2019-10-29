@@ -4,23 +4,31 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
-import dagger.android.DaggerActivity
+import com.android.nbaapp.data.vms.ViewModelFactory
+import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class BaseActivity : DaggerAppCompatActivity() {
+class BaseActivity :AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var baseViewModel: BaseViewModel
+    @Inject
     lateinit var navController: NavController
-    lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        navController = findNavController(R.id.main_fragment_container)
+        AndroidInjection.inject(this)
+        baseViewModel = ViewModelProviders.of(this, viewModelFactory).get(BaseViewModel::class.java)
+
+
+
         setSupportActionBar(binding.toolbar)
         binding.toolbar.apply {
             setupWithNavController(navController)
@@ -32,4 +40,5 @@ class BaseActivity : DaggerAppCompatActivity() {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }
+
 }

@@ -35,9 +35,9 @@ class LoginFragment : DaggerFragment(),
 
     }
 
-    private fun navigateToStart() {
-        navigator.navigate(R.id.action_loginFragment_to_startFragment)
-    }
+//    private fun navigateToStart() {
+//        navigator.navigate(R.id.action_loginFragment_to_startFragment)
+//    }
 
     private fun navigateToRegistration() {
         navigator.navigate(R.id.action_loginFragment_to_registrationFragment)
@@ -61,7 +61,7 @@ class LoginFragment : DaggerFragment(),
     }
 
     override fun onLoginClick(view:View) {
-        navigateToStart()
+//        navigateToStart()
     }
 
 

@@ -14,9 +14,6 @@ object FirebaseAuthModule {
     @BaseActivityScope
     fun getFirebaseAuth() : FirebaseAuth = FirebaseAuth.getInstance()
 
-    @Provides
-    @BaseActivityScope
-    @JvmStatic
-    fun getFirebaseCurrentUser(auth: FirebaseAuth) : FirebaseUser? = auth.currentUser
+
 
 }

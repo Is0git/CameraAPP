@@ -1,17 +1,16 @@
 package com.android.cameraapp.ui.base_activity
 
 import android.app.Application
+import android.util.Log
 import androidx.navigation.NavController
 import com.android.cameraapp.R
 import com.android.cameraapp.di.scopes.BaseActivityScope
 import com.android.cameraapp.util.ToastHandler
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
 @BaseActivityScope
 class BaseRepository @Inject constructor(
-    val user: FirebaseUser,
     val auth: FirebaseAuth,
     val navController: NavController,
     val application: Application
@@ -19,14 +18,23 @@ class BaseRepository @Inject constructor(
     lateinit var listener: FirebaseAuth.AuthStateListener
 
     init {
-        //Changing nav graphs depending on if user is logged in or not
-        listener = FirebaseAuth.AuthStateListener {
-            if (it.currentUser != null) navController.setGraph(R.navigation.auth_graph) else navController.setGraph(
-                R.navigation.nav
-            )
-            auth.addAuthStateListener { listener }
 
-        }
+        Log.d("REPO", "CREATE")
+        //Changing nav graphs depending on if user is logged in or not
+
+
+            auth.addAuthStateListener {
+                Log.d("REPO", "CREATEDr")
+                if (it.currentUser == null) {
+                    navController.setGraph(R.navigation.auth_graph)
+                    Log.d("REPO", "CREATED")
+                }  else {navController.setGraph(
+                R.navigation.nav
+                )
+                Log.d("REPO", "CREATEDs")}
+            }
+
+
 
     }
 
