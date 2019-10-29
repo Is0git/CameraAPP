@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.cameraapp.databinding.FollowersFragmentBinding
+import dagger.android.support.DaggerFragment
 
-class FollowersFragment : Fragment() {
+class FollowersFragment : DaggerFragment() {
     lateinit var binding: FollowersFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,

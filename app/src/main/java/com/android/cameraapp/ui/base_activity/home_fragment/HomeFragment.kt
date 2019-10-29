@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.HomeFragmentBinding
+import dagger.android.support.DaggerFragment
 
-class HomeFragment : Fragment() {
+class HomeFragment : DaggerFragment() {
     lateinit var binding: HomeFragmentBinding
     lateinit var viewPagerAdapter: HomeViewPagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {

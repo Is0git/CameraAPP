@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.cameraapp.databinding.PhotosFragmentBinding
+import dagger.android.support.DaggerFragment
 
-class PhotosFragment : Fragment() {
+class PhotosFragment : DaggerFragment() {
     lateinit var binding: PhotosFragmentBinding
 
     override fun onCreateView(

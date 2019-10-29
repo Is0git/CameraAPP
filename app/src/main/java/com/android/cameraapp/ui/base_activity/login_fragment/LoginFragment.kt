@@ -12,8 +12,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.LoginFragmentBinding
+import dagger.android.support.DaggerFragment
 
-class LoginFragment : Fragment(),
+class LoginFragment : DaggerFragment(),
     LoginFragmentListener {
 
     private lateinit var binding: LoginFragmentBinding

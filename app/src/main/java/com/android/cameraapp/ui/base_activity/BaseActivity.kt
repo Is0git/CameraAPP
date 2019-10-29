@@ -10,8 +10,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
+import dagger.android.DaggerActivity
+import dagger.android.support.DaggerAppCompatActivity
 
-class BaseActivity : AppCompatActivity() {
+class BaseActivity : DaggerAppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var appBarConfiguration: AppBarConfiguration

@@ -11,8 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.android.cameraapp.databinding.RegistrationFragmentBinding
+import dagger.android.support.DaggerFragment
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : DaggerFragment() {
     lateinit var binding:RegistrationFragmentBinding
     lateinit var navigator:NavController
     override fun onCreateView(

@@ -10,9 +10,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.databinding.StartFragmentBinding
+import dagger.android.support.DaggerFragment
 
 
-class StartFragment : Fragment() {
+class StartFragment : DaggerFragment() {
 
   lateinit var binding: StartFragmentBinding
     lateinit var navigation: NavController
