@@ -7,4 +7,6 @@ interface LoginFragmentListener {
 
     fun onLoginClick(view:View)
 
+    fun onGoogleSignInClick(view: View)
+
 }

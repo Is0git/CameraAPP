@@ -17,6 +17,7 @@ class BaseRepository @Inject constructor(
     var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
 
     init {
+
         //Changing main_nav graphs depending on if user is logged in or
         listener = FirebaseAuth.AuthStateListener {
             if (it.currentUser == null) user_state.postValue(UserAuthStates.NOT_LOGGED_IN) else user_state.postValue(
