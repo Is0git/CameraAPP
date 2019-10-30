@@ -2,16 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="onClickLogin"
             type="com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment" />
     </data>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:fillViewport="true"
+        android:layout_height="match_parent"
 
-        android:layout_height="match_parent">
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -120,10 +123,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:id="@+id/email"
                     android:textSize="@dimen/login_text_input_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -135,17 +138,17 @@
                 android:layout_marginTop="35dp"
                 android:hint="@string/username"
                 app:counterTextColor="@color/colorSecondaryVariant"
-                app:endIconDrawable="@drawable/ic_email_black_24dp"
+                app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
                 app:endIconMode="custom"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="@id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/email_name_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:id="@+id/user"
                     android:textSize="@dimen/login_text_input_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -229,11 +232,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
-                android:rotationX="180"
                 android:layout_marginEnd="8dp"
-                android:rotation="9"
-                android:backgroundTint="@color/colorOnPrimaryVariant"
                 android:background="@drawable/back_arrow_dashe"
+                android:backgroundTint="@color/colorOnPrimaryVariant"
+                android:rotation="9"
+                android:rotationX="180"
                 app:layout_constraintBottom_toBottomOf="@id/textView3"
                 app:layout_constraintEnd_toStartOf="@id/barrier"
                 app:layout_constraintStart_toStartOf="parent"

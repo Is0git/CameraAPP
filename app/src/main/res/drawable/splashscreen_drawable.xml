@@ -2,11 +2,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <gradient android:startColor="@color/colorPrimary"
-                android:endColor="@color/colorPrimaryDark"/>
+            <gradient
+                android:endColor="@color/colorPrimaryDark"
+                android:startColor="@color/colorPrimary" />
         </shape>
     </item>
-    <item android:drawable="@drawable/google_icon"
-        android:gravity="center"/>
+    <item
+        android:drawable="@drawable/google_icon"
+        android:gravity="center" />
 
 </layer-list>

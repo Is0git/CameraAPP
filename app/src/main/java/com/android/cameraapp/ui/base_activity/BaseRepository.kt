@@ -2,7 +2,6 @@ package com.android.cameraapp.ui.base_activity
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.android.cameraapp.di.scopes.BaseActivityScope
@@ -12,6 +11,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 
@@ -32,7 +33,7 @@ class BaseRepository @Inject constructor(
     var listener: FirebaseAuth.AuthStateListener
     var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
     var user: FirebaseUser? = null
-    var rememberUser: Boolean = false
+    var rememberUser: Boolean = true
 
 
     init {
@@ -42,11 +43,10 @@ class BaseRepository @Inject constructor(
                 UserAuthStates.LOGGED_IN
             )
         }
-
         auth.addAuthStateListener(listener)
     }
 
-    fun logIn(email: String?, password: String?, rememberUser: Boolean = false) {
+    fun logIn(email: String?, password: String?, rememberUser: Boolean = true) {
         this.rememberUser = rememberUser
         if (email.isNullOrBlank() || password.isNullOrBlank()) ToastHandler.showToast(
             application,
@@ -131,11 +131,18 @@ class BaseRepository @Inject constructor(
 
     fun sendPasswordResetToEmail(email: String?) {
 
-        if(!email.isNullOrBlank()) {
+        if (!email.isNullOrBlank()) {
             auth.sendPasswordResetEmail(email).addOnCompleteListener {
-                if (it.isSuccessful) ToastHandler.showToast(application, "Email was sent").also { controller.navigateUp() } else ToastHandler.showToast(application, it.exception?.message!!)
-            }} else ToastHandler.showToast(application, "Email cannot be blank")
-        }
+                if (it.isSuccessful) ToastHandler.showToast(
+                    application,
+                    "Email was sent"
+                ).also { controller.navigateUp() } else ToastHandler.showToast(
+                    application,
+                    it.exception?.message!!
+                )
+            }
+        } else ToastHandler.showToast(application, "Email cannot be blank")
+    }
 
 
 }

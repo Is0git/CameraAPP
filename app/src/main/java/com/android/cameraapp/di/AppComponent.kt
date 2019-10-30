@@ -12,8 +12,8 @@ interface AppComponent : AndroidInjector<App> {
 
     @Component.Builder
     interface Builder {
-        fun build() : AppComponent
+        fun build(): AppComponent
         @BindsInstance
-        fun application(application: Application) : Builder
+        fun application(application: Application): Builder
     }
 }

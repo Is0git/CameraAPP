@@ -5,14 +5,10 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.HomeFragmentBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.android.cameraapp.ui.base_activity.BaseActivity
 import dagger.android.support.DaggerFragment
-import javax.inject.Inject
 
 class HomeFragment : DaggerFragment() {
     lateinit var binding: HomeFragmentBinding
@@ -20,7 +16,8 @@ class HomeFragment : DaggerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as BaseActivity).binding.toolbar.visibility = View.VISIBLE
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.move)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.move)
     }
 
     override fun onCreateView(
@@ -41,7 +38,7 @@ class HomeFragment : DaggerFragment() {
                 childFragmentManager,
                 activity?.applicationContext!!
             )
-        binding.dataViewPager.let{
+        binding.dataViewPager.let {
             it.adapter = viewPagerAdapter
             binding.tabLayout.setupWithViewPager(it)
         }

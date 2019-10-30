@@ -12,10 +12,12 @@ import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class ForgotPasswordFragment  : DaggerFragment() {
-    lateinit var binding:ForgotPasswordFragmentBinding
-    @Inject lateinit var factory: ViewModelFactory
-    @Inject lateinit var navController: NavController
+class ForgotPasswordFragment : DaggerFragment() {
+    lateinit var binding: ForgotPasswordFragmentBinding
+    @Inject
+    lateinit var factory: ViewModelFactory
+    @Inject
+    lateinit var navController: NavController
     lateinit var baseViewModel: BaseViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,11 +25,12 @@ class ForgotPasswordFragment  : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         baseViewModel = ViewModelProviders.of(activity!!, factory).get(BaseViewModel::class.java)
-        binding = ForgotPasswordFragmentBinding.inflate(inflater, container,false)
+        binding = ForgotPasswordFragmentBinding.inflate(inflater, container, false)
 
         binding.reset.setOnClickListener {
-            val email:String? = binding.emailEditText.text.toString()
-            baseViewModel.sendPasswordResetToEmail(email) }
+            val email: String? = binding.emailEditText.text.toString()
+            baseViewModel.sendPasswordResetToEmail(email)
+        }
         return binding.root
     }
 }

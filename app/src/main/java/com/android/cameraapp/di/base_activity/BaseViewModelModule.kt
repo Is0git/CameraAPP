@@ -14,5 +14,5 @@ abstract class BaseViewModelModule {
     @IntoMap
     @BaseActivityScope
     @ViewModelKey(BaseViewModel::class)
-    abstract fun baseViewModel(baseViewModel: BaseViewModel) : ViewModel
+    abstract fun baseViewModel(baseViewModel: BaseViewModel): ViewModel
 }

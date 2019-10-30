@@ -77,10 +77,10 @@ class LoginFragment : DaggerFragment(),
         val rememberUser: Boolean = binding.checkBox.isChecked
         baseViewModel.logIn(username, password, rememberUser)
     }
+
     override fun onForgotPasswordClick(view: View) {
         navigator.navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
     }
-
 
 
     //Sign in with google
@@ -99,7 +99,7 @@ class LoginFragment : DaggerFragment(),
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if(requestCode == RC_SIGN) {
+        if (requestCode == RC_SIGN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 // Google Sign In was successful, authenticate with Firebase

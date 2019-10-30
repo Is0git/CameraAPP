@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.cameraapp.databinding.PhotosFragmentBinding
 import dagger.android.support.DaggerFragment
@@ -50,7 +49,8 @@ class PhotosFragment : DaggerFragment() {
             "https://fsa.zobj.net/crop.php?r=bH4C9LIr2dJlKebIulWa2KLxNCtswrhpREnyfXHr-gjRNZVqQGhAPMPKSWfIzOpsEZcqV6lj98CJRJVx5KrYWxv46DxjLINR4APaZJbMg4BWBltdX4xEa3rdyE5i13A1tuG3Ybo2jC6XtJUUsMpNFIZTp7W9FapaKxSwhCo7IED-yF1STvxoIqsHzEE",
             "https://i.imgur.com/ZerwVp3.jpg",
             "https://www.setaswall.com/wp-content/uploads/2017/10/Blue-Wallpaper-1080x1920-380x676.jpg",
-            "https://galshir.com/c/wallpapers/gal-shir-halloween-wallpaper.jpg",             "https://images.unsplash.com/photo-1500625597061-d472abd2afbb?ixlib=rb-1.2.1&w=1000&q=80",
+            "https://galshir.com/c/wallpapers/gal-shir-halloween-wallpaper.jpg",
+            "https://images.unsplash.com/photo-1500625597061-d472abd2afbb?ixlib=rb-1.2.1&w=1000&q=80",
             "https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg",
             "https://fsb.zobj.net/crop.php?r=wR9rP2Sec21E1lGfAoGD1lxKPJInfga-xPrbf761GWtKjRUI15acFAoFaCDjxWIxxDluSliUic0wNKlGJyY_QYSLtbJnMLgDpCK9BlqEbWUFk6i7LcDlBrTfw822tZVqmmlv_HB6w8Rn8l4uJPsnMNsaF1O431vdnlc46lmFHCSzRKo1m9da020kPQQ",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkjGDVKjMZ6DIwZLZ17t2JTDjHvmhRU_ckCPv8Dfedv13rf7hcxA&s",
@@ -68,7 +68,8 @@ class PhotosFragment : DaggerFragment() {
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStvfM1EA-0-CamCPbiZXjncZf-zvkdct7KFXZ_qt55S9PVLGJ0&s",
             "https://fsa.zobj.net/crop.php?r=bH4C9LIr2dJlKebIulWa2KLxNCtswrhpREnyfXHr-gjRNZVqQGhAPMPKSWfIzOpsEZcqV6lj98CJRJVx5KrYWxv46DxjLINR4APaZJbMg4BWBltdX4xEa3rdyE5i13A1tuG3Ybo2jC6XtJUUsMpNFIZTp7W9FapaKxSwhCo7IED-yF1STvxoIqsHzEE",
             "https://i.imgur.com/ZerwVp3.jpg",
-            "https://www.setaswall.com/wp-content/uploads/2017/10/Blue-Wallpaper-1080x1920-380x676.jpg",             "https://images.unsplash.com/photo-1500625597061-d472abd2afbb?ixlib=rb-1.2.1&w=1000&q=80",
+            "https://www.setaswall.com/wp-content/uploads/2017/10/Blue-Wallpaper-1080x1920-380x676.jpg",
+            "https://images.unsplash.com/photo-1500625597061-d472abd2afbb?ixlib=rb-1.2.1&w=1000&q=80",
             "https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg",
             "https://fsb.zobj.net/crop.php?r=wR9rP2Sec21E1lGfAoGD1lxKPJInfga-xPrbf761GWtKjRUI15acFAoFaCDjxWIxxDluSliUic0wNKlGJyY_QYSLtbJnMLgDpCK9BlqEbWUFk6i7LcDlBrTfw822tZVqmmlv_HB6w8Rn8l4uJPsnMNsaF1O431vdnlc46lmFHCSzRKo1m9da020kPQQ",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkjGDVKjMZ6DIwZLZ17t2JTDjHvmhRU_ckCPv8Dfedv13rf7hcxA&s",
@@ -86,7 +87,8 @@ class PhotosFragment : DaggerFragment() {
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStvfM1EA-0-CamCPbiZXjncZf-zvkdct7KFXZ_qt55S9PVLGJ0&s",
             "https://fsa.zobj.net/crop.php?r=bH4C9LIr2dJlKebIulWa2KLxNCtswrhpREnyfXHr-gjRNZVqQGhAPMPKSWfIzOpsEZcqV6lj98CJRJVx5KrYWxv46DxjLINR4APaZJbMg4BWBltdX4xEa3rdyE5i13A1tuG3Ybo2jC6XtJUUsMpNFIZTp7W9FapaKxSwhCo7IED-yF1STvxoIqsHzEE",
             "https://i.imgur.com/ZerwVp3.jpg",
-            "https://www.setaswall.com/wp-content/uploads/2017/10/Blue-Wallpaper-1080x1920-380x676.jpg")
+            "https://www.setaswall.com/wp-content/uploads/2017/10/Blue-Wallpaper-1080x1920-380x676.jpg"
+        )
         binding.photosRecyclerView.adapter =
             PhotosAdapter(
                 list,

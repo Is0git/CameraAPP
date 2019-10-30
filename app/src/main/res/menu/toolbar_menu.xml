@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/share"
-        android:title="@string/share"
         android:icon="@drawable/ic_share_black_24dp"
+        android:title="@string/share"
         app:showAsAction="always" />
     <item
         android:id="@+id/more"

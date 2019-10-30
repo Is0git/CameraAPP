@@ -26,7 +26,7 @@
     <style name="CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:color">@color/colorPrimary</item>
     </style>
-    
+
     <style name="AuthButton" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">20dp</item>
         <item name="android:textSize">20sp</item>
@@ -46,7 +46,8 @@
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant2</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
     <style name="toolbarStyle" parent="TextAppearance.MaterialComponents.Body1">
-       <item name="android:textSize">0sp</item>
+        <item name="android:textSize">0sp</item>
     </style>
 </resources>

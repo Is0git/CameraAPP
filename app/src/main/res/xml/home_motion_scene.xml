@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:motion="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <Transition
         app:autoTransition="none"
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@id/start"
-        app:motionInterpolator="easeIn"
-        app:duration="1200">
+        app:duration="1200"
+        app:motionInterpolator="easeIn">
         <OnSwipe
             app:dragDirection="dragUp"
 
@@ -24,11 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            app:civ_border_color="@color/colorSecondaryVariant"
             android:minHeight="200dp"
+            app:civ_border_color="@color/colorSecondaryVariant"
             app:layout_constraintTop_toBottomOf="@+id/user_description">
-            <CustomAttribute app:attributeName="backgroundColor"
-                app:customColorValue="@color/colorSurface"/>
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/colorSurface" />
         </Constraint>
 
         <Constraint
@@ -57,8 +57,9 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/avatar_image">
-            <Transform android:scaleY="1"
-                android:scaleX="1"/>
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
         </Constraint>
         <Constraint
             android:id="@+id/user_location"
@@ -69,8 +70,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/user_name">
-            <Transform android:scaleY="1"
-                android:scaleX="1"/>
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
         </Constraint>
         <Constraint
             android:id="@+id/user_description"
@@ -81,8 +83,9 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/user_location">
-            <Transform android:scaleY="1"
-                android:scaleX="1"/>
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
         </Constraint>
 
     </ConstraintSet>
@@ -95,8 +98,9 @@
             android:layout_marginBottom="170dp"
             android:minHeight="200dp"
             app:layout_constraintTop_toBottomOf="@+id/guideline10">
-            <CustomAttribute app:attributeName="backgroundColor"
-                app:customColorValue="@color/colorLightGrey"/>
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/colorLightGrey" />
         </Constraint>
 
         <Constraint
@@ -114,8 +118,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="parent">
-        </Constraint>
+            app:layout_constraintTop_toTopOf="parent"></Constraint>
         <Constraint
             android:id="@+id/user_name"
             android:layout_width="0dp"
@@ -124,8 +127,9 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/avatar_image">
-            <Transform android:scaleY="0"
-                android:scaleX="0"/>
+            <Transform
+                android:scaleX="0"
+                android:scaleY="0" />
         </Constraint>
 
         <Constraint
@@ -137,8 +141,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/user_name">
-            <Transform android:scaleY="0"
-                android:scaleX="0"/>
+            <Transform
+                android:scaleX="0"
+                android:scaleY="0" />
         </Constraint>
 
         <Constraint
@@ -149,9 +154,10 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/user_location" >
-            <Transform android:scaleY="0"
-                android:scaleX="0"/>
+            app:layout_constraintTop_toBottomOf="@+id/user_location">
+            <Transform
+                android:scaleX="0"
+                android:scaleY="0" />
         </Constraint>
     </ConstraintSet>
 

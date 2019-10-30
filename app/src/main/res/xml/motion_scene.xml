@@ -9,16 +9,17 @@
         <OnSwipe
             app:touchAnchorId="@id/camera_view"
             motion:dragDirection="dragUp"
-            motion:touchAnchorSide="top"/>
-        <OnClick app:targetId="@id/camera_button"
-            app:clickAction="toggle"/>
+            motion:touchAnchorSide="top" />
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@id/camera_button" />
         <KeyFrameSet>
             <KeyCycle
-                motion:keyPositionType="pathRelative"
                 app:curveFit="spline"
-                motion:percentX="1"
                 motion:framePosition="50"
-                motion:motionTarget="@+id/camera_view"/>
+                motion:keyPositionType="pathRelative"
+                motion:motionTarget="@+id/camera_view"
+                motion:percentX="1" />
         </KeyFrameSet>
 
     </Transition>
@@ -123,9 +124,9 @@
             android:src="@drawable/background"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="5dp"
+            app:layout_constraintEnd_toStartOf="parent"
             motion:layout_constraintBottom_toTopOf="parent"
-            motion:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintEnd_toStartOf="parent">
+            motion:layout_constraintHorizontal_bias="0.0">
             <Transform android:rotation="360" />
         </Constraint>
 

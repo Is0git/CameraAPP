@@ -9,37 +9,36 @@ import com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment
 import com.android.cameraapp.ui.base_activity.photos_fragment.PhotosFragment
 import com.android.cameraapp.ui.base_activity.registration_fragment.RegistrationFragment
 import com.android.cameraapp.ui.base_activity.start_fragment.StartFragment
-import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class FragmentsBuilder {
     @ContributesAndroidInjector
-    abstract fun loginFragment() : LoginFragment
+    abstract fun loginFragment(): LoginFragment
 
     @ContributesAndroidInjector
-    abstract fun registrationFragment() : RegistrationFragment
+    abstract fun registrationFragment(): RegistrationFragment
 
     @ContributesAndroidInjector
-    abstract fun startFragment() : StartFragment
+    abstract fun startFragment(): StartFragment
 
     @ContributesAndroidInjector
-    abstract fun homeFragment() : HomeFragment
+    abstract fun homeFragment(): HomeFragment
 
     @ContributesAndroidInjector
-    abstract fun likesFragment() : LikesFragment
+    abstract fun likesFragment(): LikesFragment
 
     @ContributesAndroidInjector
-    abstract fun photosFragment() : PhotosFragment
+    abstract fun photosFragment(): PhotosFragment
 
     @ContributesAndroidInjector
-    abstract fun followersFragment() : FollowersFragment
+    abstract fun followersFragment(): FollowersFragment
 
     @ContributesAndroidInjector
-    abstract fun followingFragment() : FollowingFragment
+    abstract fun followingFragment(): FollowingFragment
 
     @ContributesAndroidInjector
-    abstract fun forgotPasswordFragment() : ForgotPasswordFragment
+    abstract fun forgotPasswordFragment(): ForgotPasswordFragment
 
 }

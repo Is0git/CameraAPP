@@ -1,6 +1,5 @@
 package com.android.cameraapp.ui.base_activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -12,11 +11,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
-import com.android.cameraapp.util.RC_SIGN
 import com.android.cameraapp.util.UserAuthStates
 import com.android.nbaapp.data.vms.ViewModelFactory
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
