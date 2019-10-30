@@ -11,6 +11,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 
@@ -26,7 +28,8 @@ const val TAG = "Auth"
 class BaseRepository @Inject constructor(
     val auth: FirebaseAuth,
     val application: Application,
-    val controller: NavController
+    val controller: NavController,
+    val firestore: FirebaseFirestore
 ) {
     var listener: FirebaseAuth.AuthStateListener
     var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
@@ -142,6 +145,8 @@ class BaseRepository @Inject constructor(
         } else ToastHandler.showToast(application, "Email cannot be blank")
     }
 
-
+    suspend fun registerUserInDatabase() = withContext(Dispatchers.IO) {
+        firestore.collection("users").add(mutableMapOf())
+    }
 }
 
