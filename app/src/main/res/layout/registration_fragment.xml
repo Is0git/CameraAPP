@@ -79,6 +79,7 @@
                 app:layout_constraintTop_toBottomOf="@id/user_name_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -98,6 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@id/textInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/repeatPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -106,7 +108,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_name_layout"
+                android:id="@+id/email_name_layout"
                 style="@style/TextInputStyle"
                 android:layout_marginTop="50dp"
                 android:hint="@string/email"
@@ -121,9 +123,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:id="@+id/email"
                     android:textSize="@dimen/login_text_input_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/user_name_layout"
+                style="@style/TextInputStyle"
+                android:layout_marginTop="35dp"
+                android:hint="@string/username"
+                app:counterTextColor="@color/colorSecondaryVariant"
+                app:endIconDrawable="@drawable/ic_email_black_24dp"
+                app:endIconMode="custom"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
+                app:layout_constraintStart_toStartOf="@id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/email_name_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:id="@+id/user"
+                    android:textSize="@dimen/login_text_input_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
@@ -156,7 +182,7 @@
                 tools:targetApi="lollipop" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/loginButton"
+                android:id="@+id/registerButton"
                 style="@style/AuthButton"
                 android:layout_width="0dp"
                 android:layout_height="65dp"

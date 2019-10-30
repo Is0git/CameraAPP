@@ -7,21 +7,18 @@ import com.android.cameraapp.di.scopes.BaseActivityScope
 import com.android.cameraapp.util.ToastHandler
 import com.android.cameraapp.util.UserAuthStates
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import javax.inject.Inject
-import com.google.firebase.auth.OAuthProvider
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 
 //it's a base repository because it's a base class for fragments.. auth logic will be handled here since app is using navigation component
 // and we can share this repository && viewModel with other fragments
 
-const val LOGIN_WITH_GOOGLE:Int = 2
-const val LOGIN_WITH_TWITTER:Int = 3
-const val LOGIN_WITH_FACEBOOK:Int = 4
+const val LOGIN_WITH_GOOGLE: Int = 2
+const val LOGIN_WITH_TWITTER: Int = 3
+const val LOGIN_WITH_FACEBOOK: Int = 4
 const val TAG = "Auth"
 
 @BaseActivityScope
@@ -31,9 +28,8 @@ class BaseRepository @Inject constructor(
 ) {
     var listener: FirebaseAuth.AuthStateListener
     var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
-    var user:FirebaseUser? = null
-    var rememberUser:Boolean = false
-
+    var user: FirebaseUser? = null
+    var rememberUser: Boolean = false
 
 
     init {
@@ -48,25 +44,31 @@ class BaseRepository @Inject constructor(
 
     fun logIn(email: String?, password: String?, rememberUser: Boolean) {
         this.rememberUser = rememberUser
-        if (email.isNullOrBlank() || password.isNullOrBlank()) ToastHandler.showToast(application, "You need to fill all fields") else {
+        if (email.isNullOrBlank() || password.isNullOrBlank()) ToastHandler.showToast(
+            application,
+            "You need to fill all fields"
+        ) else {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener { ToastHandler.showToast(application, "LOGGED IN") }
                 .addOnFailureListener { ToastHandler.showToast(application, "${it.message}") }
         }
     }
-        //Log with auth providers google, facebook, twitter etc.
+
+    //Log with auth providers google, facebook, twitter etc.
     //have to check if user is logged in every time cause app is going be able to disable users and logged them out
-    fun<T> logInWithCredentials(credentials: T,loginIdentifier: Int) {
-       user = auth.currentUser
-            user ?: let {
-                when {
-                    credentials is GoogleSignInAccount && loginIdentifier == LOGIN_WITH_GOOGLE -> loginWithGoogle(credentials)
-                }
+    fun <T> logInWithCredentials(credentials: T, loginIdentifier: Int) {
+        user = auth.currentUser
+        user ?: let {
+            when {
+                credentials is GoogleSignInAccount && loginIdentifier == LOGIN_WITH_GOOGLE -> loginWithGoogle(
+                    credentials
+                )
             }
+        }
     }
 
 
-    private fun loginWithGoogle(account:GoogleSignInAccount) {
+    private fun loginWithGoogle(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
@@ -79,14 +81,46 @@ class BaseRepository @Inject constructor(
                 }
             }
 
-}
+    }
+
+    fun registerUser(
+        username: String?,
+        password: String?,
+        reapeat_password: String?,
+        email: String?,
+        areTermsAccepted: Boolean
+    ) {
+
+        if (!username.isNullOrBlank()
+            && !reapeat_password.isNullOrBlank()
+            && !password.isNullOrBlank()
+            && !email.isNullOrBlank() && areTermsAccepted
+            && password == reapeat_password
+        )
+
+            auth.createUserWithEmailAndPassword(email, username).addOnCompleteListener {
+                if (it.isSuccessful) ToastHandler.showToast(
+                    application,
+                    "SUCCESSFULLY REGISTERED, LOGGING IN.."
+                ) else {
+                    ToastHandler.showToast(application, "${it.exception?.message}")
+                }
+            }
+        else if (password != reapeat_password) ToastHandler.showToast(
+            application,
+            "PASSWORDS MUST MATCH"
+        )
+        else ToastHandler.showToast(application, "FIELDS CAN'T BE EMPTY")
+    }
+
 
     fun forgetOneSessionUser() {
-        if(!rememberUser) {
+        if (!rememberUser) {
             auth.signOut()
         }
     }
-        //avoid memory leak
+
+    //avoid memory leak
     fun removeListener() {
         auth.removeAuthStateListener(listener)
     }
