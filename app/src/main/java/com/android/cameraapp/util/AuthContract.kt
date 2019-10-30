@@ -1,3 +1,3 @@
 package com.android.cameraapp.util
 
-const val RC_SIGN_IN:Int = 101
+const val RC_SIGN:Int = 1

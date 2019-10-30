@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity
 
+import android.service.carrier.CarrierIdentifier
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.android.cameraapp.di.scopes.BaseActivityScope
@@ -17,6 +18,8 @@ class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewMo
         states = repository.user_state
         return states
     }
+
+    fun<T> loginWithThirdPartyAccount(account:T, loginIdentifier: Int) = repository.logInWithCredentials(account, loginIdentifier)
 
     override fun onCleared() {
         repository.removeListener()

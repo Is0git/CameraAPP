@@ -14,10 +14,12 @@ import androidx.navigation.Navigation
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.LoginFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseViewModel
-import com.android.cameraapp.util.RC_SIGN_IN
+import com.android.cameraapp.ui.base_activity.LOGIN_WITH_GOOGLE
+import com.android.cameraapp.util.RC_SIGN
 import com.android.nbaapp.data.vms.ViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -80,10 +82,29 @@ class LoginFragment : DaggerFragment(),
 
         //Sign in with google
     override fun onGoogleSignInClick(view: View) {
-        val googleOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        val googleOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .build()
         val mGoogleSignInClient = GoogleSignIn.getClient(activity!!, googleOptions);
         val intent = mGoogleSignInClient.signInIntent
-        startActivityForResult(intent, RC_SIGN_IN)
+        startActivityForResult(intent, RC_SIGN)
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if(requestCode == RC_SIGN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+                baseViewModel.loginWithThirdPartyAccount(account, LOGIN_WITH_GOOGLE)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+            }
+        }
+    }
 }
