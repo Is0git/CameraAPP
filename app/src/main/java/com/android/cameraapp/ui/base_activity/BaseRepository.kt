@@ -1,9 +1,11 @@
 package com.android.cameraapp.ui.base_activity
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.util.ToastHandler
 import com.android.cameraapp.util.UserAuthStates
@@ -13,6 +15,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -104,10 +109,13 @@ class BaseRepository @Inject constructor(
         )
 
             auth.createUserWithEmailAndPassword(email, username).addOnCompleteListener {
-                if (it.isSuccessful) ToastHandler.showToast(
-                    application,
-                    "Successfully registered!"
-                ) else {
+                if (it.isSuccessful) {
+                    ToastHandler.showToast(
+                        application,
+                        "Successfully registered!"
+                    )
+                    CoroutineScope(Dispatchers.Main).launch { registerUserInDatabase(username) }
+                } else {
                     ToastHandler.showToast(application, "${it.exception?.message}")
                 }
             }
@@ -145,8 +153,35 @@ class BaseRepository @Inject constructor(
         } else ToastHandler.showToast(application, "Email cannot be blank")
     }
 
-    suspend fun registerUserInDatabase() = withContext(Dispatchers.IO) {
-        firestore.collection("users").add(mutableMapOf())
+    suspend fun registerUserInDatabase(username: String?) = withContext(Dispatchers.IO) {
+        user = auth.currentUser
+        val date = async { getCurrentDateInFormat() }
+        val currentTime = async { getCurrentTime() }
+        val result = firestore.collection("users").add(
+            UserCollection.User(
+                mapOf(
+                    "large_message" to "Your description",
+                    "shorter_message" to "Add something inspirational"
+                ), user?.email, true, date.await(), currentTime.await(), username
+            )
+        ).await().get().apply {
+            when {
+                isSuccessful -> Log.i(TAG, "User succesfully was uploaded to database")
+                else -> Log.i(TAG, "Failed ${exception?.message}")
+            }
+        }
+
+    }
+
+    // Date dd-mmm-yyyy format
+    @SuppressLint("SimpleDateFormat")
+    fun getCurrentDateInFormat(): String? {
+        val date = Calendar.getInstance().time
+        return SimpleDateFormat("ss-mm-hh-dd-MMM-yyyy").format(date)
+    }
+
+    fun getCurrentTime(): Long? {
+        return System.currentTimeMillis()
     }
 }
 
