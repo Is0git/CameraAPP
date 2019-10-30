@@ -18,6 +18,8 @@
             app:destination="@id/registrationFragment" />
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:enterAnim="@anim/zoom_in_animation"
+            app:popEnterAnim="@anim/zoom_in_animation"
             app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
