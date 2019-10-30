@@ -9,4 +9,5 @@ interface LoginFragmentListener {
 
     fun onGoogleSignInClick(view: View)
 
+    fun onForgotPasswordClick(view: View)
 }

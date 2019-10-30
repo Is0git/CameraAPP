@@ -138,7 +138,8 @@
                 app:barrierDirection="top" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/forgot_password"
+                android:onClick="@{loginFragmentListener::onForgotPasswordClick}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/forgot_password"
@@ -213,7 +214,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="checkBox,textView2"
+                app:constraint_referenced_ids="checkBox,forgot_password"
                 tools:layout_editor_absoluteY="785dp" />
 
             <TextView

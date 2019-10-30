@@ -16,9 +16,16 @@
             app:popExitAnim="@anim/pop_back_right_animation"
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.android.cameraapp.ui.base_activity.registration_fragment.RegistrationFragment"
         android:label="RegistrationFragment" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" />
 </navigation>

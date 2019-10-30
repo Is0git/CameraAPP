@@ -77,8 +77,13 @@ class LoginFragment : DaggerFragment(),
         val rememberUser: Boolean = binding.checkBox.isChecked
         baseViewModel.logIn(username, password, rememberUser)
     }
+    override fun onForgotPasswordClick(view: View) {
+        navigator.navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+    }
 
-        //Sign in with google
+
+
+    //Sign in with google
     override fun onGoogleSignInClick(view: View) {
         val googleOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
