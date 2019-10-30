@@ -54,7 +54,7 @@ class LoginFragment : DaggerFragment(),
         navigator.navigate(R.id.action_loginFragment_to_registrationFragment)
     }
 
-    fun setRegistrationAnimation() {
+    private fun setRegistrationAnimation() {
         val objectAnimatorPointer =
             ObjectAnimator.ofFloat(binding.dashArrowBack, "alpha", 0.1f, 1f, 0.1f)
                 .also { it.repeatCount = INFINITE }
