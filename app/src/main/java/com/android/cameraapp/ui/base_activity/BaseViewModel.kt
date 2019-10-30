@@ -2,7 +2,7 @@ package com.android.cameraapp.ui.base_activity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.android.cameraapp.di.scopes.BaseActivityScope
+import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.util.UserAuthStates
 import javax.inject.Inject
 

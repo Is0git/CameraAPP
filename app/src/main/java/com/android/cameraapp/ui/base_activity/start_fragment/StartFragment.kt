@@ -10,6 +10,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.databinding.StartFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -28,7 +29,6 @@ class StartFragment : DaggerFragment() {
         binding = StartFragmentBinding.inflate(inflater, container, false)
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
         binding.circleImageView.setOnClickListener { auth.signOut() }
-
         return binding.root
     }
 
@@ -36,7 +36,7 @@ class StartFragment : DaggerFragment() {
         navigation = Navigation.findNavController(view)
     }
 
-    fun onHomeButtonClick() {
+    private fun onHomeButtonClick() {
 
         val extras =
             FragmentNavigatorExtras(binding.circleImageView to binding.circleImageView.transitionName)

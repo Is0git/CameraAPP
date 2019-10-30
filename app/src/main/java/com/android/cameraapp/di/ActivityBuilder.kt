@@ -4,7 +4,7 @@ import com.android.cameraapp.di.base_activity.BaseViewModelModule
 import com.android.cameraapp.di.base_activity.FirebaseAuthModule
 import com.android.cameraapp.di.base_activity.FragmentsBuilder
 import com.android.cameraapp.di.base_activity.NavigationModule
-import com.android.cameraapp.di.scopes.BaseActivityScope
+import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

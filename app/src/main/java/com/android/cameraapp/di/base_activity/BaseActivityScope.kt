@@ -1,4 +1,4 @@
-package com.android.cameraapp.di.scopes
+package com.android.cameraapp.di.base_activity
 
 import javax.inject.Scope
 

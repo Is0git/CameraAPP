@@ -1,6 +1,5 @@
 package com.android.cameraapp.di.base_activity
 
-import com.android.cameraapp.di.scopes.BaseActivityScope
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides

@@ -1,5 +1,7 @@
 package com.android.cameraapp.di.base_activity
 
+import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
+import com.android.cameraapp.di.base_activity.registration_fragment.RegistrationFragmentScope
 import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
@@ -15,9 +17,11 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class FragmentsBuilder {
     @ContributesAndroidInjector
+    @LoginFragmentScope
     abstract fun loginFragment(): LoginFragment
 
     @ContributesAndroidInjector
+    @RegistrationFragmentScope
     abstract fun registrationFragment(): RegistrationFragment
 
     @ContributesAndroidInjector

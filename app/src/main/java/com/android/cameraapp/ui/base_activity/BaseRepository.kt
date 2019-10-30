@@ -4,15 +4,13 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
-import com.android.cameraapp.di.scopes.BaseActivityScope
+import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.util.ToastHandler
 import com.android.cameraapp.util.UserAuthStates
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 
