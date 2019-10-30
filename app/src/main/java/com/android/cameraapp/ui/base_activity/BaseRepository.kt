@@ -85,6 +85,7 @@ class BaseRepository @Inject constructor(
                 if (task.isSuccessful) {
                     user = auth.currentUser
                     ToastHandler.showToast(application, "LOGGED IN")
+                    CoroutineScope(Dispatchers.Main).launch { registerUserInDatabase(account.displayName) }
                 } else {
                     ToastHandler.showToast(application, "COULD NOT SIGN IN WITH GOOGLE")
                     Log.w(TAG, "signInWithCredential:failure:", task.exception)
@@ -153,7 +154,7 @@ class BaseRepository @Inject constructor(
         } else ToastHandler.showToast(application, "Email cannot be blank")
     }
 
-    suspend fun registerUserInDatabase(username: String?) = withContext(Dispatchers.IO) {
+    private suspend fun registerUserInDatabase(username: String?) = withContext(Dispatchers.IO) {
         user = auth.currentUser
         val date = async { getCurrentDateInFormat() }
         val currentTime = async { getCurrentTime() }
@@ -162,7 +163,7 @@ class BaseRepository @Inject constructor(
                 mapOf(
                     "large_message" to "Your description",
                     "shorter_message" to "Add something inspirational"
-                ), user?.email, true, date.await(), currentTime.await(), username
+                ), user?.email, true, date.await(), currentTime.await(), username, null, user?.uid
             )
         ).await().get().apply {
             when {
@@ -177,10 +178,10 @@ class BaseRepository @Inject constructor(
     @SuppressLint("SimpleDateFormat")
     fun getCurrentDateInFormat(): String? {
         val date = Calendar.getInstance().time
-        return SimpleDateFormat("ss-mm-hh-dd-MMM-yyyy").format(date)
+        return SimpleDateFormat("hh:mm:hh, dd-MMM-yyyy").format(date)
     }
 
-    fun getCurrentTime(): Long? {
+    private fun getCurrentTime(): Long? {
         return System.currentTimeMillis()
     }
 }
