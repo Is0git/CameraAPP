@@ -35,4 +35,5 @@ class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewMo
         areTermsAccepted: Boolean
     ) = repository.registerUser(username, password, reapeat_password, email, areTermsAccepted)
 
+    fun sendPasswordResetToEmail(email: String?) = repository.sendPasswordResetToEmail(email)
 }

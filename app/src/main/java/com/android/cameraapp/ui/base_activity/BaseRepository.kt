@@ -39,10 +39,11 @@ class BaseRepository @Inject constructor(
                 UserAuthStates.LOGGED_IN
             )
         }
+
         auth.addAuthStateListener(listener)
     }
 
-    fun logIn(email: String?, password: String?, rememberUser: Boolean) {
+    fun logIn(email: String?, password: String?, rememberUser: Boolean = false) {
         this.rememberUser = rememberUser
         if (email.isNullOrBlank() || password.isNullOrBlank()) ToastHandler.showToast(
             application,
@@ -101,16 +102,16 @@ class BaseRepository @Inject constructor(
             auth.createUserWithEmailAndPassword(email, username).addOnCompleteListener {
                 if (it.isSuccessful) ToastHandler.showToast(
                     application,
-                    "SUCCESSFULLY REGISTERED, LOGGING IN.."
+                    "Successfully registered!"
                 ) else {
                     ToastHandler.showToast(application, "${it.exception?.message}")
                 }
             }
         else if (password != reapeat_password) ToastHandler.showToast(
             application,
-            "PASSWORDS MUST MATCH"
+            "Password must match"
         )
-        else ToastHandler.showToast(application, "FIELDS CAN'T BE EMPTY")
+        else ToastHandler.showToast(application, "You need to fill all fields")
     }
 
 
@@ -124,6 +125,14 @@ class BaseRepository @Inject constructor(
     fun removeListener() {
         auth.removeAuthStateListener(listener)
     }
+
+    fun sendPasswordResetToEmail(email: String?) {
+        if(!email.isNullOrBlank()) {
+            auth.sendPasswordResetEmail(email).addOnCompleteListener {
+                if (it.isSuccessful) ToastHandler
+            }}
+        }
+
 
 }
 
