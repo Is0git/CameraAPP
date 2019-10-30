@@ -45,7 +45,10 @@ class BaseRepository @Inject constructor(
     init {
         //Changing main_nav graphs depending on if user is logged in or not
         listener = FirebaseAuth.AuthStateListener {
-            if (it.currentUser == null) user_state.postValue(UserAuthStates.NOT_LOGGED_IN) else user_state.postValue(
+            if (it.currentUser == null) {
+                user_state.postValue(UserAuthStates.NOT_LOGGED_IN)
+                logOut()
+            } else user_state.postValue(
                 UserAuthStates.LOGGED_IN
             )
         }
@@ -183,6 +186,21 @@ class BaseRepository @Inject constructor(
 
     private fun getCurrentTime(): Long? {
         return System.currentTimeMillis()
+    }
+
+    fun logOut() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val email = auth.currentUser?.email
+            auth.signOut()
+            val uid = withContext(coroutineContext) {
+                firestore.collection("users").whereEqualTo("email", "supsup@gmail.com").get()
+                    .await()
+                    .documents.firstOrNull()?.id
+
+            }
+            firestore.document("users/${uid}").update(mapOf("_active" to false))
+        }
+
     }
 }
 
