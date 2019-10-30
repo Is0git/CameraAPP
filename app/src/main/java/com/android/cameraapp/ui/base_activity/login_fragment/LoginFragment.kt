@@ -48,9 +48,6 @@ class LoginFragment : DaggerFragment(),
 
     }
 
-//    private fun navigateToStart() {
-//        navigator.navigate(R.id.action_loginFragment_to_startFragment)
-//    }
 
     private fun navigateToRegistration() {
         navigator.navigate(R.id.action_loginFragment_to_registrationFragment)
@@ -77,7 +74,8 @@ class LoginFragment : DaggerFragment(),
     override fun onLoginClick(view: View) {
         val username: String? = binding.usernameEditText.text.toString()
         val password: String? = binding.passwordEditText.text.toString()
-        baseViewModel.logIn(username, password)
+        val rememberUser: Boolean = binding.checkBox.isChecked
+        baseViewModel.logIn(username, password, rememberUser)
     }
 
         //Sign in with google

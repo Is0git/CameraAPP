@@ -12,6 +12,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import javax.inject.Inject
+import com.google.firebase.auth.OAuthProvider
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 //it's a base repository because it's a base class for fragments.. auth logic will be handled here since app is using navigation component
 // and we can share this repository && viewModel with other fragments
 
@@ -27,8 +31,8 @@ class BaseRepository @Inject constructor(
 ) {
     var listener: FirebaseAuth.AuthStateListener
     var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
-
     var user:FirebaseUser? = null
+    var rememberUser:Boolean = false
 
 
 
@@ -40,11 +44,10 @@ class BaseRepository @Inject constructor(
             )
         }
         auth.addAuthStateListener(listener)
-
-
     }
 
-    fun logIn(email: String?, password: String?) {
+    fun logIn(email: String?, password: String?, rememberUser: Boolean) {
+        this.rememberUser = rememberUser
         if (email.isNullOrBlank() || password.isNullOrBlank()) ToastHandler.showToast(application, "You need to fill all fields") else {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener { ToastHandler.showToast(application, "LOGGED IN") }
@@ -77,6 +80,12 @@ class BaseRepository @Inject constructor(
             }
 
 }
+
+    fun forgetOneSessionUser() {
+        if(!rememberUser) {
+            auth.signOut()
+        }
+    }
         //avoid memory leak
     fun removeListener() {
         auth.removeAuthStateListener(listener)

@@ -12,7 +12,7 @@ class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewMo
 
     lateinit var states: LiveData<UserAuthStates>
 
-    fun logIn(email:String?, password:String?) = repository.logIn(email, password)
+    fun logIn(email:String?, password:String?, rememberUser:Boolean) = repository.logIn(email, password, rememberUser)
 
     fun getUserNetworkStates() : LiveData<UserAuthStates> {
         states = repository.user_state
@@ -22,6 +22,7 @@ class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewMo
     fun<T> loginWithThirdPartyAccount(account:T, loginIdentifier: Int) = repository.logInWithCredentials(account, loginIdentifier)
 
     override fun onCleared() {
+        repository.forgetOneSessionUser()
         repository.removeListener()
     }
 

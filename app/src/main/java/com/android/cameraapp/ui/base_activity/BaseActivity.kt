@@ -62,7 +62,10 @@ class BaseActivity : DaggerAppCompatActivity() {
         }
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TAGS", "DESTROY")
+    }
 
 }
 
