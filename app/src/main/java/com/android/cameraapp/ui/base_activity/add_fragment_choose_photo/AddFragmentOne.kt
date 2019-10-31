@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity.add_fragment_choose_photo
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.navigation.NavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.AddPhotoFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.cameraapp.util.ToastHandler
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -49,7 +51,15 @@ class AddFragmentOne : DaggerFragment() {
 
     private fun selectImage() {
         val intent: Intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            type = "images/*"
+            type = "image/*"
         }.also { startActivityForResult(it, imageRequestCode) }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == imageRequestCode && requestCode == Activity.RESULT_OK) {
+            if (data?.data != null) {
+                ToastHandler.showToast(activity!!.application, "Photo is selected!")
+            }
+        }
     }
 }
