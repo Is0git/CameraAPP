@@ -36,7 +36,10 @@ class HomeFragment : DaggerFragment() {
     ): View? {
         val parentFragmentViewModel: StartFragmentViewModel by navGraphViewModels(R.id.navigation2) {factory}
         binding = HomeFragmentBinding.inflate(inflater, container, false)
-        parentFragmentViewModel.userData?.observe(viewLifecycleOwner, Observer { Log.d("TAG1", "VAL: ${it.description}") })
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            parentViewModel = parentFragmentViewModel
+        }
         setViewPagerWithToolbar()
         return binding.root
     }

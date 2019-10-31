@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="parentViewModel"
+            type="com.android.cameraapp.ui.base_activity.start_fragment.StartFragmentViewModel" />
+    </data>
 
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -17,6 +22,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="56dp"
             android:elevation="4dp"
+            app:loadImageFromUrl="@{parentViewModel.userData.photo_url}"
             android:src="@drawable/background"
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
@@ -45,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
-            android:text="Magnus Kekhuis"
+            android:text="@{parentViewModel.userData.username}"
             android:textAlignment="center"
             android:textColor="@color/colorTextUser"
             android:textSize="@dimen/home_name_text_size" />
@@ -55,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
-            android:text="Massachusetts, USA"
+            android:text="@{parentViewModel.userData.description.get(`shorter_message`)}"
             android:textAlignment="center"
             android:textColor="@color/colorHomeLightGrey"
             android:textSize="@dimen/location_textSize" />
@@ -66,7 +72,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myriadpro"
             android:lineSpacingExtra="@dimen/description_text_spacing"
-            android:text="In the tumultuos business of cutting in and atteding to a wahle, there is much run."
+            android:text="@{parentViewModel.userData.description.get(`large_message`)}"
             android:textAlignment="center"
             android:textColor="@color/colorHomeDark" />
 
