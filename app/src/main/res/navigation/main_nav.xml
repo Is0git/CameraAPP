@@ -67,5 +67,4 @@
             app:popEnterAnim="@anim/zoom_in_animation"
             app:enterAnim="@anim/zoom_in_animation" />
     </navigation>
-    <action android:id="@+id/action_global_navigation3" app:destination="@id/navigation" />
 </navigation>

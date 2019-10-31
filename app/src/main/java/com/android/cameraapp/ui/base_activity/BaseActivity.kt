@@ -49,8 +49,8 @@ class BaseActivity : DaggerAppCompatActivity() {
     private fun resolveStates(states: UserAuthStates) {
         when {
             // It has to check if we aren't using same graph in order to prevent wasting resources duplicating fragments
-            states == UserAuthStates.NOT_LOGGED_IN -> navController.navigate(R.id.action_global_navigation)
-            states == UserAuthStates.LOGGED_IN -> navController.navigate(R.id.action_global_navigation2)
+            states == UserAuthStates.NOT_LOGGED_IN && navController.currentDestination?.id != R.id.loginFragment -> navController.navigate(R.id.action_global_navigation)
+            states == UserAuthStates.LOGGED_IN  -> navController.navigate(R.id.action_global_navigation2)
         }
     }
 
