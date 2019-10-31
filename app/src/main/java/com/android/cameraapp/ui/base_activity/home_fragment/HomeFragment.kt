@@ -31,7 +31,7 @@ class HomeFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val parentFragmentViewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) {factory}
+        val parentFragmentViewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) { factory }
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -53,7 +53,13 @@ class HomeFragment : DaggerFragment() {
         }
 
     }
-
+    //toolbar set visible after adding photo fragments
+    override fun onResume() {
+        super.onResume()
+        if ((activity as BaseActivity).binding.toolbar.visibility == View.INVISIBLE) (activity as BaseActivity).binding.toolbar.visibility = View.VISIBLE
+    }
 }
+
+
 
 

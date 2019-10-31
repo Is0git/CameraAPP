@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.AddPhotoFragmentBinding
+import com.android.cameraapp.ui.base_activity.BaseActivity
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -15,6 +16,13 @@ class AddFragmentOne : DaggerFragment() {
 
     lateinit var binding: AddPhotoFragmentBinding
     @Inject lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if ((activity as BaseActivity).binding.toolbar.visibility == View.VISIBLE) (activity as BaseActivity).binding.toolbar.visibility =
+            View.INVISIBLE
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
