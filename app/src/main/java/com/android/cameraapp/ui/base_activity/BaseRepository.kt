@@ -115,7 +115,7 @@ class BaseRepository @Inject constructor(
             && password == reapeat_password
         )
 
-            auth.createUserWithEmailAndPassword(email, username).addOnCompleteListener {
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                 if (it.isSuccessful) {
                     ToastHandler.showToast(
                         application,

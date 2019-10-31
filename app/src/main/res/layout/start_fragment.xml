@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="startViewModel"
+            type="com.android.cameraapp.ui.base_activity.start_fragment.StartFragmentViewModel" />
+    </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
@@ -15,6 +20,7 @@
             android:id="@+id/circleImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            app:loadImageFromUrl="@{startViewModel.userData.photo_url}"
             android:src="@drawable/background"
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
@@ -35,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
-            android:text="The monkey-rope is found in all whalers"
+            android:text="@{startViewModel.userData.description.get(`shorter_message`)}"
             android:textColor="@color/colorTextHeaderSmall"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintBottom_toTopOf="@+id/midText"
@@ -70,7 +76,7 @@
             android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
             android:lineSpacingExtra="10dp"
-            android:text="In the tumultuous business of cuttin."
+            android:text="Share your photos with the world!"
             android:textColor="@color/colorTextHeaderBig"
             android:textSize="@dimen/header_text_big"
             app:layout_constraintBottom_toTopOf="@+id/bottomText"
@@ -82,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
-            android:text="--------------- Sea world"
+            android:text="@{`Logged in as ` + startViewModel.userData.username}"
             android:textColor="@color/colorTextHeaderMed"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintBottom_toTopOf="@+id/home_button"

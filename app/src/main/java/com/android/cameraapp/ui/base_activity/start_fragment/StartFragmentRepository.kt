@@ -38,4 +38,5 @@ class StartFragmentRepository @Inject constructor(
         return data
     }
 
+
 }

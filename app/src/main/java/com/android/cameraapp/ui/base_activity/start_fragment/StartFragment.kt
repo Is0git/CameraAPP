@@ -37,7 +37,10 @@ class StartFragment : DaggerFragment() {
 
 
         binding = StartFragmentBinding.inflate(inflater, container, false)
-
+        binding.apply {
+            lifecycleOwner = lifecycleOwner
+            startViewModel = viewModel
+        }
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
         binding.circleImageView.setOnClickListener { auth.signOut() }
         return binding.root
