@@ -1,11 +1,15 @@
 package com.android.cameraapp.di.base_activity
 
+import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
 import com.android.cameraapp.di.base_activity.registration_fragment.RegistrationFragmentScope
 import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
 import com.android.cameraapp.di.base_activity.start_fragment.StartViewModelModule
+import com.android.cameraapp.ui.base_activity.add_fragment_choose_photo.AddFragmentOne
+import com.android.cameraapp.ui.base_activity.add_fragment_done.AddFragmentThree
+import com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwo
 import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
@@ -51,5 +55,17 @@ abstract class FragmentsBuilder {
 
     @ContributesAndroidInjector
     abstract fun forgotPasswordFragment(): ForgotPasswordFragment
+
+    @ContributesAndroidInjector
+    @AddPhotoFragmentsScope
+    abstract fun addFragmentOne() : AddFragmentOne
+
+    @ContributesAndroidInjector
+    @AddPhotoFragmentsScope
+    abstract fun addFragmentTwo() : AddFragmentTwo
+
+    @ContributesAndroidInjector
+    @AddPhotoFragmentsScope
+    abstract fun addFragmentThree() : AddFragmentThree
 
 }
