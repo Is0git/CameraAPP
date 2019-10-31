@@ -2,123 +2,142 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<ScrollView
-    android:layout_width="match_parent"
-    android:fillViewport="true"
-    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/colorSurface">
+        android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/left_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.10" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@color/colorSurface">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/right_guidline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.90" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/top_guidline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.10" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottom_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.90" />
-
-        <TextView
-            android:id="@+id/almost_done_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/myriadpro"
-            android:text="@string/almost_done_describe_your_photo"
-            android:textColor="@color/colorTextDark"
-            android:textSize="@dimen/header_text_big"
-            app:layout_constraintEnd_toEndOf="@id/right_guidline"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toTopOf="@+id/top_guidline"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/description_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:hint="@string/photo_description"
-            app:counterEnabled="true"
-            app:counterTextColor="@color/colorSecondaryVariant"
-            app:endIconMode="clear_text"
-            app:layout_constraintBottom_toTopOf="@+id/private_checkBox"
-            app:layout_constraintEnd_toStartOf="@+id/right_guidline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/almost_done_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/description_edit_text"
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_guideline"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/login_text_input_size" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.10" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guidline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.90" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/back_button"
-            style="@style/addPhotoButtonOutlined"
-            android:layout_width="wrap_content"
-            android:text="@string/back"
-            android:textColor="@color/colorGrey"
-            app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@+id/next_button"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@id/left_guideline" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/top_guidline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/next_button"
-            style="@style/addPhotoButtonColored"
-            android:layout_width="0dp"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="@color/colorAccent2"
-            android:text="@string/upload"
-            android:textColor="@color/colorSurface"
-            app:layout_constraintBottom_toBottomOf="@+id/back_button"
-            app:layout_constraintEnd_toEndOf="@id/right_guidline"
-            app:layout_constraintEnd_toStartOf="@+id/right_guidline"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/back_button"
-            app:layout_constraintTop_toTopOf="@+id/back_button" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/bottom_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <TextView
+                android:id="@+id/almost_done_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myriadpro"
+                android:text="@string/almost_done_describe_your_photo"
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/header_text_big"
+                app:layout_constraintEnd_toEndOf="@id/right_guidline"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toTopOf="@+id/top_guidline"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/description_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="@string/photo_description"
+                app:counterEnabled="true"
+                app:counterTextColor="@color/colorSecondaryVariant"
+                app:endIconMode="clear_text"
+                app:layout_constraintBottom_toTopOf="@+id/private_checkBox"
+                app:layout_constraintEnd_toStartOf="@+id/right_guidline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/almost_done_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/login_text_input_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back_button"
+                style="@style/addPhotoButtonOutlined"
+                android:layout_width="wrap_content"
+                android:text="@string/back"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+                app:layout_constraintEnd_toStartOf="@+id/next_button"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@id/left_guideline" />
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/next_button"-->
+<!--                style="@style/addPhotoButtonColored"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:backgroundTint="@color/colorAccent2"-->
+<!--                android:text="@string/upload"-->
+<!--                android:textColor="@color/colorSurface"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/back_button"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/right_guidline"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/right_guidline"-->
+<!--                app:layout_constraintHorizontal_bias="0.5"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/back_button"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/back_button" />-->
 
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/private_checkBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="@string/do_you_want_make_photo_this_private_only_you_will_be_able_to_see_this_photo"
-            app:layout_constraintBottom_toTopOf="@+id/back_button"
-            app:layout_constraintEnd_toStartOf="@+id/right_guidline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline" />
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/private_checkBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/do_you_want_make_photo_this_private_only_you_will_be_able_to_see_this_photo"
+                app:layout_constraintBottom_toTopOf="@+id/back_button"
+                app:layout_constraintEnd_toStartOf="@+id/right_guidline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/next_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/colorSurface"
+                android:text="@string/upload"
+                android:background="@drawable/loading_button"
+                app:layout_constraintBottom_toBottomOf="@+id/back_button"
+                app:layout_constraintEnd_toEndOf="@id/right_guidline"
+                app:layout_constraintEnd_toStartOf="@+id/right_guidline"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/back_button"
+                app:layout_constraintTop_toTopOf="@+id/back_button"
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"
+                app:spinning_bar_width="4dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>

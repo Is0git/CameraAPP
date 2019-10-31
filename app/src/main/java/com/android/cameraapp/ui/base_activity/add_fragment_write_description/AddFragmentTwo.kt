@@ -21,8 +21,10 @@ class AddFragmentTwo : DaggerFragment(){
         savedInstanceState: Bundle?
     ): View? {
         binding = AddPhotoFragment2Binding.inflate(inflater, container, false)
+
         binding.apply {
-            nextButton.setOnClickListener { navController.navigate(R.id.action_addFragmentTwo_to_addFragmentThree)}
+//            nextButton.setOnClickListener { navController.navigate(R.id.action_addFragmentTwo_to_addFragmentThree)}
+            nextButton.setOnClickListener { nextButton.startAnimation()}
             backButton.setOnClickListener { navController.navigateUp() }
         }
         return binding.root

@@ -14,7 +14,6 @@
             app:touchAnchorId="@id/on_top_card"
             app:touchAnchorSide="top" />
 
-
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
