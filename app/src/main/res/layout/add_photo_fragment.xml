@@ -64,7 +64,7 @@
             app:srcCompat="@drawable/add_your_photos_card"
             tools:ignore="ContentDescription" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/cancel_button"
             style="@style/addPhotoButtonOutlined"
             android:layout_width="wrap_content"
@@ -74,19 +74,19 @@
             app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
             app:layout_constraintEnd_toStartOf="@+id/next_button"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
             app:layout_constraintTop_toBottomOf="@+id/add_photo_image" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/next_button"
             style="@style/addPhotoButtonColored"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:backgroundTint="@color/colorLightGrey"
+            android:backgroundTint="@color/colorAccent2"
             android:text="@string/next"
-            android:textColor="@color/colorGrey"
+            android:textColor="@color/colorSurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/right_guidline"
             app:layout_constraintHorizontal_bias="0.5"
