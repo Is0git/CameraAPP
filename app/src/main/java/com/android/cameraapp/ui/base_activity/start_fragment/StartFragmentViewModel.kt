@@ -13,7 +13,7 @@ class StartFragmentViewModel @Inject constructor(val repo: StartFragmentReposito
     var userData: LiveData<UserCollection.User> = repo.data
 
     init {
-        viewModelScope.launch { userData = repo.getUserData() }
+        viewModelScope.launch { repo.getUserData() }
     }
 }
 

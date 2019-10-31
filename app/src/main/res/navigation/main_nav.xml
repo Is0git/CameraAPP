@@ -2,29 +2,70 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/navigation">
 
-    <fragment
-        android:id="@+id/startFragment"
-        android:name="com.android.cameraapp.ui.base_activity.start_fragment.StartFragment"
-        android:label="StartFragment">
+    <navigation
+        android:id="@+id/navigation"
+        app:startDestination="@id/loginFragment" >
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment"
+            android:label="LoginFragment">
+            <action
+                android:id="@+id/action_loginFragment_to_registrationFragment"
+                app:destination="@id/registrationFragment"
+                app:enterAnim="@anim/slide_left_animation"
+                app:exitAnim="@anim/slide_right_animation"
+                app:popEnterAnim="@anim/pop_back_left_animation"
+                app:popExitAnim="@anim/pop_back_right_animation" />
+            <action
+                android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+                app:destination="@id/forgotPasswordFragment"
+                app:enterAnim="@anim/zoom_in_animation"
+                app:popEnterAnim="@anim/zoom_in_animation" />
+        </fragment>
+        <fragment
+            android:id="@+id/forgotPasswordFragment"
+            android:name="com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment"
+            android:label="ForgotPasswordFragment" />
+        <fragment
+            android:id="@+id/registrationFragment"
+            android:name="com.android.cameraapp.ui.base_activity.registration_fragment.RegistrationFragment"
+            android:label="RegistrationFragment" />
         <action
-            android:id="@+id/action_startFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/slide_left_animation"
-            app:exitAnim="@anim/slide_right_animation"
-            app:popEnterAnim="@anim/pop_back_left_animation"
-            app:popExitAnim="@anim/pop_back_right_animation" />
+            android:id="@+id/action_global_navigation2"
+            app:destination="@id/navigation2"
+            app:enterAnim="@anim/zoom_in_animation"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/zoom_in_animation" />
+    </navigation>
+    <navigation
+        android:id="@+id/navigation2"
+        app:startDestination="@id/startFragment" >
+        <fragment
+            android:id="@+id/startFragment"
+            android:name="com.android.cameraapp.ui.base_activity.start_fragment.StartFragment"
+            android:label="StartFragment">
+            <action
+                android:id="@+id/action_startFragment_to_homeFragment"
+                app:destination="@id/homeFragment"
+                app:enterAnim="@anim/slide_left_animation"
+                app:exitAnim="@anim/slide_right_animation"
+                app:popEnterAnim="@anim/pop_back_left_animation"
+                app:popExitAnim="@anim/pop_back_right_animation" />
+        </fragment>
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment"
+            android:label="HomeFragment" />
         <action
-            android:id="@+id/action_startFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment"
-        android:label="HomeFragment" />
-    <fragment
-        android:id="@+id/cameraFragment"
-        android:name="com.android.cameraapp.ui.fragments.CameraFragment"
-        android:label="CameraFragment" />
+            android:id="@+id/action_global_navigation"
+            app:destination="@id/navigation"
+            app:popUpTo="@id/navigation2"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/zoom_in_animation"
+            app:enterAnim="@anim/zoom_in_animation" />
+    </navigation>
+    <action android:id="@+id/action_global_navigation3" app:destination="@id/navigation" />
 </navigation>

@@ -20,14 +20,14 @@
             android:id="@+id/circleImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:loadImageFromUrl="@{startViewModel.userData.photo_url}"
             android:src="@drawable/background"
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="5dp"
             app:layout_constraintBottom_toTopOf="@+id/topText"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="35dp" />
+            app:loadImageFromUrl="@{startViewModel.userData.photo_url}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
