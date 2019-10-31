@@ -34,12 +34,12 @@
 
     <style name="addPhotoButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="cornerRadius">20dp</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:layout_height">63dp</item>
     </style>
 
     <style name="addPhotoButtonColored" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">20dp</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:layout_height">63dp</item>
         <item name="android:background">@drawable/background</item>
     </style>
 

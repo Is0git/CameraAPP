@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.AddPhotoFragmentBinding
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class AddFragmentOne : Fragment() {
+class AddFragmentOne : DaggerFragment() {
 
     lateinit var binding: AddPhotoFragmentBinding
     @Inject lateinit var navController: NavController
@@ -23,7 +24,9 @@ class AddFragmentOne : Fragment() {
         binding.apply {
             nextButton.setOnClickListener { navigateToNext() }
             cancelButton.setOnClickListener { navigateBack() }
+            addPhotoImage.setOnClickListener {  }
         }
+
         return binding.root
     }
 

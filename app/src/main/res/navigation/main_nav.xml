@@ -91,8 +91,10 @@
             <action
                 android:id="@+id/action_addFragmentOne_to_addFragmentTwo"
                 app:destination="@id/addFragmentTwo"
-                app:enterAnim="@anim/zoom_in_animation"
-                app:popEnterAnim="@anim/zoom_in_animation" />
+                app:enterAnim="@anim/slide_left_animation"
+                app:exitAnim="@anim/slide_right_animation"
+                app:popEnterAnim="@anim/pop_back_right_animation"
+                app:popExitAnim="@anim/pop_back_left_animation" />
         </fragment>
         <fragment
             android:id="@+id/addFragmentThree"

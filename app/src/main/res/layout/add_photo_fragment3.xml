@@ -71,7 +71,6 @@
                 android:id="@+id/done_button"
                 style="@style/addPhotoButtonColored"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent2"
                 android:text="@string/done"
                 android:textColor="@color/colorSurface"

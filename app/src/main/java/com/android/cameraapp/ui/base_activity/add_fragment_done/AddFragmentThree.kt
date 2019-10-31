@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.android.cameraapp.databinding.AddPhotoFragment3Binding
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class AddFragmentThree : Fragment(){
+class AddFragmentThree : DaggerFragment(){
 
     lateinit var binding: AddPhotoFragment3Binding
     @Inject lateinit var navController: NavController
