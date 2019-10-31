@@ -14,4 +14,5 @@ abstract class BaseViewModelModule {
     @BaseActivityScope
     @ViewModelKey(BaseViewModel::class)
     abstract fun baseViewModel(baseViewModel: BaseViewModel): ViewModel
+
 }

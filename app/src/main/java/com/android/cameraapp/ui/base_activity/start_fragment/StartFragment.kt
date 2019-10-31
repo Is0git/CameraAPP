@@ -1,9 +1,12 @@
 package com.android.cameraapp.ui.base_activity.start_fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -23,11 +26,16 @@ class StartFragment : DaggerFragment() {
     lateinit var auth: FirebaseAuth
     lateinit var navigation: NavController
     @Inject lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: StartFragmentViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(StartFragmentViewModel::class.java)
+
+        viewModel.getAuthData()?.observe(viewLifecycleOwner, Observer { Log.d("Auth","${it.username}") })
         binding = StartFragmentBinding.inflate(inflater, container, false)
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
         binding.circleImageView.setOnClickListener { auth.signOut() }

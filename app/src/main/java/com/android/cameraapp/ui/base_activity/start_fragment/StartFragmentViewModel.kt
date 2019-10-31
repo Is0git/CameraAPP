@@ -11,7 +11,7 @@ import javax.inject.Inject
 class StartFragmentViewModel @Inject constructor(val repo: StartFragmentRepository) : ViewModel() {
      var userData: LiveData<UserCollection.User>? = null
 
-    fun getData(): LiveData<UserCollection.User>? {
+    fun getAuthData(): LiveData<UserCollection.User>? {
         viewModelScope.launch { userData = repo.getUserData() }
         return userData
     }

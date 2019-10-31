@@ -2,6 +2,8 @@ package com.android.cameraapp.di.base_activity
 
 import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
 import com.android.cameraapp.di.base_activity.registration_fragment.RegistrationFragmentScope
+import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
+import com.android.cameraapp.di.base_activity.start_fragment.StartViewModelModule
 import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
@@ -24,7 +26,8 @@ abstract class FragmentsBuilder {
     @RegistrationFragmentScope
     abstract fun registrationFragment(): RegistrationFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [StartViewModelModule::class])
+    @StartFragmentScope
     abstract fun startFragment(): StartFragment
 
     @ContributesAndroidInjector
