@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.navGraphViewModels
+import com.android.cameraapp.R
 import com.android.cameraapp.databinding.StartFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.nbaapp.data.vms.ViewModelFactory
@@ -26,14 +28,14 @@ class StartFragment : DaggerFragment() {
     lateinit var auth: FirebaseAuth
     lateinit var navigation: NavController
     @Inject lateinit var viewModelFactory: ViewModelFactory
-    lateinit var viewModel: StartFragmentViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(StartFragmentViewModel::class.java)
+        val viewModel: StartFragmentViewModel by navGraphViewModels(R.id.navigation2) {viewModelFactory}
 
 
         binding = StartFragmentBinding.inflate(inflater, container, false)
@@ -50,6 +52,7 @@ class StartFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navigation = Navigation.findNavController(view)
+        Log.d("TAG", "NAV: ${navigation.graph}")
     }
 
     private fun onHomeButtonClick() {
