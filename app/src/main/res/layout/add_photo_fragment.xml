@@ -40,11 +40,57 @@
             android:id="@+id/almost_done_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/upload_your_photo"
-            android:textSize="@dimen/header_text_big"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
             android:fontFamily="@font/myriadpro"
+            android:text="@string/upload_your_photo"
             android:textColor="@color/colorTextDark"
-            app:layout_constraintTop_toTopOf="@+id/top_guidline" />
+            android:textSize="@dimen/header_text_big"
+            app:layout_constraintBottom_toTopOf="@+id/add_photo_image"
+            app:layout_constraintStart_toStartOf="@+id/left_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guidline" />
+
+        <ImageView
+            android:id="@+id/add_photo_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/cancel_button"
+            app:layout_constraintEnd_toStartOf="@+id/right_guidline"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/left_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/almost_done_text"
+            app:srcCompat="@drawable/add_your_photos_card"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="@style/addPhotoButtonOutlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/colorGrey"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/next_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/left_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/add_photo_image" />
+
+        <Button
+            android:id="@+id/next_button"
+            style="@style/addPhotoButtonColored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/colorLightGrey"
+            android:text="@string/next"
+            android:textColor="@color/colorGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/right_guidline"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cancel_button"
+            app:layout_constraintTop_toTopOf="@+id/cancel_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

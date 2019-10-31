@@ -32,6 +32,16 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="addPhotoButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="addPhotoButtonColored" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
     <style name="AppButton" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">30dp</item>
     </style>

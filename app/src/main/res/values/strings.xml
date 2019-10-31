@@ -23,5 +23,7 @@
     <string name="reset">RESET</string>
     <string name="share_your_photos_with_the_world">Share your photos with the world!</string>
     <string name="upload_your_photo">Upload your photo.</string>
+    <string name="cancel">CANCEL</string>
+    <string name="next">next</string>
 
 </resources>
