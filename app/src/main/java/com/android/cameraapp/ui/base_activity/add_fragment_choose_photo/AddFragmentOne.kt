@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity.add_fragment_choose_photo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ class AddFragmentOne : DaggerFragment() {
 
     lateinit var binding: AddPhotoFragmentBinding
     @Inject lateinit var navController: NavController
-
+    var imageRequestCode:Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if ((activity as BaseActivity).binding.toolbar.visibility == View.VISIBLE) (activity as BaseActivity).binding.toolbar.visibility =
@@ -32,17 +33,23 @@ class AddFragmentOne : DaggerFragment() {
         binding.apply {
             nextButton.setOnClickListener { navigateToNext() }
             cancelButton.setOnClickListener { navigateBack() }
-            addPhotoImage.setOnClickListener {  }
+            addPhotoImage.setOnClickListener { selectImage() }
         }
 
         return binding.root
     }
 
-    fun navigateToNext() {
+    private fun navigateToNext() {
         navController.navigate(R.id.action_addFragmentOne_to_addFragmentTwo)
     }
 
-    fun navigateBack() {
+    private fun navigateBack() {
         navController.navigateUp()
+    }
+
+    private fun selectImage() {
+        val intent: Intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "images/*"
+        }.also { startActivityForResult(it, imageRequestCode) }
     }
 }

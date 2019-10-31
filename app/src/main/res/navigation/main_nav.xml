@@ -68,7 +68,9 @@
             app:enterAnim="@anim/zoom_in_animation" />
         <action
             android:id="@+id/action_global_add_photo_nav"
-            app:destination="@id/add_photo_nav" />
+            app:destination="@id/add_photo_nav"
+            app:enterAnim="@anim/zoom_in_animation"
+            app:popEnterAnim="@anim/zoom_in_animation" />
     </navigation>
     <navigation
         android:id="@+id/add_photo_nav"
