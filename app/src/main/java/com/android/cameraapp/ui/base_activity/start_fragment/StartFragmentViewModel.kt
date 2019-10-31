@@ -7,12 +7,13 @@ import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @StartFragmentScope
 class StartFragmentViewModel @Inject constructor(val repo: StartFragmentRepository) : ViewModel() {
-     var userData: LiveData<UserCollection.User>? = null
+    var userData: LiveData<UserCollection.User>? = repo.data
 
-    fun getAuthData(): LiveData<UserCollection.User>? {
+    init {
         viewModelScope.launch { userData = repo.getUserData() }
-        return userData
     }
 }
+

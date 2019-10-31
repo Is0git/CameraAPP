@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity.start_fragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.UserCollection
@@ -19,11 +20,20 @@ class StartFragmentRepository @Inject constructor(
 ) {
     var data: MutableLiveData<UserCollection.User> = MutableLiveData()
 
-    suspend fun getUserData() : LiveData<UserCollection.User> {
+    suspend fun getUserData(): LiveData<UserCollection.User> {
+        Log.d("TAG1", "START11")
         val uid = auth.currentUser?.uid
         CoroutineScope(Dispatchers.IO).launch {
+            Log.d("TAG1", "START12")
             val documents = firestore.collection("users").whereEqualTo("uid", uid).get().await()
-            launch(Dispatchers.Main) { documents.documents.firstOrNull()?.toObject(UserCollection.User::class.java).also { data.postValue(it) } }
+            launch(Dispatchers.Main) {
+                Log.d("TAG1", "START3")
+                documents.documents.firstOrNull()?.toObject(UserCollection.User::class.java).also {
+                    Log.d(
+                        "TAG1", "START5 ${it?.username}")
+                    data.postValue (it)
+                }
+            }
         }
         return data
     }

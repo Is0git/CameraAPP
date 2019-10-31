@@ -1,13 +1,13 @@
 package com.android.cameraapp.data.data_models
 
 sealed class UserCollection {
-    data class User(
-        val description: Map<String, String>?,
-        val email: String?,
-        val is_active: Boolean?,
-        val last_active: String?,
-        val last_active_int: Long?,
-        val username: String?,
+    data class User constructor(
+        val description: Map<String, String> = mapOf(),
+        val email: String? = "email",
+        val is_active: Boolean? = true,
+        val last_active: String? = "unknown",
+        val last_active_int: Long? = 0,
+        val username: String?  = "unknown",
         val photo_url: String? = "null",
         val uid: String? = "no id"
 

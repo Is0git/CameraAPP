@@ -35,8 +35,9 @@ class StartFragment : DaggerFragment() {
 
         viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(StartFragmentViewModel::class.java)
 
-        viewModel.getAuthData()?.observe(viewLifecycleOwner, Observer { Log.d("Auth","${it.username}") })
+
         binding = StartFragmentBinding.inflate(inflater, container, false)
+
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
         binding.circleImageView.setOnClickListener { auth.signOut() }
         return binding.root
