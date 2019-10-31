@@ -2,11 +2,9 @@ package com.android.cameraapp.ui.base_activity.home_fragment
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.HomeFragmentBinding
@@ -15,7 +13,6 @@ import com.android.cameraapp.ui.base_activity.start_fragment.StartFragmentViewMo
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
-import kotlin.reflect.KProperty
 
 class HomeFragment : DaggerFragment() {
     @Inject
@@ -34,7 +31,7 @@ class HomeFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val parentFragmentViewModel: StartFragmentViewModel by navGraphViewModels(R.id.navigation2) {factory}
+        val parentFragmentViewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) {factory}
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner

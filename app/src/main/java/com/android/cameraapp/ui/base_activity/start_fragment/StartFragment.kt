@@ -5,8 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -16,7 +14,6 @@ import com.android.cameraapp.databinding.StartFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.nbaapp.data.vms.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -35,7 +32,7 @@ class StartFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val viewModel: StartFragmentViewModel by navGraphViewModels(R.id.navigation2) {viewModelFactory}
+        val viewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) {viewModelFactory}
 
 
         binding = StartFragmentBinding.inflate(inflater, container, false)

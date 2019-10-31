@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav"
-    app:startDestination="@id/navigation">
+    app:startDestination="@id/auth_nav">
 
     <navigation
-        android:id="@+id/navigation"
+        android:id="@+id/auth_nav"
         app:startDestination="@id/loginFragment" >
         <fragment
             android:id="@+id/loginFragment"
@@ -34,14 +34,14 @@
             android:label="RegistrationFragment" />
         <action
             android:id="@+id/action_global_navigation2"
-            app:destination="@id/navigation2"
+            app:destination="@id/main_nav"
             app:enterAnim="@anim/zoom_in_animation"
-            app:popUpTo="@id/navigation"
+            app:popUpTo="@id/auth_nav"
             app:popUpToInclusive="true"
             app:popEnterAnim="@anim/zoom_in_animation" />
     </navigation>
     <navigation
-        android:id="@+id/navigation2"
+        android:id="@+id/main_nav"
         app:startDestination="@id/startFragment" >
         <fragment
             android:id="@+id/startFragment"
@@ -61,31 +61,42 @@
             android:label="HomeFragment" />
         <action
             android:id="@+id/action_global_navigation"
-            app:destination="@id/navigation"
-            app:popUpTo="@id/navigation2"
+            app:destination="@id/auth_nav"
+            app:popUpTo="@id/main_nav"
             app:popUpToInclusive="true"
             app:popEnterAnim="@anim/zoom_in_animation"
             app:enterAnim="@anim/zoom_in_animation" />
+        <action
+            android:id="@+id/action_global_add_photo_nav"
+            app:destination="@id/add_photo_nav" />
     </navigation>
-    <fragment
-        android:id="@+id/addFragmentTwo"
-        android:name="com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwo"
-        android:label="AddFragmentTwo" >
-        <action
-            android:id="@+id/action_addFragmentTwo_to_addFragmentThree"
-            app:popUpToInclusive="true"
-            app:destination="@id/addFragmentThree" />
-    </fragment>
-    <fragment
-        android:id="@+id/addFragmentOne"
-        android:name="com.android.cameraapp.ui.base_activity.add_fragment_choose_photo.AddFragmentOne"
-        android:label="AddFragmentOne" >
-        <action
-            android:id="@+id/action_addFragmentOne_to_addFragmentTwo"
-            app:destination="@id/addFragmentTwo" />
-    </fragment>
-    <fragment
-        android:id="@+id/addFragmentThree"
-        android:name="com.android.cameraapp.ui.base_activity.add_fragment_done.AddFragmentThree"
-        android:label="AddFragmentThree" />
+    <navigation
+        android:id="@+id/add_photo_nav"
+        app:startDestination="@id/addFragmentTwo" >
+        <fragment
+            android:id="@+id/addFragmentTwo"
+            android:name="com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwo"
+            android:label="AddFragmentTwo">
+            <action
+                android:id="@+id/action_addFragmentTwo_to_addFragmentThree"
+                app:destination="@id/addFragmentThree"
+                app:enterAnim="@anim/zoom_in_animation"
+                app:popEnterAnim="@anim/zoom_in_animation"
+                app:popUpTo="@id/homeFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/addFragmentOne"
+            android:name="com.android.cameraapp.ui.base_activity.add_fragment_choose_photo.AddFragmentOne"
+            android:label="AddFragmentOne">
+            <action
+                android:id="@+id/action_addFragmentOne_to_addFragmentTwo"
+                app:destination="@id/addFragmentTwo"
+                app:enterAnim="@anim/zoom_in_animation"
+                app:popEnterAnim="@anim/zoom_in_animation" />
+        </fragment>
+        <fragment
+            android:id="@+id/addFragmentThree"
+            android:name="com.android.cameraapp.ui.base_activity.add_fragment_done.AddFragmentThree"
+            android:label="AddFragmentThree" />
+    </navigation>
 </navigation>
