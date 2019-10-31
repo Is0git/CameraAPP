@@ -33,7 +33,7 @@ class StartFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(StartFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(StartFragmentViewModel::class.java)
 
 
         binding = StartFragmentBinding.inflate(inflater, container, false)

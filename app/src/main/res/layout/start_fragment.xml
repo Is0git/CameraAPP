@@ -76,7 +76,7 @@
             android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
             android:lineSpacingExtra="10dp"
-            android:text="Share your photos with the world!"
+            android:text="@string/share_your_photos_with_the_world"
             android:textColor="@color/colorTextHeaderBig"
             android:textSize="@dimen/header_text_big"
             app:layout_constraintBottom_toTopOf="@+id/bottomText"
