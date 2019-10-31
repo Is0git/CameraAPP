@@ -3,6 +3,7 @@ package com.android.cameraapp.ui.base_activity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -46,6 +47,12 @@ class BaseActivity : DaggerAppCompatActivity() {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.addFragmentOne -> navController.navigate(R.id.action_global_add_photo_nav)
+        }
+        return true
+    }
     private fun resolveStates(states: UserAuthStates) {
         when {
             // It has to check if we aren't using same graph in order to prevent wasting resources duplicating fragments

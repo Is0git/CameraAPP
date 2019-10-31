@@ -72,7 +72,7 @@
     </navigation>
     <navigation
         android:id="@+id/add_photo_nav"
-        app:startDestination="@id/addFragmentTwo" >
+        app:startDestination="@id/addFragmentOne" >
         <fragment
             android:id="@+id/addFragmentTwo"
             android:name="com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwo"

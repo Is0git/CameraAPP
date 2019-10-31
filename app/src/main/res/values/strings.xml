@@ -30,7 +30,8 @@
     <string name="back">Back</string>
     <string name="do_you_want_make_photo_this_private_only_you_will_be_able_to_see_this_photo">Do you want make photo this private? (Only you will be able to see this photo)</string>
     <string name="upload">Upload</string>
-    <string name="done">Done</string>
+    <string name="done">Done!</string>
     <string name="congrats_you_are_done">Congrats! You are done.</string>
+    <string name="add_photo">Add photo</string>
 
 </resources>
