@@ -27,6 +27,7 @@ class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewMo
     override fun onCleared() {
         repository.forgetOneSessionUser()
         repository.removeListener()
+        repository.cancelJobs()
     }
 
     fun registerUser(

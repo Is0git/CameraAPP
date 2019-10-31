@@ -1,6 +1,5 @@
 package com.android.cameraapp.ui.base_activity
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +8,8 @@ import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.util.ToastHandler
 import com.android.cameraapp.util.UserAuthStates
+import com.android.cameraapp.util.getCurrentDateInFormat
+import com.android.cameraapp.util.getCurrentTime
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -16,8 +17,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 
@@ -37,9 +36,10 @@ class BaseRepository @Inject constructor(
     val firestore: FirebaseFirestore
 ) {
     var listener: FirebaseAuth.AuthStateListener
-    var user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
+    val user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
     var user: FirebaseUser? = null
     var rememberUser: Boolean = true
+    val jobs: Job = Job()
 
 
     init {
@@ -47,10 +47,13 @@ class BaseRepository @Inject constructor(
         listener = FirebaseAuth.AuthStateListener {
             if (it.currentUser == null) {
                 user_state.postValue(UserAuthStates.NOT_LOGGED_IN)
-                logOut()
-            } else user_state.postValue(
-                UserAuthStates.LOGGED_IN
-            )
+
+            } else {
+                user_state.postValue(
+                    UserAuthStates.LOGGED_IN
+
+                )
+            }
         }
         auth.addAuthStateListener(listener)
     }
@@ -88,7 +91,7 @@ class BaseRepository @Inject constructor(
                 if (task.isSuccessful) {
                     user = auth.currentUser
                     ToastHandler.showToast(application, "LOGGED IN")
-                    CoroutineScope(Dispatchers.Main).launch { registerUserInDatabase(account.displayName) }
+                    CoroutineScope(Dispatchers.Main + jobs).launch { registerUserInDatabase(account.displayName) }
                 } else {
                     ToastHandler.showToast(application, "COULD NOT SIGN IN WITH GOOGLE")
                     Log.w(TAG, "signInWithCredential:failure:", task.exception)
@@ -118,7 +121,7 @@ class BaseRepository @Inject constructor(
                         application,
                         "Successfully registered!"
                     )
-                    CoroutineScope(Dispatchers.Main).launch { registerUserInDatabase(username) }
+                    CoroutineScope(Dispatchers.Main + jobs).launch { registerUserInDatabase(username) }
                 } else {
                     ToastHandler.showToast(application, "${it.exception?.message}")
                 }
@@ -177,19 +180,9 @@ class BaseRepository @Inject constructor(
 
     }
 
-    // Date dd-mmm-yyyy format
-    @SuppressLint("SimpleDateFormat")
-    fun getCurrentDateInFormat(): String? {
-        val date = Calendar.getInstance().time
-        return SimpleDateFormat("hh:mm:hh, dd-MMM-yyyy").format(date)
-    }
-
-    private fun getCurrentTime(): Long? {
-        return System.currentTimeMillis()
-    }
 
     fun logOut() {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO + jobs).launch {
             val email = auth.currentUser?.email
             auth.signOut()
             val uid = withContext(coroutineContext) {
@@ -201,6 +194,10 @@ class BaseRepository @Inject constructor(
             firestore.document("users/${uid}").update(mapOf("_active" to false))
         }
 
+    }
+    // we cancel all jobs in view model on cleared to prevent memory leaks... and can't use viewModelScope in this situation
+    fun cancelJobs() {
+        jobs.cancel()
     }
 }
 
