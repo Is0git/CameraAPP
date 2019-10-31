@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.databinding.StartFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.nbaapp.data.vms.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.android.support.DaggerFragment
@@ -21,6 +22,7 @@ class StartFragment : DaggerFragment() {
     @Inject
     lateinit var auth: FirebaseAuth
     lateinit var navigation: NavController
+    @Inject lateinit var viewModelFactory: ViewModelFactory
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
