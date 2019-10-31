@@ -67,4 +67,25 @@
             app:popEnterAnim="@anim/zoom_in_animation"
             app:enterAnim="@anim/zoom_in_animation" />
     </navigation>
+    <fragment
+        android:id="@+id/addFragmentTwo"
+        android:name="com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwo"
+        android:label="AddFragmentTwo" >
+        <action
+            android:id="@+id/action_addFragmentTwo_to_addFragmentThree"
+            app:popUpToInclusive="true"
+            app:destination="@id/addFragmentThree" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragmentOne"
+        android:name="com.android.cameraapp.ui.base_activity.add_fragment_choose_photo.AddFragmentOne"
+        android:label="AddFragmentOne" >
+        <action
+            android:id="@+id/action_addFragmentOne_to_addFragmentTwo"
+            app:destination="@id/addFragmentTwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragmentThree"
+        android:name="com.android.cameraapp.ui.base_activity.add_fragment_done.AddFragmentThree"
+        android:label="AddFragmentThree" />
 </navigation>
