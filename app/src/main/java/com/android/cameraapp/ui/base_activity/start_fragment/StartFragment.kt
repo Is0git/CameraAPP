@@ -33,14 +33,16 @@ class StartFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(StartFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(StartFragmentViewModel::class.java)
 
 
         binding = StartFragmentBinding.inflate(inflater, container, false)
         binding.apply {
-            lifecycleOwner = lifecycleOwner
+            lifecycleOwner = viewLifecycleOwner
             startViewModel = viewModel
+            Log.d("TAG1", "HAPPENED")
         }
+
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
         binding.circleImageView.setOnClickListener { auth.signOut() }
         return binding.root
