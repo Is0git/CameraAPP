@@ -10,10 +10,11 @@
 
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/constraint_layout"
+        android:id="@+id/motion_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary2"
+        app:showPaths="true"
         app:layoutDescription="@xml/home_motion_scene">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -22,7 +23,6 @@
             android:layout_height="70dp"
             android:layout_marginTop="56dp"
             android:elevation="9dp"
-            app:loadImageFromUrl="@{parentViewModel.userData.photo_url}"
             android:src="@drawable/background"
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
@@ -30,7 +30,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImageFromUrl="@{parentViewModel.userData.photo_url}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

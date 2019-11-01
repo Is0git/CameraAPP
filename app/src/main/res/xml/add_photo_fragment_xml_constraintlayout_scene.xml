@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1500">
+       <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/add_photo_image"
+               motion:framePosition="0"
+               android:alpha="1" />
+           <KeyAttribute
+               motion:motionTarget="@+id/add_photo_image"
+               motion:framePosition="0"
+               android:alpha="0.5" />
+           <KeyAttribute
+               motion:motionTarget="@+id/add_photo_image"
+               motion:framePosition="50"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/add_photo_image"
+               motion:framePosition="100"
+               android:alpha="1" />
+       </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:layout_marginEnd="50dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toTopOf="@+id/cancel_button"
+            motion:layout_constraintHorizontal_bias="0.0"
+            android:layout_width="0dp"
+            motion:layout_constraintTop_toBottomOf="@+id/almost_done_text"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guidline"
+            motion:layout_constraintStart_toEndOf="@id/left_guideline"
+            android:layout_marginStart="50dp"
+            android:id="@+id/add_photo_image" ></Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:layout_marginEnd="50dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            motion:layout_constraintBottom_toTopOf="@+id/cancel_button"
+            motion:layout_constraintHorizontal_bias="0.0"
+            android:layout_width="0dp"
+            motion:layout_constraintTop_toBottomOf="@+id/almost_done_text"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guidline"
+            motion:layout_constraintStart_toEndOf="@id/left_guideline"
+            android:layout_marginStart="50dp"
+            android:id="@+id/add_photo_image" ></Constraint>
+
+    </ConstraintSet>
+</MotionScene>

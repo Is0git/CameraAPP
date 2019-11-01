@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:showPaths="true"
+        app:layoutDescription="@xml/add_photo_fragment_xml_constraintlayout_scene"
         tools:background="@color/colorSurface">
 
         <androidx.constraintlayout.widget.Guideline
@@ -53,10 +56,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="50dp"
-            android:background="?android:attr/selectableItemBackground"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="50dp"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintBottom_toTopOf="@+id/cancel_button"
             app:layout_constraintEnd_toStartOf="@+id/right_guidline"
             app:layout_constraintHorizontal_bias="0.5"
@@ -92,5 +95,5 @@
             app:layout_constraintStart_toEndOf="@+id/cancel_button"
             app:layout_constraintTop_toTopOf="@+id/cancel_button" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
