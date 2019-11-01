@@ -11,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.navArgs
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.AddPhotoFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwoDirections
 import com.android.cameraapp.util.ToastHandler
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -24,6 +27,7 @@ class AddFragmentOne : DaggerFragment() {
     var transitionState = true
     @Inject
     lateinit var navController: NavController
+    var imageUri: Uri? = null
     var imageRequestCode: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +51,11 @@ class AddFragmentOne : DaggerFragment() {
     }
 
     private fun navigateToNext() {
-        navController.navigate(R.id.action_addFragmentOne_to_addFragmentTwo)
+         imageUri?.let {
+            AddFragmentOneDirections.actionAddFragmentOneToAddFragmentTwo(it).also {   navController.navigate(it!!)  }
+        }
+
+
     }
 
     private fun navigateBack() {
@@ -65,6 +73,7 @@ class AddFragmentOne : DaggerFragment() {
         if (requestCode == imageRequestCode && resultCode == RESULT_OK) {
             if (data?.data != null) {
                 transitionState = !transitionState
+                imageUri = data.data!!
                 imageChangeAnimationHandle(data.data!!)
                 ToastHandler.showToast(activity!!.application, "Photo is selected!")
             }
@@ -72,8 +81,6 @@ class AddFragmentOne : DaggerFragment() {
     }
 
     private fun imageChangeAnimationHandle(uri: Uri) {
-
-
         binding.addPhotoImage.apply {
             binding.addPhotoImage.setImageURI(null)
             binding.addPhotoImage.setImageURI(uri)
