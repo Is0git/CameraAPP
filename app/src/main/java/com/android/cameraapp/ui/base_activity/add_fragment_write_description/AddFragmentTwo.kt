@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgs
 import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
@@ -16,6 +17,8 @@ import com.android.cameraapp.ui.base_activity.add_fragment_choose_photo.AddFragm
 import com.android.cameraapp.ui.base_activity.add_fragment_choose_photo.AddFragmentOneDirections
 
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddFragmentTwo : DaggerFragment(){
@@ -31,7 +34,11 @@ class AddFragmentTwo : DaggerFragment(){
         Log.d("TAG", "res: ${args.imageUri!!}")
         binding.apply {
 //            nextButton.setOnClickListener { navController.navigate(R.id.action_addFragmentTwo_to_addFragmentThree)}
-            nextButton.setOnClickListener { nextButton.startAnimation()}
+            nextButton.setOnClickListener { lifecycleScope.launch {
+                binding.constraintLayout3.transitionToEnd()
+                delay(3000)
+                navController.navigateUp()
+            }}
             backButton.setOnClickListener { navController.navigateUp() }
         }
         return binding.root

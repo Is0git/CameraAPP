@@ -79,13 +79,6 @@
             android:id="@+id/addFragmentTwo"
             android:name="com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwo"
             android:label="AddFragmentTwo">
-            <action
-                android:id="@+id/action_addFragmentTwo_to_addFragmentThree"
-                app:destination="@id/addFragmentThree"
-                app:enterAnim="@anim/slide_left_animation"
-                app:exitAnim="@anim/slide_right_animation"
-                app:popEnterAnim="@anim/zoom_in_animation"
-                app:popUpTo="@id/homeFragment" />
             <argument
                 android:name="image_uri"
                 app:nullable="true"
@@ -101,19 +94,16 @@
                 app:destination="@id/addFragmentTwo"
                 app:enterAnim="@anim/slide_left_animation"
                 app:exitAnim="@anim/slide_right_animation"
-                app:popEnterAnim="@anim/pop_back_left_animation"
-                app:popExitAnim="@anim/pop_back_right_animation">
+                app:popEnterAnim="@anim/zoom_in_animation"
+                app:popUpTo="@id/addFragmentOne"
+                app:popUpToInclusive="true">
                 <argument
                     android:name="image_uri"
-                    app:nullable="true"
-                    app:argType="android.net.Uri" />
+                    app:argType="android.net.Uri"
+                    app:nullable="true" />
             </action>
 
 
         </fragment>
-        <fragment
-            android:id="@+id/addFragmentThree"
-            android:name="com.android.cameraapp.ui.base_activity.add_fragment_done.AddFragmentThree"
-            android:label="AddFragmentThree" />
     </navigation>
 </navigation>

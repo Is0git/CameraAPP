@@ -16,7 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.AddPhotoFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
-import com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwoDirections
+
 import com.android.cameraapp.util.ToastHandler
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -51,7 +51,7 @@ class AddFragmentOne : DaggerFragment() {
 
     private fun navigateToNext() {
         binding.imageUri?.let {
-            AddFragmentOneDirections.actionAddFragmentOneToAddFragmentTwo(it).also {   navController.navigate(it!!)  }
+            AddFragmentOneDirections.actionAddFragmentOneToAddFragmentTwo(it).also {   navController.navigate(it)  }
         }
 
 
