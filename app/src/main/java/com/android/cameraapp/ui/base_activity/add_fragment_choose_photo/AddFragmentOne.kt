@@ -27,7 +27,6 @@ class AddFragmentOne : DaggerFragment() {
     var transitionState = true
     @Inject
     lateinit var navController: NavController
-    var imageUri: Uri? = null
     var imageRequestCode: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,7 @@ class AddFragmentOne : DaggerFragment() {
     }
 
     private fun navigateToNext() {
-         imageUri?.let {
+        binding.imageUri?.let {
             AddFragmentOneDirections.actionAddFragmentOneToAddFragmentTwo(it).also {   navController.navigate(it!!)  }
         }
 
@@ -73,7 +72,7 @@ class AddFragmentOne : DaggerFragment() {
         if (requestCode == imageRequestCode && resultCode == RESULT_OK) {
             if (data?.data != null) {
                 transitionState = !transitionState
-                imageUri = data.data!!
+                binding.imageUri = data.data!!
                 imageChangeAnimationHandle(data.data!!)
                 ToastHandler.showToast(activity!!.application, "Photo is selected!")
             }

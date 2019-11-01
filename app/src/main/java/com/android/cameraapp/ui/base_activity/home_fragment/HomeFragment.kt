@@ -36,6 +36,7 @@ class HomeFragment : DaggerFragment() {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             parentViewModel = parentFragmentViewModel
+
         }
         setViewPagerWithToolbar()
         return binding.root
