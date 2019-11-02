@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import com.android.cameraapp.databinding.AddPhotoFragment2Binding
+import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,6 +20,7 @@ class AddFragmentTwo : DaggerFragment() {
     lateinit var binding: AddPhotoFragment2Binding
     @Inject
     lateinit var navController: NavController
+    @Inject lateinit var factory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,

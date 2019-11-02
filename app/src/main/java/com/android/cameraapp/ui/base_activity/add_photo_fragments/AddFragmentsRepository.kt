@@ -24,8 +24,6 @@ class AddFragmentsRepository @Inject constructor(
             .build()
 
         WorkManager.getInstance(application).enqueue(work)
-
-
     }
 }
 
