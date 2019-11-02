@@ -29,9 +29,12 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
 
         val jobs = launch {
             uri = inputData.getString("image_uri")
-            val userUID = withContext(Dispatchers.IO){ FirebaseAuth.getInstance().currentUser?.uid }
-            val document = getDocument(userUID)
-            uploadPhotosToFireStorage(document)
+            withTimeout(10000){
+                val userUID = withContext(Dispatchers.IO){ FirebaseAuth.getInstance().currentUser?.uid }
+                val document = getDocument(userUID)
+                uploadPhotosToFireStorage(document)
+            }
+
         }
         jobs.join()
         Result.success()

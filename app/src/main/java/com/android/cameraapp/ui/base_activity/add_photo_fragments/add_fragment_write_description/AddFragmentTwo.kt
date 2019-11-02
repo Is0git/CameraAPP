@@ -39,7 +39,7 @@ class AddFragmentTwo : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = AddPhotoFragment2Binding.inflate(inflater, container, false)
-        viewmodel = ViewModelProviders.of(activity!!, factory).get(AddFragmentsViewModel::class.java)
+        viewmodel = ViewModelProviders.of(this, factory).get(AddFragmentsViewModel::class.java)
         Log.d("TAG", "res: ${args.imageUri!!}")
         binding.apply {
             //            nextButton.setOnClickListener { navController.navigate(R.id.action_addFragmentTwo_to_addFragmentThree)}

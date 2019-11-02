@@ -44,13 +44,15 @@
 
         <TextView
             android:id="@+id/almost_done_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/myriadpro"
             android:text="@string/upload_your_photo"
             android:textColor="@color/colorTextDark"
+            app:layout_constraintHorizontal_bias="0.0"
             android:textSize="@dimen/header_text_big"
             app:layout_constraintBottom_toTopOf="@+id/add_photo_image"
+            app:layout_constraintEnd_toEndOf="@id/right_guidline"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="@id/top_guidline" />
 
