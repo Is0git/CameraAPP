@@ -5,7 +5,7 @@
     <dimen name="login_text_input_size">20sp</dimen>
     <dimen name="home_name_text_size">20sp</dimen>
     <dimen name="header_text_big">35sp</dimen>
-    <dimen name="toolbar_marginTop">35sp</dimen>
+    <dimen name="toolbar_marginTop">39sp</dimen>
     <dimen name="location_textSize">16sp</dimen>
     <dimen name="description_text_spacing">10dp</dimen>
     <dimen name="materialCard_corner_radius">27dp</dimen>

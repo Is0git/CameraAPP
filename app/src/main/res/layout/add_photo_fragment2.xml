@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutDescription="@xml/add_photo_fragment2_xml_constraintlayout3_scene"
-            app:showPaths="false"
             tools:background="@color/colorSurface">
 
             <View

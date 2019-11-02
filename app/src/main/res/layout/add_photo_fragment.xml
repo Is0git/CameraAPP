@@ -11,7 +11,6 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:showPaths="true"
         app:layoutDescription="@xml/add_photo_fragment_xml_constraintlayout_scene"
         tools:background="@color/colorSurface">
 
