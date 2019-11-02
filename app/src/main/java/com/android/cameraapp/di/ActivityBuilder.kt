@@ -10,6 +10,5 @@ import javax.inject.Singleton
 abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = [FirebaseAuthModule::class, NavigationModule::class, BaseViewModelModule::class, FragmentsBuilder::class, FirebaseFirestoreModule::class])
     @BaseActivityScope
-    @Singleton
     abstract fun baseActivity(): BaseActivity
 }

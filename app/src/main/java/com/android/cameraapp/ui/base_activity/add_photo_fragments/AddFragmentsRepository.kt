@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.work.*
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
 import com.android.cameraapp.ui.base_activity.BaseActivity
-import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.AddFragmentTwo
 import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.UploadPhoto
 import com.android.cameraapp.util.ToastHandler
 import javax.inject.Inject
@@ -16,7 +15,8 @@ import javax.inject.Inject
 class AddFragmentsRepository @Inject constructor(
     val application: Application,
     val navController: NavController,
-    val fragment:AddFragmentTwo
+    val activity: BaseActivity,
+    val workManager: WorkManager
 ) {
 
     fun uploadPhoto(uri: Uri) {
@@ -32,10 +32,18 @@ class AddFragmentsRepository @Inject constructor(
             .setConstraints(constraints)
             .build()
 
-        WorkManager.getInstance(application).getWorkInfoByIdLiveData(work.id).observe(
-            fragment,
-            Observer { ToastHandler.showToast(application, "RES: ${it.state}") })
-        WorkManager.getInstance(application).beginUniqueWork("upload_photo_work", ExistingWorkPolicy.KEEP, work).enqueue()
+        workManager.getWorkInfoByIdLiveData(work.id).observe(
+            activity,
+            Observer {
+                when (it.state) {
+                    WorkInfo.State.SUCCEEDED -> activity.binding.constraintLayout2.transitionToStart()
+                    WorkInfo.State.FAILED, WorkInfo.State.CANCELLED -> {
+                        activity.binding.constraintLayout2.transitionToStart()
+                        ToastHandler.showToast(application, "Image was not uploaded!")
+                    }
+                }
+            })
+        workManager.beginUniqueWork("upload_photo_work", ExistingWorkPolicy.KEEP, work).enqueue()
     }
 }
 
