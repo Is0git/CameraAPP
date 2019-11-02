@@ -1,7 +1,6 @@
 package com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.work.CoroutineWorker
@@ -21,14 +20,15 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
 
     private val firestore = FirebaseFirestore.getInstance()
     private val fireStorage = FirebaseStorage.getInstance()
-    private var uri:String? = null
+    private var uri: String? = null
 
     override suspend fun doWork(): Result = coroutineScope {
-      val jobs = launch {
+
+        val jobs = launch {
             uri = inputData.getString("image_uri")
-            val userUID = async { FirebaseAuth.getInstance().currentUser?.uid }
-            val document = getDocument(userUID.await())
-             uploadPhotosToFireStorage(document)
+            val userUID = withContext(Dispatchers.IO){ FirebaseAuth.getInstance().currentUser?.uid }
+            val document = getDocument(userUID)
+            uploadPhotosToFireStorage(document)
         }
         jobs.join()
         Result.success()
@@ -42,9 +42,10 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
 
     suspend fun uploadPhotosToFireStorage(document: DocumentSnapshot?) {
         fireStorage.getReference(
-            "$usersStorage/$usersStoragePhotos/${document?.getString("uid")}").putFile(uri?.toUri()!!).await().task.apply {
+            "$usersStorage/$usersStoragePhotos/${document?.getString("uid")}"
+        ).putFile(uri?.toUri()!!).await().task.apply {
             when {
-                isSuccessful -> uploadPhotosToFireStorage(document)
+                isSuccessful -> uploadPhotosToFireStore(document!!)
                 else -> throw IOException("Couldn't upload photos: ${exception?.message}")
             }
         }
@@ -54,7 +55,14 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
     suspend fun uploadPhotosToFireStore(document: DocumentSnapshot) {
         firestore.collection("$userCollection/${document?.id}/$userPhotosCollection").add(
             UserCollection.Photos(
-                getCurrentDateInFormat(), id.toString(), "$usersStorage/$usersStoragePhotos/${document.get("uid")}", document.getString("uid"), "200", "400"))
+                getCurrentDateInFormat(),
+                id.toString(),
+                "$usersStorage/$usersStoragePhotos/${document.get("uid")}",
+                document.getString("uid"),
+                "200",
+                "400"
+            )
+        )
             .await().get().apply {
                 when {
                     isSuccessful -> Log.d("TAG2", "Photo uploaded")
@@ -63,11 +71,3 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
             }
     }
 }
-
-//firestore.collection("$userCollection/${document.id}/$userPhotosCollection").add(UserCollection.Photos(
-//getCurrentDateInFormat(), id.toString(), "$usersStorage/$usersStoragePhotos/${document.get("uid")}", document.getString("uid"), "200", "400"))
-//.await().get().apply {
-//    when {
-//        isSuccessful ->
-//    }
-//}

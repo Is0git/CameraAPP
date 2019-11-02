@@ -5,10 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import com.android.cameraapp.databinding.AddPhotoFragment2Binding
+import com.android.cameraapp.ui.base_activity.add_photo_fragments.AddFragmentsViewModel
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.delay
@@ -21,6 +24,7 @@ class AddFragmentTwo : DaggerFragment() {
     @Inject
     lateinit var navController: NavController
     @Inject lateinit var factory: ViewModelFactory
+        lateinit var viewmodel:AddFragmentsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,10 +32,11 @@ class AddFragmentTwo : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = AddPhotoFragment2Binding.inflate(inflater, container, false)
+        viewmodel = ViewModelProviders.of(activity!!, factory).get(AddFragmentsViewModel::class.java)
         Log.d("TAG", "res: ${args.imageUri!!}")
         binding.apply {
             //            nextButton.setOnClickListener { navController.navigate(R.id.action_addFragmentTwo_to_addFragmentThree)}
-            nextButton.setOnClickListener { }
+            nextButton.setOnClickListener {uploadPhoto() }
             backButton.setOnClickListener { navController.navigateUp() }
         }
         return binding.root
@@ -41,6 +46,7 @@ class AddFragmentTwo : DaggerFragment() {
         lifecycleScope.launch {
             if (binding.descriptionEditText.text.toString().isNotBlank() && binding.privateCheckBox.isChecked) {
                 binding.constraintLayout3.transitionToEnd()
+                viewmodel.uploadPhoto(args.imageUri!!)
                 delay(3000)
                 navController.navigateUp()
             }
