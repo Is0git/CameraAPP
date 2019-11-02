@@ -20,13 +20,13 @@ class AddFragmentsRepository @Inject constructor(
     val workManager: WorkManager
 ) {
 
-    fun uploadPhoto(uri: Uri) {
+    fun uploadPhoto(uri: Uri, description:String, isPrivate:Boolean) {
         val constraints =
             Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
-        val data = workDataOf("image_uri" to uri.toString())
+        val data = workDataOf("image_uri" to uri.toString(), "description" to description, "isPrivate" to isPrivate)
         val work = OneTimeWorkRequestBuilder<UploadPhoto>()
             .addTag("Upload Work")
             .setInputData(data)

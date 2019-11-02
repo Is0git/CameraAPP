@@ -54,7 +54,6 @@ class AddFragmentTwo : DaggerFragment() {
             if (binding.descriptionEditText.text.toString().isNotBlank() && binding.privateCheckBox.isChecked) {
                 binding.constraintLayout3.transitionToEnd()
                 viewmodel.uploadPhoto(args.imageUri!!)
-
                 delay(3000)
                 (activity as BaseActivity).binding.constraintLayout2.transitionToEnd()
                 navController.navigateUp()

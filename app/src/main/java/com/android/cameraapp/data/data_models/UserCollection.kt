@@ -30,6 +30,8 @@ sealed class UserCollection {
         val photo_id: String?,
         val storage_url: String?,
         val user_uid: String?,
+        val description: String?,
+        val isPrivate: Boolean = false,
         val width: String?,
         val height: String?
     )

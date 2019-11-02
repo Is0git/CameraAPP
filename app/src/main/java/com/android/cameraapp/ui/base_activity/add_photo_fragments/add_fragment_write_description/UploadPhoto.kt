@@ -65,6 +65,8 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
                 id.toString(),
                 "$usersStorage/$usersStoragePhotos/${document.get("uid")}",
                 document.getString("uid"),
+                inputData.getString("description"),
+                inputData.getBoolean("isPrivate", false),
                 "200",
                 "400"
             )
