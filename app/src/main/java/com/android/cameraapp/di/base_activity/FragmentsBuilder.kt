@@ -1,5 +1,6 @@
 package com.android.cameraapp.di.base_activity
 
+import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
@@ -60,7 +61,7 @@ abstract class FragmentsBuilder {
     @AddPhotoFragmentsScope
     abstract fun addFragmentOne() : AddFragmentOne
 
-    @ContributesAndroidInjector(modules = [AddFragmentViewModelModule::class])
+    @ContributesAndroidInjector(modules = [AddFragmentViewModelModule::class, AddFragmentModule::class])
     @AddPhotoFragmentsScope
     abstract fun addFragmentTwo() : AddFragmentTwo
 

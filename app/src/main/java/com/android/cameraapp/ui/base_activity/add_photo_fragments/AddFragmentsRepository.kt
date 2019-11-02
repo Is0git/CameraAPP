@@ -17,14 +17,11 @@ class AddFragmentsRepository @Inject constructor(
     val application: Application,
     val navController: NavController,
     val activity: BaseActivity,
-    val workManager: WorkManager
+    val workManager: WorkManager,
+    val constraints: Constraints
 ) {
 
     fun uploadPhoto(uri: Uri, description:String, isPrivate:Boolean) {
-        val constraints =
-            Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .build()
 
         val data = workDataOf("image_uri" to uri.toString(), "description" to description, "isPrivate" to isPrivate)
         val work = OneTimeWorkRequestBuilder<UploadPhoto>()
