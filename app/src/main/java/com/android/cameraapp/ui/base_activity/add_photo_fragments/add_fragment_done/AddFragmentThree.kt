@@ -1,10 +1,9 @@
-package com.android.cameraapp.ui.base_activity.add_fragment_done
+package com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_done
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.android.cameraapp.databinding.AddPhotoFragment3Binding
 import dagger.android.support.DaggerFragment

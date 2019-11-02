@@ -1,4 +1,4 @@
-package com.android.cameraapp.ui.base_activity.add_fragment_write_description
+package com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description
 
 import android.os.Bundle
 import android.util.Log

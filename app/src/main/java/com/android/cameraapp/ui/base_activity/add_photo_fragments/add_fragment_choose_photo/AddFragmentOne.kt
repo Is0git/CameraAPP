@@ -1,19 +1,13 @@
-package com.android.cameraapp.ui.base_activity.add_fragment_choose_photo
+package com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_choose_photo
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.navArgs
-import com.android.cameraapp.R
 import com.android.cameraapp.databinding.AddPhotoFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 

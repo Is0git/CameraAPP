@@ -77,7 +77,7 @@
         app:startDestination="@id/addFragmentOne">
         <fragment
             android:id="@+id/addFragmentTwo"
-            android:name="com.android.cameraapp.ui.base_activity.add_fragment_write_description.AddFragmentTwo"
+            android:name="com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.AddFragmentTwo"
             android:label="AddFragmentTwo">
             <argument
                 android:name="image_uri"
@@ -86,7 +86,7 @@
         </fragment>
         <fragment
             android:id="@+id/addFragmentOne"
-            android:name="com.android.cameraapp.ui.base_activity.add_fragment_choose_photo.AddFragmentOne"
+            android:name="com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_choose_photo.AddFragmentOne"
             android:label="AddFragmentOne">
 
             <action
