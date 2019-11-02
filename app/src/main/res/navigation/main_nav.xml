@@ -94,7 +94,8 @@
                 app:destination="@id/addFragmentTwo"
                 app:enterAnim="@anim/slide_left_animation"
                 app:exitAnim="@anim/slide_right_animation"
-                app:popEnterAnim="@anim/zoom_in_animation"
+                app:popEnterAnim="@anim/pop_back_left_animation"
+                app:popExitAnim="@anim/pop_back_right_animation"
                 app:popUpTo="@id/addFragmentOne"
                 app:popUpToInclusive="true">
                 <argument
