@@ -14,7 +14,10 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.io.IOException
+import java.lang.Exception
+import java.lang.IllegalStateException
 
+const val TAG = "UploadTAG"
 class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
     CoroutineWorker(appContext, workerParams) {
 
@@ -42,11 +45,11 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
 
     suspend fun uploadPhotosToFireStorage(document: DocumentSnapshot?) {
         fireStorage.getReference(
-            "$usersStorage/$usersStoragePhotos/${document?.getString("uid")}"
+            "$usersStorage/$usersStoragePhotos/${document?.getString("uid")}/${System.currentTimeMillis()}"
         ).putFile(uri?.toUri()!!).await().task.apply {
             when {
                 isSuccessful -> uploadPhotosToFireStore(document!!)
-                else -> throw IOException("Couldn't upload photos: ${exception?.message}")
+                else -> throw CancellationException("Couldn't upload photos: ${exception?.message}")
             }
         }
 
@@ -66,7 +69,7 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
             .await().get().apply {
                 when {
                     isSuccessful -> Log.d("TAG2", "Photo uploaded")
-                    else -> throw IOException("Problems with firestore: ${exception?.message}")
+                    else -> throw CancellationException("Problems with firestore: ${exception?.message}")
                 }
             }
     }
