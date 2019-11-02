@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import androidx.work.WorkManager
 import com.android.cameraapp.databinding.AddPhotoFragment2Binding
+import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.ui.base_activity.add_photo_fragments.AddFragmentsViewModel
 import com.android.cameraapp.util.ToastHandler
 import com.android.nbaapp.data.vms.ViewModelFactory
@@ -54,8 +55,9 @@ class AddFragmentTwo : DaggerFragment() {
                 binding.constraintLayout3.transitionToEnd()
                 viewmodel.uploadPhoto(args.imageUri!!)
 
-//                delay(3000)
-//                navController.navigateUp()
+                delay(3000)
+                (activity as BaseActivity).binding.constraintLayout2.transitionToEnd()
+                navController.navigateUp()
             }
         }
     }

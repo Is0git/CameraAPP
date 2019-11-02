@@ -12,6 +12,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowBackground">@drawable/splashscreen_drawable</item>
+        <item name="shapeAppearanceMediumComponent">@style/progressBar</item>
     </style>
 
     <style name="TextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -56,9 +57,17 @@
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant2</item>
         <item name="android:windowFullscreen">true</item>
+
+
     </style>
 
     <style name="toolbarStyle" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">0sp</item>
     </style>
+
+    <style name="progressBar" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>
