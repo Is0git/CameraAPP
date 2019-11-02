@@ -52,7 +52,7 @@ class AddFragmentTwo : DaggerFragment() {
         lifecycleScope.launch {
             if (binding.descriptionEditText.text.toString().isNotBlank() && binding.privateCheckBox.isChecked) {
                 binding.constraintLayout3.transitionToEnd()
-                viewmodel.uploadPhoto("dasd".toUri())
+                viewmodel.uploadPhoto(args.imageUri!!)
 
 //                delay(3000)
 //                navController.navigateUp()
