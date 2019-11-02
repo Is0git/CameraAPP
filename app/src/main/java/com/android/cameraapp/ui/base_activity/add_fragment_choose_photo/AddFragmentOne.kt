@@ -77,6 +77,7 @@ class AddFragmentOne : DaggerFragment() {
                 ToastHandler.showToast(activity!!.application, "Photo is selected!")
             }
         }
+
     }
 
     private fun imageChangeAnimationHandle(uri: Uri) {
