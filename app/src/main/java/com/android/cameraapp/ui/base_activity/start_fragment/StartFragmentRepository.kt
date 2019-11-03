@@ -23,15 +23,11 @@ class StartFragmentRepository @Inject constructor(
 
 
     suspend fun getUserData() {
-        Log.d("TAG1", "START11")
         val uid = auth.currentUser?.uid
         CoroutineScope(Dispatchers.IO).launch {
-            Log.d("TAG1", "START12")
             val documents = firestore.collection("users").whereEqualTo("uid", uid).get().await()
             launch(Dispatchers.Main) {
-                Log.d("TAG1", "START3")
                 documents.documents.firstOrNull()?.toObject(UserCollection.User::class.java).also {
-                    Log.d("TAG1", "START5 ${it?.username}")
                     data.setValue (it)
                 }
             }

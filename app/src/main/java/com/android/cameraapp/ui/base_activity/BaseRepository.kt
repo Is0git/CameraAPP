@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.BaseActivityScope
-import com.android.cameraapp.util.ToastHandler
-import com.android.cameraapp.util.UserAuthStates
-import com.android.cameraapp.util.getCurrentDateInFormat
-import com.android.cameraapp.util.getCurrentTime
+import com.android.cameraapp.util.*
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -164,19 +161,15 @@ class BaseRepository @Inject constructor(
         user = auth.currentUser
         val date = async { getCurrentDateInFormat() }
         val currentTime = async { getCurrentTime() }
-        val result = firestore.collection("users").add(
+        firestore.document("$userCollection/${user?.uid}").set(
             UserCollection.User(
                 mapOf(
                     "large_message" to "Your description",
                     "shorter_message" to "Add something inspirational"
                 ), user?.email, true, date.await(), currentTime.await(), username, null, user?.uid
             )
-        ).await().get().apply {
-            when {
-                isSuccessful -> Log.i(TAG, "User succesfully was uploaded to database")
-                else -> Log.i(TAG, "Failed ${exception?.message}")
-            }
-        }
+        )
+
 
     }
 

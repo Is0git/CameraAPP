@@ -92,7 +92,9 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:tabInlineLabel="true"
+            android:layout_height="75dp"
+            app:tabMode="scrollable"
             android:elevation="8dp" />
 
         <com.google.android.material.card.MaterialCardView

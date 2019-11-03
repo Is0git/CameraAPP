@@ -50,10 +50,12 @@ class AddFragmentTwo : DaggerFragment() {
     }
 
     fun uploadPhoto() {
+        val description =binding.descriptionEditText.text.toString()
+        val isPrivate = binding.privateCheckBox.isChecked
         lifecycleScope.launch {
-            if (binding.descriptionEditText.text.toString().isNotBlank() && binding.privateCheckBox.isChecked) {
+            if (description.isNotBlank()) {
                 binding.constraintLayout3.transitionToEnd()
-                viewmodel.uploadPhoto(args.imageUri!!)
+                viewmodel.uploadPhoto(args.imageUri!!, description, isPrivate)
                 delay(3000)
                 (activity as BaseActivity).binding.constraintLayout2.transitionToEnd()
                 navController.navigateUp()
