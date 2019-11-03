@@ -39,32 +39,33 @@ class PhotosDataSource @Inject constructor(
                         else -> throw CancellationException("FAILED TO UPLOAD: ${exception?.message}")
                     }
 
-                }.await().also { lastDocument = it.documents.last() }.toObjects(UserCollection.Photos::class.java).let { callback.onResult(it) }
+                }.await().also { lastDocument = it.documents.last() }
+                .toObjects(UserCollection.Photos::class.java).let { callback.onResult(it) }
         }
     }
 
-        override fun loadInitial(
-            params: LoadInitialParams,
-            callback: LoadInitialCallback<UserCollection.Photos>
-        ) {
-            CoroutineScope(Dispatchers.Main).launch {
-                val querySnapshot =
-                    fireStore.collection("$userCollection/${user.uid}/$userPhotosCollection")
-                        .limit(params.pageSize.toLong()).get()
-                        .apply {
-                            when {
-                                isSuccessful -> Log.i(TAG, "succesfully uploaded")
-                                else -> throw CancellationException("FAILED TO UPLOAD: ${exception?.message}")
-                            }
-                        }.await()
+    override fun loadInitial(
+        params: LoadInitialParams,
+        callback: LoadInitialCallback<UserCollection.Photos>
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val querySnapshot =
+                fireStore.collection("$userCollection/${user.uid}/$userPhotosCollection")
+                    .limit(params.pageSize.toLong()).get()
+                    .apply {
+                        when {
+                            isSuccessful -> Log.i(TAG, "succesfully uploaded")
+                            else -> throw CancellationException("FAILED TO UPLOAD: ${exception?.message}")
+                        }
+                    }.await()
 
-                callback.onResult(
-                    querySnapshot.toObjects(UserCollection.Photos::class.java),
-                    params.requestedStartPosition,
-                    params.pageSize
-                ).also { lastDocument = querySnapshot.documents.last() }
-            }
-
+            callback.onResult(
+                querySnapshot.toObjects(UserCollection.Photos::class.java),
+                params.requestedStartPosition,
+                params.pageSize
+            ).also { lastDocument = querySnapshot.documents.last() }
         }
+
+    }
 
 }
