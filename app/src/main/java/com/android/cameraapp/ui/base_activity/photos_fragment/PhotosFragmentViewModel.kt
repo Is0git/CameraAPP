@@ -6,6 +6,6 @@ import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
 import javax.inject.Inject
 
 @PhotoFragmentScope
-class PhotosFragmentViewModel @Inject constructor(repo: PhotosFragmentRepository) : ViewModel() {
+class PhotosFragmentViewModel @Inject constructor(val repo: PhotosFragmentRepository) : ViewModel() {
     val photoPagedList = repo.pagedList
 }

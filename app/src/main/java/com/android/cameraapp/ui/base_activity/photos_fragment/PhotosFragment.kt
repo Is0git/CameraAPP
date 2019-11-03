@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.cameraapp.databinding.PhotosFragmentBinding
+import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class PhotosFragment : DaggerFragment() {
     lateinit var binding: PhotosFragmentBinding
-
+    @Inject lateinit var factory: ViewModelFactory
+    lateinit var viewmodel: PhotosFragmentViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

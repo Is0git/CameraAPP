@@ -1,14 +1,10 @@
 package com.android.cameraapp.di.base_activity.photo_fragment
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.android.cameraapp.data.data_models.UserCollection
-import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
-import com.android.cameraapp.ui.base_activity.home_fragment.PhotoDataFactory
-import com.android.cameraapp.ui.base_activity.home_fragment.PhotosDataSource
-import dagger.Binds
+import com.android.cameraapp.ui.base_activity.photos_fragment.PhotoDataFactory
 import dagger.Module
 import dagger.Provides
 
@@ -29,7 +25,7 @@ object PhotoFragmentModule {
     @PhotoFragmentScope
     @Provides
     @JvmStatic
-    fun getPagedListLiveData(dataSourceFactory: PhotoDataFactory , config: PagedList.Config) : LiveData<PagedList<UserCollection.Photos>> {
+    fun getPagedListLiveData(dataSourceFactory: PhotoDataFactory, config: PagedList.Config) : LiveData<PagedList<UserCollection.Photos>> {
        return LivePagedListBuilder(dataSourceFactory, config).build()
     }
 }

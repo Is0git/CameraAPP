@@ -1,12 +1,12 @@
-package com.android.cameraapp.ui.base_activity.home_fragment
+package com.android.cameraapp.ui.base_activity.photos_fragment
 
 import android.util.Log
 import androidx.paging.PositionalDataSource
 import com.android.cameraapp.data.data_models.UserCollection
-import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
 import com.android.cameraapp.util.userCollection
 import com.android.cameraapp.util.userPhotosCollection
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,7 +21,7 @@ const val TAG = "HomeFragmentTAG"
 
 @PhotoFragmentScope
 class PhotosDataSource @Inject constructor(
-    val user: FirebaseUser,
+    val auth: FirebaseAuth,
     val fireStore: FirebaseFirestore
 ) : PositionalDataSource<UserCollection.Photos>() {
 
@@ -31,7 +31,7 @@ class PhotosDataSource @Inject constructor(
         callback: LoadRangeCallback<UserCollection.Photos>
     ) {
         CoroutineScope(Dispatchers.Main).launch {
-            val snapshot = fireStore.collection("$userCollection/${user.uid}/$userPhotosCollection")
+            val snapshot = fireStore.collection("$userCollection/${auth.uid}/$userPhotosCollection")
                 .startAfter(lastDocument)
                 .limit(params.loadSize.toLong())
                 .get().apply {
@@ -51,7 +51,7 @@ class PhotosDataSource @Inject constructor(
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             val querySnapshot =
-                fireStore.collection("$userCollection/${user.uid}/$userPhotosCollection")
+                fireStore.collection("$userCollection/${auth.uid}/$userPhotosCollection")
                     .limit(params.pageSize.toLong()).get()
                     .apply {
                         when {

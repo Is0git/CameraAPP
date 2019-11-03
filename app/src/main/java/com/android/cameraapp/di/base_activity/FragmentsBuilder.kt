@@ -7,6 +7,7 @@ import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentModule
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.registration_fragment.RegistrationFragmentScope
 import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
@@ -40,7 +41,7 @@ abstract class FragmentsBuilder {
     @StartFragmentScope
     abstract fun startFragment(): StartFragment
 
-    @ContributesAndroidInjector(modules = [HomeFragmentViewModelModule::class])
+    @ContributesAndroidInjector()
     @HomeFragmentScope
     abstract fun homeFragment(): HomeFragment
 
@@ -48,6 +49,7 @@ abstract class FragmentsBuilder {
     abstract fun likesFragment(): LikesFragment
 
     @ContributesAndroidInjector(modules = [PhotoFragmentModule::class, PhotoFragmentViewModelModule::class])
+    @PhotoFragmentScope
     abstract fun photosFragment(): PhotosFragment
 
     @ContributesAndroidInjector

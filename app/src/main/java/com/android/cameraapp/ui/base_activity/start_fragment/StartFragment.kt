@@ -33,7 +33,7 @@ class StartFragment : DaggerFragment() {
     ): View? {
 
         val viewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) {viewModelFactory}
-
+        Log.d("VIEWMODELCHECK", "DATA: $viewModel")
 
         binding = StartFragmentBinding.inflate(inflater, container, false)
         binding.apply {

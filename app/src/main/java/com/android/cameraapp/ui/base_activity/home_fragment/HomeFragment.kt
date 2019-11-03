@@ -2,6 +2,7 @@ package com.android.cameraapp.ui.base_activity.home_fragment
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,7 @@ class HomeFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val parentFragmentViewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) { factory }
+        Log.d("VIEWMODELCHECK", "DATA: $parentFragmentViewModel")
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
