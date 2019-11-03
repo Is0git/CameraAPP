@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.cameraapp.R
@@ -23,10 +24,13 @@ class PhotosFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewmodel: PhotosFragmentViewModel by navGraphViewModels(R.id.main_nav)
+        val viewModel = ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java)
+        Log.d(TAG, "LOAD FRAGMENT: ${viewModel}")
         binding = PhotosFragmentBinding.inflate(inflater, container, false)
         binding.photosRecyclerView.adapter = adapter
-        viewmodel.photoPagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        viewModel.photoPageList.observe(viewLifecycleOwner, Observer {
+            Log.d("TRIGGER", "SIZE : ${it.size}")
+            adapter.submitList(it) })
         return binding.root
     }
 

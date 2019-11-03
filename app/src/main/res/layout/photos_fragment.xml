@@ -10,8 +10,8 @@
             android:id="@+id/photos_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
             android:orientation="vertical"
             tools:itemCount="24"
             tools:listitem="@layout/photos_list_layout" />

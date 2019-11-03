@@ -49,7 +49,7 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
         ).putFile(uri?.toUri()!!).await().task.apply {
             when {
                 isSuccessful -> {
-                    val downloadUrl = snapshot.metadata?.reference?.downloadUrl?.result.toString()
+                    val downloadUrl = snapshot.metadata?.reference?.downloadUrl?.await().toString()
                     uploadPhotosToFireStore(document!!, downloadUrl)
                 }
                 else -> throw CancellationException("Couldn't upload photos: ${exception?.message}")

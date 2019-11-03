@@ -17,8 +17,8 @@ object PhotoFragmentModule {
     fun pagedConfig() : PagedList.Config{
         return PagedList.Config.Builder()
             .setEnablePlaceholders(false)
-            .setPageSize(10)
-            .setInitialLoadSizeHint(10)
+            .setInitialLoadSizeHint(9)
+            .setPageSize(3)
             .build()
     }
 

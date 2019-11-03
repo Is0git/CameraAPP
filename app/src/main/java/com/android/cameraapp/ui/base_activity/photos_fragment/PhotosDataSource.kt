@@ -7,7 +7,6 @@ import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
 import com.android.cameraapp.util.userCollection
 import com.android.cameraapp.util.userPhotosCollection
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CancellationException
@@ -30,42 +29,39 @@ class PhotosDataSource @Inject constructor(
         params: LoadRangeParams,
         callback: LoadRangeCallback<UserCollection.Photos>
     ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            val snapshot = fireStore.collection("$userCollection/${auth.uid}/$userPhotosCollection")
-                .startAfter(lastDocument)
-                .limit(params.loadSize.toLong())
-                .get().apply {
-                    when {
-                        isSuccessful -> Log.i(TAG, "succesfully uploaded")
-                        else -> throw CancellationException("FAILED TO UPLOAD: ${exception?.message}")
-                    }
 
-                }.await().also { lastDocument = it.documents.last() }
-                .toObjects(UserCollection.Photos::class.java).let { callback.onResult(it) }
-        }
+        fireStore.collection("$userCollection/${auth.uid}/$userPhotosCollection")
+            .limit(params.loadSize.toLong())
+            .startAfter(lastDocument)
+            .get().addOnCompleteListener { task ->
+                when {
+                    task.isSuccessful && task.result?.size() != 0 -> {
+                        task.result?.also {lastDocument = it.documents.last()  }?.toObjects(UserCollection.Photos::class.java).let {
+                            callback.onResult(it!!)
+                        }
+                    }
+                }
+            }
+
     }
 
     override fun loadInitial(
         params: LoadInitialParams,
         callback: LoadInitialCallback<UserCollection.Photos>
     ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            val querySnapshot =
-                fireStore.collection("$userCollection/${auth.uid}/$userPhotosCollection")
-                    .limit(params.pageSize.toLong()).get()
-                    .apply {
-                        when {
-                            isSuccessful -> Log.i(TAG, "succesfully uploaded")
-                            else -> throw CancellationException("FAILED TO UPLOAD: ${exception?.message}")
-                        }
-                    }.await()
+        Log.d(TAG, "LOAD INITIAL")
 
-            callback.onResult(
-                querySnapshot.toObjects(UserCollection.Photos::class.java),
-                params.requestedStartPosition,
-                params.pageSize
-            ).also { lastDocument = querySnapshot.documents.last() }
-        }
+
+            fireStore.collection("$userCollection/${auth.uid}/$userPhotosCollection")
+                .limit(params.pageSize.toLong()).get().addOnCompleteListener { task ->
+                    when {
+                        task.isSuccessful -> {
+                            task.result?.also {lastDocument = it.documents.last()  }?.toObjects(UserCollection.Photos::class.java).let {
+                                callback.onResult(it!!, params.requestedStartPosition, it.size)
+                            }
+                        }
+                    }
+                }
 
     }
 
