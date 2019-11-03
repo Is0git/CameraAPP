@@ -95,10 +95,6 @@ class PhotosFragment : DaggerFragment() {
             "https://i.imgur.com/ZerwVp3.jpg",
             "https://www.setaswall.com/wp-content/uploads/2017/10/Blue-Wallpaper-1080x1920-380x676.jpg"
         )
-        binding.photosRecyclerView.adapter =
-            PhotosAdapter(
-                list,
-                activity?.applicationContext!!
-            )
+        binding.photosRecyclerView.adapter = PhotosAdapter()
     }
 }

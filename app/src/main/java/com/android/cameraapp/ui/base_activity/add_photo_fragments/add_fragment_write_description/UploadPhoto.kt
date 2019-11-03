@@ -13,9 +13,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import java.io.IOException
-import java.lang.Exception
-import java.lang.IllegalStateException
 
 const val TAG = "UploadTAG"
 class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
@@ -51,14 +48,17 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
             "$usersStorage/$usersStoragePhotos/${document?.getString("uid")}/${System.currentTimeMillis()}"
         ).putFile(uri?.toUri()!!).await().task.apply {
             when {
-                isSuccessful -> uploadPhotosToFireStore(document!!)
+                isSuccessful -> {
+                    val downloadUrl = snapshot.metadata?.reference?.downloadUrl?.result.toString()
+                    uploadPhotosToFireStore(document!!, downloadUrl)
+                }
                 else -> throw CancellationException("Couldn't upload photos: ${exception?.message}")
             }
         }
 
     }
 
-    suspend fun uploadPhotosToFireStore(document: DocumentSnapshot) {
+    suspend fun uploadPhotosToFireStore(document: DocumentSnapshot, downloadURL:String?) {
         firestore.collection("$userCollection/${document.id}/$userPhotosCollection").add(
             UserCollection.Photos(
                 getCurrentDateInFormat(),
@@ -68,7 +68,8 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
                 inputData.getString("description"),
                 inputData.getBoolean("isPrivate", false),
                 "200",
-                "400"
+                "400",
+                downloadURL
             )
         )
             .await().get().apply {
