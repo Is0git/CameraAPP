@@ -7,10 +7,4 @@ import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import javax.inject.Inject
 
 @HomeFragmentScope
-class HomeFragmentRepository @Inject constructor(private val factory: PhotoDataFactory, val pagedList: LiveData<PagedList<UserCollection.Photos>>) {
-
-    init {
-
-    }
-
-}
+class HomeFragmentRepository @Inject constructor(val pagedList: LiveData<PagedList<UserCollection.Photos>>)
