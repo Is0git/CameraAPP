@@ -10,10 +10,6 @@ import com.android.cameraapp.databinding.PhotosListLayoutBinding
 
 class PhotosAdapter :
     PagedListAdapter<UserCollection.Photos, PhotosAdapter.MyViewHolder>(diffUtil) {
-    class MyViewHolder(val binding: PhotosListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
             PhotosListLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,8 +17,13 @@ class PhotosAdapter :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val item = getItem(position)
+        holder.binding.photoData = item
     }
+
+    class MyViewHolder(val binding: PhotosListLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+
+
 }
 
 
