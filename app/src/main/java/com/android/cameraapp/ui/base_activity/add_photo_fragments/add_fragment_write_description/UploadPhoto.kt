@@ -59,7 +59,7 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
     }
 
     suspend fun uploadPhotosToFireStore(document: DocumentSnapshot) {
-        firestore.collection("$userCollection/${document?.id}/$userPhotosCollection").add(
+        firestore.collection("$userCollection/${document.id}/$userPhotosCollection").add(
             UserCollection.Photos(
                 getCurrentDateInFormat(),
                 id.toString(),

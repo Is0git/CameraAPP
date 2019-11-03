@@ -40,7 +40,7 @@ class BaseRepository @Inject constructor(
 
 
     init {
-        //Changing main_nav graphs depending on if user is logged in or not
+        //Changing nav graphs depending on if user is logged in or not
         listener = FirebaseAuth.AuthStateListener {
             if (it.currentUser == null) {
                 user_state.postValue(UserAuthStates.NOT_LOGGED_IN)
