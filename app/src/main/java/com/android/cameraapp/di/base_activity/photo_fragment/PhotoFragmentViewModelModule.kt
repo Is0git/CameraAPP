@@ -1,4 +1,4 @@
-package com.android.cameraapp.di.base_activity.home_fragment
+package com.android.cameraapp.di.base_activity.photo_fragment
 
 import androidx.lifecycle.ViewModel
 import com.android.cameraapp.di.ViewModelKey
@@ -8,10 +8,10 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class HomeFragmentViewModelModule {
+abstract class PhotoFragmentViewModelModule {
+    @PhotoFragmentScope
     @Binds
     @IntoMap
-    @HomeFragmentScope
     @ViewModelKey(PhotosFragmentViewModel::class)
-    abstract fun getHomeViewModel(viewModel: PhotosFragmentViewModel) : ViewModel
+    abstract fun getViewModel(viewModel: PhotosFragmentViewModel) : ViewModel
 }

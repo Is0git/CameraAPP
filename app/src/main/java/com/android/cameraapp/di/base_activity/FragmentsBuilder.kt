@@ -3,10 +3,11 @@ package com.android.cameraapp.di.base_activity
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
-import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentModule
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentModule
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.registration_fragment.RegistrationFragmentScope
 import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
 import com.android.cameraapp.di.base_activity.start_fragment.StartViewModelModule
@@ -39,14 +40,14 @@ abstract class FragmentsBuilder {
     @StartFragmentScope
     abstract fun startFragment(): StartFragment
 
-    @ContributesAndroidInjector(modules = [HomeFragmentViewModelModule::class, HomeFragmentModule::class])
+    @ContributesAndroidInjector(modules = [HomeFragmentViewModelModule::class])
     @HomeFragmentScope
     abstract fun homeFragment(): HomeFragment
 
     @ContributesAndroidInjector
     abstract fun likesFragment(): LikesFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [PhotoFragmentModule::class, PhotoFragmentViewModelModule::class])
     abstract fun photosFragment(): PhotosFragment
 
     @ContributesAndroidInjector

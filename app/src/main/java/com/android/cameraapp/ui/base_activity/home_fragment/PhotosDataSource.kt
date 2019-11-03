@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.paging.PositionalDataSource
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
 import com.android.cameraapp.util.userCollection
 import com.android.cameraapp.util.userPhotosCollection
 import com.google.firebase.auth.FirebaseUser
@@ -18,7 +19,7 @@ import javax.inject.Inject
 
 const val TAG = "HomeFragmentTAG"
 
-@HomeFragmentScope
+@PhotoFragmentScope
 class PhotosDataSource @Inject constructor(
     val user: FirebaseUser,
     val fireStore: FirebaseFirestore
