@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.PhotosListLayoutBinding
-
-class PhotosAdapter :
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
+import javax.inject.Inject
+@PhotoFragmentScope
+class PhotosAdapter @Inject constructor() :
     PagedListAdapter<UserCollection.Photos, PhotosAdapter.MyViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =

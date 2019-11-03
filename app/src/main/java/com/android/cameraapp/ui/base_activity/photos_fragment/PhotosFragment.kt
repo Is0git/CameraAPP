@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.cameraapp.R
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class PhotosFragment : DaggerFragment() {
     lateinit var binding: PhotosFragmentBinding
     @Inject lateinit var factory: ViewModelFactory
-
+    @Inject lateinit var adapter:PhotosAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,16 +25,11 @@ class PhotosFragment : DaggerFragment() {
     ): View? {
         val viewmodel: PhotosFragmentViewModel by navGraphViewModels(R.id.main_nav)
         binding = PhotosFragmentBinding.inflate(inflater, container, false)
-        setRecyclerView()
-
+        binding.photosRecyclerView.adapter = adapter
+        viewmodel.photoPagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
         return binding.root
     }
 
 
-    private fun setRecyclerView() {
-        Log.d("TAG", "WTF")
-        val manager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
-        binding.photosRecyclerView.layoutManager = manager
-        binding.photosRecyclerView.adapter = PhotosAdapter()
-    }
+
 }
