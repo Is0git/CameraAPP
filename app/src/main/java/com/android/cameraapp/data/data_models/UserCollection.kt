@@ -26,13 +26,13 @@ sealed class UserCollection {
     data class Likes(val liker_id: String?, val name: String?, val when_liked: String?)
     //SubCollection
     data class Photos(
-        val date_taken: String?,
-        val photo_id: String?,
-        val storage_url: String?,
-        val user_uid: String?,
-        val description: String?,
+        val date_taken: String? = "N/A",
+        val photo_id: String? = "N/A",
+        val storage_url: String? = "N/A",
+        val user_uid: String? = "N/A",
+        val description: String? = "N/A",
         val isPrivate: Boolean = false,
-        val width: String?,
-        val height: String?
+        val width: String? = "N/A",
+        val height: String? = "N/A"
     )
 }
