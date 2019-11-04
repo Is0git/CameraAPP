@@ -10,6 +10,7 @@ import com.android.cameraapp.util.userPhotosCollection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import javax.inject.Inject
 
 const val TAG = "FollowersTAG"
@@ -50,6 +51,7 @@ class FollowersDataSource @Inject constructor(
     ) {
         firestore.collection("$userCollection/${auth.uid}/$userFollowersCollection").
             limit(params.requestedLoadSize.toLong())
+            .orderBy("following_time_long", Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener {
                 when {
