@@ -1,9 +1,8 @@
 package com.android.cameraapp.util;
 
-import android.content.Context;
 import android.widget.TextView;
 
-import androidx.databinding.BindingAdapter;
+import com.android.cameraapp.R;
 
 public class FollowingTimeResolveAdapter {
 
@@ -41,4 +40,16 @@ public class FollowingTimeResolveAdapter {
             return diff / DAY_MILLIS + " days ago";
         }
     }
+
+    public static String getFollowingDate(long time, String date, TextView view) {
+        long three_days = 259200000;
+        long time_elapsed = System.currentTimeMillis() - time;
+        if (time_elapsed > three_days) {
+            return date;
+        }
+        else {
+            return view.getContext().getString(R.string.now_follows_you);
+        }
+    }
+    //259200000
 }
