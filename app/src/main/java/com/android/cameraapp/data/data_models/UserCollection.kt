@@ -25,11 +25,11 @@ sealed class UserCollection {
     //SubCollection
 
     data class Following(
-        val date_since: String?,
-        val name: String?,
-        val user_uid: String?,
-        val user_photo: String?,
-        val following_time_long: Long?
+        val date_since: String? = "N/A",
+        val name: String? = "N/A",
+        val user_uid: String? = "N/A",
+        val user_photo: String? = "N/A",
+        val following_time_long: Long? = 0
     )
 
     //SubCollection

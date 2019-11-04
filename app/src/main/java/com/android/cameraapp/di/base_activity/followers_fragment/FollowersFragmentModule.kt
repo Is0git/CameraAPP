@@ -12,7 +12,7 @@ import dagger.Provides
 @Module
 object FollowersFragmentModule {
 
-    @Provides
+       @Provides
     @FollowersFragmentScope
     @JvmStatic
     fun getPageConfig(): PagedList.Config = PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false).build()

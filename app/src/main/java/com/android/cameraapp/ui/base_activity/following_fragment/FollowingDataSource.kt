@@ -12,7 +12,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import javax.inject.Inject
-
+const val TAG = "FollowingTAG"
 @FollowingFragmentScope
 class FollowingDataSource @Inject constructor(val auth: FirebaseAuth, val firestore: FirebaseFirestore) :
     PositionalDataSource<UserCollection.Following>() {
@@ -44,15 +44,17 @@ class FollowingDataSource @Inject constructor(val auth: FirebaseAuth, val firest
         params: LoadInitialParams,
         callback: LoadInitialCallback<UserCollection.Following>
     ) {
-        firestore.collection("$userCollection/$auth.uid/$userFollowingCollection")
+        firestore.collection("$userCollection/${auth.uid}/$userFollowingCollection")
             .limit(params.requestedLoadSize.toLong())
             .orderBy("following_time_long", Query.Direction.DESCENDING)
             .get().addOnCompleteListener {
+                Log.d(TAG, "RES: ${it.result?.size()}")
                 when {
                     it.isSuccessful && it.result?.size() != 0 -> {
                         lastDocument = it.result?.documents?.last()!!
                         it.result?.toObjects(UserCollection.Following::class.java)
                             .also { callback.onResult(it!!, 0, it.size) }
+
                     }
                     it.isCanceled -> Log.i(TAG, "FAILED: ${it.exception?.message}")
                 }
