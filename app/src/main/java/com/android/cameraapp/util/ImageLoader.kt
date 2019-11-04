@@ -9,6 +9,6 @@ object ImageLoader {
     @JvmStatic
     @BindingAdapter("app:loadImageFromUrl")
     fun loadImage(view: ImageView, url:String?) {
-        Glide.with(view.context).load(url).centerCrop().placeholder(R.drawable.background).into(view)
+        Glide.with(view.context).load(url).centerCrop().placeholder(R.drawable.image_placeholder).into(view)
     }
 }

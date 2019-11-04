@@ -8,11 +8,12 @@ sealed class UserCollection {
         val is_active: Boolean? = true,
         val last_active: String? = "unknown",
         val last_active_int: Long? = 0,
-        val username: String?  = "unknown",
+        val username: String? = "unknown",
         val photo_url: String? = "null",
         val uid: String? = "no id"
 
     )
+
     //SubCollection
     data class Followers(
         val follower_name: String? = "N/A",
@@ -23,9 +24,17 @@ sealed class UserCollection {
     )
     //SubCollection
 
-    data class Following(val date_since: String?, val name: String?, val user_uid: String?)
+    data class Following(
+        val date_since: String?,
+        val name: String?,
+        val user_uid: String?,
+        val user_photo: String?,
+        val following_time_long: Long?
+    )
+
     //SubCollection
     data class Likes(val liker_id: String?, val name: String?, val when_liked: String?)
+
     //SubCollection
     data class Photos(
         val date_taken: String? = "N/A",
@@ -36,6 +45,6 @@ sealed class UserCollection {
         val isPrivate: Boolean = false,
         val width: String? = "N/A",
         val height: String? = "N/A",
-        val image_url:String? ="N/A"
+        val image_url: String? = "N/A"
     )
 }

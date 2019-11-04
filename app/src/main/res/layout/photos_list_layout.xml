@@ -19,7 +19,7 @@
             android:layout_height="250dp"
             app:loadImageFromUrl="@{photoData.image_url}"
             android:adjustViewBounds="true"
-            android:background="@drawable/background"
+            android:background="@drawable/image_placeholder"
             tools:ignore="ContentDescription" />
 
 

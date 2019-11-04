@@ -1,0 +1,3 @@
+package com.android.cameraapp.ui.base_activity.following_fragment
+
+class FollowingRepository

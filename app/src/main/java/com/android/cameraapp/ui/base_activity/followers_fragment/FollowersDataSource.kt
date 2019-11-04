@@ -51,7 +51,8 @@ class FollowersDataSource @Inject constructor(
     ) {
         firestore.collection("$userCollection/${auth.uid}/$userFollowersCollection").
             limit(params.requestedLoadSize.toLong())
-            .orderBy("following_time_long", Query.Direction.DESCENDING)
+            .orderBy("following_time_long", Query.Direction.DESCENDING
+            )
             .get()
             .addOnCompleteListener {
                 when {
