@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowersRecyclerviewBinding
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 @FollowersFragmentScope
 class FollowersAdapter @Inject constructor():
-    PagedListAdapter<UserCollection.Followers, FollowersAdapter.MyViewHolder>(callback) {
+    PagedListAdapter<DataFlat.Followers, FollowersAdapter.MyViewHolder>(callback) {
     class MyViewHolder(val binding: FollowersRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -30,15 +31,15 @@ class FollowersAdapter @Inject constructor():
 
 }
 
-val callback = object : DiffUtil.ItemCallback<UserCollection.Followers>() {
+val callback = object : DiffUtil.ItemCallback<DataFlat.Followers>() {
     override fun areItemsTheSame(
-        oldItem: UserCollection.Followers,
-        newItem: UserCollection.Followers
+        oldItem: DataFlat.Followers,
+        newItem: DataFlat.Followers
     ): Boolean = oldItem.follower_uid == newItem.follower_uid
 
     override fun areContentsTheSame(
-        oldItem: UserCollection.Followers,
-        newItem: UserCollection.Followers
+        oldItem: DataFlat.Followers,
+        newItem: DataFlat.Followers
     ): Boolean = oldItem == newItem
 
 }
