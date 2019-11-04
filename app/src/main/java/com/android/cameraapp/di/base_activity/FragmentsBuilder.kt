@@ -18,6 +18,9 @@ import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragme
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentModule
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersViewModelModule
+import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragmentScope
+import com.android.cameraapp.di.base_activity.following_fragment.FollowingModule
+import com.android.cameraapp.di.base_activity.following_fragment.FollowingViewModelModule
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
@@ -59,7 +62,8 @@ abstract class FragmentsBuilder {
     @FollowersFragmentScope
     abstract fun followersFragment(): FollowersFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [FollowingModule::class, FollowingViewModelModule::class])
+    @FollowingFragmentScope
     abstract fun followingFragment(): FollowingFragment
 
     @ContributesAndroidInjector
