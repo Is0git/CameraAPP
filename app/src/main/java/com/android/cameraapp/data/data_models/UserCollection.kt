@@ -1,6 +1,7 @@
 package com.android.cameraapp.data.data_models
 
 sealed class UserCollection {
+    //Collection
     data class User constructor(
         val description: Map<String, String> = mapOf(),
         val email: String? = "email",

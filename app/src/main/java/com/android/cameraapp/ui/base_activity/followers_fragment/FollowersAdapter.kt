@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowersRecyclerviewBinding
+import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
+import javax.inject.Inject
 
-class FollowersAdapter :
+@FollowersFragmentScope
+class FollowersAdapter @Inject constructor():
     PagedListAdapter<UserCollection.Followers, FollowersAdapter.MyViewHolder>(callback) {
     class MyViewHolder(val binding: FollowersRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 

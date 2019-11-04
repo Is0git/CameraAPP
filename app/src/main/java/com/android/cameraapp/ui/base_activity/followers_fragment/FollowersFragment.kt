@@ -4,10 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.android.cameraapp.databinding.FollowersFragmentBinding
+import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class FollowersFragment : DaggerFragment() {
+    @Inject
+    lateinit var factory: ViewModelFactory
+    @Inject
+    lateinit var adapter: FollowersAdapter
+    lateinit var viewmodel: FollowersViewModel
     lateinit var binding: FollowersFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -15,8 +23,8 @@ class FollowersFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FollowersFragmentBinding.inflate(inflater, container, false)
-        binding.followersRecyclerView.adapter =
-            FollowersAdapter()
+        binding.followersRecyclerView.adapter = adapter
+        viewmodel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
         return binding.root
     }
 }
