@@ -5,7 +5,6 @@ import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentVie
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentModule
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
-import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentViewModelModule
@@ -16,7 +15,8 @@ import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_c
 import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_done.AddFragmentThree
 import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.AddFragmentTwo
 import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
-import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragmentModule
+import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentModule
+import com.android.cameraapp.di.base_activity.followers_fragment.FollowersViewModelModule
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
@@ -49,7 +49,7 @@ abstract class FragmentsBuilder {
     @ContributesAndroidInjector
     abstract fun likesFragment(): LikesFragment
 
-    @ContributesAndroidInjector(modules = [PhotoFragmentModule::class, PhotoFragmentViewModelModule::class])
+    @ContributesAndroidInjector(modules = [PhotoFragmentModule::class, PhotoFragmentViewModelModule::class, FollowersViewModelModule::class])
     @PhotoFragmentScope
     abstract fun photosFragment(): PhotosFragment
 
