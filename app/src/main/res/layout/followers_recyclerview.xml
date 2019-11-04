@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
+        <import type="com.android.cameraapp.util.FollowingTimeResolveAdapter"/>
         <variable
             name="item"
             type="com.android.cameraapp.data.data_models.UserCollection.Followers" />
@@ -83,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/myriadpro"
-            android:text="@{item.when_followed}"
+            android:text="@{FollowingTimeResolveAdapter.getTimeAgo(item.following_time_long)}"
             android:textSize="@dimen/smallest_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
