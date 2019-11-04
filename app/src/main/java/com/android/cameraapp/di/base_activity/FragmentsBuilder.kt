@@ -16,6 +16,7 @@ import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_c
 import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_done.AddFragmentThree
 import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.AddFragmentTwo
 import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
+import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragmentModule
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
@@ -52,7 +53,7 @@ abstract class FragmentsBuilder {
     @PhotoFragmentScope
     abstract fun photosFragment(): PhotosFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [FollowersFragmentModule::class])
     abstract fun followersFragment(): FollowersFragment
 
     @ContributesAndroidInjector
