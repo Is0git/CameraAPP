@@ -124,5 +124,9 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc01'
 
+    //Rxjava
+
+    implementation "io.reactivex.rxjava3:rxjava:3.0.0-RC4"
+
 
 }
