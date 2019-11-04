@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
             android:singleLine="true"
-            android:text="@{FollowingTimeResolveAdapter.getFollowingDate(item.following_time_long, item.when_followed, userName)}"
+            android:text="@{FollowingTimeResolveAdapter.getFollowingDate(item.following_time_long, item.when_followed, userName, 1)}"
             android:textColor="@color/colorGrey"
             android:textSize="@dimen/home_recyclerView_subText"
             app:layout_constraintBottom_toBottomOf="parent"

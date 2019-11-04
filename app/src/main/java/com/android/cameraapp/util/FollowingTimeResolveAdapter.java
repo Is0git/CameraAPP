@@ -41,15 +41,20 @@ public class FollowingTimeResolveAdapter {
         }
     }
 
-    public static String getFollowingDate(long time, String date, TextView view) {
+    public static String getFollowingDate(long time, String date, TextView view, int type) {
         long three_days = 259200000;
         long time_elapsed = System.currentTimeMillis() - time;
         if (time_elapsed > three_days) {
             return date;
+        } else {
+            if (type == 1) {
+                return view.getContext().getString(R.string.now_follows_you);
+            }
+            else if (type == 2) {
+                return view.getContext().getString(R.string.you_are_now_following);
+            }
+            else return "asdsa";
         }
-        else {
-            return view.getContext().getString(R.string.now_follows_you);
-        }
+        //259200000
     }
-    //259200000
 }
