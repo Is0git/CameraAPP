@@ -18,7 +18,7 @@ object PhotoFragmentModule {
         return PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(9)
-            .setPageSize(3)
+            .setPageSize(9)
             .build()
     }
 

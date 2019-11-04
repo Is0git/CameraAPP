@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             app:tabInlineLabel="true"
             android:layout_height="75dp"
-            app:tabMode="scrollable"
+            app:tabMode="auto"
             android:elevation="8dp" />
 
         <com.google.android.material.card.MaterialCardView

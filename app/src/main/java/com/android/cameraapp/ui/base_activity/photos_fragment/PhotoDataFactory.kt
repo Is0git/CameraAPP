@@ -12,6 +12,7 @@ class PhotoDataFactory @Inject constructor(val dataSource: PhotosDataSource) : D
 
     override fun create(): DataSource<Int, UserCollection.Photos> {
         Log.d(TAG, "LOAD FACTORY")
+        Log.d("TEST", "RES1: $dataSource")
        return dataSource
     }
 }

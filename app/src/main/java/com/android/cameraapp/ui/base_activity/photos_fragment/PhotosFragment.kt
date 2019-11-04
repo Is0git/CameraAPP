@@ -13,6 +13,8 @@ import com.android.cameraapp.R
 import com.android.cameraapp.databinding.PhotosFragmentBinding
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class PhotosFragment : DaggerFragment() {
@@ -33,7 +35,5 @@ class PhotosFragment : DaggerFragment() {
             adapter.submitList(it) })
         return binding.root
     }
-
-
 
 }

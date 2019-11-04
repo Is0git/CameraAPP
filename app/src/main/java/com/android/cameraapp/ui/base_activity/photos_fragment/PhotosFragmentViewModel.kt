@@ -17,4 +17,5 @@ class PhotosFragmentViewModel @Inject constructor(val repo: PhotosFragmentReposi
         Log.d(TAG, "LOAD VIEWMODEL")
         repo.pagedList.value?.get(1)?.storage_url
     }
+
 }
