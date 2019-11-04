@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.android.cameraapp.data.data_models.UserCollection
+import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersAdapter
 import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersDataSourceFactory
 import dagger.Module
 import dagger.Provides
@@ -22,5 +23,10 @@ object FollowersFragmentModule {
     fun getPagedListLiveData(pagedListConfig: PagedList.Config, dataSourceFactory: FollowersDataSourceFactory) : LiveData<PagedList<UserCollection.Followers>> {
         return LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
     }
+
+    @Provides
+    @FollowersFragmentScope
+    @JvmStatic
+    fun getListAdapter() = FollowersAdapter()
 
 }
