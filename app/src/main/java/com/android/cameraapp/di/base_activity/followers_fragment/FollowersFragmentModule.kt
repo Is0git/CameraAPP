@@ -15,7 +15,7 @@ object FollowersFragmentModule {
     @Provides
     @FollowersFragmentScope
     @JvmStatic
-    fun getPageConfig(): PagedList.Config = PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false).setInitialLoadSizeHint(20).build()
+    fun getPageConfig(): PagedList.Config = PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false).build()
 
     @Provides
     @FollowersFragmentScope
