@@ -10,10 +10,15 @@ import com.android.cameraapp.util.userFollowersCollection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -28,12 +33,18 @@ class FollowersDataSource @Inject constructor(
     PositionalDataSource<DataFlat.Followers>() {
     var lastDocument: DocumentSnapshot? = null
     var finalChannel: Channel<DataFlat.Followers> = Channel()
-    var list = mutableListOf<DataFlat.Followers>()
     override fun loadRange(
         params: LoadRangeParams,
         callback: LoadRangeCallback<DataFlat.Followers>
     ) {
+        val list = mutableListOf<DataFlat.Followers>()
+        lastDocument?.let {
+            CoroutineScope(Dispatchers.Main).launch {
+                getFollowers(list, params)
+                callback.onResult(list)
 
+            }
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -41,56 +52,57 @@ class FollowersDataSource @Inject constructor(
         params: LoadInitialParams,
         callback: LoadInitialCallback<DataFlat.Followers>
     ) {
-        val channel = Channel<DataFlat.Followers>()
-        val finalResultChannel =
-            CoroutineScope(Dispatchers.Main).launch {
-              getFollowers(channel, params)
-              for (i in finalChannel) println(i)
+        val list = mutableListOf<DataFlat.Followers>()
+        CoroutineScope(Dispatchers.Main).launch {
+            getFollowers(list!!, params)
+            callback.onResult(list, 0, list.size)
 
-            }
-        print("asdsad")
+        }
 
     }
 
-    suspend fun CoroutineScope.getFollowers(
-        channel: Channel<DataFlat.Followers>,
-        params: LoadInitialParams
-    ) = launch {
-            val result: List<DataFlat.Followers> =
+    suspend fun <T> getFollowers(
+        list: MutableList<DataFlat.Followers>,
+        params: T
+    ) {
+        val result: List<DataFlat.Followers>? = when (params) {
+            is LoadInitialParams -> {
                 firestore.collection("$userCollection/${auth.uid}/$userFollowersCollection")
                     .limit(params.requestedLoadSize.toLong())
+                    .orderBy("following_time_long", Query.Direction.DESCENDING)
                     .get().await().also {
                         lastDocument = it?.documents?.last() ?: throw CancellationException("Empty")
                     }.toObjects(DataFlat.Followers::class.java)
-
-            launch {
-                for (i in result) {
-                    channel.send(i)
-                }
             }
 
-            getFollowersChannel(channel)
+            is LoadRangeParams -> {
+                firestore.collection("$userCollection/${auth.uid}/$userFollowersCollection")
+                    .orderBy("following_time_long", Query.Direction.DESCENDING)
+                    .startAfter(lastDocument!!)
+                    .limit(params.loadSize.toLong())
+                    .get().await().also {
+                        lastDocument = if(it?.documents != null && it?.documents.size > 0) it.documents.last() else throw CancellationException("Empty")
+                    }.toObjects(DataFlat.Followers::class.java)
+            }
+            else -> null
         }
+        streamFollowers(result!!).map { getUsers(it) }.collect { list.add(it) }
 
 
-     fun CoroutineScope.getFollowersChannel(channel: Channel<DataFlat.Followers>) = launch {
-             for (i in channel) {
-                 getUsers(i)
-             }
-
-         }
+    }
 
 
-     fun CoroutineScope.getUsers(i: DataFlat.Followers) = launch {
+    suspend fun streamFollowers(result: List<DataFlat.Followers>): Flow<DataFlat.Followers> =
+        flow { for (i in result) emit(i) }
+
+    suspend fun getUsers(i: DataFlat.Followers): DataFlat.Followers {
         if (i.follower_uid != null) {
             val result: UserCollection.User =
                 firestore.document("$userCollection/${i.follower_uid}").get().await()
                     .let { it.toObject(UserCollection.User::class.java)!! }
             i.user = result
-            list.add(i)
-            finalChannel.send(i)
-
         }
+        return i
     }
 
 
