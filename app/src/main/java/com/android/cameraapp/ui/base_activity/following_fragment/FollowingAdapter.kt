@@ -6,10 +6,11 @@ import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowingRecyclerviewBinding
 
-class FollowingAdapter : PagedListAdapter<UserCollection.Following, FollowingAdapter.MyViewHolder>(
+class FollowingAdapter : PagedListAdapter<DataFlat.Following, FollowingAdapter.MyViewHolder>(
     diffUtil) {
     class MyViewHolder(val binding: FollowingRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -31,14 +32,14 @@ class FollowingAdapter : PagedListAdapter<UserCollection.Following, FollowingAda
 
 
 }
-    val diffUtil = object : DiffUtil.ItemCallback<UserCollection.Following>() {
+    val diffUtil = object : DiffUtil.ItemCallback<DataFlat.Following>() {
         override fun areItemsTheSame(
-            oldItem: UserCollection.Following,
-            newItem: UserCollection.Following
-        ): Boolean = oldItem.user_uid == newItem.user_uid
+            oldItem: DataFlat.Following,
+            newItem: DataFlat.Following
+        ): Boolean = oldItem.user?.uid == newItem.user?.uid
         override fun areContentsTheSame(
-            oldItem: UserCollection.Following,
-            newItem: UserCollection.Following
+            oldItem: DataFlat.Following,
+            newItem: DataFlat.Following
         ): Boolean = oldItem == newItem
 
     }

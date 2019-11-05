@@ -4,7 +4,7 @@
         <import type="com.android.cameraapp.util.FollowingTimeResolveAdapter"/>
         <variable
             name="item"
-            type="com.android.cameraapp.data.data_models.UserCollection.Following" />
+            type="com.android.cameraapp.data.data_models.DataFlat.Following" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,7 +19,7 @@
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:elevation="4dp"
-            app:loadImageFromUrl="@{item.user_photo}"
+            app:loadImageFromUrl="@{item.user.photo_url}"
             android:src="@drawable/background"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
@@ -34,7 +34,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/quicksand"
             android:singleLine="true"
-            android:text="@{item.name}"
+            android:text="@{item.user.username}"
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/home_recyclerView_name"
             app:layout_constraintBottom_toTopOf="@+id/liked_what"
