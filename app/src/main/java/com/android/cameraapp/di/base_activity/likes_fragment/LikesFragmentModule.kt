@@ -7,6 +7,7 @@ import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragmentScope
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingAdapter
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingDataSourceFactory
+import com.android.cameraapp.ui.base_activity.likes_fragment.LikesAdapter
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesDataSourceFactory
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragmentDataSource
 import dagger.Provides
@@ -28,6 +29,6 @@ object LikesFragmentModule {
     @Provides
     @LikesFragmentScope
     @JvmStatic
-    fun getPagedListAdapter() = FollowingAdapter()
+    fun getPagedListAdapter() = LikesAdapter()
 
 }
