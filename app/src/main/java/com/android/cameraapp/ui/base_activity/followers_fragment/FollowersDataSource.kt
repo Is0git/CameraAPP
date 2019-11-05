@@ -1,7 +1,6 @@
 package com.android.cameraapp.ui.base_activity.followers_fragment
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.paging.PositionalDataSource
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
@@ -11,12 +10,12 @@ import com.android.cameraapp.util.userFollowersCollection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 const val TAG = "FollowersTAG"
@@ -28,36 +27,13 @@ class FollowersDataSource @Inject constructor(
 ) :
     PositionalDataSource<DataFlat.Followers>() {
     var lastDocument: DocumentSnapshot? = null
+    var finalChannel: Channel<DataFlat.Followers> = Channel()
+    var list = mutableListOf<DataFlat.Followers>()
     override fun loadRange(
         params: LoadRangeParams,
         callback: LoadRangeCallback<DataFlat.Followers>
     ) {
-        lastDocument?.let {
-            val followersWithUser: MutableList<DataFlat.Followers> = mutableListOf()
-            getFollowersObservable(params)
-                .flatMap { getFollowersWithUser(it) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : Observer<DataFlat.Followers> {
-                    override fun onComplete() {
-                        callback.onResult(followersWithUser)
-                    }
 
-                    override fun onSubscribe(d: Disposable) {
-
-                    }
-
-                    override fun onNext(t: DataFlat.Followers) {
-                        followersWithUser.add(t)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.d(TAG, "ERROR: ${e.message}")
-                    }
-
-                })
-
-        }
     }
 
     @SuppressLint("CheckResult")
@@ -65,102 +41,58 @@ class FollowersDataSource @Inject constructor(
         params: LoadInitialParams,
         callback: LoadInitialCallback<DataFlat.Followers>
     ) {
-        val followersWithUser: MutableList<DataFlat.Followers> = mutableListOf()
-        getFollowersObservable(params)
-            .flatMap { getFollowersWithUser(it) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe(object : Observer<DataFlat.Followers> {
-                override fun onComplete() {
-                    callback.onResult(followersWithUser, 0, followersWithUser.size)
-                }
+        val channel = Channel<DataFlat.Followers>()
+        val finalResultChannel =
+            CoroutineScope(Dispatchers.Main).launch {
+              getFollowers(channel, params)
+              for (i in finalChannel) println(i)
 
-                override fun onSubscribe(d: Disposable) {
-
-                }
-
-                override fun onNext(t: DataFlat.Followers) {
-                    followersWithUser.add(t)
-                }
-
-                override fun onError(e: Throwable) {
-                    Log.d(TAG, "ERROR: ${e.message}")
-                }
-
-            })
-    }
-
-    @SuppressLint("CheckResult")
-    fun getFollowersWithUser(followers: DataFlat.Followers): Observable<DataFlat.Followers> {
-       return Observable.create<UserCollection.User> { getUser(followers.follower_uid!!) }
-            .map {
-                followers.user = it
-                return@map followers
             }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
+        print("asdsad")
 
     }
 
-    fun <T> getFollowersObservable(params: T): Observable<DataFlat.Followers> {
-        return Observable.create<List<DataFlat.Followers>> { getFireStoreFollower(params) }
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .flatMap { Observable.fromIterable(it) }
-
-
-    }
-
-    fun <T> getFireStoreFollower(params: T): List<DataFlat.Followers>? {
-        var followers: List<DataFlat.Followers>? = null
-        if (params is LoadInitialParams) {
-            firestore.collection("$userCollection/${auth.uid}/$userFollowersCollection")
-                .limit(params.requestedLoadSize.toLong())
-                .orderBy(
-                    "following_time_long", Query.Direction.DESCENDING
-                )
-                .get()
-                .addOnCompleteListener {
-                    when {
-                        it.isSuccessful && it.result?.size() != 0 -> {
-                            if (lastDocument != null) lastDocument = it.result?.documents?.last()!!
-                            followers = it.result?.toObjects(DataFlat.Followers::class.java)!!
-                        }
-                        it.isCanceled -> Log.i(TAG, "FAILED: ${it.exception?.message}")
-                    }
-                }
-        } else if (params is LoadRangeParams) {
-            if (lastDocument != null) {
+    suspend fun CoroutineScope.getFollowers(
+        channel: Channel<DataFlat.Followers>,
+        params: LoadInitialParams
+    ) = launch {
+            val result: List<DataFlat.Followers> =
                 firestore.collection("$userCollection/${auth.uid}/$userFollowersCollection")
-                    .startAfter(lastDocument!!)
-                    .limit(params.loadSize.toLong())
-                    .get()
-                    .addOnCompleteListener {
-                        when {
-                            it.isSuccessful && it.result?.size() != 0 -> {
-                                lastDocument = it.result?.documents?.last()!!
-                                followers = it.result?.toObjects(DataFlat.Followers::class.java)
-                            }
-                            it.isCanceled -> Log.i(
-                                TAG,
-                                "FAILED ON loadRANGE: ${it.exception?.message}"
-                            )
-                        }
-                    }
+                    .limit(params.requestedLoadSize.toLong())
+                    .get().await().also {
+                        lastDocument = it?.documents?.last() ?: throw CancellationException("Empty")
+                    }.toObjects(DataFlat.Followers::class.java)
+
+            launch {
+                for (i in result) {
+                    channel.send(i)
+                }
             }
+
+            getFollowersChannel(channel)
         }
-        return followers
+
+
+     fun CoroutineScope.getFollowersChannel(channel: Channel<DataFlat.Followers>) = launch {
+             for (i in channel) {
+                 getUsers(i)
+             }
+
+         }
+
+
+     fun CoroutineScope.getUsers(i: DataFlat.Followers) = launch {
+        if (i.follower_uid != null) {
+            val result: UserCollection.User =
+                firestore.document("$userCollection/${i.follower_uid}").get().await()
+                    .let { it.toObject(UserCollection.User::class.java)!! }
+            i.user = result
+            list.add(i)
+            finalChannel.send(i)
+
+        }
     }
 
-    fun getUser(uid: String): UserCollection.User? {
-        var user: UserCollection.User? = null
-        firestore.document("$userCollection/$uid").get().addOnCompleteListener {
-            when {
-                it.isSuccessful -> user = it.result?.toObject(UserCollection.User::class.java)!!
-                else -> return@addOnCompleteListener
-            }
-        }
-        return user
-    }
+
 }
 
