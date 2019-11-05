@@ -21,6 +21,9 @@ import com.android.cameraapp.di.base_activity.followers_fragment.FollowersViewMo
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragmentScope
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingModule
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingViewModelModule
+import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentModule
+import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
+import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentViewModelModule
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
@@ -50,7 +53,8 @@ abstract class FragmentsBuilder {
     @HomeFragmentScope
     abstract fun homeFragment(): HomeFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [LikesFragmentViewModelModule::class, LikesFragmentModule::class])
+    @LikesFragmentScope
     abstract fun likesFragment(): LikesFragment
 
     @ContributesAndroidInjector(modules = [PhotoFragmentModule::class, PhotoFragmentViewModelModule::class])
