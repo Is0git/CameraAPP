@@ -34,7 +34,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/quicksand"
             android:singleLine="true"
-            android:text="@{item.user.username"
+            android:text="@{item.user.username}"
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/home_recyclerView_name"
             app:layout_constraintBottom_toTopOf="@+id/liked_what"

@@ -70,7 +70,7 @@ class FollowingDataSource @Inject constructor(val auth: FirebaseAuth, val firest
                 }
 
                 is LoadRangeParams -> {
-                    firestore.collection("$userCollection/${auth.uid}/$userFollowersCollection")
+                    firestore.collection("$userCollection/${auth.uid}/$userFollowingCollection")
                         .orderBy("following_time_long", Query.Direction.DESCENDING)
                         .startAfter(lastDocument!!)
                         .limit(params.loadSize.toLong())
@@ -95,8 +95,8 @@ class FollowingDataSource @Inject constructor(val auth: FirebaseAuth, val firest
         suspend fun getUsers(i: DataFlat.Following): DataFlat.Following {
             if (i.user_uid != null) {
                 val result: UserCollection.User =
-                    firestore.document("$userCollection/${i.user_uid}").get().await()
-                        .let { it.toObject(UserCollection.User::class.java)!! }
+                    firestore.collection(userCollection).document("${i.user_uid}").get().await()
+                        .let { it?.toObject(UserCollection.User::class.java)!! }
                 i.user = result
             }
             return i
