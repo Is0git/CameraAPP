@@ -9,4 +9,13 @@ sealed class DataFlat {
         val following_time_long: Long? = 0,
         var user: UserCollection.User? = null
     )
+
+    data class Following(
+        val date_since: String? = "N/A",
+        val name: String? = "N/A",
+        val user_uid: String? = "N/A",
+        val user_photo: String? = "N/A",
+        val following_time_long: Long? = 0,
+        var user: UserCollection.User? = null
+    )
 }
