@@ -23,7 +23,7 @@ sealed class DataFlat {
         val name: String? = "N/A",
         val user_uid: String? = "N/A",
         val when_liked: String? = "N/A",
-        val liked_time_longs: Long? = 0,
+        val liked_time_long: Long? = 0,
         var user: UserCollection.User? = null
     )
 }
