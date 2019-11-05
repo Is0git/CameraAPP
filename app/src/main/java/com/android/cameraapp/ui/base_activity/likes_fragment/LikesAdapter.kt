@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.LikesRecyclerviewBinding
+import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
+import javax.inject.Inject
 
-class LikesAdapter : PagedListAdapter<DataFlat.Likes, LikesAdapter.MyViewHolder>(callback) {
+@LikesFragmentScope
+class LikesAdapter @Inject constructor(): PagedListAdapter<DataFlat.Likes, LikesAdapter.MyViewHolder>(callback) {
      class MyViewHolder(val binding: LikesRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -30,7 +33,6 @@ class LikesAdapter : PagedListAdapter<DataFlat.Likes, LikesAdapter.MyViewHolder>
 }
 
 val callback = object : DiffUtil.ItemCallback<DataFlat.Likes>() {
-    override fun areItemsTheSame(oldItem: DataFlat.Likes, newItem: DataFlat.Likes): Boolean = oldItem.user.uid == newItem.user.uid
+    override fun areItemsTheSame(oldItem: DataFlat.Likes, newItem: DataFlat.Likes): Boolean = oldItem.user?.uid == newItem.user?.uid
     override fun areContentsTheSame(oldItem: DataFlat.Likes, newItem: DataFlat.Likes): Boolean = oldItem == newItem
-
 }

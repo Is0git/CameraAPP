@@ -10,8 +10,9 @@ import com.android.cameraapp.ui.base_activity.following_fragment.FollowingDataSo
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesAdapter
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesDataSourceFactory
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragmentDataSource
+import dagger.Module
 import dagger.Provides
-
+@Module
 object LikesFragmentModule {
     @Provides
     @LikesFragmentScope

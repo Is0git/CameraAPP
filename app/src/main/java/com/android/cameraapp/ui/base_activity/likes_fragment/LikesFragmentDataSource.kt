@@ -26,8 +26,8 @@ class LikesFragmentDataSource @Inject constructor(
     var document: DocumentSnapshot? = null
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<DataFlat.Likes>) {
         document?.let {
+            val list = mutableListOf<DataFlat.Likes>()
             CoroutineScope(Dispatchers.Main).launch {
-                val list = mutableListOf<DataFlat.Likes>()
                 getLikes(list, params)
                 callback.onResult(list)
             }
@@ -39,9 +39,8 @@ class LikesFragmentDataSource @Inject constructor(
         params: LoadInitialParams,
         callback: LoadInitialCallback<DataFlat.Likes>
     ) {
-
+        val list = mutableListOf<DataFlat.Likes>()
         CoroutineScope(Dispatchers.Main).launch {
-            val list = mutableListOf<DataFlat.Likes>()
             getLikes(list, params)
             callback.onResult(list, 0, list.size)
         }
@@ -50,7 +49,7 @@ class LikesFragmentDataSource @Inject constructor(
     suspend fun <T> getLikes(list: MutableList<DataFlat.Likes>, params: T) {
         val result: MutableList<DataFlat.Likes>? = when (params) {
             is LoadInitialParams -> {
-                firestore.collection("$userCollection/$auth.uid/$userLikesCollection")
+                firestore.collection("$userCollection/${auth.uid}/$userLikesCollection")
                     .orderBy("liked_time_long", Query.Direction.DESCENDING)
                     .limit(params.requestedLoadSize.toLong()).get().await()
                     .also {
@@ -59,7 +58,7 @@ class LikesFragmentDataSource @Inject constructor(
                     }.let { it.toObjects(DataFlat.Likes::class.java) }
             }
             is LoadRangeParams -> {
-                firestore.collection("$userCollection/$auth.uid/$userLikesCollection")
+                firestore.collection("$userCollection/${auth.uid}/$userLikesCollection")
                     .orderBy("liked_time_long", Query.Direction.DESCENDING)
                     .startAfter(document)
                     .limit(params.loadSize.toLong()).get().await()
@@ -77,22 +76,17 @@ class LikesFragmentDataSource @Inject constructor(
 
     }
 
-    suspend fun mapUsers(list: MutableList<DataFlat.Likes>): Flow<DataFlat.Likes> = flow {
-        for (a in list) emit(a)
-    }
+    suspend fun mapUsers(list: MutableList<DataFlat.Likes>): Flow<DataFlat.Likes> = flow { for (a in list) emit(a) }
 
 
-    suspend fun getUsers(list: DataFlat.Likes): DataFlat.Likes {
-        val userObject: UserCollection.User? = null
-        list.user_uid?.let {
-            firestore.document("$userCollection/${list.user_uid}").get().await()
-                ?.let {
-                    if (it.exists()) it.toObject(UserCollection.User::class.java) else throw CancellationException(
-                        "PROB EMTY"
-                    )
+    suspend fun getUsers(i: DataFlat.Likes): DataFlat.Likes {
+        val userObject: UserCollection.User? = i.user_uid?.let {
+            firestore.document("$userCollection/${i.user_uid}").get().await()
+                .let {
+                    if (it != null) it.toObject(UserCollection.User::class.java) else throw CancellationException("PROB EMTY")
                 }
         }
-        list.user = userObject!!
-        return list
+        i.user = userObject
+        return i
     }
 }

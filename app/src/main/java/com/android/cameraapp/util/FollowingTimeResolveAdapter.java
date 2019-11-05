@@ -53,6 +53,9 @@ public class FollowingTimeResolveAdapter {
             else if (type == 2) {
                 return view.getContext().getString(R.string.you_are_now_following);
             }
+            else if (type == 3) {
+                return view.getContext().getString(R.string.has_liked);
+            }
             else return "asdsa";
         }
         //259200000
