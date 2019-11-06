@@ -50,5 +50,6 @@
     <string name="home">HOME</string>
     <string name="search">SEARCH</string>
     <string name="settings">SETTINGS</string>
+    <string name="comment">Comment</string>
 
 </resources>
