@@ -105,7 +105,7 @@ class FollowersDataSource @Inject constructor(
 
     fun cancelJobs() {
         if(jobs.isActive) {
-            cancelJobs()
+            jobs.cancel()
         }
     }
 }

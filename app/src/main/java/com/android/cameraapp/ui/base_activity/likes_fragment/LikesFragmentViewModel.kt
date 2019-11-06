@@ -9,7 +9,7 @@ class LikesFragmentViewModel @Inject constructor(val repo: LikesFragmentReposito
     val pagedList = repo.pagelist
 
     override fun onCleared() {
-        super.onCleared()
         dataSource.cancelJob()
+        super.onCleared()
     }
 }

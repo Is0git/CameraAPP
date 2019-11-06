@@ -9,7 +9,7 @@ class FollowingViewModel @Inject constructor(val repo: FollowingRepository, val 
     val pagelist = repo.pagedList
 
     override fun onCleared() {
-        super.onCleared()
         dataSource.cancelJobs()
+        super.onCleared()
     }
 }

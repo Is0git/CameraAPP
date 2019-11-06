@@ -15,8 +15,8 @@ class FollowersViewModel @Inject constructor(
     var pagedList: LiveData<PagedList<DataFlat.Followers>> = repo.pagedList
 
     override fun onCleared() {
-        super.onCleared()
         dataSource.cancelJobs()
+        super.onCleared()
     }
 
 
