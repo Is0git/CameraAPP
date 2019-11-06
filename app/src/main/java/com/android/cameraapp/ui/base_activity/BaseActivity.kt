@@ -36,7 +36,10 @@ class BaseActivity : DaggerAppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
 
-        binding.toolbar.apply {
+
+        binding.apply {
+            bar.setupWithNavController(navController)
+        }.toolbar.apply {
             setupWithNavController(navController)
             setTitleTextAppearance(applicationContext, R.style.toolbarStyle)
         }

@@ -190,7 +190,7 @@ class BaseRepository @Inject constructor(
     }
     // we cancel all jobs in view model on cleared to prevent memory leaks... and can't use viewModelScope in this situation
     fun cancelJobs() {
-        jobs.cancel()
+        if (jobs.isActive) jobs.cancel()
     }
 }
 
