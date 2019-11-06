@@ -3,6 +3,7 @@ package com.android.cameraapp.ui.base_activity.feed_fragment
 import androidx.paging.PositionalDataSource
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
+import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
 import com.android.cameraapp.util.userCollection
 import com.android.cameraapp.util.userLikesCollection
 import com.google.firebase.auth.FirebaseAuth
@@ -15,8 +16,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class PhotosWithUserDataSource(
+@FeedFragmentScope
+class PhotosWithUserDataSource @Inject constructor(
     val auth: FirebaseAuth,
     val firestore: FirebaseFirestore,
     val job: Job
