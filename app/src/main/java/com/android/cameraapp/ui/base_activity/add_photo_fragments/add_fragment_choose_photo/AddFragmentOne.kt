@@ -82,5 +82,8 @@ class AddFragmentOne : DaggerFragment() {
         if (!transitionState) binding.constraintLayout.transitionToEnd() else binding.constraintLayout.transitionToStart()
     }
 
-
+    override fun onStart() {
+        super.onStart()
+        (activity as BaseActivity).activityUItoInvisible()
+    }
 }

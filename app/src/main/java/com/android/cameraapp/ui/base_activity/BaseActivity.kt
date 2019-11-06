@@ -4,16 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
@@ -41,19 +40,27 @@ class BaseActivity : DaggerAppCompatActivity() {
 
         navController = findNavController(R.id.main_fragment_container)
         setSupportActionBar(binding.toolbar)
-        AppBarConfiguration(navController.graph, null) {false}
+        AppBarConfiguration(navController.graph, null) { false }
         setNavigatioOptions()
         binding.apply {
             bar.setupWithNavController(navController)
-            fab.setOnClickListener { navController.navigate(R.id.add_photo_nav)}
+            fab.setOnClickListener { navController.navigate(R.id.add_photo_nav) }
             bar.setOnMenuItemClickListener {
-                when(it.itemId) {
-                    R.id.feedFragment -> navController.navigate(R.id.feedFragment, null, options_feed)
-                    R.id.homeFragment -> navController.navigate(R.id.homeFragment, null, options_home)
+                when (it.itemId) {
+                    R.id.feedFragment -> navController.navigate(
+                        R.id.feedFragment,
+                        null,
+                        options_feed
+                    )
+                    R.id.homeFragment -> navController.navigate(
+                        R.id.homeFragment,
+                        null,
+                        options_home
+                    )
                     else -> true
                 }
                 false
-             }
+            }
         }.toolbar.apply {
             setupWithNavController(navController)
             setTitleTextAppearance(applicationContext, R.style.toolbarStyle)
@@ -66,29 +73,60 @@ class BaseActivity : DaggerAppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.addFragmentOne -> navController.navigate(R.id.action_global_add_photo_nav)
+        when (item.itemId) {
+          R.id.share -> true
         }
         return true
     }
+
     private fun resolveStates(states: UserAuthStates) {
         when {
             // It has to check if we aren't using same graph in order to prevent wasting resources duplicating fragments
-            states == UserAuthStates.NOT_LOGGED_IN && navController.currentDestination?.id != R.id.loginFragment -> navController.navigate(R.id.action_global_navigation)
-            states == UserAuthStates.LOGGED_IN  -> navController.navigate(R.id.action_global_navigation2)
+            states == UserAuthStates.NOT_LOGGED_IN && navController.currentDestination?.id != R.id.loginFragment -> navController.navigate(
+                R.id.action_global_navigation
+            )
+            states == UserAuthStates.LOGGED_IN -> navController.navigate(R.id.action_global_navigation2)
         }
     }
 
     fun setNavigatioOptions() {
-        options_feed = NavOptions.Builder().setPopUpTo(R.id.feedFragment, true).setLaunchSingleTop(true).build()
-        options_home = NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).setLaunchSingleTop(true).build()
+        options_feed =
+            NavOptions.Builder().setPopUpTo(R.id.feedFragment, true).setLaunchSingleTop(true)
+                .build()
+        options_home =
+            NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).setLaunchSingleTop(true)
+                .build()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d("TAGS", "DESTROY")
     }
 
-}
+    fun activityUItoInvisible() {
+        if (binding.toolbar.visibility == View.VISIBLE) binding.toolbar.visibility = View.INVISIBLE
 
+        if (binding.bar.isVisible) binding.apply {
+            bar.performHide().also { bar.visibility = View.INVISIBLE }
+            fab.hide()
+
+        }
+    }
+
+
+    fun activityUItoVisible() {
+        if (binding.toolbar.visibility == View.INVISIBLE) binding.toolbar.visibility =
+            View.VISIBLE
+
+
+        if (binding.bar.visibility == View.INVISIBLE) {
+            binding.apply {
+                bar.visibility = View.VISIBLE
+                bar.performShow()
+                fab.show()
+            }
+        }
+    }
+}
 //FIGURE OUT how to inject nav controller in repository cause AndroidInjector is before setContentView and NavController needs a view.
 // Implementing HasInjector and putting  injector after setContentView makes Dagger act weird!!!

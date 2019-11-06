@@ -67,23 +67,11 @@ class StartFragment : DaggerFragment() {
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        handleUIVisibility()
+    override fun onStart() {
+        super.onStart()
+        (activity as BaseActivity).activityUItoInvisible()
 
     }
 
-    fun handleUIVisibility() {
-        if ((activity as BaseActivity).binding.toolbar.visibility == View.VISIBLE) (activity as BaseActivity).binding.toolbar.visibility =
-            View.INVISIBLE
 
-
-        if ((activity as BaseActivity).binding.bar.isVisible) (activity as BaseActivity).binding.apply {
-            bar.performHide().also { bar.visibility = View.INVISIBLE }
-            fab.hide()
-
-        }
-
-
-    }
 }

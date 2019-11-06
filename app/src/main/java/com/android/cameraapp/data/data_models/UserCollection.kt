@@ -45,6 +45,7 @@ sealed class UserCollection {
         val isPrivate: Boolean = false,
         val width: String? = "N/A",
         val height: String? = "N/A",
+        val time_in_long : Long? = 0,
         val image_url: String? = "N/A"
     )
 }

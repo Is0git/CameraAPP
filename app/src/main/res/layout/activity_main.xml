@@ -53,6 +53,7 @@
                 android:gravity="center"
                 app:titleMarginStart="20dp"
                 android:visibility="invisible"
+                app:navigationIcon="@drawable/facebook_icon"
                 app:logo="@drawable/google_icon"
                 app:backgroundTint="@color/colorAccent"
                 android:textDirection="firstStrong"

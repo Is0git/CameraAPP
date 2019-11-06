@@ -1,6 +1,6 @@
 package com.android.cameraapp.data.data_models
 
-sealed class DataFlat {
+sealed class  DataFlat {
     data class Followers(
         var follower_name: String? = "N/A",
         val follower_uid: String? = "N/A",
@@ -24,6 +24,20 @@ sealed class DataFlat {
         val user_uid: String? = "N/A",
         val when_liked: String? = "N/A",
         val liked_time_long: Long? = 0,
+        var user: UserCollection.User? = null
+    )
+
+    data class PhotosWithUser(
+        val date_taken: String? = "N/A",
+        val photo_id: String? = "N/A",
+        val storage_url: String? = "N/A",
+        val user_uid: String? = "N/A",
+        val description: String? = "N/A",
+        val isPrivate: Boolean = false,
+        val width: String? = "N/A",
+        val height: String? = "N/A",
+        val time_in_long : Long? = 0,
+        val image_url: String? = "N/A",
         var user: UserCollection.User? = null
     )
 }

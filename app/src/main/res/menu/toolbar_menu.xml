@@ -5,13 +5,5 @@
         android:id="@+id/share"
         android:icon="@drawable/ic_share_black_24dp"
         android:title="@string/share"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/more"
-        android:title="@string/more" />
-    <item
-        android:id="@+id/addFragmentOne"
-        android:icon="@drawable/add_your_photo_image"
-        android:title="@string/add_photo"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 </menu>
