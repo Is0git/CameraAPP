@@ -9,9 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.android.cameraapp.databinding.FeedFragmentBinding
 import com.android.nbaapp.data.vms.ViewModelFactory
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class FeedFragment : Fragment() {
+class FeedFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
@@ -23,8 +24,7 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
         binding = FeedFragmentBinding.inflate(inflater, container, false)
         binding.feedRecyclerView.adapter = adapter
         viewModel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })

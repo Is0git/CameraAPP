@@ -55,9 +55,9 @@ class PhotosWithUserDataSource @Inject constructor(
     suspend fun <T> getPhotos(list: MutableList<DataFlat.PhotosWithUser>, params: T) {
         val result: MutableList<DataFlat.PhotosWithUser>? = when (params) {
             is LoadInitialParams -> {
-                firestore.collectionGroup("photos").whereEqualTo("private", true)
+                firestore.collectionGroup("photos")
                     .orderBy("time_in_long", Query.Direction.DESCENDING)
-                    .orderBy("liked_time_long", Query.Direction.DESCENDING)
+                    .whereEqualTo("private", false)
                     .limit(params.requestedLoadSize.toLong()).get().await()
                     .also {
                         if (it?.documents != null && it.documents.size > 0) document =
@@ -65,9 +65,9 @@ class PhotosWithUserDataSource @Inject constructor(
                     }.let { it.toObjects(DataFlat.PhotosWithUser::class.java) }
             }
             is LoadRangeParams -> {
-                firestore.collection("$userCollection/${auth.uid}/$userLikesCollection")
+                firestore.collection("photos")
                     .orderBy("time_in_long", Query.Direction.DESCENDING)
-                    .orderBy("liked_time_long", Query.Direction.DESCENDING)
+                    .whereEqualTo("private", false)
                     .startAfter(document!!)
                     .limit(params.loadSize.toLong()).get().await()
                     .also {
