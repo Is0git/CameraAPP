@@ -30,9 +30,4 @@ object LikesFragmentModule {
     }
 
 
-    @Provides
-    @LikesFragmentScope
-    @JvmStatic
-    fun getJob()  : Job= Job()
-
 }

@@ -11,15 +11,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -28,7 +25,8 @@ const val TAG = "FollowersTAG"
 @FollowersFragmentScope
 class FollowersDataSource @Inject constructor(
     val auth: FirebaseAuth,
-    val firestore: FirebaseFirestore
+    val firestore: FirebaseFirestore,
+    val jobs: Job
 ) :
     PositionalDataSource<DataFlat.Followers>() {
     var lastDocument: DocumentSnapshot? = null
@@ -105,6 +103,10 @@ class FollowersDataSource @Inject constructor(
         return i
     }
 
-
+    fun cancelJobs() {
+        if(jobs.isActive) {
+            cancelJobs()
+        }
+    }
 }
 

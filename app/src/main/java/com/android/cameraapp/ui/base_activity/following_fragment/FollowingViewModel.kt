@@ -5,6 +5,11 @@ import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragme
 import javax.inject.Inject
 
 @FollowingFragmentScope
-class FollowingViewModel @Inject constructor(val repo: FollowingRepository) : ViewModel() {
+class FollowingViewModel @Inject constructor(val repo: FollowingRepository, val dataSource: FollowingDataSource) : ViewModel() {
     val pagelist = repo.pagedList
+
+    override fun onCleared() {
+        super.onCleared()
+        dataSource.cancelJobs()
+    }
 }
