@@ -49,17 +49,21 @@
                 android:id="@+id/bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hideOnScroll="true"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                app:backgroundTint="@color/colorAccent2"
+                android:textDirection="firstStrong"
+                app:fabAlignmentMode="end"
                 app:fabCradleMargin="20dp"
                 app:fabCradleRoundedCornerRadius="40dp"
-                app:fabAlignmentMode="end"
                 app:fabCradleVerticalOffset="0dp"
-                android:layout_gravity="bottom" />
+                app:hideOnScroll="true"
+                app:menu="@menu/bottom_app_bar_menu" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
-                android:backgroundTint="@color/colorAccent2"
+                android:backgroundTint="@color/colorSurface"
                 android:src="@drawable/ic_repeat_black_24dp"
                 android:tint="@color/colorSurface"
                 app:elevation="10dp"

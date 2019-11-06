@@ -46,5 +46,9 @@
     <string name="years">years</string>
     <string name="year">year</string>
     <string name="has_liked">Has liked your photo!</string>
+    <string name="profile">PROFILE</string>
+    <string name="home">HOME</string>
+    <string name="search">SEARCH</string>
+    <string name="settings">SETTINGS</string>
 
 </resources>
