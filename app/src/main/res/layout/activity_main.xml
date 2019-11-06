@@ -51,21 +51,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:gravity="center"
-                app:backgroundTint="@color/colorAccent2"
+                app:titleMarginStart="20dp"
+                android:visibility="invisible"
+                app:logo="@drawable/google_icon"
+                app:backgroundTint="@color/colorAccent"
                 android:textDirection="firstStrong"
                 app:fabAlignmentMode="end"
                 app:fabCradleMargin="20dp"
                 app:fabCradleRoundedCornerRadius="40dp"
                 app:fabCradleVerticalOffset="0dp"
-                app:hideOnScroll="true"
+                app:fabAnimationMode="slide"
                 app:menu="@menu/bottom_app_bar_menu" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:backgroundTint="@color/colorSurface"
-                android:src="@drawable/ic_repeat_black_24dp"
-                android:tint="@color/colorSurface"
+                android:src="@drawable/icon_add"
+                android:visibility="invisible"
                 app:elevation="10dp"
                 android:layout_height="wrap_content"
                 app:layout_anchor="@id/bar"/>

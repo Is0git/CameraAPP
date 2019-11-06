@@ -56,10 +56,25 @@ class HomeFragment : DaggerFragment() {
         }
 
     }
+
     //toolbar set visible after adding photo fragments
     override fun onResume() {
         super.onResume()
-        if ((activity as BaseActivity).binding.toolbar.visibility == View.INVISIBLE) (activity as BaseActivity).binding.toolbar.visibility = View.VISIBLE
+        handleUIVisibility()
+    }
+
+    fun handleUIVisibility() {
+        if ((activity as BaseActivity).binding.toolbar.visibility == View.INVISIBLE) (activity as BaseActivity).binding.toolbar.visibility =
+            View.VISIBLE
+
+
+        if ((activity as BaseActivity).binding.bar.visibility == View.INVISIBLE) {(activity as BaseActivity).binding.apply {
+            bar.visibility = View.VISIBLE
+            bar.performShow()
+            fab.show()
+        }
+}
+
     }
 }
 

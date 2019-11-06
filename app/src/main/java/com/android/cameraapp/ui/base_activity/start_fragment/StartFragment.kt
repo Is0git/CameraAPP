@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -24,7 +25,8 @@ class StartFragment : DaggerFragment() {
     @Inject
     lateinit var auth: FirebaseAuth
     lateinit var navigation: NavController
-    @Inject lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +34,7 @@ class StartFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val viewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) {viewModelFactory}
+        val viewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) { viewModelFactory }
         Log.d("VIEWMODELCHECK", "DATA: $viewModel")
 
         binding = StartFragmentBinding.inflate(inflater, container, false)
@@ -67,7 +69,21 @@ class StartFragment : DaggerFragment() {
 
     override fun onResume() {
         super.onResume()
+        handleUIVisibility()
+
+    }
+
+    fun handleUIVisibility() {
         if ((activity as BaseActivity).binding.toolbar.visibility == View.VISIBLE) (activity as BaseActivity).binding.toolbar.visibility =
             View.INVISIBLE
+
+
+        if ((activity as BaseActivity).binding.bar.isVisible) (activity as BaseActivity).binding.apply {
+            bar.performHide().also { bar.visibility = View.INVISIBLE }
+            fab.hide()
+
+        }
+
+
     }
 }

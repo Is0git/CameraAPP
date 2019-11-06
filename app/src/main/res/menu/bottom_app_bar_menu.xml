@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-        <item android:id="@+id/home" android:title="@string/home" app:showAsAction="always"
-            android:icon="@drawable/home_icon"/>
-        <item android:id="@+id/profile" android:title="@string/profile" app:showAsAction="ifRoom" android:icon="@drawable/icons_account"/>
-        <item android:id="@+id/search" android:title="@string/search" app:showAsAction="ifRoom" android:icon="@drawable/search_icon"/>
-        <item android:id="@+id/settings" android:title="@string/settings" android:icon="@drawable/settings_icon"/>
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home_icon"
+        android:title="@string/home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/icons_account"
+        android:title="@string/profile"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/search_icon"
+        android:title="@string/search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings_icon"
+        android:title="@string/settings"
+        app:showAsAction="always" />
 </menu>
