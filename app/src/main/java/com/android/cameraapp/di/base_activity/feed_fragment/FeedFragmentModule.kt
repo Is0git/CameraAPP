@@ -19,7 +19,7 @@ object FeedFragmentModule {
     @FeedFragmentScope
     @JvmStatic
     fun getPageConfig(): PagedList.Config =
-        PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false).build()
+        PagedList.Config.Builder().setPageSize(5).setEnablePlaceholders(false).build()
 
     @Provides
     @FeedFragmentScope

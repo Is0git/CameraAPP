@@ -54,7 +54,7 @@
                 app:titleMarginStart="20dp"
                 android:visibility="invisible"
                 app:navigationIcon="@drawable/facebook_icon"
-                app:logo="@drawable/google_icon"
+                app:contentInsetEndWithActions="@dimen/regular_text_size"
                 app:backgroundTint="@color/colorAccent"
                 android:textDirection="firstStrong"
                 app:fabAlignmentMode="end"
