@@ -69,7 +69,7 @@ class FollowingDataSource @Inject constructor(
                     .orderBy("following_time_long", Query.Direction.DESCENDING)
                     .get().await().also {
                         lastDocument =
-                            it?.documents?.last() ?: throw CancellationException("Empty")
+                            if(it?.documents != null && it?.documents.size > 0) it.documents.last() else throw CancellationException("Empty")
                     }.toObjects(DataFlat.Following::class.java)
             }
 
