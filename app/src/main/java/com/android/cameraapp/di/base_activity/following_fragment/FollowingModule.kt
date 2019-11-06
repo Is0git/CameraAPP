@@ -29,9 +29,4 @@ object FollowingModule {
         return LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
     }
 
-    @Provides
-    @FollowingFragmentScope
-    @JvmStatic
-    fun getPagedListAdapter() = FollowingAdapter()
-
 }

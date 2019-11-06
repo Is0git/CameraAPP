@@ -25,9 +25,6 @@ object FollowersFragmentModule {
         return LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
     }
 
-    @Provides
-    @FollowersFragmentScope
-    @JvmStatic
-    fun getListAdapter() = FollowersAdapter()
+
 
 }

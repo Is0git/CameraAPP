@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowingRecyclerviewBinding
+import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragmentScope
+import javax.inject.Inject
 
-class FollowingAdapter : PagedListAdapter<DataFlat.Following, FollowingAdapter.MyViewHolder>(
+@FollowingFragmentScope
+class FollowingAdapter @Inject constructor(): PagedListAdapter<DataFlat.Following, FollowingAdapter.MyViewHolder>(
     diffUtil) {
     class MyViewHolder(val binding: FollowingRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
