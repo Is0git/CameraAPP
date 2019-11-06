@@ -5,6 +5,7 @@ import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentVie
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentModule
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
+import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentModule
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
@@ -88,7 +89,7 @@ abstract class FragmentsBuilder {
     @AddPhotoFragmentsScope
     abstract fun addFragmentThree() : AddFragmentThree
 
-    @ContributesAndroidInjector(modules = [FeedFragmentModule::class])
+    @ContributesAndroidInjector(modules = [FeedFragmentModule::class, FeedFragmentViewModelModule::class])
     @FeedFragmentScope
     abstract fun feedFragment() : FeedFragment
 
