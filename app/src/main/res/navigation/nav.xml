@@ -49,16 +49,12 @@
             android:label="StartFragment">
             <action
                 android:id="@+id/action_startFragment_to_homeFragment"
-                app:destination="@id/homeFragment"
+                app:destination="@id/activityFragment"
                 app:enterAnim="@anim/slide_left_animation"
                 app:exitAnim="@anim/slide_right_animation"
                 app:popEnterAnim="@anim/pop_back_left_animation"
                 app:popExitAnim="@anim/pop_back_right_animation" />
         </fragment>
-        <fragment
-            android:id="@+id/homeFragment"
-            android:name="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment"
-            android:label="HomeFragment" />
         <action
             android:id="@+id/action_global_navigation"
             app:destination="@id/auth_nav"
@@ -71,6 +67,25 @@
             app:destination="@id/add_photo_nav"
             app:enterAnim="@anim/zoom_in_animation"
             app:popEnterAnim="@anim/zoom_in_animation" />
+        <navigation android:id="@+id/activityFragment"
+            app:startDestination="@id/homeFragment">
+            <fragment
+                android:id="@+id/feedFragment"
+                android:name="com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment"
+                android:label="FeedFragment" >
+                <action
+                    android:id="@+id/action_feedFragment_to_homeFragment"
+                    app:destination="@id/homeFragment" />
+            </fragment>
+            <fragment
+                android:id="@+id/homeFragment"
+                android:name="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment"
+                android:label="HomeFragment" >
+                <action
+                    android:id="@+id/action_homeFragment_to_feedFragment"
+                    app:destination="@id/feedFragment" />
+            </fragment>
+        </navigation>
     </navigation>
     <navigation
         android:id="@+id/add_photo_nav"
