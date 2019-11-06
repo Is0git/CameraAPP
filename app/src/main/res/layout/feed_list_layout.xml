@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="com.android.cameraapp.util.FollowingTimeResolveAdapter"/>
         <variable
             name="item"
             type="com.android.cameraapp.data.data_models.DataFlat.PhotosWithUser" />
@@ -20,6 +21,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/background"
+            app:loadImageFromUrl="@{item.user.photo_url}"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="5dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
@@ -48,7 +50,7 @@
             android:layout_marginStart="12dp"
             android:fontFamily="@font/myriadpro"
             android:singleLine="true"
-            android:text="TextView"
+            android:text="@{item.user.username}"
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
@@ -61,7 +63,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myriadpro"
             android:singleLine="true"
-            android:text="18 minutes ago"
+            android:text="@{FollowingTimeResolveAdapter.getTimeAgo(item.time_in_long)}"
             android:textColor="@color/colorHomeLightGrey"
             android:textSize="@dimen/smallest_text"
             app:layout_constraintBottom_toBottomOf="@+id/user_image"
@@ -78,9 +80,10 @@
             app:layout_constraintStart_toStartOf="@id/left_guideline"
             app:layout_constraintTop_toBottomOf="@+id/user_image">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:loadImageFromUrl="@{item.image_url}"
                 android:background="@drawable/image_placeholder" />
         </com.google.android.material.card.MaterialCardView>
 
