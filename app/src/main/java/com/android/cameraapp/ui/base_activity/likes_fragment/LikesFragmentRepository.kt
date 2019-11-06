@@ -8,4 +8,4 @@ import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import javax.inject.Inject
 
 @LikesFragmentScope
-class LikesFragmentRepository @Inject constructor(val pagelist: LiveData<PagedList<DataFlat.Likes>>)
+class LikesFragmentRepository @Inject constructor(var pagelist: LiveData<PagedList<DataFlat.Likes>>)

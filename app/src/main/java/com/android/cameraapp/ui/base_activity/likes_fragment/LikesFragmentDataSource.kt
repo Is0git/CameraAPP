@@ -21,13 +21,15 @@ import javax.inject.Inject
 @LikesFragmentScope
 class LikesFragmentDataSource @Inject constructor(
     val auth: FirebaseAuth,
-    val firestore: FirebaseFirestore
+    val firestore: FirebaseFirestore,
+    val job: Job
 ) : PositionalDataSource<DataFlat.Likes>() {
     var document: DocumentSnapshot? = null
+
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<DataFlat.Likes>) {
         document?.let {
             val list = mutableListOf<DataFlat.Likes>()
-            CoroutineScope(Dispatchers.Main).launch {
+            CoroutineScope(Dispatchers.Main + job).launch {
                 getLikes(list, params)
                 callback.onResult(list)
             }
@@ -40,7 +42,7 @@ class LikesFragmentDataSource @Inject constructor(
         callback: LoadInitialCallback<DataFlat.Likes>
     ) {
         val list = mutableListOf<DataFlat.Likes>()
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.Main + job).launch {
             getLikes(list, params)
             callback.onResult(list, 0, list.size)
         }
@@ -60,7 +62,7 @@ class LikesFragmentDataSource @Inject constructor(
             is LoadRangeParams -> {
                 firestore.collection("$userCollection/${auth.uid}/$userLikesCollection")
                     .orderBy("liked_time_long", Query.Direction.DESCENDING)
-                    .startAfter(document)
+                    .startAfter(document!!)
                     .limit(params.loadSize.toLong()).get().await()
                     .also {
                         if (it?.documents != null && it.documents.size > 0) document =
@@ -88,5 +90,11 @@ class LikesFragmentDataSource @Inject constructor(
         }
         i.user = userObject
         return i
+    }
+
+   fun cancelJob() {
+        if(job.isActive) {
+            job.cancel()
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProviders
 import com.android.cameraapp.databinding.LikesFragmentBinding
 import com.android.nbaapp.data.vms.ViewModelFactory
@@ -24,10 +25,9 @@ class LikesFragment : DaggerFragment() {
     ): View? {
         viewmodel = ViewModelProviders.of(this, viewmodelFactory).get(LikesFragmentViewModel::class.java)
         binding = LikesFragmentBinding.inflate(inflater, container, false)
-        binding.likesRecyclerView.adapter =
-            LikesAdapter()
-
+        binding.likesRecyclerView.adapter = adapter
         viewmodel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
         return binding.root
+
     }
 }

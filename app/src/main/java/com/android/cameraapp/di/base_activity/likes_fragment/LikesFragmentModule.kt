@@ -12,6 +12,8 @@ import com.android.cameraapp.ui.base_activity.likes_fragment.LikesDataSourceFact
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragmentDataSource
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.Job
+
 @Module
 object LikesFragmentModule {
     @Provides
@@ -27,9 +29,10 @@ object LikesFragmentModule {
         return LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
     }
 
+
     @Provides
     @LikesFragmentScope
     @JvmStatic
-    fun getPagedListAdapter() = LikesAdapter()
+    fun getJob()  : Job= Job()
 
 }
