@@ -9,10 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FeedFragmentBinding
 import com.android.cameraapp.util.FeedFragmentOnClickListener
+import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -25,6 +28,10 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
     lateinit var viewModel: FeedFragmentViewModel
     lateinit var binding: FeedFragmentBinding
     lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,8 +46,10 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
     }
 
     override fun imageOnClick(photo: View, item: DataFlat.PhotosWithUser) {
+        photo.transitionName = getCurrentTime().toString()
         val action = FeedFragmentDirections.actionFeedFragmentToFullPictureFragment(item.image_url, photo.transitionName)
-        navController.navigate(action)
+        val transitionExtras = FragmentNavigatorExtras(photo as ImageView to photo.transitionName)
+        navController.navigate(action, transitionExtras)
     }
 
 }

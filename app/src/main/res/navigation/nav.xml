@@ -81,14 +81,20 @@
                     app:popUpToInclusive="true" />
                 <action
                     android:id="@+id/action_feedFragment_to_fullPictureFragment"
-                    app:destination="@id/fullPictureFragment">
-                    <argument app:nullable="true"
+                    app:destination="@id/fullPictureFragment"
+                    app:enterAnim="@anim/nav_default_enter_anim"
+                    app:exitAnim="@anim/nav_default_exit_anim"
+                    app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                    app:popExitAnim="@anim/nav_default_pop_exit_anim">
+                    <argument
                         android:name="photo_url"
-                        app:argType="string"/>
+                        app:argType="string"
+                        app:nullable="true" />
 
-                    <argument app:nullable="true"
+                    <argument
                         android:name="transition_name"
-                        app:argType="string"/>
+                        app:argType="string"
+                        app:nullable="true" />
                 </action>
             </fragment>
             <fragment

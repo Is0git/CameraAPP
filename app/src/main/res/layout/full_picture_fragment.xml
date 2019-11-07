@@ -8,7 +8,7 @@
             android:layout_height="match_parent"
             android:id="@+id/photo"
             android:transitionName="photo"
-            android:background="@color/colorHomeLightGrey"
+            android:background="@color/colorSurface"
             android:src="@drawable/image_placeholder"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
