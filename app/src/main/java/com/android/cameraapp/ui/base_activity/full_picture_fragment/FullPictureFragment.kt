@@ -12,7 +12,7 @@ import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FullPictureFragmentBinding
 import com.android.cameraapp.util.FeedFragmentOnClickListener
 
-class FullPictureFragment : Fragment(), FeedFragmentOnClickListener {
+class FullPictureFragment : Fragment()  {
     lateinit var binding: FullPictureFragmentBinding
     lateinit var navController: NavController
     override fun onCreateView(
@@ -27,7 +27,5 @@ class FullPictureFragment : Fragment(), FeedFragmentOnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = findNavController()
     }
-    override fun imageOnClick(item: DataFlat.PhotosWithUser, photo: ImageView) {
 
-    }
 }

@@ -7,12 +7,17 @@
         <variable
             name="item"
             type="com.android.cameraapp.data.data_models.DataFlat.PhotosWithUser" />
+
+        <variable
+            name="click"
+            type="com.android.cameraapp.util.FeedFragmentOnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="15dp"
+        android:onClick="@{() -> click.imageOnClick(imageView, item)}"
         tools:background="@color/colorSurface">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -81,6 +86,7 @@
             app:layout_constraintTop_toBottomOf="@+id/user_image">
 
             <ImageView
+                android:id="@+id/image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:transitionName="photo"

@@ -8,17 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FeedListLayoutBinding
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
+import com.android.cameraapp.util.FeedFragmentOnClickListener
 import javax.inject.Inject
 @FeedFragmentScope
 class PhotosWithUserAdapter @Inject constructor() : PagedListAdapter<DataFlat.PhotosWithUser, PhotosWithUserAdapter.MyViewHolder>(
     callback) {
-    class MyViewHolder(val binding: FeedListLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    lateinit var onClickHandler: FeedFragmentOnClickListener
+    class MyViewHolder(val binding: FeedListLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PhotosWithUserAdapter.MyViewHolder {
         val binding = FeedListLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.click = onClickHandler
         return MyViewHolder(binding)
     }
 
