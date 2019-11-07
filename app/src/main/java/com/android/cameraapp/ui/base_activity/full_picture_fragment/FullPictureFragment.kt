@@ -11,8 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FullPictureFragmentBinding
 import com.android.cameraapp.util.FeedFragmentOnClickListener
+import dagger.android.support.DaggerFragment
 
-class FullPictureFragment : Fragment()  {
+class FullPictureFragment : DaggerFragment()  {
     lateinit var binding: FullPictureFragmentBinding
     lateinit var navController: NavController
     override fun onCreateView(

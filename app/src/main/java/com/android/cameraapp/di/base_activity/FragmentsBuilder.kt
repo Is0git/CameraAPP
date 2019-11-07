@@ -24,12 +24,14 @@ import com.android.cameraapp.di.base_activity.followers_fragment.FollowersViewMo
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragmentScope
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingModule
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingViewModelModule
+import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentModule
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentViewModelModule
 import com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
+import com.android.cameraapp.ui.base_activity.full_picture_fragment.FullPictureFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragment
 import com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment
@@ -92,5 +94,9 @@ abstract class FragmentsBuilder {
     @ContributesAndroidInjector(modules = [FeedFragmentModule::class, FeedFragmentViewModelModule::class])
     @FeedFragmentScope
     abstract fun feedFragment() : FeedFragment
+
+    @ContributesAndroidInjector
+    @FullPictureScope
+    abstract fun fullPictureFragment() : FullPictureFragment
 
 }
