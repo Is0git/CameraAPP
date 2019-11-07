@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +22,6 @@ import com.android.cameraapp.databinding.ActivityMainBinding
 import com.android.cameraapp.util.UserAuthStates
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -52,12 +50,12 @@ class BaseActivity : DaggerAppCompatActivity() {
         binding.apply {
             bar.setupWithNavController(navController)
             fab.setOnClickListener {
-              lifecycleScope.launch {
-                  fabOnClickAnimation().start()
-                  delay(1500)
-                  navController.navigate(R.id.add_photo_nav)
-              }
+                lifecycleScope.launch {
+//                    fabOnClickAnimation().start()
+                    delay(1500)
+                    navController.navigate(R.id.add_photo_nav)
                 }
+            }
             bar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.feedFragment -> navController.navigate(
@@ -87,7 +85,7 @@ class BaseActivity : DaggerAppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-          R.id.share -> true
+            R.id.share -> true
         }
         return true
     }
@@ -141,18 +139,19 @@ class BaseActivity : DaggerAppCompatActivity() {
         }
     }
 
-    fun fabOnClickAnimation() : ObjectAnimator {
-
-        val property_scaleX = PropertyValuesHolder.ofFloat("scaleX", 1.0f, 20.0f )
-        val property_scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.0f, 20.0f )
-        val property_transX = PropertyValuesHolder.ofInt("translationX",  550)
-        val property_transY = PropertyValuesHolder.ofInt("translationY",  550)
-       return ObjectAnimator.ofPropertyValuesHolder(binding.fab, property_scaleX, property_scaleY, property_transX, property_transY).apply {
-           duration = 1500
-       }
-
-
-        }
+//    fun fabOnClickAnimation(): ObjectAnimator {
+//        binding.fab.
+//        val elevation = PropertyValuesHolder.ofFloat("elevation", 20f)
+//        return ObjectAnimator.ofPropertyValuesHolder(
+//            binding.fab,
+//            elevation,
+//            scale
+//        ).apply {
+//            duration = 1500
+//        }
+//
+//
+//    }
 }
 //FIGURE OUT how to inject nav controller in repository cause AndroidInjector is before setContentView and NavController needs a view.
 // Implementing HasInjector and putting  injector after setContentView makes Dagger act weird!!!

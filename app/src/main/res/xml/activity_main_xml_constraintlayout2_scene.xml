@@ -28,6 +28,16 @@
                 motion:attributeName="radius"
                 motion:customDimension="20dp" />
         </Constraint>
+        <Constraint
+            android:id="@+id/transition_view"
+            android:elevation="20dp"
+            motion:layout_constraintStart_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintTop_toBottomOf="parent">
+            <CustomAttribute
+                motion:attributeName="visibility" />
+        </Constraint>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -43,5 +53,33 @@
                 motion:attributeName="radius"
                 motion:customDimension="0dp" />
         </Constraint>
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetStart="@+id/transStart"
+        motion:constraintSetEnd="@+id/transEnd">
+        <OnClick motion:targetId="@+id/button"/>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/transStart">
+        <Constraint
+        android:id="@+id/transition_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+        motion:layout_constraintStart_toEndOf="parent"
+        motion:layout_constraintTop_toBottomOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/transEnd">
+        <Constraint
+            android:id="@+id/transition_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorAccent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            />
     </ConstraintSet>
 </MotionScene>
