@@ -13,11 +13,13 @@
             type="com.android.cameraapp.util.FeedFragmentOnClickListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
         android:onClick="@{() -> click.imageOnClick(imageView, item)}"
+        android:paddingBottom="15dp"
+        app:layoutDescription="@xml/feed_list_layout_xml_constraintlayout5_scene"
         tools:background="@color/colorSurface">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -26,13 +28,13 @@
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/background"
-            app:loadImageFromUrl="@{item.user.photo_url}"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="5dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImageFromUrl="@{item.user.photo_url}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/left_guideline"
@@ -80,18 +82,20 @@
             android:id="@+id/image_card"
             android:layout_width="0dp"
             android:layout_height="230dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="@id/guideline18"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/user_image">
+            app:layout_constraintTop_toBottomOf="@+id/user_image"
+            app:shapeAppearanceOverlay="@style/feedTopCard">
 
             <ImageView
                 android:id="@+id/image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/image_placeholder"
                 android:transitionName="photo"
-                app:loadImageFromUrl="@{item.image_url}"
-                android:background="@drawable/image_placeholder" />
+                app:loadImageFromUrl="@{item.image_url}" />
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView
@@ -150,6 +154,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
+
             android:background="@drawable/icon_share"
             app:layout_constraintBottom_toBottomOf="@+id/comment_text"
             app:layout_constraintEnd_toStartOf="@+id/share_text"
@@ -165,10 +170,41 @@
             android:fontFamily="@font/quicksand"
             android:text="@string/share"
             android:textSize="@dimen/smallest_text"
+
             app:layout_constraintBottom_toBottomOf="@+id/share_icon"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/share_icon"
             app:layout_constraintTop_toTopOf="@+id/share_icon" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/feedCard_shape"
+            style="@style/feedCardShape"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorAccent"
+            android:minHeight="50dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/share_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline19"
+            app:layout_constraintTop_toTopOf="@+id/ago_text"
+            app:shapeAppearanceOverlay="@style/feedCardShape">
+
+            <View
+                android:id="@+id/icon"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/expand_icon" />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

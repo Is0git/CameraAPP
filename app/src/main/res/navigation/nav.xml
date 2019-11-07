@@ -92,9 +92,11 @@
                         app:nullable="true" />
 
                     <argument
-                        android:name="transition_name"
-                        app:argType="string"
-                        app:nullable="true" />
+                    android:name="transition_name"
+                    app:argType="string"
+                    app:nullable="true" />
+
+
                 </action>
             </fragment>
             <fragment

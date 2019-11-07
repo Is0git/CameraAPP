@@ -65,9 +65,25 @@
         <item name="android:textSize">0sp</item>
     </style>
 
-    <style name="progressBar" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+    <style name="progressBar" parent="ShapeAppearance.MaterialComponents.MediumComponent">
 
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">15dp</item>
     </style>
 
+    <style name="FeedMaterial" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/feedCardShape</item>
+    </style>
+
+    <style name="feedCardShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerSizeBottomLeft">10dp</item>
+        <item name="cornerSize">5dp</item>
+    </style>
+
+    <style name="feedTopCard" parent="">
+
+    </style>
 </resources>

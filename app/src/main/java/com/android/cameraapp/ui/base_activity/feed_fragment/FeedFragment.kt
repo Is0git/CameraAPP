@@ -14,6 +14,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FeedFragmentBinding
+import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.util.FeedFragmentOnClickListener
 import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
@@ -52,4 +53,8 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         navController.navigate(action, transitionExtras)
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as BaseActivity).apply { activityUItoVisible() }
+    }
 }
