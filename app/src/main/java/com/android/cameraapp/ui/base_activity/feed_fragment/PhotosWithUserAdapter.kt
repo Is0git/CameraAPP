@@ -23,24 +23,7 @@ class PhotosWithUserAdapter @Inject constructor() :
 
     class MyViewHolder(val binding: FeedListLayoutBinding, var isStarted: Boolean = false) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.feedCardShape.setOnClickListener {
-                if (!isStarted) {
-                    binding.constraintLayout5.apply {
-                        setTransition(R.id.start, R.id.end)
-                        transitionToEnd()
-                    }
-                    isStarted = true
-                } else {
-                    binding.constraintLayout5.apply {
-                        setTransition(R.id.end2, R.id.start)
-                        transitionToEnd()
-                    }
-                    isStarted = false
 
-                }
-            }
-        }
     }
 
     override fun onCreateViewHolder(
@@ -56,6 +39,12 @@ class PhotosWithUserAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: PhotosWithUserAdapter.MyViewHolder, position: Int) {
         val item = getItem(position)
         holder.binding.item = item
+    }
+
+    override fun onViewRecycled(holder: MyViewHolder) {
+        super.onViewRecycled(holder)
+        if(holder.binding.constraintLayout5.currentState == R.id.end2)
+        holder.binding.constraintLayout5.progress = 0f
     }
 }
 

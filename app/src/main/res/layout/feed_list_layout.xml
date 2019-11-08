@@ -17,7 +17,6 @@
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> click.imageOnClick(imageView, item)}"
         android:paddingBottom="15dp"
         app:layoutDescription="@xml/feed_list_layout_xml_constraintlayout5_scene"
         tools:background="@color/colorSurface">
@@ -35,6 +34,7 @@
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="parent"
             app:loadImageFromUrl="@{item.user.photo_url}" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/left_guideline"
@@ -187,24 +187,66 @@
             app:cardElevation="3dp"
             app:layout_constraintBottom_toBottomOf="@+id/share_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline19"
             app:layout_constraintTop_toTopOf="@+id/ago_text"
             app:shapeAppearanceOverlay="@style/feedCardShape">
 
-            <View
-                android:id="@+id/icon"
-                android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:background="@drawable/expand_icon" />
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:iconGravity="textStart"
+            app:iconSize="20dp"
+            android:elevation="15dp"
+            android:outlineProvider="none"
+            android:id="@+id/arrow_icon"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:clickable="false"
+            app:layout_constraintStart_toStartOf="@id/feedCard_shape"
+            app:layout_constraintTop_toTopOf="@id/feedCard_shape"
+            app:layout_constraintBottom_toBottomOf="@id/feedCard_shape"
+            app:iconTint="@color/colorAccent"
+            app:icon="@drawable/expand_icon"/>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline19"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.92" />
+            android:fontFamily="@font/youth"
+            android:elevation="15dp"
+            android:text=" &quot;Almost perfect&quot;"
+            android:alpha="0"
+            app:layout_constraintEnd_toEndOf="@id/feedCard_shape"
+            app:layout_constraintStart_toStartOf="@id/feedCard_shape"
+            app:layout_constraintTop_toTopOf="@id/feedCard_shape"
+            android:textColor="@color/colorTextDark"
+            android:textSize="40sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:id="@+id/line"
+            android:outlineProvider="none"
+            android:elevation="15dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@id/feedCard_shape"
+            app:layout_constraintTop_toBottomOf="@id/title"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:fontFamily="@font/myriadpro"
+            android:elevation="15dp"
+            android:text="@{item.description}"
+            android:alpha="0"
+            android:id="@+id/description_text"
+            android:layout_width="wrap_content"
+            android:textAlignment="textStart"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/feedCard_shape"
+            app:layout_constraintBottom_toBottomOf="@id/feedCard_shape"
+            android:textColor="@color/colorTextDark"
+            android:textSize="@dimen/regular_text_size" />
+
+
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

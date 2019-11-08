@@ -2,71 +2,188 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
-    <Transition
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
-        motion:duration="450">
-        <KeyFrameSet></KeyFrameSet>
-    </Transition>
-
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/feedCard_shape"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             motion:layout_constraintBottom_toBottomOf="@+id/share_text"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="@id/guideline19"
-            motion:layout_constraintTop_toTopOf="@+id/ago_text" >
+            motion:layout_constraintStart_toEndOf="@+id/image_card"
+            motion:layout_constraintTop_toTopOf="@+id/ago_text">
             <CustomAttribute
                 motion:attributeName="cardElevation"
                 motion:customDimension="0dp" />
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@color/colorSurface" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/arrow_icon"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"
+            motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
+            motion:layout_constraintTop_toTopOf="@id/feedCard_shape">
+
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@color/colorAccent2" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
+            motion:layout_constraintHorizontal_bias="0.11"
+            motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
+            motion:layout_constraintTop_toTopOf="@id/feedCard_shape" />
+
+
+        <Constraint
+            android:id="@+id/description_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/feedCard_shape"
+            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"/>
+
+        <Constraint
+            android:id="@+id/line"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
+            motion:layout_constraintTop_toTopOf="@+id/feedCard_shape" >
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="@color/colorSecondary" />
         </Constraint>
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
-        <Constraint
-            android:id="@+id/feedCard_shape"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            motion:layout_constraintBottom_toTopOf="@+id/comment_text"
-            motion:layout_constraintTop_toTopOf="@+id/image_card"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="@id/guideline19">
-            <CustomAttribute
-                motion:attributeName="cardElevation"
-                motion:customDimension="15dp" />
-        </Constraint>
-    </ConstraintSet>
     <Transition
         motion:constraintSetEnd="@+id/end2"
-        motion:constraintSetStart="@+id/end"
-        motion:autoTransition="animateToEnd"
-        motion:transitionDisable="true"></Transition>
+        motion:constraintSetStart="@+id/start"
+        motion:duration="600"
+        motion:motionInterpolator="easeOut">
+
+        <OnClick motion:targetId="@id/feedCard_shape" />
+        <KeyFrameSet>
+            <KeyAttribute
+                android:rotation="0"
+                motion:framePosition="65"
+                motion:motionTarget="@+id/arrow_icon" />
+            <KeyAttribute
+                android:rotation="180"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/arrow_icon" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="40"
+                motion:motionTarget="@+id/title" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/title" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/title" />
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="40"
+                motion:motionTarget="@+id/description_text" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/description_text" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/description_text" />
+            <KeyPosition
+                motion:motionTarget="@+id/line"
+                motion:framePosition="60"
+                motion:percentY="0.2" />
+        </KeyFrameSet>
+
+
+    </Transition>
 
     <ConstraintSet android:id="@+id/end2">
         <Constraint
             android:id="@+id/feedCard_shape"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            motion:layout_constraintBottom_toTopOf="@+id/comment_text"
-            motion:layout_constraintTop_toTopOf="@+id/image_card"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="32dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/share_text"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="@id/guideline19" ></Constraint>
+            motion:layout_constraintStart_toEndOf="@+id/user_image"
+            motion:layout_constraintTop_toTopOf="@+id/ago_text">
+            <CustomAttribute
+                motion:attributeName="cardElevation"
+                motion:customDimension="15dp" />
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@color/colorSurface" />
+
+
+        </Constraint>
+
         <Constraint
-            android:id="@+id/guideline19"
-            motion:layout_constraintGuide_percent="0.50"
+            android:id="@+id/arrow_icon"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"
+            motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
+            motion:layout_constraintTop_toTopOf="@id/feedCard_shape">
+
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@color/colorSurface" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
+            motion:layout_constraintHorizontal_bias="0.11"
+            motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
+            motion:layout_constraintTop_toTopOf="@id/feedCard_shape" />
+
+
+        <Constraint
+            android:id="@+id/description_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            motion:layout_constraintTop_toBottomOf="@id/line"
+            motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
+            motion:layout_constraintStart_toEndOf="@id/arrow_icon"
+            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"/>
+
+        <Constraint
+            android:id="@+id/line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
+            motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
+            motion:layout_constraintTop_toBottomOf="@id/title" >
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="@color/colorAccent" />
+        </Constraint>
     </ConstraintSet>
-    <Transition
-        motion:constraintSetStart="@+id/end2"
-        motion:constraintSetEnd="@+id/start" >
-        <OnSwipe motion:touchAnchorId="@id/feedCard_shape"
-            motion:dragDirection="dragRight" />
-    </Transition>
 </MotionScene>
