@@ -84,6 +84,9 @@ class AddFragmentOne : DaggerFragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as BaseActivity).activityUItoInvisible()
+        (activity as BaseActivity).apply {
+            TopBartoInvisible()
+            BottomBarToInvisible()
+        }
     }
 }

@@ -12,4 +12,6 @@
     <dimen name="smallest_text">12sp</dimen>
     <dimen name="home_recyclerView_name">16sp</dimen>
     <dimen name="home_recyclerView_subText">14sp</dimen>
+    <dimen name="card_large">25sp</dimen>
+    <dimen name="card_mid">20sp</dimen>
 </resources>

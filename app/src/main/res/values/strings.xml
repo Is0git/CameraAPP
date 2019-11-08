@@ -51,5 +51,6 @@
     <string name="search">SEARCH</string>
     <string name="settings">SETTINGS</string>
     <string name="comment">Comment</string>
+    <string name="feed">#FEED</string>
 
 </resources>

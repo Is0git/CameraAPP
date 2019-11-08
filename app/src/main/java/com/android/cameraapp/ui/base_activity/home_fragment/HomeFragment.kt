@@ -12,6 +12,8 @@ import com.android.cameraapp.databinding.HomeFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.ui.base_activity.start_fragment.StartFragmentViewModel
 import com.android.nbaapp.data.vms.ViewModelFactory
+import com.google.android.material.shape.EdgeTreatment
+import com.google.android.material.shape.ShapeAppearanceModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -40,6 +42,7 @@ class HomeFragment : DaggerFragment() {
             parentViewModel = parentFragmentViewModel
 
         }
+
         setViewPagerWithToolbar()
         return binding.root
     }
@@ -60,9 +63,12 @@ class HomeFragment : DaggerFragment() {
     //toolbar set visible after adding photo fragments
     override fun onStart() {
         super.onStart()
-        (activity as BaseActivity).activityUItoVisible()
-    }
+        (activity as BaseActivity).apply {
+            TopBartoVisible()
+            BottomBarVisible()
+        }
 
+    }
 
 
 }

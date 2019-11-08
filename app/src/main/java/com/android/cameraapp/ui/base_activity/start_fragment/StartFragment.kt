@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -69,7 +68,11 @@ class StartFragment : DaggerFragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as BaseActivity).activityUItoInvisible()
+        (activity as BaseActivity).apply {
+            TopBartoInvisible()
+            BottomBarToInvisible()
+        }
+
 
     }
 

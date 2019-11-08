@@ -1,7 +1,5 @@
 package com.android.cameraapp.ui.base_activity
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -51,7 +49,7 @@ class BaseActivity : DaggerAppCompatActivity() {
             bar.setupWithNavController(navController)
             fab.setOnClickListener {
                 lifecycleScope.launch {
-//                    fabOnClickAnimation().start()
+                    //                    fabOnClickAnimation().start()
                     delay(1500)
                     navController.navigate(R.id.add_photo_nav)
                 }
@@ -114,9 +112,13 @@ class BaseActivity : DaggerAppCompatActivity() {
         Log.d("TAGS", "DESTROY")
     }
 
-    fun activityUItoInvisible() {
+    fun TopBartoInvisible() {
         if (binding.toolbar.visibility == View.VISIBLE) binding.toolbar.visibility = View.INVISIBLE
 
+
+    }
+
+    fun BottomBarToInvisible() {
         if (binding.bar.isVisible) binding.apply {
             bar.performHide().also { bar.visibility = View.INVISIBLE }
             fab.hide()
@@ -125,11 +127,14 @@ class BaseActivity : DaggerAppCompatActivity() {
     }
 
 
-    fun activityUItoVisible() {
+    fun TopBartoVisible() {
         if (binding.toolbar.visibility == View.INVISIBLE) binding.toolbar.visibility =
             View.VISIBLE
 
 
+    }
+
+    fun BottomBarVisible() {
         if (binding.bar.visibility == View.INVISIBLE) {
             binding.apply {
                 bar.visibility = View.VISIBLE

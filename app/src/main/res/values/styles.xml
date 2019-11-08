@@ -86,4 +86,15 @@
     <style name="feedTopCard" parent="">
 
     </style>
+        <style name="fullScreenCard">
+            <item name="shapeAppearanceOverlay">@style/fullScreenAppereance</item>
+        </style>
+    <style name="fullScreenAppereance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSize">5dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
 </resources>
