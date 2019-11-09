@@ -16,13 +16,11 @@ import androidx.navigation.fragment.findNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FeedFragmentBinding
-import com.android.cameraapp.databinding.FeedListLayoutBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.util.FeedFragmentOnClickListener
 import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.coroutines.delay
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -54,7 +52,11 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         return binding.root
     }
 
-    override fun imageOnClick(photo: View, item: DataFlat.PhotosWithUser, motionLayout: MotionLayout) {
+    override fun imageOnClick(
+        photo: View,
+        item: DataFlat.PhotosWithUser,
+        motionLayout: MotionLayout
+    ) {
         photo.transitionName = getCurrentTime().toString()
         val action = FeedFragmentDirections.actionFeedFragmentToFullPictureFragment(
             item.image_url,
@@ -68,14 +70,21 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         }
         val executor = Executors.newSingleThreadScheduledExecutor()
         executor.schedule({
-            activity?.runOnUiThread {  navController.navigate(action, transitionExtras) }
+            activity?.runOnUiThread { navController.navigate(action, transitionExtras) }
         }, 450, TimeUnit.MILLISECONDS)
 
     }
 
     override fun likeOrUnlikePhoto(icon: View, dataFlat: DataFlat.PhotosWithUser, likes: TextView) {
         Log.d("FEEDFRAGMENT", "CLICKED ON ICON, OH BOY!")
-        viewModel.likePhoto(dataFlat, likes)
+        if (dataFlat.me_liked) {
+            dataFlat.me_liked = false
+            viewModel.removeLike(dataFlat, likes, icon)
+        } else {
+            dataFlat.me_liked = true
+            viewModel.likePhoto(dataFlat, likes, icon)
+        }
+
     }
 
     override fun onStart() {

@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity.feed_fragment
 
+import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,7 +19,9 @@ class FeedFragmentViewModel @Inject constructor(val repo: FeedFragmentRepository
         repo.dataSource.cancelJob()
     }
 
-    fun likePhoto(data: DataFlat.PhotosWithUser, likesCount: TextView) = viewModelScope.launch {
-        repo.likePhoto(data, likesCount)
+    fun likePhoto(data: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) = viewModelScope.launch {
+        repo.likePhoto(data, likesCount, icon)
     }
+
+    fun removeLike(data: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) = viewModelScope.launch { repo.dislikePhoto(data, likesCount, icon) }
 }
