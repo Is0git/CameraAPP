@@ -144,19 +144,6 @@ class BaseActivity : DaggerAppCompatActivity() {
         }
     }
 
-//    fun fabOnClickAnimation(): ObjectAnimator {
-//        binding.fab.
-//        val elevation = PropertyValuesHolder.ofFloat("elevation", 20f)
-//        return ObjectAnimator.ofPropertyValuesHolder(
-//            binding.fab,
-//            elevation,
-//            scale
-//        ).apply {
-//            duration = 1500
-//        }
-//
-//
-//    }
 }
-//FIGURE OUT how to inject nav controller in repository cause AndroidInjector is before setContentView and NavController needs a view.
+//TO DO FIGURE OUT how to inject nav controller in repository cause AndroidInjector is before setContentView and NavController needs a view.
 // Implementing HasInjector and putting  injector after setContentView makes Dagger act weird!!!

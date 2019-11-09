@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="image_url"
             type="String" />
@@ -268,6 +267,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:elevation="4dp"
             android:id="@+id/comments_list"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
@@ -275,7 +275,7 @@
             app:layout_constraintTop_toBottomOf="@id/comments_number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:spanCount="5"
+            tools:itemCount="10"
             tools:listitem="@layout/full_photo_list"/>
 
 
