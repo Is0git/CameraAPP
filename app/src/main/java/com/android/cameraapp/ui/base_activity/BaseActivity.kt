@@ -50,7 +50,6 @@ class BaseActivity : DaggerAppCompatActivity() {
             fab.setOnClickListener {
                 lifecycleScope.launch {
                     //                    fabOnClickAnimation().start()
-                    delay(1500)
                     navController.navigate(R.id.add_photo_nav)
                 }
             }

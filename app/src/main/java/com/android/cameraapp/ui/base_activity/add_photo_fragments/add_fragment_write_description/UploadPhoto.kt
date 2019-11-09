@@ -69,6 +69,7 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
                 inputData.getBoolean("isPrivate", false),
                 "200",
                 "400",
+                0,
                 getCurrentTime(),
                 downloadURL
             )

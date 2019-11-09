@@ -1,10 +1,12 @@
 package com.android.cameraapp.ui.base_activity.feed_fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -69,6 +71,11 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
             activity?.runOnUiThread {  navController.navigate(action, transitionExtras) }
         }, 450, TimeUnit.MILLISECONDS)
 
+    }
+
+    override fun likeOrUnlikePhoto(icon: View, dataFlat: DataFlat.PhotosWithUser, likes: TextView) {
+        Log.d("FEEDFRAGMENT", "CLICKED ON ICON, OH BOY!")
+        viewModel.likePhoto(dataFlat, likes)
     }
 
     override fun onStart() {
