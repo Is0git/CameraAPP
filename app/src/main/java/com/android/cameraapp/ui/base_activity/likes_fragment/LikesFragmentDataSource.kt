@@ -82,8 +82,8 @@ class LikesFragmentDataSource @Inject constructor(
 
 
     suspend fun getUsers(i: DataFlat.Likes): DataFlat.Likes {
-        val userObject: UserCollection.User? = i.user_uid?.let {
-            firestore.document("$userCollection/${i.user_uid}").get().await()
+        val userObject: UserCollection.User? = i.liker_id?.let {
+            firestore.document("$userCollection/${i.liker_id}").get().await()
                 .let {
                     if (it != null) it.toObject(UserCollection.User::class.java) else throw CancellationException("PROB EMTY")
                 }

@@ -15,12 +15,11 @@ import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
 import com.android.cameraapp.util.*
 import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -36,6 +35,7 @@ data class FeedFragmentRepository @Inject constructor(
     suspend fun likePhoto(photo: DataFlat.PhotosWithUser, likesCount: TextView, icon : View) = coroutineScope {
         launch(Dispatchers.Main) {increaseCounterUI(likesCount, icon)}
         val photoDocument = getDocumentId(photo).await().documents.firstOrNull()
+        photoDocument?.id
         launch { addLikedPhoto(photoDocument!!) }
         launch { increaseLikeCounter(photoDocument!!) }
 
@@ -48,7 +48,8 @@ data class FeedFragmentRepository @Inject constructor(
         launch { decreaseLikeCounter(photoDocument!!) }
     }
 
-    fun getDocumentId(photo: DataFlat.PhotosWithUser) = fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection").whereEqualTo("photo_id", photo.photo_id).get()
+    fun getDocumentId(photo: DataFlat.PhotosWithUser) =
+        fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection").whereEqualTo("photo_id", photo.photo_id).get()
 
     suspend fun removePhoto(photoDocument: DocumentSnapshot) {
        val documentID = fireStore.collection("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/$photosLikesCollection")
@@ -58,18 +59,15 @@ data class FeedFragmentRepository @Inject constructor(
 
     }
 
-    suspend fun addLikedPhoto(photoDocument: DocumentSnapshot) {
-        fireStore.collection("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/$photosLikesCollection")
-            .add(
-                UserCollection.PictureLikes(
-                    firebaseAuth.uid,
-                    firebaseAuth.currentUser?.displayName,
-                    getCurrentDateInFormat(),
-                    photoDocument.id,
-                    getCurrentTime()
-                )
-            ).await()
+    suspend fun addLikedPhoto(photoDocument: DocumentSnapshot) = coroutineScope {
+        val likeResult = fireStore.collection("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/$photosLikesCollection")
+            .add(UserCollection.PictureLikes(firebaseAuth.uid, firebaseAuth.currentUser?.displayName, getCurrentDateInFormat(), photoDocument.id, getCurrentTime())).await()
+
+        val id = likeResult.id
+        resolveLikedFirstTime(id, photoDocument)
     }
+
+
 
     suspend fun increaseLikeCounter(photoDocument: DocumentSnapshot) {
         fireStore.document("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}")
@@ -91,6 +89,20 @@ data class FeedFragmentRepository @Inject constructor(
         }
     }
 
+    suspend fun getLikeDocument(id: String, photoDocument: DocumentSnapshot) : DocumentSnapshot = fireStore.document("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/${userLikesCollection}/${id}").get().await()
+
+
+    suspend fun resolveLikedFirstTime(id: String, photoDocument: DocumentSnapshot) = coroutineScope {
+
+            //adding liked instance in user collection(happens only one time and it's just a message in particular time)
+                //check if there is document with this photo id in order to know if it's first time like
+               val result = fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection").whereEqualTo("photo_id", photoDocument.id).get()
+
+                if(result.await().documents.size == 0) launch {
+                    launch { fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection").add(UserCollection.PictureLikes(firebaseAuth.uid, "NAME", getCurrentDateInFormat(), photoDocument.id, getCurrentTime())) }
+            }
+
+    }
     fun decreaseCounterUI(likesCount: TextView, icon : View) {
         val newLikesCount = likesCount.apply {
             val newValue = text.toString().toInt() - 1
