@@ -14,4 +14,5 @@
     <dimen name="home_recyclerView_subText">14sp</dimen>
     <dimen name="card_large">25sp</dimen>
     <dimen name="card_mid">20sp</dimen>
+    <dimen name="search_text">45sp</dimen>
 </resources>

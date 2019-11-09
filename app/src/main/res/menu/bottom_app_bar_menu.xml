@@ -12,13 +12,10 @@
         android:title="@string/profile"
         app:showAsAction="always" />
     <item
-        android:id="@+id/search"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/search_icon"
         android:title="@string/search"
         app:showAsAction="always" />
-<!--    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/settings_icon"
-        android:title="@string/settings"
-        app:showAsAction="always" />-->
+
+
 </menu>

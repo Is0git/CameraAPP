@@ -109,6 +109,9 @@
                     app:launchSingleTop="true"
                     app:popUpTo="@id/homeFragment"
                     app:popUpToInclusive="true" />
+                <action
+                    android:id="@+id/action_homeFragment_to_searchFragment"
+                    app:destination="@id/searchFragment" />
             </fragment>
             <fragment
                 android:id="@+id/fullPictureFragment"
@@ -121,6 +124,10 @@
                     android:name="transition_name"
                     app:argType="string"/>
             </fragment>
+            <fragment
+                android:id="@+id/searchFragment"
+                android:name="com.android.cameraapp.ui.base_activity.search_fragment.SearchFragment"
+                android:label="SearchFragment" />
         </navigation>
     </navigation>
     <navigation

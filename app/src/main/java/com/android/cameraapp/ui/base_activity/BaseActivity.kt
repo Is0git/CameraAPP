@@ -66,6 +66,8 @@ class BaseActivity : DaggerAppCompatActivity() {
                         null,
                         options_home
                     )
+
+                    R.id.searchFragment -> navController.navigate(R.id.searchFragment)
                     else -> true
                 }
                 false
