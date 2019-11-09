@@ -48,4 +48,7 @@ sealed class UserCollection {
         val time_in_long : Long? = 0,
         val image_url: String? = "N/A"
     )
+
+    //SubCollection
+    data class PictureLikes(val liker_id: String?, val name:String?, val when_liked: String?, val photo_id: String?)
 }
