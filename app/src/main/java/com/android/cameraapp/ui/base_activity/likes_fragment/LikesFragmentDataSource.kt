@@ -52,7 +52,7 @@ class LikesFragmentDataSource @Inject constructor(
         val result: MutableList<DataFlat.Likes>? = when (params) {
             is LoadInitialParams -> {
                 firestore.collection("$userCollection/${auth.uid}/$userLikesCollection")
-                    .orderBy("liked_time_long", Query.Direction.DESCENDING)
+                    .orderBy("time_in_long", Query.Direction.DESCENDING)
                     .limit(params.requestedLoadSize.toLong()).get().await()
                     .also {
                         if (it?.documents != null && it.documents.size > 0) document =
@@ -61,7 +61,7 @@ class LikesFragmentDataSource @Inject constructor(
             }
             is LoadRangeParams -> {
                 firestore.collection("$userCollection/${auth.uid}/$userLikesCollection")
-                    .orderBy("liked_time_long", Query.Direction.DESCENDING)
+                    .orderBy("time_in_long", Query.Direction.DESCENDING)
                     .startAfter(document!!)
                     .limit(params.loadSize.toLong()).get().await()
                     .also {

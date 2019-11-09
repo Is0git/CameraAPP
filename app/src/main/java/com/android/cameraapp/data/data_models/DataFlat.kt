@@ -20,11 +20,11 @@ sealed class DataFlat {
     )
 
     data class Likes(
-        val liker_id: String?,
-        val name: String?,
-        val when_liked: String?,
-        val photo_id: String?,
-        val time_in_long: Long?,
+        val liker_id: String? = "N/A",
+        val name: String? = "N/A",
+        val when_liked: String? = "N/A",
+        val photo_id: String? = "N/A",
+        val time_in_long: Long? = 0,
         val first_time_liked: Boolean = false,
         var user: UserCollection.User? = null
     )

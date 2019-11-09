@@ -97,8 +97,8 @@ data class FeedFragmentRepository @Inject constructor(
             //adding liked instance in user collection(happens only one time and it's just a message in particular time)
                 //check if there is document with this photo id in order to know if it's first time like
                val result = fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection").whereEqualTo("photo_id", photoDocument.id).get()
-
-                if(result.await().documents.size == 0) launch {
+                //user doesn't get notified when he liked himself
+                if(result.await().documents.size == 0 && photoDocument.get("user_uid") != firebaseAuth.uid) launch {
                     launch { fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection").add(UserCollection.PictureLikes(firebaseAuth.uid, "NAME", getCurrentDateInFormat(), photoDocument.id, getCurrentTime())) }
             }
 
