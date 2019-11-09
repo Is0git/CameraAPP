@@ -4,8 +4,9 @@ import androidx.paging.PositionalDataSource
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
+import com.android.cameraapp.util.photosLikesCollection
 import com.android.cameraapp.util.userCollection
-import com.android.cameraapp.util.userLikesCollection
+import com.android.cameraapp.util.userPhotosCollection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -80,7 +81,8 @@ class PhotosWithUserDataSource @Inject constructor(
 
 
 
-        mapUsers(result!!).map { getUsers(it) }.collect { list.add(it) }
+        mapUsers(result!!).map { getUsers(it) }.map { checkPhotoIsLiked(it) }
+            .collect { list.add(it) }
 
     }
 
@@ -100,6 +102,18 @@ class PhotosWithUserDataSource @Inject constructor(
         i.user = userObject
         return i
     }
+
+    suspend fun checkPhotoIsLiked(dataFlat: DataFlat.PhotosWithUser) =
+        withContext(Dispatchers.Main) {
+            val documentId = firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/")
+                    .whereEqualTo("photo_id", dataFlat.photo_id).get().await()
+            dataFlat.me_liked  = firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${documentId.documents.firstOrNull()?.id}/$photosLikesCollection")
+                    .whereEqualTo("liker_id", auth.uid).get().await().documents.let { it.size > 0 }
+
+            dataFlat
+
+        }
+
 
     fun cancelJob() {
         if (job.isActive) {

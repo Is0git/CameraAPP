@@ -106,6 +106,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@{item.me_liked == false ? @color/colorTextDark : @color/colorAccent}"
             android:onClick="@{() -> click.likeOrUnlikePhoto(loveIcon, item, likesNumber)}"
             android:background="@drawable/icon_love_black"
             app:layout_constraintEnd_toStartOf="@+id/likes_number"
