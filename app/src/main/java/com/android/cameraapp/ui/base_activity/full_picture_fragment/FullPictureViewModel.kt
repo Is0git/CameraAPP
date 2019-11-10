@@ -11,9 +11,13 @@ import javax.inject.Inject
 @FullPictureScope
 class FullPictureViewModel @Inject constructor(val repo : FullPictureRepository): ViewModel() {
         val list = repo.likes
+        val followingState = repo.followingState
+
 
         fun getLikes(photosWithUser: DataFlat.PhotosWithUser) : LiveData<List<DataFlat.Likes>> {
                 viewModelScope.launch { repo.getLimitedLikes(photosWithUser) }
                 return list
         }
+
+        fun checkIfFollow(userUID:String) = viewModelScope.launch { repo.checkIfFollow(userUID) }
 }

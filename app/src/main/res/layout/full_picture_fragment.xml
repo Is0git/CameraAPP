@@ -28,7 +28,7 @@
             android:background="@color/colorOnSurfaceFull"
             android:outlineProvider="none"
             android:elevation="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/LIKE" />
+            app:layout_constraintTop_toBottomOf="@+id/FOLLOW" />
 
         <View
             android:id="@+id/info_divider"
@@ -214,12 +214,12 @@
             app:layout_constraintTop_toTopOf="@+id/liker_1" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/LIKE"
+            android:id="@+id/FOLLOW"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="5dp"
-            android:text="LIKE"
+            android:text="@{photoViewModel.followingState == 0 ? `FOLLOW` : `UNFOLLOW`}"
             android:textColor="@color/colorSurface"
             app:backgroundTint="@color/colorAccent2"
             app:layout_constraintBottom_toBottomOf="@+id/likes_button"

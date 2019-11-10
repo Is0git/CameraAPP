@@ -13,6 +13,10 @@ import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
 import com.android.cameraapp.util.*
+import com.android.cameraapp.util.firebase.photosLikesCollection
+import com.android.cameraapp.util.firebase.userCollection
+import com.android.cameraapp.util.firebase.userLikesCollection
+import com.android.cameraapp.util.firebase.userPhotosCollection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
@@ -88,7 +92,7 @@ data class FeedFragmentRepository @Inject constructor(
         }
     }
 
-    suspend fun getLikeDocument(id: String, photoDocument: DocumentSnapshot) : DocumentSnapshot = fireStore.document("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/${userLikesCollection}/${id}").get().await()
+    suspend fun getLikeDocument(id: String, photoDocument: DocumentSnapshot) : DocumentSnapshot = fireStore.document("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/$userLikesCollection/${id}").get().await()
 
 
     suspend fun resolveLikedFirstTime(id: String, photoDocument: DocumentSnapshot) = coroutineScope {

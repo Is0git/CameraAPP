@@ -7,6 +7,10 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.util.*
+import com.android.cameraapp.util.firebase.userCollection
+import com.android.cameraapp.util.firebase.userPhotosCollection
+import com.android.cameraapp.util.firebase.usersStorage
+import com.android.cameraapp.util.firebase.usersStoragePhotos
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore

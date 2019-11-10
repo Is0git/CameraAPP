@@ -4,9 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureScope
-import com.android.cameraapp.util.photosLikesCollection
-import com.android.cameraapp.util.userCollection
-import com.android.cameraapp.util.userPhotosCollection
+import com.android.cameraapp.util.firebase.FollowingResolver
+import com.android.cameraapp.util.firebase.photosLikesCollection
+import com.android.cameraapp.util.firebase.userCollection
+import com.android.cameraapp.util.firebase.userPhotosCollection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
@@ -22,8 +23,9 @@ class FullPictureRepository @Inject constructor(
     val auth: FirebaseAuth,
     val firestore: FirebaseFirestore
 
-) {
+) : FollowingResolver(auth, firestore){
     val likes = MutableLiveData<List<DataFlat.Likes>>()
+    val followingState = MutableLiveData<Int>()
     //e.x 4 likes with user
     suspend fun getLimitedLikes(photo: DataFlat.PhotosWithUser)  {
         val list= mutableListOf<DataFlat.Likes>()
@@ -49,4 +51,18 @@ class FullPictureRepository @Inject constructor(
         like.user = user
         return like
     }
+
+    override fun isFollowing() {
+        followingState.value = IS_FOLLOWING
+
+    }
+
+    override fun isNotFollowing() {
+        followingState.value = IS_NOT_FOLLOWING
+    }
+
+    override suspend fun checkIfFollow(followerUID: String) {
+        super.checkIfFollow(followerUID)
+    }
+
 }

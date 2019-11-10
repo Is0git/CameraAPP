@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.util.*
+import com.android.cameraapp.util.firebase.userCollection
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

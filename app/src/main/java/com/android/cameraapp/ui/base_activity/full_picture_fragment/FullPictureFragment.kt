@@ -44,8 +44,8 @@ class FullPictureFragment : DaggerFragment() {
                 photoViewModel = viewmodel
                 lifecycleOwner = viewLifecycleOwner
             }
+        viewModelInitWork()
         setUpTransition()
-        viewmodel.getLikes(args.photosWithUsers as DataFlat.PhotosWithUser).observe(viewLifecycleOwner, Observer { Log.d("FULLFRAGMENT", "RES: ${it.get(0).user?.username}") })
         return binding.root
     }
 
@@ -62,6 +62,11 @@ class FullPictureFragment : DaggerFragment() {
             TransitionInflater.from(context).inflateTransition(R.transition.move)
     }
 
+    fun viewModelInitWork() {
+        val data = args.photosWithUsers as DataFlat.PhotosWithUser
+        viewmodel.checkIfFollow(data.user_uid!!)
+        viewmodel.getLikes(data)
+    }
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {

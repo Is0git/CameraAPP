@@ -1,4 +1,4 @@
-package com.android.cameraapp.util
+package com.android.cameraapp.util.firebase
 //database
 const val userCollection = "users"
 const val userPhotosCollection = "photos"
