@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FullPhotoListBinding
+import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureScope
+import javax.inject.Inject
 
-class CommentsListAdapter : ListAdapter<DataFlat.CommentsWithUser, CommentsListAdapter.MyViewHolder>(
+@FullPictureScope
+class CommentsListAdapter @Inject constructor() : ListAdapter<DataFlat.CommentsWithUser, CommentsListAdapter.MyViewHolder>(
     callback) {
     class MyViewHolder(val binding: FullPhotoListBinding) : RecyclerView.ViewHolder(binding.root)
 

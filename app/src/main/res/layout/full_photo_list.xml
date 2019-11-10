@@ -59,6 +59,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/comment_cardView"
             android:layout_width="wrap_content"
+            app:layout_constraintHorizontal_bias="0.0"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:minHeight="35dp"

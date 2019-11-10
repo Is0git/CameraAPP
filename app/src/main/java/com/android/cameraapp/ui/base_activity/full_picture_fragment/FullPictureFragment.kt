@@ -17,12 +17,14 @@ import com.android.cameraapp.databinding.FullPictureFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.full_picture_fragment.*
 import javax.inject.Inject
 
 class FullPictureFragment : DaggerFragment() {
     lateinit var binding: FullPictureFragmentBinding
     lateinit var navController: NavController
     @Inject lateinit var viewModelFactory: ViewModelFactory
+    @Inject lateinit var adapter: CommentsListAdapter
     lateinit var viewmodel: FullPictureViewModel
     val args: FullPictureFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,10 +44,11 @@ class FullPictureFragment : DaggerFragment() {
                 photoWithUserItem = args.photosWithUsers as DataFlat.PhotosWithUser
                 photoViewModel = viewmodel
                 lifecycleOwner = viewLifecycleOwner
+                commentsList.adapter = adapter
             }
         viewModelInitWork()
         setUpTransition()
-        viewmodel.getCommentsWithUser(args.photosWithUsers as DataFlat.PhotosWithUser).observe(viewLifecycleOwner, Observer { if(it != null && it.isNotEmpty()) Log.d("FULLFRAGMENT", "RES: ${it?.get(0)?.post_user_uid}") })
+        viewmodel.getCommentsWithUser(args.photosWithUsers as DataFlat.PhotosWithUser).observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
         binding.FOLLOW.setOnClickListener { if(binding.FOLLOW.text == "FOLLOW") viewmodel.followUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!) else  viewmodel.unfollowUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!)}
         return binding.root
     }
