@@ -7,6 +7,9 @@
         <variable
             name="image_url"
             type="String" />
+        <variable
+            name="photoWithUserItem"
+            type="com.android.cameraapp.data.data_models.DataFlat.PhotosWithUser" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,7 +110,7 @@
             android:layout_height="wrap_content"
             android:elevation="4dp"
             android:fontFamily="@font/myriadpro"
-            android:text="@string/username"
+            android:text="@{photoWithUserItem.user.username}"
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/card_mid"
             app:layout_constraintEnd_toEndOf="@+id/circleImageView"
@@ -120,7 +123,7 @@
             android:layout_height="wrap_content"
             android:elevation="4dp"
             android:fontFamily="@font/myriadpro"
-            android:text="His qoutes and other stuff"
+            android:text="@{photoWithUserItem.user.description.get(`shorter_message`)}"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintEnd_toEndOf="@+id/materialTextView"
             app:layout_constraintStart_toStartOf="@+id/materialTextView"
@@ -189,7 +192,7 @@
             android:layout_marginStart="14dp"
             android:elevation="4dp"
             android:fontFamily="@font/myriadpro"
-            android:text="87 likes"
+            android:text="@{photoWithUserItem.likes_number.toString() + ` likes`}"
             android:textColor="@color/colorAccent"
             android:textSize="12sp"
             app:backgroundTint="@color/colorLightGrey"
@@ -236,7 +239,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:elevation="4dp"
-            android:text="“Photography is a way of feeling, of touching, of loving. What you have caught on film is captured forever… It remembers little things, long after you have forgotten everything.”"
+            android:text="@{photoWithUserItem.description}"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@+id/photo_name"
@@ -257,7 +260,7 @@
             android:layout_marginTop="16dp"
             android:elevation="4dp"
             android:fontFamily="@font/myriadpro"
-            android:text="3 Comments"
+            android:text="@{photoWithUserItem.comments_number + ` comments`}"
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/card_large"
             android:textStyle="bold"

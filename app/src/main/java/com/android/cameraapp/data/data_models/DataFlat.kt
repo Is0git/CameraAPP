@@ -1,5 +1,8 @@
 package com.android.cameraapp.data.data_models
 
+import android.os.Parcel
+import android.os.Parcelable
+
 sealed class DataFlat {
     data class Followers(
         var follower_name: String? = "N/A",
@@ -44,5 +47,52 @@ sealed class DataFlat {
         var me_liked: Boolean = false,
         var comments_number: Int? = 0,
         var user: UserCollection.User? = null
-    )
+    ) : Parcelable {
+        constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readByte() != 0.toByte(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readByte() != 0.toByte(),
+            parcel.readValue(Int::class.java.classLoader) as? Int
+        )
+
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+            parcel.writeString(date_taken)
+            parcel.writeString(photo_id)
+            parcel.writeString(storage_url)
+            parcel.writeString(user_uid)
+            parcel.writeString(description)
+            parcel.writeByte(if (isPrivate) 1 else 0)
+            parcel.writeString(width)
+            parcel.writeString(height)
+            parcel.writeValue(time_in_long)
+            parcel.writeString(image_url)
+            parcel.writeValue(likes_number)
+            parcel.writeByte(if (me_liked) 1 else 0)
+            parcel.writeValue(comments_number)
+        }
+
+        override fun describeContents(): Int {
+            return 0
+        }
+
+        companion object CREATOR : Parcelable.Creator<PhotosWithUser> {
+            override fun createFromParcel(parcel: Parcel): PhotosWithUser {
+                return PhotosWithUser(parcel)
+            }
+
+            override fun newArray(size: Int): Array<PhotosWithUser?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
 }

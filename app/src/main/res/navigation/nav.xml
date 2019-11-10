@@ -96,6 +96,9 @@
                     app:argType="string"
                     app:nullable="true" />
 
+                    <argument android:name="photosWithUsers"
+                                app:argType="android.os.Parcelable"/>
+
 
                 </action>
             </fragment>
@@ -123,6 +126,9 @@
                 <argument app:nullable="true"
                     android:name="transition_name"
                     app:argType="string"/>
+
+                <argument android:name="photosWithUsers"
+                    app:argType="android.os.Parcelable"/>
             </fragment>
             <fragment
                 android:id="@+id/searchFragment"

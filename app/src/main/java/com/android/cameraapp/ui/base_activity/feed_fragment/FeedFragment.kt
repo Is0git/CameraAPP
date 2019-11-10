@@ -60,7 +60,8 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         photo.transitionName = getCurrentTime().toString()
         val action = FeedFragmentDirections.actionFeedFragmentToFullPictureFragment(
             item.image_url,
-            photo.transitionName
+            photo.transitionName,
+            item
         )
         val transitionExtras = FragmentNavigatorExtras(photo as ImageView to photo.transitionName)
 

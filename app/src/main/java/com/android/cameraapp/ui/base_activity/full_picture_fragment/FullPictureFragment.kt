@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.android.cameraapp.R
+import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FullPictureFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import dagger.android.support.DaggerFragment
@@ -29,7 +30,10 @@ class FullPictureFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FullPictureFragmentBinding.inflate(inflater, container, false)
-            .also { it.imageUrl = args.photoUrl }
+            .also {
+                it.imageUrl = args.photoUrl
+                it.photoWithUserItem = args.photosWithUsers as DataFlat.PhotosWithUser
+            }
         setUpTransition()
         return binding.root
     }
@@ -41,7 +45,6 @@ class FullPictureFragment : DaggerFragment() {
 
     fun setUpTransition() {
         binding.photo.transitionName = args.transitionName
-        binding.photo.transitionName
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(R.transition.move)
         sharedElementReturnTransition =
