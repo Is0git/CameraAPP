@@ -1,6 +1,7 @@
 package com.android.cameraapp.util.firebase
 
 import com.android.cameraapp.data.data_models.DataFlat
+import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.util.getCurrentDateInFormat
 import com.android.cameraapp.util.getCurrentTime
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +33,7 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
     abstract fun isNotFollowing()
 
     suspend fun followUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
-        if(userUID != auth.uid) {
+        if (userUID != auth.uid) {
             val user = super.getCurrentUser()
             fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
                 .add(
@@ -45,6 +46,11 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
                     )
                 ).await()
             resolve(state)
+            fireStore.collection("$userCollection/${user.uid}/$userFollowingCollection").add(
+                UserCollection.Following(
+                    getCurrentDateInFormat(), "", userUID, "N/A", getCurrentTime()
+                )
+            ).await()
         }
     }
 
@@ -57,6 +63,15 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
             fireStore.document("$userCollection/$userUID/$userFollowersCollection/$followingDocId")
                 .delete().await()
             resolve(state)
+            removeFollowing(userUID, user)
+
         }
+    }
+
+    suspend fun removeFollowing(userUID: String, user: UserCollection.User?) {
+        val docId = fireStore.collection("$userCollection/${user?.uid}/$userFollowingCollection")
+            .whereEqualTo("user_uid", userUID).get().await().documents.first().id
+
+        fireStore.document("$userCollection/${user?.uid}/$userFollowingCollection/$docId").delete()
     }
 }
