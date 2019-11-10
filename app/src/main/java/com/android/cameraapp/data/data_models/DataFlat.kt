@@ -32,6 +32,16 @@ sealed class DataFlat {
         var user: UserCollection.User? = null
     )
 
+    data class CommentsWithUser(val comment_date: String? = "N/A",
+                                val comment_id: String? = "N/A",
+                                val comment_date_long: Long = 0,
+                                val photo_id: String? = "N/A",
+                                val user_uid: String? = "N/A",
+                                val post_user_uid: String? = "N/A",
+                                val description: String? = "N/A",
+                                val likes_number: Int? = 0,
+                                var user: UserCollection.User? = null)
+
     data class PhotosWithUser(
         val date_taken: String? = "N/A",
         val photo_id: String? = "N/A",

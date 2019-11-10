@@ -51,13 +51,12 @@ sealed class UserCollection {
 
     data class Comments(val comment_date: String? = "N/A",
                         val comment_id: String? = "N/A",
+                        val comment_date_long: Long = 0,
                         val photo_id: String? = "N/A",
                         val user_uid: String? = "N/A",
                         val post_user_uid: String? = "N/A",
                         val description: String? = "N/A",
-                        val likes_number: Int? = 0) {
-
-    }
+                        val likes_number: Int? = 0)
     //SubCollection
     data class PictureLikes(val liker_id: String?, val name:String?, val when_liked: String?, val photo_id: String?, val time_in_long: Long?, val first_time_liked: Boolean = false)
 }

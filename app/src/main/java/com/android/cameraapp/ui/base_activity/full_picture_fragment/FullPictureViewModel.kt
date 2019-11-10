@@ -12,6 +12,7 @@ import javax.inject.Inject
 class FullPictureViewModel @Inject constructor(val repo : FullPictureRepository): ViewModel() {
         val list = repo.likes
         val followingState = repo.followingState
+        val commentsWithUser = repo.comments
 
 
         fun getLikes(photosWithUser: DataFlat.PhotosWithUser) : LiveData<List<DataFlat.Likes>> {
@@ -24,4 +25,9 @@ class FullPictureViewModel @Inject constructor(val repo : FullPictureRepository)
         fun followUser(userUID:String) = viewModelScope.launch { repo.followUser(userUID) }
 
         fun unfollowUser(userUID: String) = viewModelScope.launch { repo.unfollowUser(userUID) }
+
+        fun getCommentsWithUser(photo: DataFlat.PhotosWithUser) : LiveData<List<DataFlat.CommentsWithUser>> {
+                viewModelScope.launch { repo.getCommentsWithUser(photo) }
+                return commentsWithUser
+        }
 }
