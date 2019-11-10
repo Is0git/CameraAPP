@@ -25,6 +25,7 @@ import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragme
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingModule
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingViewModelModule
 import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureScope
+import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureViewModelModule
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentModule
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentViewModelModule
@@ -95,7 +96,7 @@ abstract class FragmentsBuilder {
     @FeedFragmentScope
     abstract fun feedFragment() : FeedFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [FullPictureViewModelModule::class])
     @FullPictureScope
     abstract fun fullPictureFragment() : FullPictureFragment
 

@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity.full_picture_fragment
 
+import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureScope
@@ -20,13 +21,15 @@ import javax.inject.Inject
 class FullPictureRepository @Inject constructor(
     val auth: FirebaseAuth,
     val firestore: FirebaseFirestore
+
 ) {
+    val likes = MutableLiveData<List<DataFlat.Likes>>()
     //e.x 4 likes with user
-    suspend fun getLimitedLikes(photo: DataFlat.PhotosWithUser) : List<DataFlat.Likes> {
-        val likes = mutableListOf<DataFlat.Likes>()
+    suspend fun getLimitedLikes(photo: DataFlat.PhotosWithUser)  {
+        val list= mutableListOf<DataFlat.Likes>()
         val documentId = getDocumentId(photo).await().documents.firstOrNull()?.id
-        getLikers(documentId, photo).map { getUsers(it) }.collect { likes.add(it) }
-        return likes
+        getLikers(documentId, photo).map { getUsers(it) }.collect { list.add(it) }
+        likes.value = list
     }
 
     fun getDocumentId(photo: DataFlat.PhotosWithUser) =

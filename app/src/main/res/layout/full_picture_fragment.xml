@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="photoViewModel"
+            type="com.android.cameraapp.ui.base_activity.full_picture_fragment.FullPictureViewModel" />
+        <variable
             name="image_url"
             type="String" />
         <variable
@@ -57,7 +60,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="300dp"
-
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,6 +138,11 @@
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:elevation="4dp"
+            app:resolveLikers="@{photoViewModel.list}"
+            app:resolveLiker2="@{liker2}"
+            app:resolveLiker3="@{liker3}"
+            app:resolveLiker4="@{liker4}"
+            android:visibility="invisible"
             android:src="@drawable/background"
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
@@ -153,6 +160,7 @@
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/liker_1"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="@+id/liker_1" />
@@ -167,6 +175,7 @@
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/liker_2"
             app:layout_constraintStart_toEndOf="@+id/liker_1"
             app:layout_constraintTop_toTopOf="@+id/liker_2" />
@@ -181,6 +190,7 @@
             android:transitionName="user_image"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/liker_3"
             app:layout_constraintStart_toEndOf="@+id/liker_2"
             app:layout_constraintTop_toTopOf="@+id/liker_3" />
