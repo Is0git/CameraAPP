@@ -32,24 +32,31 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
     abstract fun isNotFollowing()
 
     suspend fun followUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
-        val user = super.getCurrentUser()
-        fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
-            .add(
-                DataFlat.Followers(
-                    user?.username!!,
-                    user.uid,
-                    user.photo_url,
-                    getCurrentDateInFormat(),
-                    getCurrentTime()
-                )
-            ).await()
-        resolve(state)
+        if(userUID != auth.uid) {
+            val user = super.getCurrentUser()
+            fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
+                .add(
+                    DataFlat.Followers(
+                        user?.username!!,
+                        user.uid,
+                        user.photo_url,
+                        getCurrentDateInFormat(),
+                        getCurrentTime()
+                    )
+                ).await()
+            resolve(state)
+        }
     }
 
     suspend fun unfollowUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
-        val user = super.getCurrentUser()
-       val followingDocId = fireStore.collection("$userCollection/$userUID/$userFollowersCollection").whereEqualTo("follower_uid", user?.uid).get().await().documents.first().id
-        fireStore.document("$userCollection/$userUID/$userFollowersCollection/$followingDocId").delete().await()
-        resolve(state)
+        if (userUID != auth.uid) {
+            val user = super.getCurrentUser()
+            val followingDocId =
+                fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
+                    .whereEqualTo("follower_uid", user?.uid).get().await().documents.first().id
+            fireStore.document("$userCollection/$userUID/$userFollowersCollection/$followingDocId")
+                .delete().await()
+            resolve(state)
+        }
     }
 }
