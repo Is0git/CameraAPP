@@ -42,6 +42,7 @@ sealed class DataFlat {
         val image_url: String? = "N/A",
         val likes_number: Int? = 0,
         var me_liked: Boolean = false,
+        var comments_number: Int? = 0,
         var user: UserCollection.User? = null
     )
 }

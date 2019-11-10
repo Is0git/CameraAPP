@@ -4,18 +4,16 @@ import android.app.Application
 import android.content.res.ColorStateList
 import android.os.Build
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
+import androidx.work.WorkManager
 import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
 import com.android.cameraapp.util.*
-import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,7 +27,8 @@ data class FeedFragmentRepository @Inject constructor(
     val dataSource: PhotosWithUserDataSource,
     val firebaseAuth: FirebaseAuth,
     val fireStore: FirebaseFirestore,
-    val application: Application
+    val application: Application,
+    val work: WorkManager
 ) {
 
     suspend fun likePhoto(photo: DataFlat.PhotosWithUser, likesCount: TextView, icon : View) = coroutineScope {
@@ -98,9 +97,13 @@ data class FeedFragmentRepository @Inject constructor(
                 //check if there is document with this photo id in order to know if it's first time like
                val result = fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection").whereEqualTo("photo_id", photoDocument.id).get()
                 //user doesn't get notified when he liked himself
-                if(result.await().documents.size == 0 && photoDocument.get("user_uid") != firebaseAuth.uid) launch {
-                    launch { fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection").add(UserCollection.PictureLikes(firebaseAuth.uid, "NAME", getCurrentDateInFormat(), photoDocument.id, getCurrentTime())) }
-            }
+                if( photoDocument.get("user_uid") != firebaseAuth.uid &&  result.await().documents.size == 0) launch { fireStore.collection("$userCollection/${photoDocument.get("user_uid")}/$userLikesCollection").add(UserCollection.PictureLikes(firebaseAuth.uid, "NAME", getCurrentDateInFormat(),
+                    photoDocument.getString("user_uid"), getCurrentTime())) }
+
+
+    }
+
+    fun sendNotification() {
 
     }
     fun decreaseCounterUI(likesCount: TextView, icon : View) {
