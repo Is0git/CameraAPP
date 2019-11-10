@@ -25,7 +25,6 @@ class FullPictureFragment : DaggerFragment() {
     @Inject lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewmodel: FullPictureViewModel
     val args: FullPictureFragmentArgs by navArgs()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,7 +45,7 @@ class FullPictureFragment : DaggerFragment() {
             }
         viewModelInitWork()
         setUpTransition()
-
+        viewmodel.getCommentsWithUser(args.photosWithUsers as DataFlat.PhotosWithUser).observe(viewLifecycleOwner, Observer { if(it != null && it.isNotEmpty()) Log.d("FULLFRAGMENT", "RES: ${it?.get(0)?.post_user_uid}") })
         binding.FOLLOW.setOnClickListener { if(binding.FOLLOW.text == "FOLLOW") viewmodel.followUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!) else  viewmodel.unfollowUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!)}
         return binding.root
     }

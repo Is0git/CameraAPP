@@ -93,7 +93,8 @@ class FullPictureRepository @Inject constructor(
         return item
     }
     suspend fun getComments(dataFlat: DataFlat.PhotosWithUser) : List<DataFlat.CommentsWithUser> {
-        return firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection$/${dataFlat.doc_id}/$photoCommentsCollection")
+
+        return firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${dataFlat.doc_id}/$photoCommentsCollection")
               .orderBy("comment_date_long").get().await().toObjects(DataFlat.CommentsWithUser::class.java)
     }
 
