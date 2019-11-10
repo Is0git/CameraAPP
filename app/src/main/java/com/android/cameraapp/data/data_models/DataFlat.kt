@@ -46,6 +46,7 @@ sealed class DataFlat {
         val likes_number: Int? = 0,
         var me_liked: Boolean = false,
         var comments_number: Int? = 0,
+        var doc_id: String = "N/A",
         var user: UserCollection.User? = null
     ) : Parcelable {
         constructor(parcel: Parcel) : this(

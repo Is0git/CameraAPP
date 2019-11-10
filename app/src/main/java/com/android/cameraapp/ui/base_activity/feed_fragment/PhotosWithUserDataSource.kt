@@ -106,7 +106,7 @@ class PhotosWithUserDataSource @Inject constructor(
     suspend fun checkPhotoIsLiked(dataFlat: DataFlat.PhotosWithUser) =
         withContext(Dispatchers.Main) {
             val documentId = firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/")
-                    .whereEqualTo("photo_id", dataFlat.photo_id).get().await()
+                    .whereEqualTo("photo_id", dataFlat.photo_id).get().await().also { dataFlat.doc_id = it.documents.firstOrNull()?.id!! }
             dataFlat.me_liked  = firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${documentId.documents.firstOrNull()?.id}/$photosLikesCollection")
                     .whereEqualTo("liker_id", auth.uid).get().await().documents.let { it.size > 0 }
 

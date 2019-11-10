@@ -73,4 +73,8 @@ class FullPictureRepository @Inject constructor(
         super.unfollowUser(userUID, IS_NOT_FOLLOWING) {followingState.value = it}
     }
 
+    fun getComments() {
+
+    }
+
 }

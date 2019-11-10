@@ -16,7 +16,10 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
         const val IS_FOLLOWING: Int = 1
         const val IS_NOT_FOLLOWING: Int = 0
     }
+    lateinit var photoDocID:String
+    init {
 
+    }
     open suspend fun checkIfFollow(followerUID: String) {
         fireStore.collection("$userCollection/$followerUID/$userFollowersCollection")
             .whereEqualTo("follower_uid", firebaseAuth.uid).get().await().documents.apply {
@@ -52,6 +55,7 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
                 )
             ).await()
         }
+        resolve(state)
     }
 
     suspend fun unfollowUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
@@ -62,16 +66,19 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
                     .whereEqualTo("follower_uid", user?.uid).get().await().documents.first().id
             fireStore.document("$userCollection/$userUID/$userFollowersCollection/$followingDocId")
                 .delete().await()
-            resolve(state)
             removeFollowing(userUID, user)
+            resolve(state)
 
         }
     }
 
     suspend fun removeFollowing(userUID: String, user: UserCollection.User?) {
         val docId = fireStore.collection("$userCollection/${user?.uid}/$userFollowingCollection")
-            .whereEqualTo("user_uid", userUID).get().await().documents.first().id
-
+            .whereEqualTo("user_uid", userUID).get().await().let { if(it.documents.size > 0) it.documents.first().id else CancellationException("NULL")}
         fireStore.document("$userCollection/${user?.uid}/$userFollowingCollection/$docId").delete()
+    }
+
+    suspend fun getCurrentDocID() {
+        fireStore.collection("$userCollection/${auth.uid}")
     }
 }
