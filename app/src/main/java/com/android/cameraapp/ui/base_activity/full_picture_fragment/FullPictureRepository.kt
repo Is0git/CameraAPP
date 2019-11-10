@@ -20,10 +20,10 @@ import javax.inject.Inject
 
 @FullPictureScope
 class FullPictureRepository @Inject constructor(
-    val auth: FirebaseAuth,
+    private val authFirebase: FirebaseAuth,
     val firestore: FirebaseFirestore
 
-) : FollowingResolver(auth, firestore){
+) : FollowingResolver(authFirebase, firestore){
     val likes = MutableLiveData<List<DataFlat.Likes>>()
     val followingState = MutableLiveData<Int>()
     //e.x 4 likes with user
@@ -63,6 +63,14 @@ class FullPictureRepository @Inject constructor(
 
     override suspend fun checkIfFollow(followerUID: String) {
         super.checkIfFollow(followerUID)
+    }
+
+    suspend fun followUser(userUID: String)  {
+        super.followUser(userUID, IS_FOLLOWING) {followingState.value = it}
+    }
+
+    suspend fun unfollowUser(userUID: String) {
+        super.unfollowUser(userUID, IS_NOT_FOLLOWING) {followingState.value = it}
     }
 
 }

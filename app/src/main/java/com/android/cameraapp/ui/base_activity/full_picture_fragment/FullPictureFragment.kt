@@ -46,6 +46,8 @@ class FullPictureFragment : DaggerFragment() {
             }
         viewModelInitWork()
         setUpTransition()
+
+        binding.FOLLOW.setOnClickListener { if(binding.FOLLOW.text == "FOLLOW") viewmodel.followUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!) else  viewmodel.unfollowUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!)}
         return binding.root
     }
 
@@ -66,6 +68,7 @@ class FullPictureFragment : DaggerFragment() {
         val data = args.photosWithUsers as DataFlat.PhotosWithUser
         viewmodel.checkIfFollow(data.user_uid!!)
         viewmodel.getLikes(data)
+
     }
     override fun onStart() {
         super.onStart()

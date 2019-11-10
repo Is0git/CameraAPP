@@ -20,4 +20,8 @@ class FullPictureViewModel @Inject constructor(val repo : FullPictureRepository)
         }
 
         fun checkIfFollow(userUID:String) = viewModelScope.launch { repo.checkIfFollow(userUID) }
+
+        fun followUser(userUID:String) = viewModelScope.launch { repo.followUser(userUID) }
+
+        fun unfollowUser(userUID: String) = viewModelScope.launch { repo.unfollowUser(userUID) }
 }
