@@ -37,7 +37,7 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
 
     suspend fun followUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
         if (userUID != auth.uid) {
-            val user = super.getCurrentUser()
+            val user = getCurrentUser()
             fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
                 .add(
                     DataFlat.Followers(
@@ -60,7 +60,7 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
 
     suspend fun unfollowUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
         if (userUID != auth.uid) {
-            val user = super.getCurrentUser()
+            val user = getCurrentUser()
             val followingDocId =
                 fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
                     .whereEqualTo("follower_uid", user?.uid).get().await().documents.first().id
@@ -77,5 +77,6 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
             .whereEqualTo("user_uid", userUID).get().await().let { if(it.documents.size > 0) it.documents.first().id else CancellationException("NULL")}
         fireStore.document("$userCollection/${user?.uid}/$userFollowingCollection/$docId").delete()
     }
+
 
 }

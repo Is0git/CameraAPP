@@ -162,13 +162,14 @@ class BaseRepository @Inject constructor(
         user = auth.currentUser
         val date = async { getCurrentDateInFormat() }
         val currentTime = async { getCurrentTime() }
+        val usernameArray = mutableListOf<String>()
+       username?.forEach { usernameArray.add(it.toString()) }
         firestore.document("$userCollection/${user?.uid}").set(
             UserCollection.User(
                 mapOf(
                     "large_message" to "Your description",
                     "shorter_message" to "Add something inspirational"
-                ), user?.email, true, date.await(), currentTime.await(), username, null, user?.uid
-            )
+                ), user?.email, true, date.await(), currentTime.await(), username, null, user?.uid, usernameArray)
         )
 
 

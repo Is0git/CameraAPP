@@ -55,6 +55,10 @@
             android:layout_width="0dp"
             android:layout_height="400dp"
             android:layout_marginTop="24dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            android:orientation="vertical"
+            tools:listitem="@layout/search_user_list"
             app:layout_constraintEnd_toEndOf="@id/guideline22"
             app:layout_constraintStart_toStartOf="@id/guideline21"
             app:layout_constraintTop_toBottomOf="@id/search_view" />

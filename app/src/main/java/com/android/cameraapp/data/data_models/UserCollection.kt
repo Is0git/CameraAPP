@@ -1,5 +1,7 @@
 package com.android.cameraapp.data.data_models
 
+import com.google.common.primitives.Chars
+
 sealed class UserCollection {
     //Collection
     data class User constructor(
@@ -10,9 +12,12 @@ sealed class UserCollection {
         val last_active_int: Long? = 0,
         val username: String? = "unknown",
         val photo_url: String? = "null",
-        val uid: String? = "no id"
+        val uid: String? = "no id",
+        val username_array: List<String>? = null) {
 
-    )
+    }
+
+
 
     //SubCollection
     data class Followers(

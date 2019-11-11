@@ -50,6 +50,7 @@ class FullPictureFragment : DaggerFragment() {
         setUpTransition()
         viewmodel.getCommentsWithUser(args.photosWithUsers as DataFlat.PhotosWithUser).observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
         binding.FOLLOW.setOnClickListener { if(binding.FOLLOW.text == "FOLLOW") viewmodel.followUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!) else  viewmodel.unfollowUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!)}
+        binding.commentLayout.setEndIconOnClickListener { onEndIconClick()}
         return binding.root
     }
 
@@ -71,6 +72,11 @@ class FullPictureFragment : DaggerFragment() {
         viewmodel.checkIfFollow(data.user_uid!!)
         viewmodel.getLikes(data)
 
+    }
+
+    fun onEndIconClick() {
+        val commentText = binding.commentEditText.text.toString()
+        if(commentText.isNotBlank()) viewmodel.addComment(args.photosWithUsers as DataFlat.PhotosWithUser, commentText)
     }
     override fun onStart() {
         super.onStart()

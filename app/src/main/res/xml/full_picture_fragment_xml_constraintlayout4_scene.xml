@@ -32,7 +32,7 @@
            <KeyAttribute
                motion:motionTarget="@+id/comments_card"
                motion:framePosition="100"
-               android:elevation="4dp" />
+               android:elevation="6dp" />
            <KeyAttribute
                motion:motionTarget="@+id/comments_card"
                motion:framePosition="100"
@@ -101,7 +101,7 @@
            <KeyAttribute
                motion:motionTarget="@+id/comments_card"
                motion:framePosition="48"
-               android:elevation="9dp" />
+               android:elevation="15dp" />
            <KeyAttribute
                motion:motionTarget="@+id/comments_number"
                motion:framePosition="0"
@@ -117,7 +117,8 @@
        </KeyFrameSet>
         <OnSwipe motion:touchAnchorSide="top"
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@id/comments_card" />
+            motion:touchAnchorId="@id/comments_list"
+            motion:maxAcceleration="10" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -230,45 +231,17 @@
             motion:layout_constraintTop_toBottomOf="@+id/photo_name"
             motion:layout_constraintStart_toStartOf="@+id/photo_name"
             android:layout_marginTop="8dp" />
+
         <Constraint
-            android:id="@+id/liker_1"
-            android:elevation="8dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:visibility="invisible"
-            motion:layout_constraintTop_toBottomOf="@+id/materialTextView4"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
-            android:layout_marginTop="20dp" />
-        <Constraint
-            android:id="@+id/liker_2"
-            android:elevation="8dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_1"
-            android:visibility="gone"
-            android:layout_marginStart="25dp"
-            motion:layout_constraintTop_toTopOf="@+id/liker_1"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline" />
-        <Constraint
-            android:id="@+id/liker_3"
-            android:elevation="8dp"
-            motion:layout_constraintStart_toEndOf="@+id/liker_1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_2"
-            android:visibility="gone"
-            android:layout_marginStart="18dp"
-            motion:layout_constraintTop_toTopOf="@+id/liker_2" />
-        <Constraint
-            android:id="@+id/liker_4"
-            android:elevation="8dp"
-            motion:layout_constraintStart_toEndOf="@+id/liker_2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_3"
-            android:visibility="gone"
-            android:layout_marginStart="15dp"
-            motion:layout_constraintTop_toTopOf="@+id/liker_3" />
+            android:id="@+id/comments_list"
+            android:elevation="20dp"
+            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toTopOf="@id/comment_layout"
+            motion:layout_constraintTop_toBottomOf="@id/comments_number"
+            motion:layout_constraintStart_toStartOf="@id/left_guideline"
+            android:layout_marginBottom="16dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -301,10 +274,11 @@
             motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/comments_number"
             motion:layout_constraintStart_toStartOf="@id/left_guideline"
-            motion:layout_constraintTop_toTopOf="@id/guideline15" />
+            motion:layout_constraintTop_toTopOf="@id/guideline15"
+            motion:layout_constraintBottom_toTopOf="@id/comment_layout"
+            android:layout_marginBottom="16dp" />
         <Constraint
             android:id="@+id/base_card"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -383,45 +357,7 @@
             motion:layout_constraintTop_toBottomOf="@+id/photo_name"
             motion:layout_constraintStart_toStartOf="@+id/photo_name"
             android:layout_marginTop="8dp" />
-        <Constraint
-            android:id="@+id/liker_1"
-            android:elevation="8dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:visibility="invisible"
-            motion:layout_constraintTop_toBottomOf="@+id/materialTextView4"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
-            android:layout_marginTop="20dp" />
-        <Constraint
-            android:id="@+id/liker_2"
-            android:elevation="8dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_1"
-            android:visibility="gone"
-            android:layout_marginStart="25dp"
-            motion:layout_constraintTop_toTopOf="@+id/liker_1"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline" />
-        <Constraint
-            android:id="@+id/liker_3"
-            android:elevation="8dp"
-            motion:layout_constraintStart_toEndOf="@+id/liker_1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_2"
-            android:visibility="gone"
-            android:layout_marginStart="18dp"
-            motion:layout_constraintTop_toTopOf="@+id/liker_2" />
-        <Constraint
-            android:id="@+id/liker_4"
-            android:elevation="8dp"
-            motion:layout_constraintStart_toEndOf="@+id/liker_2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_3"
-            android:visibility="gone"
-            android:layout_marginStart="15dp"
-            motion:layout_constraintTop_toTopOf="@+id/liker_3" />
+
 
     </ConstraintSet>
 

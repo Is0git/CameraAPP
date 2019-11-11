@@ -30,4 +30,8 @@ class FullPictureViewModel @Inject constructor(val repo : FullPictureRepository)
                 viewModelScope.launch { repo.getCommentsWithUser(photo) }
                 return commentsWithUser
         }
+
+        fun addComment(dataFlat: DataFlat.PhotosWithUser, comment: String)  = viewModelScope.launch {
+                repo.addComment(dataFlat, comment)
+        }
 }

@@ -29,6 +29,8 @@ import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureV
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentModule
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentViewModelModule
+import com.android.cameraapp.di.base_activity.search_fragment.SearchFragmentScope
+import com.android.cameraapp.di.base_activity.search_fragment.SearchViewModelModule
 import com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
@@ -38,6 +40,7 @@ import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragment
 import com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment
 import com.android.cameraapp.ui.base_activity.photos_fragment.PhotosFragment
 import com.android.cameraapp.ui.base_activity.registration_fragment.RegistrationFragment
+import com.android.cameraapp.ui.base_activity.search_fragment.SearchFragment
 import com.android.cameraapp.ui.base_activity.start_fragment.StartFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -99,5 +102,9 @@ abstract class FragmentsBuilder {
     @ContributesAndroidInjector(modules = [FullPictureViewModelModule::class])
     @FullPictureScope
     abstract fun fullPictureFragment() : FullPictureFragment
+
+    @ContributesAndroidInjector(modules = [SearchViewModelModule::class])
+    @SearchFragmentScope
+    abstract fun searchFragment() : SearchFragment
 
 }
