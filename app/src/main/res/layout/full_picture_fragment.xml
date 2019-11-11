@@ -281,13 +281,34 @@
             android:elevation="20dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/comment_layout"
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
             app:layout_constraintTop_toBottomOf="@id/comments_number"
             tools:itemCount="10"
             tools:listitem="@layout/full_photo_list" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:id="@+id/comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:clickable="true"
+            android:focusable="true"
+            app:endIconDrawable="@drawable/ok_icon"
+            app:endIconTint="@color/colorAccent2"
+            app:endIconMode="custom"
+            app:boxBackgroundColor="@color/colorSurface"
+            app:layout_constraintTop_toBottomOf="parent"
+            android:hint="@string/comment">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/comment_edit_text"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

@@ -106,6 +106,14 @@
                motion:motionTarget="@+id/comments_number"
                motion:framePosition="0"
                android:elevation="10dp" />
+           <KeyAttribute
+               motion:motionTarget="@+id/comment_layout"
+               motion:framePosition="80"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/comment_layout"
+               motion:framePosition="100"
+               android:alpha="1" />
        </KeyFrameSet>
         <OnSwipe motion:touchAnchorSide="top"
             motion:dragDirection="dragUp"
@@ -129,6 +137,13 @@
                 motion:customColorValue="@color/colorOnSurfaceFull" />
         </Constraint>
 
+        <Constraint
+            android:id="@+id/comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            motion:layout_constraintTop_toBottomOf="parent"
+            android:hint="@string/comment"/>
         <Constraint
             android:id="@+id/base_card"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -273,7 +288,13 @@
                 motion:customColorValue="@color/colorSurface" />
         </Constraint>
 
-
+        <Constraint
+            android:id="@+id/comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:hint="@string/comment"
+            android:elevation="10dp" />
         <Constraint
             android:id="@+id/comments_list"
             android:elevation="20dp"

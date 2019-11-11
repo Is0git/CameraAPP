@@ -78,7 +78,4 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
         fireStore.document("$userCollection/${user?.uid}/$userFollowingCollection/$docId").delete()
     }
 
-    suspend fun getCurrentDocID() {
-        fireStore.collection("$userCollection/${auth.uid}")
-    }
 }
