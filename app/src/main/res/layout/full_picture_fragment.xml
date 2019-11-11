@@ -15,9 +15,11 @@
             type="com.android.cameraapp.data.data_models.DataFlat.PhotosWithUser" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutDescription="@xml/full_picture_fragment_xml_constraintlayout4_scene"
         tools:background="@color/colorSurface">
 
         <View
@@ -26,18 +28,9 @@
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/colorOnSurfaceFull"
-            android:outlineProvider="none"
             android:elevation="5dp"
+            android:outlineProvider="none"
             app:layout_constraintTop_toBottomOf="@+id/FOLLOW" />
-
-        <View
-            android:id="@+id/info_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorOnSurfaceFull"
-            android:elevation="4dp"
-            app:layout_constraintTop_toBottomOf="@id/photo_description" />
 
 
         <ImageView
@@ -97,21 +90,21 @@
             android:id="@+id/circleImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:elevation="5dp"
+            android:elevation="7dp"
             android:src="@drawable/background"
             android:transitionName="user_image"
-            app:loadImageFromUrl="@{photoWithUserItem.user.photo_url}"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="3dp"
             app:layout_constraintEnd_toStartOf="@+id/right_guideline"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toTopOf="@+id/image_base" />
-+
+            app:layout_constraintTop_toTopOf="@+id/image_base"
+            app:loadImageFromUrl="@{photoWithUserItem.user.photo_url}" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:fontFamily="@font/myriadpro"
             android:text="@{photoWithUserItem.user.username}"
             android:textColor="@color/colorTextDark"
@@ -124,7 +117,7 @@
             android:id="@+id/materialTextView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:fontFamily="@font/myriadpro"
             android:text="@{photoWithUserItem.user.description.get(`shorter_message`)}"
             android:textSize="@dimen/regular_text_size"
@@ -137,30 +130,30 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
-            android:elevation="4dp"
-            app:resolveLikers="@{photoViewModel.list}"
-            app:resolveLiker2="@{liker2}"
-            app:resolveLiker3="@{liker3}"
-            app:resolveLiker4="@{liker4}"
-            android:visibility="invisible"
+            android:elevation="8dp"
             android:src="@drawable/background"
             android:transitionName="user_image"
+            android:visibility="invisible"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView4"
+            app:resolveLiker2="@{liker2}"
+            app:resolveLiker3="@{liker3}"
+            app:resolveLiker4="@{liker4}"
+            app:resolveLikers="@{photoViewModel.list}" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/liker_2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="25dp"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:src="@drawable/background"
             android:transitionName="user_image"
+            android:visibility="gone"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/liker_1"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"
             app:layout_constraintTop_toTopOf="@+id/liker_1" />
@@ -170,12 +163,12 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="18dp"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:src="@drawable/background"
             android:transitionName="user_image"
+            android:visibility="gone"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/liker_2"
             app:layout_constraintStart_toEndOf="@+id/liker_1"
             app:layout_constraintTop_toTopOf="@+id/liker_2" />
@@ -185,12 +178,12 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="15dp"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:src="@drawable/background"
             android:transitionName="user_image"
+            android:visibility="gone"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="2dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/liker_3"
             app:layout_constraintStart_toEndOf="@+id/liker_2"
             app:layout_constraintTop_toTopOf="@+id/liker_3" />
@@ -201,7 +194,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="14dp"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:fontFamily="@font/myriadpro"
             android:text="@{photoWithUserItem.likes_number.toString() + ` likes`}"
             android:textColor="@color/colorAccent"
@@ -218,10 +211,10 @@
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="5dp"
+            android:backgroundTint="@{photoViewModel.followingState == 0 ? @color/colorAccent2 : @color/colorSurface}"
+            android:elevation="8dp"
             android:text="@{photoViewModel.followingState == 0 ? `FOLLOW` : `UNFOLLOW`}"
             android:textColor="@{photoViewModel.followingState == 0 ? @color/colorSurface : @color/colorAccent2 }"
-            android:backgroundTint="@{photoViewModel.followingState == 0 ? @color/colorAccent2 : @color/colorSurface}"
             app:layout_constraintBottom_toBottomOf="@+id/likes_button"
             app:layout_constraintEnd_toStartOf="@+id/right_guideline"
             app:layout_constraintHorizontal_bias="1.0"
@@ -234,7 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:fontFamily="@font/myriadpro"
             android:text="Best photo ever"
             android:textColor="@color/colorTextDark"
@@ -249,7 +242,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:text="@{photoWithUserItem.description}"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
@@ -257,21 +250,24 @@
             app:layout_constraintTop_toBottomOf="@+id/photo_name" />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/comments_card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:minHeight="200dp"
             android:backgroundTint="@color/colorOnSurfaceFull"
             app:cardCornerRadius="0dp"
+            app:cardElevation="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/base_card" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/comments_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/comments_number"
             android:layout_marginTop="16dp"
-            android:elevation="4dp"
+            android:elevation="10dp"
             android:fontFamily="@font/myriadpro"
-            android:text="@{photoWithUserItem.comments_number + ` comments`}"
+            android:text="@{photoWithUserItem.comments_number + ` comments`, default = `comments`}"
             android:textColor="@color/colorTextDark"
             android:textSize="@dimen/card_large"
             android:textStyle="bold"
@@ -279,19 +275,19 @@
             app:layout_constraintTop_toBottomOf="@+id/base_card" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comments_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:elevation="4dp"
-            android:id="@+id/comments_list"
+            android:elevation="20dp"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@id/left_guideline"
-            app:layout_constraintEnd_toEndOf="@id/right_guideline"
-            app:layout_constraintTop_toBottomOf="@id/comments_number"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/right_guideline"
+            app:layout_constraintStart_toStartOf="@id/left_guideline"
+            app:layout_constraintTop_toBottomOf="@id/comments_number"
             tools:itemCount="10"
-            tools:listitem="@layout/full_photo_list"/>
+            tools:listitem="@layout/full_photo_list" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
