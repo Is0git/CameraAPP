@@ -32,7 +32,7 @@ class SearchRepository @Inject constructor(
         searchJob = coroutineScope {
             launch {
                 delay(1000)
-                fireStore.collection("$userCollection/").whereArrayContains("username_array", searchKey).get()
+                fireStore.collection("$userCollection/").orderBy("username").startAt(searchKey).endAt("$searchKey+\uf8ff").get()
                     .await()
                     .let { querySnapshot ->
                         if (querySnapshot.documents.isNotEmpty()) querySnapshot.toObjects(
