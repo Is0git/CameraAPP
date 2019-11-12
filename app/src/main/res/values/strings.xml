@@ -52,5 +52,7 @@
     <string name="settings">SETTINGS</string>
     <string name="comment">Comment</string>
     <string name="feed">#FEED</string>
+    <string name="dark_mode_preference">dark_mode_preference</string>
+    <string name="dark_mode_theme">Dark mode theme</string>
 
 </resources>

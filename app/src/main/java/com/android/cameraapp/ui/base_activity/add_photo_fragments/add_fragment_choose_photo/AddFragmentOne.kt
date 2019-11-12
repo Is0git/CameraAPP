@@ -26,11 +26,7 @@ class AddFragmentOne : DaggerFragment() {
     lateinit var navController: NavController
     var permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
     var imageRequestCode: Int = 1
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if ((activity as BaseActivity).binding.toolbar.visibility == View.VISIBLE) (activity as BaseActivity).binding.toolbar.visibility =
-            View.INVISIBLE
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,7 +87,6 @@ class AddFragmentOne : DaggerFragment() {
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {
-            TopBartoInvisible()
             BottomBarToInvisible()
         }
     }

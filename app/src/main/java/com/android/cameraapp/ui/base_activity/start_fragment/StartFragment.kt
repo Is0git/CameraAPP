@@ -77,7 +77,6 @@ class StartFragment : DaggerFragment() {
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {
-            TopBartoInvisible()
             BottomBarToInvisible()
         }
 

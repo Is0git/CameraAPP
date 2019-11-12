@@ -91,7 +91,6 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {
-            TopBartoInvisible()
             BottomBarVisible()
         }
 

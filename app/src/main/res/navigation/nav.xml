@@ -115,6 +115,9 @@
                 <action
                     android:id="@+id/action_homeFragment_to_searchFragment"
                     app:destination="@id/searchFragment" />
+                <action
+                    android:id="@+id/action_homeFragment_to_settingsFragment"
+                    app:destination="@id/settingsFragment" />
             </fragment>
             <fragment
                 android:id="@+id/fullPictureFragment"
@@ -134,6 +137,10 @@
                 android:id="@+id/searchFragment"
                 android:name="com.android.cameraapp.ui.base_activity.search_fragment.SearchFragment"
                 android:label="SearchFragment" />
+            <fragment
+                android:id="@+id/settingsFragment"
+                android:name="com.android.cameraapp.ui.base_activity.settings_fragment.SettingsFragment"
+                android:label="SettingsFragment" />
         </navigation>
     </navigation>
     <navigation

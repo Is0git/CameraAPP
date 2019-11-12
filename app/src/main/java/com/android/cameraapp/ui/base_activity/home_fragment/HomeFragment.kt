@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.HomeFragmentBinding
@@ -22,9 +25,9 @@ class HomeFragment : DaggerFragment() {
     lateinit var factory: ViewModelFactory
     lateinit var binding: HomeFragmentBinding
     lateinit var viewPagerAdapter: HomeViewPagerAdapter
+    lateinit var controller: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as BaseActivity).binding.toolbar.visibility = View.VISIBLE
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(R.transition.move)
     }
@@ -42,7 +45,7 @@ class HomeFragment : DaggerFragment() {
             parentViewModel = parentFragmentViewModel
 
         }
-
+        binding.settingsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_settingsFragment) }
         setViewPagerWithToolbar()
         return binding.root
     }
@@ -60,11 +63,13 @@ class HomeFragment : DaggerFragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        controller = Navigation.findNavController(view)
+    }
     //toolbar set visible after adding photo fragments
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {
-            TopBartoVisible()
             BottomBarVisible()
         }
 

@@ -20,7 +20,6 @@ import com.android.cameraapp.databinding.ActivityMainBinding
 import com.android.cameraapp.util.UserAuthStates
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,7 +41,7 @@ class BaseActivity : DaggerAppCompatActivity() {
 
 
         navController = findNavController(R.id.main_fragment_container)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.bar)
         AppBarConfiguration(navController.graph, null) { false }
         setNavigatioOptions()
         binding.apply {
@@ -71,14 +70,11 @@ class BaseActivity : DaggerAppCompatActivity() {
                 }
                 false
             }
-        }.toolbar.apply {
-            setupWithNavController(navController)
-            setTitleTextAppearance(applicationContext, R.style.toolbarStyle)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        menuInflater.inflate(R.menu.bottom_app_bar_menu, menu)
         return true
     }
 
@@ -113,11 +109,6 @@ class BaseActivity : DaggerAppCompatActivity() {
         Log.d("TAGS", "DESTROY")
     }
 
-    fun TopBartoInvisible() {
-        if (binding.toolbar.visibility == View.VISIBLE) binding.toolbar.visibility = View.INVISIBLE
-
-
-    }
 
     fun BottomBarToInvisible() {
         if (binding.bar.isVisible) binding.apply {
@@ -127,13 +118,6 @@ class BaseActivity : DaggerAppCompatActivity() {
         }
     }
 
-
-    fun TopBartoVisible() {
-        if (binding.toolbar.visibility == View.INVISIBLE) binding.toolbar.visibility =
-            View.VISIBLE
-
-
-    }
 
     fun BottomBarVisible() {
         if (binding.bar.visibility == View.INVISIBLE) {
