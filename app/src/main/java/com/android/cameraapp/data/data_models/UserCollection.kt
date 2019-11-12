@@ -51,7 +51,9 @@ sealed class UserCollection {
         val height: String? = "N/A",
         val likes_number: Int? = 0,
         val time_in_long : Long? = 0,
-        val image_url: String? = "N/A"
+        val image_url: String? = "N/A",
+        val mid_image_url: String = "N/A",
+        val low_image_url: String = "N/A"
     )
 
     data class Comments(val comment_date: String? = "N/A",

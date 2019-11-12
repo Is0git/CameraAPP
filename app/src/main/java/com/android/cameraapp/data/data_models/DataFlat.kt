@@ -56,7 +56,9 @@ sealed class DataFlat {
         val likes_number: Int? = 0,
         var me_liked: Boolean = false,
         var comments_number: Int? = 0,
-        var doc_id: String = "N/A",
+        var doc_id: String? = "N/A",
+        val mid_image_url: String? = "N/A",
+        val low_image_url: String? = "N/A",
         var user: UserCollection.User? = null
     ) : Parcelable {
         constructor(parcel: Parcel) : this(
@@ -72,9 +74,11 @@ sealed class DataFlat {
             parcel.readString(),
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readByte() != 0.toByte(),
-            parcel.readValue(Int::class.java.classLoader) as? Int
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()
         )
-
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             parcel.writeString(date_taken)
@@ -90,6 +94,9 @@ sealed class DataFlat {
             parcel.writeValue(likes_number)
             parcel.writeByte(if (me_liked) 1 else 0)
             parcel.writeValue(comments_number)
+            parcel.writeString(doc_id)
+            parcel.writeString(mid_image_url)
+            parcel.writeString(low_image_url)
         }
 
         override fun describeContents(): Int {
