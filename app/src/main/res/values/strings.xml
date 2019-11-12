@@ -54,5 +54,6 @@
     <string name="feed">#FEED</string>
     <string name="dark_mode_preference">dark_mode_preference</string>
     <string name="dark_mode_theme">Dark mode theme</string>
+    <string name="google_maps_key">AIzaSyAnmjhXYfpS_XUhdDkTzz3i3YxFEljrsHA</string>
 
 </resources>

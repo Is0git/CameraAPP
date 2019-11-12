@@ -136,4 +136,6 @@ dependencies {
 
     implementation "androidx.preference:preference-ktx:$preference_version"
 
+    implementation "com.google.android.gms:play-services-location:17.0.0"
+    implementation "com.google.android.gms:play-services-places:17.0.0"
 }

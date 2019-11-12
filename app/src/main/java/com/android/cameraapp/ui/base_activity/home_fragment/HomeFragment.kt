@@ -45,7 +45,10 @@ class HomeFragment : DaggerFragment() {
             parentViewModel = parentFragmentViewModel
 
         }
-        binding.settingsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_settingsFragment) }
+        binding.apply {
+            settingsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_settingsFragment) }
+            mapsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_mapFragment)  }
+        }
         setViewPagerWithToolbar()
         return binding.root
     }

@@ -118,6 +118,9 @@
                 <action
                     android:id="@+id/action_homeFragment_to_settingsFragment"
                     app:destination="@id/settingsFragment" />
+                <action
+                    android:id="@+id/action_homeFragment_to_mapFragment"
+                    app:destination="@id/mapFragment" />
             </fragment>
             <fragment
                 android:id="@+id/fullPictureFragment"
@@ -141,6 +144,10 @@
                 android:id="@+id/settingsFragment"
                 android:name="com.android.cameraapp.ui.base_activity.settings_fragment.SettingsFragment"
                 android:label="SettingsFragment" />
+            <fragment
+                android:id="@+id/mapFragment"
+                android:name="com.android.cameraapp.ui.base_activity.map_fragment.MapFragment"
+                android:label="MapFragment" />
         </navigation>
     </navigation>
     <navigation
