@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="startViewModel"
             type="com.android.cameraapp.ui.base_activity.start_fragment.StartFragmentViewModel" />
@@ -123,8 +124,27 @@
 
         <TextureView
             android:id="@+id/camera_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_width="640dp"
+            android:layout_height="640dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/AppButton"
+            android:fontFamily="@font/myriadpro"
+            android:gravity="top"
+            android:outlineAmbientShadowColor="@color/colorHomeDark"
+            android:outlineSpotShadowColor="@color/colorHomeDark"
+            android:text="CAMERA"
+            android:id="@+id/take_photo_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"/>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

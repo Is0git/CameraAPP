@@ -17,7 +17,7 @@
             android:id="@+id/AuthorName"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            app:loadImageFromUrl="@{photoData.image_url}"
+            app:loadImageFromUrl="@{photoData.low_image_url}"
             android:adjustViewBounds="true"
             android:background="@drawable/image_placeholder"
             tools:ignore="ContentDescription" />

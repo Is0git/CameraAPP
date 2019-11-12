@@ -98,7 +98,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorSurface"
                 android:transitionName="photo"
-                app:loadImageFromUrl="@{item.image_url}" />
+                app:loadImageFromUrl="@{item.mid_image_url}" />
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView
