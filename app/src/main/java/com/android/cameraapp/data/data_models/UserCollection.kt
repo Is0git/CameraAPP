@@ -13,7 +13,7 @@ sealed class UserCollection {
         val username: String? = "unknown",
         val photo_url: String? = "null",
         val uid: String? = "no id",
-        val username_array: List<String>? = null) {
+        val username_array: List<String>? = listOf()) {
 
     }
 

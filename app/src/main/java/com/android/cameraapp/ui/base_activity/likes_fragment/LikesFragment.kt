@@ -26,7 +26,6 @@ class LikesFragment : DaggerFragment() {
         viewmodel = ViewModelProviders.of(this, viewmodelFactory).get(LikesFragmentViewModel::class.java)
         binding = LikesFragmentBinding.inflate(inflater, container, false)
         binding.likesRecyclerView.adapter = adapter
-        viewmodel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
         return binding.root
 
     }

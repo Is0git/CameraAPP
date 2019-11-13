@@ -17,8 +17,6 @@ class FollowersViewModel @Inject constructor(
 
     init {
         repo.getData()
-
-        viewModelScope.launch { repo.getAllFollowers() }
     }
     override fun onCleared() {
         super.onCleared()

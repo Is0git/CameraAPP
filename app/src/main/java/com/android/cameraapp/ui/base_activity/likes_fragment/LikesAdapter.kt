@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.LikesRecyclerviewBinding
@@ -11,7 +12,7 @@ import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import javax.inject.Inject
 
 @LikesFragmentScope
-class LikesAdapter @Inject constructor(): PagedListAdapter<DataFlat.Likes, LikesAdapter.MyViewHolder>(callback) {
+class LikesAdapter @Inject constructor(): ListAdapter<DataFlat.Likes, LikesAdapter.MyViewHolder>(callback) {
      class MyViewHolder(val binding: LikesRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }

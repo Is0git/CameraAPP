@@ -10,7 +10,7 @@ sealed class DataFlat {
         var followers_photo_url: String? = "N/A",
         var when_followed: String? = "N/A",
         var following_time_long: Long? = 0,
-        var user: UserCollection.User? = null
+        var user: UserCollection.User? = UserCollection.User()
     )
 
     data class Following(
