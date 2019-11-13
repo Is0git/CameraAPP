@@ -21,4 +21,9 @@ class PhotosFragmentViewModel @Inject constructor(val repo: PhotosFragmentReposi
 
         viewModelScope.launch { repo.getAllPhotos() }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        repo.clearListener()
+    }
 }

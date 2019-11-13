@@ -26,7 +26,7 @@ class FollowersFragment : DaggerFragment() {
         binding = FollowersFragmentBinding.inflate(inflater, container, false)
         binding.followersRecyclerView.adapter = adapter
         viewmodel = ViewModelProviders.of(this, factory).get(FollowersViewModel::class.java)
-        viewmodel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        viewmodel.mediatorFollowers.observe(viewLifecycleOwner, Observer { adapter.addItems(it) })
         return binding.root
     }
 }

@@ -25,7 +25,7 @@ class PhotosAdapter @Inject constructor() :
             items.add(0, item[0])
             notifyItemInserted(0)
         } else if (item.size > 1) {
-            items.addAll(item)
+            items = item.toMutableList()
             notifyDataSetChanged()
         }
 
@@ -38,7 +38,7 @@ class PhotosAdapter @Inject constructor() :
 
     class MyViewHolder(val binding: PhotosListLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun getItemCount(): Int = items?.size ?: 0
+    override fun getItemCount(): Int = items.size
 
 }
 
