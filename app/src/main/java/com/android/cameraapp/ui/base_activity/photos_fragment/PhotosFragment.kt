@@ -30,9 +30,9 @@ class PhotosFragment : DaggerFragment() {
         Log.d(TAG, "LOAD FRAGMENT: ${viewModel}")
         binding = PhotosFragmentBinding.inflate(inflater, container, false)
         binding.photosRecyclerView.adapter = adapter
-        viewModel.photoPageList.observe(viewLifecycleOwner, Observer {
+        viewModel.mediatorLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("TRIGGER", "SIZE : ${it.size}")
-            adapter.submitList(it) })
+            adapter.addItems(it)})
         return binding.root
     }
 

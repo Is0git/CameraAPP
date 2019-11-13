@@ -57,6 +57,8 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         item: DataFlat.PhotosWithUser,
         motionLayout: MotionLayout
     ) {
+        motionLayout.isClickable = false
+        binding.feedCosntraintLayout.isClickable = false
         photo.transitionName = getCurrentTime().toString()
         val action = FeedFragmentDirections.actionFeedFragmentToFullPictureFragment(
             item.image_url,

@@ -66,7 +66,7 @@ class PhotosWithUserDataSource @Inject constructor(
                     }.let { it.toObjects(DataFlat.PhotosWithUser::class.java) }
             }
             is LoadRangeParams -> {
-                firestore.collection("photos")
+                firestore.collectionGroup("photos")
                     .orderBy("time_in_long", Query.Direction.DESCENDING)
                     .whereEqualTo("private", false)
                     .startAfter(document!!)
@@ -74,7 +74,7 @@ class PhotosWithUserDataSource @Inject constructor(
                     .also {
                         if (it?.documents != null && it.documents.size > 0) document =
                             it.documents.last() else throw CancellationException()
-                    }.let { it.toObjects(DataFlat.PhotosWithUser::class.java) }
+                    }.toObjects(DataFlat.PhotosWithUser::class.java)
             }
             else -> null
         }
@@ -105,9 +105,12 @@ class PhotosWithUserDataSource @Inject constructor(
 
     suspend fun checkPhotoIsLiked(dataFlat: DataFlat.PhotosWithUser) =
         withContext(Dispatchers.Main) {
-            val documentId = firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/")
-                    .whereEqualTo("photo_id", dataFlat.photo_id).get().await().also { dataFlat.doc_id = it.documents.firstOrNull()?.id!! }
-            dataFlat.me_liked  = firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${documentId.documents.firstOrNull()?.id}/$photosLikesCollection")
+            val documentId =
+                firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/")
+                    .whereEqualTo("photo_id", dataFlat.photo_id).get().await()
+                    .also { dataFlat.doc_id = it.documents.firstOrNull()?.id!! }
+            dataFlat.me_liked =
+                firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${documentId.documents.firstOrNull()?.id}/$photosLikesCollection")
                     .whereEqualTo("liker_id", auth.uid).get().await().documents.let { it.size > 0 }
 
             dataFlat

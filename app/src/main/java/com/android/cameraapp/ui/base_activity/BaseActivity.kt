@@ -14,6 +14,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
@@ -54,22 +55,8 @@ class BaseActivity : DaggerAppCompatActivity() {
                 }
             }
             bar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.feedFragment -> navController.navigate(
-                        R.id.feedFragment,
-                        null,
-                        options_feed
-                    )
-                    R.id.homeFragment -> navController.navigate(
-                        R.id.homeFragment,
-                        null,
-                        options_home
-                    )
 
-                    R.id.searchFragment -> navController.navigate(R.id.searchFragment)
-                    else -> true
-                }
-                false
+                it.onNavDestinationSelected(navController)
             }
         }
     }

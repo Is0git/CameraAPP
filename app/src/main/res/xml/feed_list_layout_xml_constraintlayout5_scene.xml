@@ -19,9 +19,7 @@
             <CustomAttribute
                 motion:attributeName="cardElevation"
                 motion:customDimension="1dp" />
-            <CustomAttribute
-                motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="@color/colorSurface" />
+
         </Constraint>
         <Constraint
             android:id="@+id/arrow_icon"
@@ -32,9 +30,7 @@
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
             motion:layout_constraintTop_toTopOf="@id/feedCard_shape">
 
-            <CustomAttribute
-                motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="@color/colorAccent2" />
+
             <CustomAttribute
                 motion:attributeName="iconSize"
                 motion:customIntegerValue="60" />
@@ -312,10 +308,6 @@
             <CustomAttribute
                 motion:attributeName="cardElevation"
                 motion:customDimension="15dp" />
-            <CustomAttribute
-                motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="@color/colorSurface" />
-
 
         </Constraint>
 
@@ -328,9 +320,7 @@
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
             motion:layout_constraintTop_toTopOf="@id/feedCard_shape">
 
-            <CustomAttribute
-                motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="@color/colorSurface" />
+
             <CustomAttribute
                 motion:attributeName="iconSize"
                 motion:customIntegerValue="100" />
