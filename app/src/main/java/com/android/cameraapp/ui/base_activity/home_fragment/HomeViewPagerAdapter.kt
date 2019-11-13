@@ -29,16 +29,16 @@ class HomeViewPagerAdapter(manager: FragmentManager, val context: Context) :
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             0 -> """Photos
-              |668
+              |0
           """.trimMargin()
 
-            1 -> """Followers
-              |1353
+            1 -> """Flw
+              |0
           """.trimMargin()
-            2 -> """Following
-              |135""".trimMargin()
+            2 -> """Fln
+              |0""".trimMargin()
             3 -> """Likes
-              |45789
+              |0
           """.trimMargin()
             else -> null
         }

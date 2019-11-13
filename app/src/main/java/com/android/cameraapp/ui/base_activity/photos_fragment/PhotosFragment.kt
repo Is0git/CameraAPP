@@ -11,6 +11,7 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.PhotosFragmentBinding
+import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.*
@@ -31,7 +32,9 @@ class PhotosFragment : DaggerFragment() {
         binding = PhotosFragmentBinding.inflate(inflater, container, false)
         binding.photosRecyclerView.adapter = adapter
         viewModel.mediatorLiveData.observe(viewLifecycleOwner, Observer {
-            Log.d("TRIGGER", "SIZE : ${it.size}")
+            (parentFragment as HomeFragment).binding.tabLayout.getTabAt(0)?.text = """Photos
+                      |${it.size}
+                  """.trimMargin()
             adapter.addItems(it)})
         return binding.root
     }

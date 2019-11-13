@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.android.cameraapp.databinding.FollowingFragmentBinding
+import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -26,7 +27,10 @@ class FollowingFragment : DaggerFragment() {
         viewModel = ViewModelProviders.of(this, factory).get(FollowingViewModel::class.java)
         binding = FollowingFragmentBinding.inflate(inflater, container, false)
         binding.followingRecyclerView.adapter = adapter
-        viewModel.pagelist.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        viewModel.pagelist.observe(viewLifecycleOwner, Observer { adapter.submitList(it)
+            (parentFragment as HomeFragment).binding.tabLayout.getTabAt(2)?.text = """FLW
+                      |${it.size}
+                  """.trimMargin()})
         return binding.root
     }
 }

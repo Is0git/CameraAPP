@@ -7,6 +7,7 @@ import javax.inject.Inject
 @LikesFragmentScope
 class LikesFragmentViewModel @Inject constructor(val repo: LikesFragmentRepository): ViewModel() {
 
+    val likes = repo.liveLikeList
 
     override fun onCleared() {
         super.onCleared()

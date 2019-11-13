@@ -43,7 +43,6 @@ class BaseActivity : DaggerAppCompatActivity() {
         navController = findNavController(R.id.main_fragment_container)
         setSupportActionBar(binding.bar)
         AppBarConfiguration(navController.graph, null) { false }
-        setNavigatioOptions()
         binding.apply {
             bar.setupWithNavController(navController)
             if (savedInstanceState == null) checkIfUserLoggedIn()
@@ -87,14 +86,7 @@ class BaseActivity : DaggerAppCompatActivity() {
         }
 
         }
-        fun setNavigatioOptions() {
-            options_feed =
-                NavOptions.Builder().setPopUpTo(R.id.feedFragment, true).setLaunchSingleTop(true)
-                    .build()
-            options_home =
-                NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).setLaunchSingleTop(true)
-                    .build()
-        }
+
 
         override fun onDestroy() {
             super.onDestroy()

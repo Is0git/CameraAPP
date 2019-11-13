@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProviders
 import com.android.cameraapp.databinding.LikesFragmentBinding
+import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -26,6 +27,10 @@ class LikesFragment : DaggerFragment() {
         viewmodel = ViewModelProviders.of(this, viewmodelFactory).get(LikesFragmentViewModel::class.java)
         binding = LikesFragmentBinding.inflate(inflater, container, false)
         binding.likesRecyclerView.adapter = adapter
+        viewmodel.likes.observe(viewLifecycleOwner, Observer { adapter.submitList(it)
+            (parentFragment as HomeFragment).binding.tabLayout.getTabAt(3)?.text = """Likes
+                      |${it.size}
+                  """.trimMargin()})
         return binding.root
 
     }

@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity.likes_fragment
 
+import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
@@ -25,7 +26,7 @@ class LikesFragmentRepository @Inject constructor(
     val adapter: LikesAdapter
 ) : EventListener<QuerySnapshot> {
     lateinit var job: Job
-
+    val liveLikeList = MutableLiveData<List<DataFlat.Likes>>()
     var listenerRegistration: ListenerRegistration = firestore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection")
     .orderBy("time_in_long", Query.Direction.DESCENDING).addSnapshotListener(this)
 
@@ -35,7 +36,7 @@ class LikesFragmentRepository @Inject constructor(
             if (p0?.documents?.isNotEmpty()!!) {
                 val items = p0.toObjects(DataFlat.Likes::class.java)
                 getLikers(items)
-                adapter.submitList(items)
+                liveLikeList.value = items
             }
         }
     }
