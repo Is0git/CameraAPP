@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.UserCollection
+import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-@StartFragmentScope
+@BaseActivityScope
 class StartFragmentRepository @Inject constructor(
     val firestore: FirebaseFirestore,
     val auth: FirebaseAuth

@@ -2,44 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav"
-    app:startDestination="@id/auth_nav">
+    app:startDestination="@id/main_nav">
 
-    <navigation
-        android:id="@+id/auth_nav"
-        app:startDestination="@id/loginFragment">
-        <fragment
-            android:id="@+id/loginFragment"
-            android:name="com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment"
-            android:label="LoginFragment">
-            <action
-                android:id="@+id/action_loginFragment_to_registrationFragment"
-                app:destination="@id/registrationFragment"
-                app:enterAnim="@anim/slide_left_animation"
-                app:exitAnim="@anim/slide_right_animation"
-                app:popEnterAnim="@anim/pop_back_left_animation"
-                app:popExitAnim="@anim/pop_back_right_animation" />
-            <action
-                android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-                app:destination="@id/forgotPasswordFragment"
-                app:enterAnim="@anim/zoom_in_animation"
-                app:popEnterAnim="@anim/zoom_in_animation" />
-        </fragment>
-        <fragment
-            android:id="@+id/forgotPasswordFragment"
-            android:name="com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment"
-            android:label="ForgotPasswordFragment" />
-        <fragment
-            android:id="@+id/registrationFragment"
-            android:name="com.android.cameraapp.ui.base_activity.registration_fragment.RegistrationFragment"
-            android:label="RegistrationFragment" />
-        <action
-            android:id="@+id/action_global_navigation2"
-            app:destination="@id/main_nav"
-            app:enterAnim="@anim/zoom_in_animation"
-            app:popEnterAnim="@anim/zoom_in_animation"
-            app:popUpTo="@id/auth_nav"
-            app:popUpToInclusive="true" />
-    </navigation>
+
     <navigation
         android:id="@+id/main_nav"
         app:startDestination="@id/startFragment">

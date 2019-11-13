@@ -56,7 +56,7 @@ class StartFragment : DaggerFragment() {
             startViewModel = viewModel
             Log.d("TAG1", "HAPPENED")
         }
-        if (checkIfPermissionsGranted()) binding.cameraView.post { startCamera() } else askForCameraPermissions()
+        if (checkIfPermissionsGranted()) binding.cameraView.post {  } else askForCameraPermissions()
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
         binding.circleImageView.setOnClickListener { auth.signOut() }
         return binding.root

@@ -33,28 +33,13 @@ class BaseRepository @Inject constructor(
     val controller: NavController,
     val firestore: FirebaseFirestore
 ) {
-    var listener: FirebaseAuth.AuthStateListener
     val user_state: MutableLiveData<UserAuthStates> = MutableLiveData()
     var user: FirebaseUser? = null
     var rememberUser: Boolean = true
     val jobs: Job = Job()
 
 
-    init {
-        //Changing nav graphs depending on if user is logged in or not
-        listener = FirebaseAuth.AuthStateListener {
-            if (it.currentUser == null) {
-                user_state.postValue(UserAuthStates.NOT_LOGGED_IN)
-
-            } else {
-                user_state.postValue(
-                    UserAuthStates.LOGGED_IN
-
-                )
-            }
-        }
-        auth.addAuthStateListener(listener)
-    }
+    fun checkIfUserLoggedIN() : Boolean = auth.currentUser != null
 
     fun logIn(email: String?, password: String?, rememberUser: Boolean = true) {
         this.rememberUser = rememberUser
@@ -138,10 +123,6 @@ class BaseRepository @Inject constructor(
         }
     }
 
-    //avoid memory leak
-    fun removeListener() {
-        auth.removeAuthStateListener(listener)
-    }
 
     fun sendPasswordResetToEmail(email: String?) {
 

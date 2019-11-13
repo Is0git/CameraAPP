@@ -55,7 +55,7 @@ abstract class FragmentsBuilder {
     @RegistrationFragmentScope
     abstract fun registrationFragment(): RegistrationFragment
 
-    @ContributesAndroidInjector(modules = [StartViewModelModule::class])
+    @ContributesAndroidInjector
     @StartFragmentScope
     abstract fun startFragment(): StartFragment
 

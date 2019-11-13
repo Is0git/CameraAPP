@@ -11,22 +11,18 @@ import javax.inject.Inject
 @BaseActivityScope
 class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewModel() {
 
-    lateinit var states: LiveData<UserAuthStates>
+
 
     fun logIn(email: String?, password: String?, rememberUser: Boolean) =
         repository.logIn(email, password, rememberUser)
 
-    fun getUserNetworkStates(): LiveData<UserAuthStates> {
-        states = repository.user_state
-        return states
-    }
 
     fun <T> loginWithThirdPartyAccount(account: T, loginIdentifier: Int) =
         repository.logInWithCredentials(account, loginIdentifier)
 
+    fun checkIfUserLoggedIn() : Boolean = repository.checkIfUserLoggedIN()
     override fun onCleared() {
         repository.forgetOneSessionUser()
-        repository.removeListener()
         repository.cancelJobs()
     }
 

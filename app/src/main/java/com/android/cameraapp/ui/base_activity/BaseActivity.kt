@@ -11,12 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
+import com.android.cameraapp.ui.base_activity.start_fragment.StartFragment
 import com.android.cameraapp.util.UserAuthStates
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
@@ -33,11 +36,11 @@ class BaseActivity : DaggerAppCompatActivity() {
     lateinit var navController: NavController
     lateinit var options_home: NavOptions
     lateinit var options_feed: NavOptions
+    var state:Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         baseViewModel = ViewModelProviders.of(this, viewModelFactory).get(BaseViewModel::class.java)
-        baseViewModel.getUserNetworkStates().observe(this, Observer { resolveStates(it) })
 
 
         navController = findNavController(R.id.main_fragment_container)
@@ -46,6 +49,8 @@ class BaseActivity : DaggerAppCompatActivity() {
         setNavigatioOptions()
         binding.apply {
             bar.setupWithNavController(navController)
+            if(savedInstanceState == null) checkIfUserLoggedIn()
+
             fab.setOnClickListener {
                 lifecycleScope.launch {
                     //                    fabOnClickAnimation().start()
@@ -84,17 +89,10 @@ class BaseActivity : DaggerAppCompatActivity() {
         }
         return true
     }
-
-    private fun resolveStates(states: UserAuthStates) {
-        when {
-            // It has to check if we aren't using same graph in order to prevent wasting resources duplicating fragments
-            states == UserAuthStates.NOT_LOGGED_IN && navController.currentDestination?.id != R.id.loginFragment -> navController.navigate(
-                R.id.action_global_navigation
-            )
-            states == UserAuthStates.LOGGED_IN -> navController.navigate(R.id.action_global_navigation2)
-        }
+    fun checkIfUserLoggedIn() {
+        state = baseViewModel.checkIfUserLoggedIn()
+        if (state) navController.setGraph(R.navigation.nav) else navController.setGraph(R.navigation.auth_nav)
     }
-
     fun setNavigatioOptions() {
         options_feed =
             NavOptions.Builder().setPopUpTo(R.id.feedFragment, true).setLaunchSingleTop(true)
