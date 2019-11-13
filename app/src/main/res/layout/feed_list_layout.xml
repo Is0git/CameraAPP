@@ -16,17 +16,32 @@
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
+        android:layout_height="360dp"
         android:onClick="@{() -> click.imageOnClick(imageView, item, constraintLayout5)}"
         app:layoutDescription="@xml/feed_list_layout_xml_constraintlayout5_scene"
         tools:background="@color/colorSurface">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bottom_material_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25sp"
+            android:layout_marginBottom="5dp"
+            android:elevation="1dp"
+            android:minHeight="315dp"
+            app:cardBackgroundColor="#FEFDFD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline18"
+            app:layout_constraintStart_toStartOf="@id/left_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.10" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_image"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
+            android:outlineProvider="none"
             android:src="@drawable/background"
             app:civ_border_color="@color/colorSurface"
             app:civ_border_width="5dp"
@@ -99,6 +114,7 @@
                 android:background="@color/colorSurface"
                 android:transitionName="photo"
                 app:loadImageFromUrl="@{item.mid_image_url}" />
+
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView

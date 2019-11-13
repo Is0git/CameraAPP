@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="urn:oasis:names:tc:xliff:document:1.2">
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/feedCard_shape"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:elevation="4dp"
+            android:layout_height="40dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             motion:layout_constraintBottom_toBottomOf="@+id/share_text"
@@ -25,6 +27,7 @@
             android:id="@+id/arrow_icon"
             android:layout_width="40dp"
             android:layout_height="20dp"
+            android:elevation="2dp"
             motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
             motion:layout_constraintTop_toTopOf="@id/feedCard_shape">
@@ -43,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:elevation="2dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintHorizontal_bias="0.11"
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
@@ -55,6 +59,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
+            android:elevation="2dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="@id/feedCard_shape"
             motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"/>
@@ -62,6 +67,7 @@
         <Constraint
             android:id="@+id/line"
             android:layout_width="1dp"
+            android:elevation="2dp"
             android:layout_height="1dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintTop_toTopOf="@+id/feedCard_shape" >
@@ -74,9 +80,11 @@
             motion:layout_constraintEnd_toStartOf="@+id/guideline18"
             motion:layout_constraintStart_toEndOf="@+id/user_image"
             android:layout_width="0dp"
+            android:elevation="2dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            motion:layout_constraintTop_toTopOf="@+id/user_image">
+            motion:layout_constraintTop_toTopOf="@+id/user_image"
+            android:layout_marginTop="5dp">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
@@ -85,6 +93,7 @@
             android:id="@+id/ago_text"
             motion:layout_constraintEnd_toStartOf="@+id/guideline18"
             android:layout_width="0dp"
+            android:elevation="2dp"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="@+id/user_image"
             motion:layout_constraintTop_toBottomOf="@+id/user_name"
@@ -98,10 +107,12 @@
             motion:layout_constraintEnd_toStartOf="@+id/guideline18"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:elevation="2dp"
             motion:layout_constraintHorizontal_bias="0.0"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="16dp">
             <CustomAttribute
                 motion:attributeName="rotation"
                 motion:customDimension="0dp" />
@@ -122,6 +133,7 @@
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="@+id/comment_icon"
             android:layout_marginEnd="16dp"
+            android:elevation="2dp"
             motion:layout_constraintHorizontal_bias="0.114"
             motion:layout_constraintTop_toTopOf="@+id/comment_icon"
             motion:layout_constraintEnd_toStartOf="@id/share_icon"
@@ -134,6 +146,7 @@
         <Constraint
             motion:layout_constraintVertical_bias="0.0"
             android:layout_height="15dp"
+            android:elevation="2dp"
             motion:layout_constraintEnd_toStartOf="@+id/share_icon"
             motion:layout_constraintStart_toEndOf="@+id/likes_number"
             motion:layout_constraintTop_toTopOf="@+id/likes_number"
@@ -151,10 +164,11 @@
             android:id="@+id/love_icon"
             motion:layout_constraintEnd_toStartOf="@+id/likes_number"
             android:layout_width="15dp"
+            android:elevation="2dp"
             android:layout_height="15dp"
             motion:layout_constraintTop_toBottomOf="@+id/image_card"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="4dp">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
@@ -165,6 +179,7 @@
             motion:layout_constraintStart_toEndOf="@+id/love_icon"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:elevation="2dp"
             motion:layout_constraintBottom_toBottomOf="@+id/love_icon"
             android:layout_marginEnd="16dp"
             motion:layout_constraintHorizontal_bias="0.5"
@@ -179,6 +194,7 @@
             motion:layout_constraintStart_toEndOf="@+id/comment_icon"
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:elevation="2dp"
             motion:layout_constraintBottom_toBottomOf="@+id/comment_text"
             android:layout_marginStart="8dp"
             motion:layout_constraintHorizontal_bias="0.5"
@@ -194,6 +210,7 @@
             motion:layout_constraintStart_toEndOf="@+id/share_icon"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:elevation="2dp"
             motion:layout_constraintBottom_toBottomOf="@+id/share_icon"
             android:layout_marginEnd="16dp"
             motion:layout_constraintHorizontal_bias="0.5"
@@ -206,15 +223,27 @@
             android:id="@+id/image_card"
             motion:layout_constraintEnd_toEndOf="@id/guideline18"
             android:layout_width="0dp"
+            android:elevation="2dp"
             android:layout_height="230dp"
             motion:layout_constraintTop_toBottomOf="@+id/user_image"
             motion:layout_constraintStart_toStartOf="@id/left_guideline"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             motion:layout_constraintBottom_toTopOf="@id/comment_icon" >
             <CustomAttribute
                 motion:attributeName="radius"
                 motion:customDimension="15dp" />
         </Constraint>
+        <Constraint
+            motion:layout_constraintVertical_bias="0.10"
+            android:layout_height="wrap_content"
+            motion:layout_constraintStart_toStartOf="@id/left_guideline"
+            android:layout_marginTop="25sp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="5dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="@id/guideline18"
+            android:layout_width="0dp"
+            android:id="@+id/bottom_material_card" />
     </ConstraintSet>
 
     <Transition
@@ -274,6 +303,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="4dp"
+            android:elevation="1dp"
             android:layout_marginBottom="32dp"
             motion:layout_constraintBottom_toBottomOf="@+id/share_text"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -293,6 +323,7 @@
             android:id="@+id/arrow_icon"
             android:layout_width="40dp"
             android:layout_height="20dp"
+            android:elevation="2dp"
             motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
             motion:layout_constraintTop_toTopOf="@id/feedCard_shape">
@@ -309,6 +340,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:elevation="15dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintHorizontal_bias="0.11"
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
@@ -322,6 +354,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:elevation="15dp"
             motion:layout_constraintTop_toBottomOf="@id/line"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintStart_toEndOf="@id/arrow_icon"
@@ -331,6 +364,7 @@
             android:id="@+id/line"
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:elevation="15dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
             motion:layout_constraintTop_toBottomOf="@id/title" >
@@ -338,6 +372,114 @@
                 motion:attributeName="backgroundColor"
                 motion:customColorValue="@color/colorAccent" />
         </Constraint>
+        <Constraint
+            motion:layout_constraintEnd_toStartOf="@+id/guideline18"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+
+            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            android:layout_marginTop="32dp"
+            android:id="@+id/user_image"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:elevation="1dp" />
+        <Constraint
+            android:id="@+id/image_card"
+            motion:layout_constraintEnd_toEndOf="@id/guideline18"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            motion:layout_constraintTop_toBottomOf="@+id/user_image"
+            motion:layout_constraintStart_toStartOf="@id/left_guideline"
+            android:layout_marginTop="4dp"
+            android:elevation="2dp" />
+        <Constraint
+            android:id="@+id/user_name"
+            motion:layout_constraintEnd_toStartOf="@+id/guideline18"
+            motion:layout_constraintStart_toEndOf="@+id/user_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            motion:layout_constraintTop_toTopOf="@+id/user_image"
+            android:elevation="1dp"
+            android:layout_marginTop="5dp" />
+        <Constraint
+            android:id="@+id/ago_text"
+            motion:layout_constraintEnd_toStartOf="@+id/guideline18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@+id/user_image"
+            motion:layout_constraintTop_toBottomOf="@+id/user_name"
+            motion:layout_constraintStart_toStartOf="@+id/user_name"
+            android:elevation="1dp" />
+        <Constraint
+            android:id="@+id/love_icon"
+            motion:layout_constraintEnd_toStartOf="@+id/likes_number"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            motion:layout_constraintTop_toBottomOf="@+id/image_card"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            android:layout_marginTop="8dp"
+            android:elevation="1dp" />
+        <Constraint
+            android:id="@+id/comment_icon"
+            motion:layout_constraintEnd_toStartOf="@+id/comment_text"
+            motion:layout_constraintStart_toEndOf="@+id/likes_number"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/likes_number"
+            android:layout_marginStart="8dp"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintTop_toTopOf="@+id/likes_number"
+            motion:layout_editor_absoluteX="139dp"
+            android:elevation="1dp" />
+        <Constraint
+            android:id="@+id/likes_number"
+            motion:layout_constraintEnd_toStartOf="@+id/comment_icon"
+            motion:layout_constraintStart_toEndOf="@+id/love_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/love_icon"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintTop_toTopOf="@+id/love_icon"
+            motion:layout_editor_absoluteX="92dp"
+            android:elevation="1dp" />
+        <Constraint
+            android:id="@+id/comment_text"
+            motion:layout_constraintEnd_toStartOf="@+id/share_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/comment_icon"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintTop_toTopOf="@+id/comment_icon"
+            motion:layout_editor_absoluteX="191dp"
+            android:elevation="1dp" />
+        <Constraint
+            android:id="@+id/share_icon"
+            motion:layout_constraintEnd_toStartOf="@+id/share_text"
+            motion:layout_constraintStart_toEndOf="@+id/comment_icon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/comment_text"
+            android:layout_marginStart="8dp"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintTop_toTopOf="@+id/comment_text"
+            motion:layout_editor_absoluteX="286dp"
+            android:elevation="1dp" />
+        <Constraint
+            android:id="@+id/share_text"
+            motion:layout_constraintEnd_toStartOf="@+id/guideline18"
+            motion:layout_constraintStart_toEndOf="@+id/share_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/share_icon"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintTop_toTopOf="@+id/share_icon"
+            android:elevation="1dp" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/start"
@@ -352,8 +494,10 @@
             motion:layout_constraintEnd_toEndOf="@id/guideline18"
             android:layout_width="0dp"
             android:id="@+id/image_card"
+            android:elevation="2dp"
             motion:layout_constraintBottom_toBottomOf="@id/comment_icon"
-            motion:layout_constraintTop_toBottomOf="@+id/ago_text" >
+            motion:layout_constraintTop_toBottomOf="@+id/ago_text"
+            android:layout_marginTop="8dp">
             <CustomAttribute
                 motion:attributeName="radius"
                 motion:customDimension="0dp" />
@@ -363,6 +507,7 @@
             motion:layout_constraintBottom_toBottomOf="@+id/comment_icon"
             android:layout_width="wrap_content"
             android:id="@+id/comment_text"
+            android:elevation="2dp"
             motion:layout_editor_absoluteX="202dp"
             motion:layout_constraintEnd_toEndOf="@id/guideline18"
             motion:layout_constraintStart_toStartOf="@id/left_guideline" >
@@ -374,6 +519,7 @@
             motion:layout_editor_absoluteY="277dp"
             android:layout_height="15dp"
             android:layout_width="15dp"
+            android:elevation="2dp"
             android:id="@+id/love_icon"
             motion:layout_editor_absoluteX="41dp" >
             <CustomAttribute
@@ -386,6 +532,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:elevation="2dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintHorizontal_bias="0.11"
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
@@ -396,6 +543,7 @@
             android:id="@+id/description_text"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:elevation="2dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -405,6 +553,7 @@
         <Constraint
             android:id="@+id/line"
             android:layout_width="1dp"
+            android:elevation="2dp"
             android:layout_height="1dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintTop_toTopOf="@+id/feedCard_shape" >
@@ -416,10 +565,11 @@
             android:id="@+id/user_image"
             android:layout_width="1dp"
             android:layout_height="1dp"
+            android:elevation="2dp"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
             android:layout_marginTop="36dp"
-            android:layout_marginStart="20dp" >
+            android:layout_marginStart="30dp" >
             <CustomAttribute
                 motion:attributeName="rotation"
                 motion:customDimension="90dp" />
@@ -430,7 +580,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="28dp"
+            android:elevation="2dp"
             motion:layout_constraintStart_toEndOf="@+id/user_image">
 
             <CustomAttribute
@@ -441,6 +592,7 @@
             android:id="@+id/ago_text"
             motion:layout_constraintEnd_toStartOf="@+id/guideline18"
             android:layout_width="0dp"
+            android:elevation="2dp"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="@+id/user_name"
             motion:layout_constraintStart_toStartOf="@+id/user_name">
@@ -458,6 +610,7 @@
             motion:layout_constraintBottom_toBottomOf="@+id/likes_number"
             motion:layout_constraintHorizontal_bias="0.5"
             android:layout_width="15dp"
+            android:elevation="2dp"
             android:layout_marginStart="8dp"
             android:id="@+id/comment_icon"
             android:layout_marginEnd="60dp" >
@@ -470,9 +623,10 @@
             motion:layout_constraintEnd_toStartOf="@+id/likes_number"
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:elevation="2dp"
             motion:layout_constraintTop_toBottomOf="@+id/image_card"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="4dp">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
@@ -483,6 +637,7 @@
             motion:layout_constraintStart_toEndOf="@+id/love_icon"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:elevation="2dp"
             motion:layout_constraintBottom_toBottomOf="@+id/love_icon"
             android:layout_marginEnd="16dp"
             motion:layout_constraintHorizontal_bias="0.5"
@@ -496,6 +651,7 @@
             motion:layout_constraintEnd_toStartOf="@+id/share_text"
             motion:layout_constraintStart_toEndOf="@+id/comment_icon"
             android:layout_width="15dp"
+            android:elevation="2dp"
             android:layout_height="15dp"
             motion:layout_constraintBottom_toBottomOf="@+id/comment_text"
             android:layout_marginStart="8dp"
@@ -511,6 +667,7 @@
             motion:layout_constraintEnd_toStartOf="@+id/guideline18"
             motion:layout_constraintStart_toEndOf="@+id/share_icon"
             android:layout_width="wrap_content"
+            android:elevation="2dp"
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="@+id/share_icon"
             android:layout_marginEnd="16dp"

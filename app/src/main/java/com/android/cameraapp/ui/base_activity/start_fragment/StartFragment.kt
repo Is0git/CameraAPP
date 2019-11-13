@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Matrix
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
@@ -31,6 +30,7 @@ import javax.inject.Inject
 
 private const val CAMERA_PERMISSIONS_CODE = 1
 const val TAG = "STARTFRAGMENT"
+
 class StartFragment : DaggerFragment() {
 
     lateinit var binding: StartFragmentBinding
@@ -56,9 +56,12 @@ class StartFragment : DaggerFragment() {
             startViewModel = viewModel
             Log.d("TAG1", "HAPPENED")
         }
-        if (checkIfPermissionsGranted()) binding.cameraView.post {  } else askForCameraPermissions()
+        if (checkIfPermissionsGranted()) binding.cameraView.post { } else askForCameraPermissions()
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
-        binding.circleImageView.setOnClickListener { auth.signOut() }
+        binding.circleImageView.setOnClickListener {
+            auth.signOut()
+            navigation.setGraph(R.navigation.auth_nav)
+        }
         return binding.root
     }
 
@@ -107,13 +110,12 @@ class StartFragment : DaggerFragment() {
 
             // To update the SurfaceTexture, we have to remove it and re-add it
             val parent = binding.cameraView.parent as ViewGroup
-            parent.removeView( binding.cameraView)
-            parent.addView( binding.cameraView, 0)
+            parent.removeView(binding.cameraView)
+            parent.addView(binding.cameraView, 0)
 
             binding.cameraView.surfaceTexture = it.surfaceTexture
             updateTransform()
         }
-
 
 
         // Create configuration object for the image capture use case
@@ -133,30 +135,34 @@ class StartFragment : DaggerFragment() {
         // version 1.1.0 or higher.
         binding.takePhotoButton.setOnClickListener {
             Log.d(TAG, "CLICKEDCAMERA")
-            val file = File("content://com.android.providers.media.documents/document",
-                "${System.currentTimeMillis()}.jpg")
-        imageCapture.takePicture(file, object : ImageCapture.OnImageSavedListener {
-            override fun onImageSaved(file: File) {
-                val msg = "Photo capture succeeded: ${file.absolutePath}"
-                Log.d("CameraXApp", msg)
-                binding.cameraView.post {
-                    Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT).show()
+            val file = File(
+                "content://com.android.providers.media.documents/document",
+                "${System.currentTimeMillis()}.jpg"
+            )
+            imageCapture.takePicture(file, object : ImageCapture.OnImageSavedListener {
+                override fun onImageSaved(file: File) {
+                    val msg = "Photo capture succeeded: ${file.absolutePath}"
+                    Log.d("CameraXApp", msg)
+                    binding.cameraView.post {
+                        Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-            }
 
-            override fun onError(
-                useCaseError: ImageCapture.UseCaseError,
-                message: String,
-                cause: Throwable?
-            ) {
-                val msg = "Photo capture failed: $message"
-                Log.e("CameraXApp", msg)
-                binding.cameraView.post {
-                    Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT).show()
+                override fun onError(
+                    useCaseError: ImageCapture.UseCaseError,
+                    message: String,
+                    cause: Throwable?
+                ) {
+                    val msg = "Photo capture failed: $message"
+                    Log.e("CameraXApp", msg)
+                    binding.cameraView.post {
+                        Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-            }
 
-        } )
+            })
 
         }
 
@@ -171,7 +177,7 @@ class StartFragment : DaggerFragment() {
         val centerY = binding.cameraView.height / 2f
 
         // Correct preview output to account for display rotation
-        val rotationDegrees = when(binding.cameraView.display.rotation) {
+        val rotationDegrees = when (binding.cameraView.display.rotation) {
             Surface.ROTATION_0 -> 0
             Surface.ROTATION_90 -> 90
             Surface.ROTATION_180 -> 180

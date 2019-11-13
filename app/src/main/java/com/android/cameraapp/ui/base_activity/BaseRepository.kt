@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.BaseActivityScope
 import com.android.cameraapp.util.*
@@ -48,7 +49,8 @@ class BaseRepository @Inject constructor(
             "You need to fill all fields"
         ) else {
             auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener { ToastHandler.showToast(application, "LOGGED IN") }
+                .addOnSuccessListener { controller.setGraph(R.navigation.nav)
+                    ToastHandler.showToast(application, "LOGGED IN")  }
                 .addOnFailureListener { ToastHandler.showToast(application, "${it.message}") }
         }
     }
@@ -145,13 +147,13 @@ class BaseRepository @Inject constructor(
         val currentTime = async { getCurrentTime() }
         val usernameArray = mutableListOf<String>()
        username?.forEach { usernameArray.add(it.toString()) }
-        firestore.document("$userCollection/${user?.uid}").set(
+        val result = firestore.document("$userCollection/${user?.uid}").set(
             UserCollection.User(
                 mapOf(
                     "large_message" to "Your description",
                     "shorter_message" to "Add something inspirational"
                 ), user?.email, true, date.await(), currentTime.await(), username, null, user?.uid, usernameArray)
-        )
+        ).addOnSuccessListener { controller.setGraph(R.navigation.nav) }
 
 
     }
