@@ -27,11 +27,16 @@ class FullPictureViewModel @Inject constructor(val repo : FullPictureRepository)
         fun unfollowUser(userUID: String) = viewModelScope.launch { repo.unfollowUser(userUID) }
 
         fun getCommentsWithUser(photo: DataFlat.PhotosWithUser) : LiveData<List<DataFlat.CommentsWithUser>> {
-                viewModelScope.launch { repo.getCommentsWithUser(photo) }
+                viewModelScope.launch { repo.getComments(photo) }
                 return commentsWithUser
         }
 
         fun addComment(dataFlat: DataFlat.PhotosWithUser, comment: String)  = viewModelScope.launch {
                 repo.addComment(dataFlat, comment)
+        }
+
+        override fun onCleared() {
+                super.onCleared()
+                 repo.removeListeners(repo.job) {if(it.isActive) it.cancel()}
         }
 }

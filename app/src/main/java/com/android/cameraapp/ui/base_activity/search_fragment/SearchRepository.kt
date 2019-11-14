@@ -38,7 +38,7 @@ class SearchRepository @Inject constructor(
                         if (querySnapshot.documents.isNotEmpty()) querySnapshot.toObjects(
                             UserCollection.User::class.java
                         ).also {
-                            searchResults.value= it
+                            searchResults.value = it
                         } else throw CancellationException("Empty search")
                     }
             }

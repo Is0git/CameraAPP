@@ -2,6 +2,7 @@ package com.android.cameraapp.ui.base_activity.full_picture_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 @FullPictureScope
 class CommentsListAdapter @Inject constructor() : ListAdapter<DataFlat.CommentsWithUser, CommentsListAdapter.MyViewHolder>(
-    callback) {
+    asyncDiffUtil) {
     class MyViewHolder(val binding: FullPhotoListBinding) : RecyclerView.ViewHolder(binding.root)
 
 
@@ -20,12 +21,12 @@ class CommentsListAdapter @Inject constructor() : ListAdapter<DataFlat.CommentsW
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CommentsListAdapter.MyViewHolder {
+    ): MyViewHolder {
         val binding = FullPhotoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CommentsListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             val item = getItem(position)
             holder.binding.item = item
     }
@@ -42,3 +43,5 @@ val callback = object : DiffUtil.ItemCallback<DataFlat.CommentsWithUser>() {
     ): Boolean = oldItem == newItem
 
 }
+
+val asyncDiffUtil = AsyncDifferConfig.Builder<DataFlat.CommentsWithUser>(callback).build()

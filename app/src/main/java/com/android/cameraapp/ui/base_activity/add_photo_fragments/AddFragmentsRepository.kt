@@ -37,7 +37,7 @@ class AddFragmentsRepository @Inject constructor(
                 workInfo?.state?.let {
                     when (it) {
                         WorkInfo.State.SUCCEEDED -> activity.binding.constraintLayout2.transitionToStart()
-                        WorkInfo.State.FAILED, WorkInfo.State.CANCELLED -> {
+                        WorkInfo.State.FAILED, WorkInfo.State.CANCELLED-> {
                             activity.binding.constraintLayout2.transitionToStart()
                             Log.i(TAG, "FAIL: $it")
                             ToastHandler.showToast(application, "Image was not uploaded!")

@@ -40,7 +40,8 @@ class SearchFragment : DaggerFragment() {
             }
 
         })
-        viewModel.searchQueries.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        viewModel.searchQueries.observe(viewLifecycleOwner, Observer { adapter.submitList(it)
+        binding.searchList.scrollToPosition(0)})
         return binding.root
     }
 }

@@ -10,16 +10,14 @@ import com.android.cameraapp.util.getCurrentTime
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.model.value.IntegerValue
-import kotlinx.coroutines.coroutineScope
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-
 import javax.inject.Inject
 
 @FullPictureScope
@@ -33,6 +31,9 @@ class FullPictureRepository @Inject constructor(
     val followingState = MutableLiveData<Int>()
     val comments = MutableLiveData<List<DataFlat.CommentsWithUser>>()
     var debounce: Int = 0
+    lateinit var job: Job
+
+
     //e.x 4 likes with user
     suspend fun getLimitedLikes(photo: DataFlat.PhotosWithUser) {
         val list = mutableListOf<DataFlat.Likes>()
@@ -86,13 +87,6 @@ class FullPictureRepository @Inject constructor(
         super.unfollowUser(userUID, IS_NOT_FOLLOWING) { followingState.value = it }
     }
 
-    suspend fun getCommentsWithUser(dataFlat: DataFlat.PhotosWithUser) {
-        val commentsList = mutableListOf<DataFlat.CommentsWithUser>()
-        val comments = getComments(dataFlat)
-        mapUsers(comments).map { getUsers(it) }.collect { commentsList.add(it) }
-        this.comments.postValue(commentsList)
-
-    }
 
     suspend fun mapUsers(dataFlat: List<DataFlat.CommentsWithUser>): Flow<DataFlat.CommentsWithUser> =
         flow {
@@ -106,19 +100,24 @@ class FullPictureRepository @Inject constructor(
         return item
     }
 
-    suspend fun getComments(dataFlat: DataFlat.PhotosWithUser): List<DataFlat.CommentsWithUser> {
 
-        return firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${dataFlat.doc_id}/$photoCommentsCollection")
-            .orderBy("comment_date_long", Query.Direction.DESCENDING).get().await()
-            .toObjects(DataFlat.CommentsWithUser::class.java)
+    override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
+        job = CoroutineScope(Dispatchers.Main).launch {
+            val commentsWithoutUser =
+                if (p0?.documents?.isNotEmpty()!!) p0.toObjects(DataFlat.CommentsWithUser::class.java) else throw CancellationException(
+                    "NO ITEMS"
+                )
+            mapUsers(commentsWithoutUser).map { getUsers(it) }.collect()
+            comments.value = commentsWithoutUser
+        }
+
+
     }
 
     suspend fun addComment(dataFlat: DataFlat.PhotosWithUser, comment: String) {
         debounce++
         if (debounce < 3) {
             coroutineScope {
-                val currentUser = getCurrentUser()
-                val newCurrentList = mutableListOf<DataFlat.CommentsWithUser>()
                 val commentObj = DataFlat.CommentsWithUser(
                     getCurrentDateInFormat(),
                     "${getCurrentTime()}c",
@@ -128,23 +127,18 @@ class FullPictureRepository @Inject constructor(
                     dataFlat.user_uid,
                     comment,
                     0,
-                    currentUser
+                    getCurrentUser()
                 )
 
-                newCurrentList.apply {
-                    add(commentObj)
-                    addAll(adapter.currentList)
-                }
-                comments.postValue(newCurrentList)
                 launch {
                     firestore.collection("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${dataFlat.doc_id}/$photoCommentsCollection")
                         .add(commentObj).await()
                 }
-                launch { firestore.document("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${dataFlat.doc_id}")
-                    .update("comments_number", FieldValue.increment(1)).await() }
+                launch {
+                    firestore.document("$userCollection/${dataFlat.user_uid}/$userPhotosCollection/${dataFlat.doc_id}")
+                        .update("comments_number", FieldValue.increment(1)).await()
+                }
             }
-
-
         }
     }
 }

@@ -5,21 +5,21 @@ import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.util.getCurrentDateInFormat
 import com.android.cameraapp.util.getCurrentTime
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.*
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
 
 abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: FirebaseFirestore) :
-    CurrentUser(firebaseAuth, fireStore) {
+    CurrentUser(firebaseAuth, fireStore), EventListener<QuerySnapshot> {
     companion object {
         const val IS_FOLLOWING: Int = 1
         const val IS_NOT_FOLLOWING: Int = 0
     }
     lateinit var photoDocID:String
-    init {
+    var registration: ListenerRegistration? = null
 
-    }
     open suspend fun checkIfFollow(followerUID: String) {
         fireStore.collection("$userCollection/$followerUID/$userFollowersCollection")
             .whereEqualTo("follower_uid", firebaseAuth.uid).get().await().documents.apply {
@@ -30,7 +30,9 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
             }
         }
     }
-
+  open fun getComments(photo: DataFlat.PhotosWithUser) {
+        registration = fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photoCommentsCollection").orderBy("comment_date_long", Query.Direction.ASCENDING).addSnapshotListener(this)
+    }
     abstract fun isFollowing()
 
     abstract fun isNotFollowing()
@@ -79,4 +81,8 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
     }
 
 
+    inline fun removeListeners(job: Job, clearJob: (Job) -> Unit) {
+        registration?.remove()
+        clearJob(job)
+    }
 }
