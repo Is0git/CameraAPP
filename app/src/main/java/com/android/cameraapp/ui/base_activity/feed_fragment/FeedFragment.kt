@@ -74,7 +74,7 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         val executor = Executors.newSingleThreadScheduledExecutor()
         executor.schedule({
             activity?.runOnUiThread { navController.navigate(action, transitionExtras) }
-        }, 450, TimeUnit.MILLISECONDS)
+        }, 380, TimeUnit.MILLISECONDS)
 
     }
 

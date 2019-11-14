@@ -1,11 +1,12 @@
 package com.android.cameraapp.ui.base_activity.full_picture_fragment
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.animation.doOnEnd
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -17,14 +18,15 @@ import com.android.cameraapp.databinding.FullPictureFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.full_picture_fragment.*
 import javax.inject.Inject
 
 class FullPictureFragment : DaggerFragment() {
     lateinit var binding: FullPictureFragmentBinding
     lateinit var navController: NavController
-    @Inject lateinit var viewModelFactory: ViewModelFactory
-    @Inject lateinit var adapter: CommentsListAdapter
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var adapter: CommentsListAdapter
     lateinit var viewmodel: FullPictureViewModel
     val args: FullPictureFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,8 @@ class FullPictureFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewmodel = ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
+        viewmodel =
+            ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
         binding = FullPictureFragmentBinding.inflate(inflater, container, false)
             .apply {
                 imageUrl = args.photoUrl
@@ -48,9 +51,15 @@ class FullPictureFragment : DaggerFragment() {
             }
         viewModelInitWork()
         setUpTransition()
-        viewmodel.getCommentsWithUser(args.photosWithUsers as DataFlat.PhotosWithUser).observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-        binding.FOLLOW.setOnClickListener { if(binding.FOLLOW.text == "FOLLOW") viewmodel.followUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!) else  viewmodel.unfollowUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!)}
-        binding.commentLayout.setEndIconOnClickListener { onEndIconClick()}
+        animateUserImage()
+        viewmodel.getCommentsWithUser(args.photosWithUsers as DataFlat.PhotosWithUser)
+            .observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        binding.FOLLOW.setOnClickListener {
+            if (binding.FOLLOW.text == "FOLLOW") viewmodel.followUser(
+                (args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!
+            ) else viewmodel.unfollowUser((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!)
+        }
+        binding.commentLayout.setEndIconOnClickListener { onEndIconClick() }
         return binding.root
     }
 
@@ -74,10 +83,25 @@ class FullPictureFragment : DaggerFragment() {
 
     }
 
+    fun animateUserImage() {
+        ObjectAnimator.ofFloat(binding.circleImageView, "alpha", 0.0f, 1.0f).apply {
+            duration = 1500
+        }.apply {
+            doOnEnd {
+                binding.circleImageView.alpha = 1f
+            }
+            start()
+        }
+    }
+
     fun onEndIconClick() {
         val commentText = binding.commentEditText.text.toString()
-        if(commentText.isNotBlank()) viewmodel.addComment(args.photosWithUsers as DataFlat.PhotosWithUser, commentText)
+        if (commentText.isNotBlank()) viewmodel.addComment(
+            args.photosWithUsers as DataFlat.PhotosWithUser,
+            commentText
+        )
     }
+
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {

@@ -39,12 +39,6 @@
                 android:name="com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment"
                 android:label="FeedFragment" >
                 <action
-                    android:id="@+id/action_feedFragment_to_homeFragment"
-                    app:destination="@id/homeFragment"
-                    app:launchSingleTop="true"
-                    app:popUpTo="@id/feedFragment"
-                    app:popUpToInclusive="true" />
-                <action
                     android:id="@+id/action_feedFragment_to_fullPictureFragment"
                     app:destination="@id/fullPictureFragment"
                     app:enterAnim="@anim/nav_default_enter_anim"
@@ -71,15 +65,6 @@
                 android:id="@+id/homeFragment"
                 android:name="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment"
                 android:label="HomeFragment" >
-                <action
-                    android:id="@+id/action_homeFragment_to_feedFragment"
-                    app:destination="@id/feedFragment"
-                    app:launchSingleTop="true"
-                    app:popUpTo="@id/homeFragment"
-                    app:popUpToInclusive="true" />
-                <action
-                    android:id="@+id/action_homeFragment_to_searchFragment"
-                    app:destination="@id/searchFragment" />
                 <action
                     android:id="@+id/action_homeFragment_to_settingsFragment"
                     app:destination="@id/settingsFragment" />
