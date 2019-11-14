@@ -44,8 +44,7 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        viewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
         binding = FeedFragmentBinding.inflate(inflater, container, false)
         binding.feedRecyclerView.adapter = adapter.also { it.onClickHandler = this }
         viewModel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
@@ -82,6 +81,7 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         Log.d("FEEDFRAGMENT", "CLICKED ON ICON, OH BOY!")
         if (dataFlat.me_liked) {
             dataFlat.me_liked = false
+            dataFlat.likes_number = 20
             viewModel.removeLike(dataFlat, likes, icon)
         } else {
             dataFlat.me_liked = true

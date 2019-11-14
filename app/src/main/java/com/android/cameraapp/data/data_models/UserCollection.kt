@@ -1,9 +1,12 @@
 package com.android.cameraapp.data.data_models
 
+import android.os.Parcelable
 import com.google.common.primitives.Chars
+import kotlinx.android.parcel.Parcelize
 
 sealed class UserCollection {
     //Collection
+    @Parcelize
     data class User constructor(
         val description: Map<String, String> = mapOf(),
         val email: String? = "email",
@@ -13,7 +16,7 @@ sealed class UserCollection {
         val username: String? = "unknown",
         val photo_url: String? = "null",
         val uid: String? = "no id",
-        val username_array: List<String>? = listOf()) {
+        val username_array: List<String>? = listOf()) : Parcelable {
 
     }
 
@@ -53,7 +56,8 @@ sealed class UserCollection {
         val time_in_long : Long? = 0,
         val image_url: String? = "N/A",
         val mid_image_url: String = "N/A",
-        val low_image_url: String = "N/A"
+        val low_image_url: String = "N/A",
+        var doc_id: String = "N/A"
     )
 
     data class Comments(val comment_date: String? = "N/A",

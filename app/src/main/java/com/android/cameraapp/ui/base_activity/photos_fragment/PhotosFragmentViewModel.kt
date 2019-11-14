@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
+import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @PhotoFragmentScope
 class PhotosFragmentViewModel @Inject constructor(val repo: PhotosFragmentRepository) : ViewModel() {
-    val mediatorLiveData : MediatorLiveData<List<UserCollection.Photos>> = repo.mediatorLiveData
+    val mediatorLiveData : MediatorLiveData<List<DataFlat.PhotosWithUser>> = repo.mediatorLiveData
 
     init {
         repo.getData()

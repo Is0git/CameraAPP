@@ -10,12 +10,14 @@ import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowersRecyclerviewBinding
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
+import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener
 import javax.inject.Inject
 
 @FollowersFragmentScope
 class FollowersAdapter @Inject constructor() :
     ListAdapter<DataFlat.Followers, FollowersAdapter.MyViewHolder>(differ) {
 
+    lateinit var listener: HomeFragmentListener<UserCollection.User>
 
     class MyViewHolder(val binding: FollowersRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -25,6 +27,7 @@ class FollowersAdapter @Inject constructor() :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
             FollowersRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.listener = this.listener
         return MyViewHolder(binding)
     }
 

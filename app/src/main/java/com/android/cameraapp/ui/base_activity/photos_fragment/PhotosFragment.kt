@@ -1,42 +1,69 @@
 package com.android.cameraapp.ui.base_activity.photos_fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.navGraphViewModels
-import androidx.recyclerview.widget.GridLayoutManager
-import com.android.cameraapp.R
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import com.android.cameraapp.data.data_models.DataFlat
+import com.android.cameraapp.databinding.HomeFragmentBinding
 import com.android.cameraapp.databinding.PhotosFragmentBinding
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
+import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentDirections
+import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PhotosFragment : DaggerFragment() {
+class PhotosFragment : DaggerFragment(), PhotosFragmentListeners {
     lateinit var binding: PhotosFragmentBinding
-    @Inject lateinit var factory: ViewModelFactory
-    @Inject lateinit var adapter:PhotosAdapter
+    @Inject
+    lateinit var factory: ViewModelFactory
+    @Inject
+    lateinit var adapter: PhotosAdapter
+    lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewModel = ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java)
-        Log.d(TAG, "LOAD FRAGMENT: ${viewModel}")
+        val viewModel =
+            ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java)
+        adapter.listeners = this
         binding = PhotosFragmentBinding.inflate(inflater, container, false)
         binding.photosRecyclerView.adapter = adapter
         viewModel.mediatorLiveData.observe(viewLifecycleOwner, Observer {
-            (parentFragment as HomeFragment).binding.tabLayout.getTabAt(0)?.text = """Photos
+           val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
+            binding.tabLayout.getTabAt(0)?.text = """Photos
                       |${it.size}
                   """.trimMargin()
-            adapter.addItems(it)})
+            adapter.addItems(it)
+        })
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
+
+    override fun onPhotoClick(view: ImageView, photoData: DataFlat.PhotosWithUser) {
+        view.transitionName = getCurrentTime().toString()
+        val transitionExtras = FragmentNavigatorExtras(view to view.transitionName)
+        val action = HomeFragmentDirections.actionHomeFragmentToFullPictureFragment(
+            photoData,
+            photoData.image_url,
+            view.transitionName
+        )
+
+        navController.navigate(action, transitionExtras)
+
+
     }
 
 }

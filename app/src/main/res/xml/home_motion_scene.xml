@@ -110,6 +110,28 @@
                 app:attributeName="backgroundColor"
                 app:customColorValue="@color/colorSurface" />
         </Constraint>
+        <Constraint
+            android:id="@+id/settings_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline10"
+            app:layout_constraintStart_toStartOf="@id/guideline9">
+            <CustomAttribute
+                app:attributeName="elevation"
+                app:customDimension="0dp" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/maps_button"
+            app:layout_constraintEnd_toEndOf="@id/guideline3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline10"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                app:attributeName="elevation"
+                app:customDimension="0dp" />
+        </Constraint>
 
     </ConstraintSet>
 
@@ -203,6 +225,28 @@
             <CustomAttribute
                 app:attributeName="backgroundColor"
                 app:customColorValue="@color/colorAccent2" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/settings_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline10"
+            app:layout_constraintStart_toStartOf="@id/guideline9">
+            <CustomAttribute
+                app:attributeName="elevation"
+                app:customDimension="9dp" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/maps_button"
+            app:layout_constraintEnd_toEndOf="@id/guideline3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline10"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                app:attributeName="elevation"
+                app:customDimension="9dp" />
         </Constraint>
     </ConstraintSet>
 

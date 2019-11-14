@@ -46,14 +46,6 @@
                motion:framePosition="100"
                android:rotationX="10" />
            <KeyAttribute
-               motion:motionTarget="@+id/FOLLOW"
-               motion:framePosition="20"
-               android:rotationX="-10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/FOLLOW"
-               motion:framePosition="100"
-               android:rotationX="10" />
-           <KeyAttribute
                motion:motionTarget="@+id/photo_name"
                motion:framePosition="20"
                android:rotationX="-10" />
@@ -169,16 +161,7 @@
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
             android:layout_marginTop="16dp"
             android:alpha="1" />
-        <Constraint
-            android:id="@+id/FOLLOW"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
-            motion:layout_constraintStart_toEndOf="@+id/likes_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/likes_button"
-            motion:layout_constraintHorizontal_bias="1.0"
-            motion:layout_constraintTop_toTopOf="@+id/likes_button" />
+
         <Constraint
             android:id="@+id/materialTextView"
             android:elevation="3dp"
@@ -238,10 +221,22 @@
             motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            motion:layout_constraintBottom_toTopOf="@id/comment_layout"
             motion:layout_constraintTop_toBottomOf="@id/comments_number"
             motion:layout_constraintStart_toStartOf="@id/left_guideline"
-            android:layout_marginBottom="16dp" />
+            motion:layout_constraintBottom_toBottomOf="@+id/comments_card" />
+        <Constraint
+            android:id="@+id/circleImageView"
+            android:elevation="7dp"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@+id/image_base"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline">
+            <CustomAttribute
+                motion:attributeName="elevation"
+                motion:customDimension="7dp" />
+        </Constraint>
 
     </ConstraintSet>
 
@@ -253,7 +248,7 @@
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/base_card"
-            motion:layout_constraintTop_toTopOf="@id/guideline15">
+            motion:layout_constraintTop_toTopOf="parent">
             <CustomAttribute
                 motion:attributeName="cardBackgroundColor"
                 motion:customColorValue="@color/colorSurface" />
@@ -277,9 +272,9 @@
             android:layout_height="0dp"
             motion:layout_constraintTop_toBottomOf="@id/comments_number"
             motion:layout_constraintStart_toStartOf="@id/left_guideline"
-            motion:layout_constraintTop_toTopOf="@id/guideline15"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toTopOf="@id/comment_layout"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="0dp" />
         <Constraint
             android:id="@+id/base_card"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -296,16 +291,7 @@
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
             android:layout_marginTop="16dp"
             android:alpha="0" />
-        <Constraint
-            android:id="@+id/FOLLOW"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
-            motion:layout_constraintStart_toEndOf="@+id/likes_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@+id/likes_button"
-            motion:layout_constraintHorizontal_bias="1.0"
-            motion:layout_constraintTop_toTopOf="@+id/likes_button" />
+
         <Constraint
             android:id="@+id/materialTextView"
             android:elevation="3dp"
@@ -358,6 +344,19 @@
             motion:layout_constraintTop_toBottomOf="@+id/photo_name"
             motion:layout_constraintStart_toStartOf="@+id/photo_name"
             android:layout_marginTop="8dp" />
+        <Constraint
+            android:id="@+id/circleImageView"
+            android:elevation="7dp"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="@+id/image_base"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline" >
+            <CustomAttribute
+                motion:attributeName="elevation"
+                motion:customDimension="2dp" />
+        </Constraint>
 
 
     </ConstraintSet>

@@ -177,7 +177,6 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
-
             android:background="@drawable/icon_share"
             app:layout_constraintBottom_toBottomOf="@+id/comment_text"
             app:layout_constraintEnd_toStartOf="@+id/share_text"

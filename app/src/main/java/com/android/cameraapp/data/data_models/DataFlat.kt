@@ -2,6 +2,8 @@ package com.android.cameraapp.data.data_models
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 
 sealed class DataFlat {
     data class Followers(
@@ -51,16 +53,16 @@ sealed class DataFlat {
         val isPrivate: Boolean = false,
         val width: String? = "N/A",
         val height: String? = "N/A",
+        @get: Bindable var likes_number: Int? = 0,
         val time_in_long: Long? = 0,
         val image_url: String? = "N/A",
-        val likes_number: Int? = 0,
         var me_liked: Boolean = false,
-        var comments_number: Int? = 0,
+        @get: Bindable var comments_number: Int? = 0,
         var doc_id: String? = "N/A",
         val mid_image_url: String? = "N/A",
         val low_image_url: String? = "N/A",
         var user: UserCollection.User? = null
-    ) : Parcelable {
+    ) : Parcelable, BaseObservable() {
         constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
@@ -70,15 +72,16 @@ sealed class DataFlat {
             parcel.readByte() != 0.toByte(),
             parcel.readString(),
             parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readString(),
-            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readByte() != 0.toByte(),
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
             parcel.readString(),
             parcel.readString()
-        )
+        ) {
+        }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             parcel.writeString(date_taken)
@@ -89,9 +92,9 @@ sealed class DataFlat {
             parcel.writeByte(if (isPrivate) 1 else 0)
             parcel.writeString(width)
             parcel.writeString(height)
+            parcel.writeValue(likes_number)
             parcel.writeValue(time_in_long)
             parcel.writeString(image_url)
-            parcel.writeValue(likes_number)
             parcel.writeByte(if (me_liked) 1 else 0)
             parcel.writeValue(comments_number)
             parcel.writeString(doc_id)
@@ -112,5 +115,6 @@ sealed class DataFlat {
                 return arrayOfNulls(size)
             }
         }
+
     }
 }

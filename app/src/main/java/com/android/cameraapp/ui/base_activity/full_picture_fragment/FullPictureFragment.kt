@@ -1,11 +1,13 @@
 package com.android.cameraapp.ui.base_activity.full_picture_fragment
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,7 +18,9 @@ import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FullPictureFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment
 import com.android.nbaapp.data.vms.ViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -27,6 +31,7 @@ class FullPictureFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
     lateinit var adapter: CommentsListAdapter
+    @Inject  lateinit var firebaseAuth: FirebaseAuth
     lateinit var viewmodel: FullPictureViewModel
     val args: FullPictureFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +44,10 @@ class FullPictureFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewmodel =
-            ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
+
+
+
+        viewmodel = ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
         binding = FullPictureFragmentBinding.inflate(inflater, container, false)
             .apply {
                 imageUrl = args.photoUrl
@@ -52,8 +59,14 @@ class FullPictureFragment : DaggerFragment() {
         viewModelInitWork()
         setUpTransition()
         animateUserImage()
+        handleUserAccess()
+
         viewmodel.getCommentsWithUser(args.photosWithUsers as DataFlat.PhotosWithUser)
-            .observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+            .observe(viewLifecycleOwner, Observer {
+                adapter.submitList(it)
+                binding.commentsNumber.text = getString(R.string.comments, it.size, it.size)
+                (args.photosWithUsers as DataFlat.PhotosWithUser).comments_number = it.size
+            })
         binding.FOLLOW.setOnClickListener {
             if (binding.FOLLOW.text == "FOLLOW") viewmodel.followUser(
                 (args.photosWithUsers as DataFlat.PhotosWithUser).user_uid!!
@@ -95,6 +108,7 @@ class FullPictureFragment : DaggerFragment() {
     }
 
     fun onEndIconClick() {
+        (activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(activity!!.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         val commentText = binding.commentEditText.text.toString()
         if (commentText.isNotBlank()) viewmodel.addComment(
             args.photosWithUsers as DataFlat.PhotosWithUser,
@@ -109,5 +123,9 @@ class FullPictureFragment : DaggerFragment() {
             BottomBarToInvisible()
         }
 
+    }
+
+    fun handleUserAccess() {
+        if((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid == firebaseAuth.uid ) { binding.FOLLOW.visibility = View.INVISIBLE }
     }
 }

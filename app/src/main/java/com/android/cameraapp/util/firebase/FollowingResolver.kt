@@ -6,13 +6,14 @@ import com.android.cameraapp.util.getCurrentDateInFormat
 import com.android.cameraapp.util.getCurrentTime
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
 abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: FirebaseFirestore) :
     CurrentUser(firebaseAuth, fireStore), EventListener<QuerySnapshot> {
+    val userJob: Job by lazy { CoroutineScope(Dispatchers.Main).launch { user = getCurrentUser() }}
+    var user: UserCollection.User? = null
+
     companion object {
         const val IS_FOLLOWING: Int = 1
         const val IS_NOT_FOLLOWING: Int = 0
@@ -39,19 +40,18 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
 
     suspend fun followUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
         if (userUID != auth.uid) {
-            val user = getCurrentUser()
             fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
                 .add(
                     DataFlat.Followers(
                         user?.username!!,
-                        user.uid,
-                        user.photo_url,
+                        user?.uid,
+                        user?.photo_url,
                         getCurrentDateInFormat(),
                         getCurrentTime()
                     )
                 ).await()
             resolve(state)
-            fireStore.collection("$userCollection/${user.uid}/$userFollowingCollection").add(
+            fireStore.collection("$userCollection/${user?.uid}/$userFollowingCollection").add(
                 UserCollection.Following(
                     getCurrentDateInFormat(), "", userUID, "N/A", getCurrentTime()
                 )
@@ -62,10 +62,9 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
 
     suspend fun unfollowUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
         if (userUID != auth.uid) {
-            val user = getCurrentUser()
             val followingDocId =
                 fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
-                    .whereEqualTo("follower_uid", user?.uid).get().await().documents.first().id
+                    .whereEqualTo("follower_uid", user?.uid).get().await().let {  if(it.documents.isNotEmpty()) it.documents.first().id else throw CancellationException("EMPTY QUERY LIST")}
             fireStore.document("$userCollection/$userUID/$userFollowersCollection/$followingDocId")
                 .delete().await()
             removeFollowing(userUID, user)
@@ -83,6 +82,7 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
 
     inline fun removeListeners(job: Job, clearJob: (Job) -> Unit) {
         registration?.remove()
+        if(userJob.isActive) userJob.cancel()
         clearJob(job)
     }
 }

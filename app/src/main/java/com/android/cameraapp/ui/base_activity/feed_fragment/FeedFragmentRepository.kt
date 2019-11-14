@@ -12,16 +12,19 @@ import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
-import com.android.cameraapp.util.*
 import com.android.cameraapp.util.firebase.photosLikesCollection
 import com.android.cameraapp.util.firebase.userCollection
 import com.android.cameraapp.util.firebase.userLikesCollection
 import com.android.cameraapp.util.firebase.userPhotosCollection
+import com.android.cameraapp.util.getCurrentDateInFormat
+import com.android.cameraapp.util.getCurrentTime
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -35,37 +38,48 @@ data class FeedFragmentRepository @Inject constructor(
     val work: WorkManager
 ) {
 
-    suspend fun likePhoto(photo: DataFlat.PhotosWithUser, likesCount: TextView, icon : View) = coroutineScope {
-        launch(Dispatchers.Main) {increaseCounterUI(likesCount, icon)}
-        launch { addLikedPhoto(photo)}
-        launch { increaseLikeCounter(photo) }
+    suspend fun likePhoto(photo: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) =
+        coroutineScope {
+            launch(Dispatchers.Main) { increaseCounterUI(photo, icon) }
+            launch { addLikedPhoto(photo) }
+            launch { increaseLikeCounter(photo) }
+        }
 
-    }
-
-    suspend fun dislikePhoto(photo: DataFlat.PhotosWithUser, likesCount: TextView, icon : View) = coroutineScope {
-        launch(Dispatchers.Main) { decreaseCounterUI(likesCount, icon) }
-        launch { removePhoto(photo) }
-        launch { decreaseLikeCounter(photo) }
-    }
-
+    suspend fun dislikePhoto(photo: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) =
+        coroutineScope {
+            launch(Dispatchers.Main) { decreaseCounterUI(photo, icon) }
+            launch { removePhoto(photo) }
+            launch { decreaseLikeCounter(photo) }
+        }
 
 
     suspend fun removePhoto(photo: DataFlat.PhotosWithUser) {
-       val documentID = fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photosLikesCollection")
-            .whereEqualTo("liker_id", firebaseAuth.uid).get().await().documents.firstOrNull()?.id
+        val documentID =
+            fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photosLikesCollection")
+                .whereEqualTo("liker_id", firebaseAuth.uid).get().await().documents.firstOrNull()
+                ?.id
 
-        fireStore.document("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photosLikesCollection/$documentID").delete()
+        fireStore.document("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photosLikesCollection/$documentID")
+            .delete()
 
     }
 
     suspend fun addLikedPhoto(photo: DataFlat.PhotosWithUser) = coroutineScope {
-        val likeResult = fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photosLikesCollection")
-            .add(UserCollection.PictureLikes(firebaseAuth.uid, firebaseAuth.currentUser?.displayName, getCurrentDateInFormat(), photo.photo_id, getCurrentTime())).await()
+        val likeResult =
+            fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photosLikesCollection")
+                .add(
+                    UserCollection.PictureLikes(
+                        firebaseAuth.uid,
+                        firebaseAuth.currentUser?.displayName,
+                        getCurrentDateInFormat(),
+                        photo.photo_id,
+                        getCurrentTime()
+                    )
+                ).await()
 
         val id = likeResult.id
         resolveLikedFirstTime(id, photo)
     }
-
 
 
     suspend fun increaseLikeCounter(photo: DataFlat.PhotosWithUser) {
@@ -78,43 +92,46 @@ data class FeedFragmentRepository @Inject constructor(
             .update("likes_number", FieldValue.increment(-1)).await()
     }
 
-    fun increaseCounterUI(likesCount: TextView, icon: View) {
-        val newLikesCount = likesCount.apply {
-            val newValue = text.toString().toInt() + 1
-            text = newValue.toString()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                icon.backgroundTintList = ColorStateList.valueOf(application.getColor(R.color.colorAccent))
-            }
+    fun increaseCounterUI(photoDocument: DataFlat.PhotosWithUser, icon: View) {
+        photoDocument.likes_number = 2
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            icon.backgroundTintList =
+                ColorStateList.valueOf(application.getColor(R.color.colorAccent))
         }
     }
 
-    suspend fun getLikeDocument(id: String, photoDocument: DocumentSnapshot) : DocumentSnapshot = fireStore.document("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/$userLikesCollection/${id}").get().await()
+
+    suspend fun getLikeDocument(id: String, photoDocument: DocumentSnapshot): DocumentSnapshot =
+        fireStore.document("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/$userLikesCollection/${id}").get().await()
 
 
     suspend fun resolveLikedFirstTime(id: String, photo: DataFlat.PhotosWithUser) = coroutineScope {
 
-            //adding liked instance in user collection(happens only one time and it's just a message in particular time)
-                //check if there is document with this photo id in order to know if it's first time like
-               val result = fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection").whereEqualTo("photo_id", photo.photo_id).get()
-                //user doesn't get notified when he liked himself
-                if( photo.user_uid != firebaseAuth.uid &&  result.await().documents.size == 0) launch { fireStore.collection("$userCollection/${photo.user_uid}/$userLikesCollection").add(UserCollection.PictureLikes(firebaseAuth.uid, "NAME", getCurrentDateInFormat(),
-                    photo.user_uid, getCurrentTime())) }
+        //adding liked instance in user collection(happens only one time and it's just a message in particular time)
+        //check if there is document with this photo id in order to know if it's first time like
+        val result =
+            fireStore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection")
+                .whereEqualTo("photo_id", photo.photo_id).get()
+        //user doesn't get notified when he liked himself
+        if (photo.user_uid != firebaseAuth.uid && result.await().documents.size == 0) launch {
+            fireStore.collection("$userCollection/${photo.user_uid}/$userLikesCollection").add(
+                UserCollection.PictureLikes(
+                    firebaseAuth.uid, "NAME", getCurrentDateInFormat(),
+                    photo.user_uid, getCurrentTime()
+                )
+            )
+        }
     }
 
-    fun sendNotification() {
 
-    }
 
-    suspend fun getComments(photoDocID:String) {
-        fireStore.collection("$userCollection/")
-    }
-    fun decreaseCounterUI(likesCount: TextView, icon : View) {
-        val newLikesCount = likesCount.apply {
-            val newValue = text.toString().toInt() - 1
-            text = newValue.toString()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                icon.backgroundTintList = ColorStateList.valueOf(application.getColor(R.color.colorTextDark))
-            }
+    fun decreaseCounterUI(photo: DataFlat.PhotosWithUser, icon: View) {
+
+        photo.likes_number.let { it!! - 1 }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            icon.backgroundTintList =
+                ColorStateList.valueOf(application.getColor(R.color.colorTextDark))
+
         }
     }
 }

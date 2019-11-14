@@ -12,7 +12,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var binding: SettingsFragmentBinding
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences_screen, rootKey)
+
     }
+
+
 
 //    override fun onCreateView(
 //        inflater: LayoutInflater,

@@ -5,12 +5,17 @@
         <variable
             name="item"
             type="com.android.cameraapp.data.data_models.DataFlat.Followers" />
+        <variable
+            name="listener"
+            type="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener" />
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="75dp"
+        android:onClick="@{() -> listener.onUserClick(item.user)}"
         android:background="@color/colorPrimary2">
 
         <de.hdodenhof.circleimageview.CircleImageView

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.PhotosListLayoutBinding
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
@@ -12,14 +13,16 @@ import javax.inject.Inject
 @PhotoFragmentScope
 class PhotosAdapter @Inject constructor() :
     RecyclerView.Adapter<PhotosAdapter.MyViewHolder>() {
-    var items = mutableListOf<UserCollection.Photos>()
+    var items = mutableListOf<DataFlat.PhotosWithUser>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
             PhotosListLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.clickListener = listeners
         return MyViewHolder(binding)
     }
 
-    fun addItems(item: List<UserCollection.Photos>) {
+     lateinit var listeners:PhotosFragmentListeners
+    fun addItems(item: List<DataFlat.PhotosWithUser>) {
 
         if (item.size == 1) {
             items.add(0, item[0])
@@ -43,16 +46,16 @@ class PhotosAdapter @Inject constructor() :
 }
 
 
-val diffUtil = object : DiffUtil.ItemCallback<UserCollection.Photos>() {
+val diffUtil = object : DiffUtil.ItemCallback<DataFlat.PhotosWithUser>() {
     override fun areItemsTheSame(
-        oldItem: UserCollection.Photos,
-        newItem: UserCollection.Photos
+        oldItem: DataFlat.PhotosWithUser,
+        newItem: DataFlat.PhotosWithUser
     ): Boolean = oldItem.photo_id == newItem.photo_id
 
 
     override fun areContentsTheSame(
-        oldItem: UserCollection.Photos,
-        newItem: UserCollection.Photos
+        oldItem: DataFlat.PhotosWithUser,
+        newItem: DataFlat.PhotosWithUser
     ): Boolean = oldItem == newItem
 
 }

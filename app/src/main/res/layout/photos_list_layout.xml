@@ -5,7 +5,10 @@
     <data>
         <variable
             name="photoData"
-            type="com.android.cameraapp.data.data_models.UserCollection.Photos" />
+            type="com.android.cameraapp.data.data_models.DataFlat.PhotosWithUser" />
+        <variable
+            name="clickListener"
+            type="com.android.cameraapp.ui.base_activity.photos_fragment.PhotosFragmentListeners" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             app:loadImageFromUrl="@{photoData.mid_image_url}"
+            android:onClick="@{() -> clickListener.onPhotoClick(AuthorName, photoData)}"
             android:adjustViewBounds="true"
             android:background="@drawable/image_placeholder"
             tools:ignore="ContentDescription" />

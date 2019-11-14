@@ -14,6 +14,7 @@ import javax.inject.Inject
 @BaseActivityScope
 class StartFragmentViewModel @Inject constructor(val repo: StartFragmentRepository) : ViewModel() {
      var userData: LiveData<UserCollection.User>? = repo.data
+    var isForeign: Boolean = false
 
     init {
 

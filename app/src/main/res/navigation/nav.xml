@@ -32,12 +32,13 @@
             app:destination="@id/add_photo_nav"
             app:enterAnim="@anim/zoom_in_animation"
             app:popEnterAnim="@anim/zoom_in_animation" />
-        <navigation android:id="@+id/activityFragment"
+        <navigation
+            android:id="@+id/activityFragment"
             app:startDestination="@id/homeFragment">
             <fragment
                 android:id="@+id/feedFragment"
                 android:name="com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment"
-                android:label="FeedFragment" >
+                android:label="FeedFragment">
                 <action
                     android:id="@+id/action_feedFragment_to_fullPictureFragment"
                     app:destination="@id/fullPictureFragment"
@@ -51,40 +52,81 @@
                         app:nullable="true" />
 
                     <argument
-                    android:name="transition_name"
-                    app:argType="string"
-                    app:nullable="true" />
+                        android:name="transition_name"
+                        app:argType="string"
+                        app:nullable="true" />
 
-                    <argument android:name="photosWithUsers"
-                                app:argType="android.os.Parcelable"/>
+                    <argument
+                        android:name="photosWithUsers"
+                        app:argType="android.os.Parcelable" />
 
 
                 </action>
+                <action
+                    android:id="@+id/action_feedFragment_to_homeFragment"
+                    app:destination="@id/homeFragment" />
             </fragment>
             <fragment
                 android:id="@+id/homeFragment"
                 android:name="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment"
-                android:label="HomeFragment" >
+                android:label="HomeFragment">
+                <argument
+                    android:name="userData"
+                    app:nullable="true"
+                    android:defaultValue="@null"
+                    app:argType="android.os.Parcelable" />
+                <argument
+                    android:name="foreign"
+                    app:nullable="true"
+                    android:defaultValue="@null"
+                    app:argType="string"/>
                 <action
                     android:id="@+id/action_homeFragment_to_settingsFragment"
                     app:destination="@id/settingsFragment" />
                 <action
                     android:id="@+id/action_homeFragment_to_mapFragment"
                     app:destination="@id/mapFragment" />
+                <action
+                    android:id="@+id/action_homeFragment_to_fullPictureFragment"
+                    app:destination="@id/fullPictureFragment">
+                    <argument
+                        android:name="photosWithUsers"
+                        app:nullable="true"
+                        android:defaultValue="@null"
+                        app:argType="android.os.Parcelable" />
+
+                </action>
+                <action
+                    android:id="@+id/action_homeFragment_self2"
+                    app:destination="@id/homeFragment">
+                    <argument
+                        android:name="userData"
+                        app:nullable="true"
+                        android:defaultValue="@null"
+                        app:argType="android.os.Parcelable" />
+                    <argument
+                        android:name="foreign"
+                        app:nullable="true"
+                        android:defaultValue="@null"
+                        app:argType="string"/>
+                </action>
             </fragment>
             <fragment
                 android:id="@+id/fullPictureFragment"
                 android:name="com.android.cameraapp.ui.base_activity.full_picture_fragment.FullPictureFragment"
                 android:label="FullPictureFragment">
-                <argument app:nullable="true"
+                <argument
                     android:name="photo_url"
-                    app:argType="string"/>
-                <argument app:nullable="true"
+                    app:argType="string"
+                    app:nullable="true" />
+                <argument
                     android:name="transition_name"
-                    app:argType="string"/>
+                    app:argType="string"
+                    app:nullable="true" />
 
-                <argument android:name="photosWithUsers"
-                    app:argType="android.os.Parcelable"/>
+                <argument
+                    android:name="photosWithUsers"
+                    app:argType="android.os.Parcelable" />
             </fragment>
             <fragment
                 android:id="@+id/searchFragment"
@@ -109,8 +151,8 @@
             android:label="AddFragmentTwo">
             <argument
                 android:name="image_uri"
-                app:nullable="true"
-                app:argType="android.net.Uri" />
+                app:argType="android.net.Uri"
+                app:nullable="true" />
         </fragment>
         <fragment
             android:id="@+id/addFragmentOne"
