@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorTextHeaderSmall">#c6c9cb</color>
+    <color name="colorTextHeaderBig">#ffffff</color>
+    <color name="colorTextHeaderMed">#939393</color>
+    <color name="colorTextUser">#D1D0D0</color>
+    <color name="colorHomeLightGrey">#8F8D8D</color>
+    <color name="colorHomeDark">#323339</color>
+
+
+    <color name="colorPrimary2">#121212</color>
+    <color name="colorPrimaryVariant2">#ffffff</color>
+    <color name="colorPrimaryDark2">#1b1c24</color>
+    <color name="colorAccent2">#ff7a7a</color>
+    <color name="colorSecondary2">#5069ff</color>
+    <color name="colorSecondaryVariant2">#965fce</color>
+</resources>

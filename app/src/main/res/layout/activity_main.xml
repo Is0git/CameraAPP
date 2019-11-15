@@ -70,6 +70,7 @@
                 android:src="@drawable/icon_add"
                 android:visibility="invisible"
                 app:elevation="10dp"
+                app:tint="@color/colorAccent"
                 android:layout_height="wrap_content"
                 app:layout_anchor="@id/bar"/>
 

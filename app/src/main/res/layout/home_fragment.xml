@@ -27,7 +27,7 @@
             android:elevation="9dp"
             android:src="@drawable/background"
             android:transitionName="user_image"
-            app:civ_border_color="@color/colorSurface"
+            app:civ_border_color="@color/borderColor"
             app:civ_border_width="5dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintHorizontal_bias="0.496"
@@ -83,6 +83,7 @@
             android:id="@+id/top_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardElevation="1dp"
             android:minHeight="200dp"
             tools:layout_editor_absoluteX="0dp">
 
@@ -94,15 +95,15 @@
             android:layout_width="match_parent"
             app:tabInlineLabel="true"
             android:layout_height="75dp"
-            android:elevation="8dp" />
+            android:elevation="4dp" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/on_top_card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="100dp"
-            android:backgroundTint="@color/colorLightGrey"
             android:minHeight="200dp"
+            android:elevation="10dp"
             app:cardCornerRadius="@dimen/materialCard_corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +115,7 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/data_viewPager"
                 android:layout_width="match_parent"
+                android:elevation="5dp"
                 android:layout_height="match_parent" />
         </com.google.android.material.card.MaterialCardView>
 

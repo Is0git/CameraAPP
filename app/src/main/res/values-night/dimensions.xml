@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_text">40sp</dimen>
+    <dimen name="regular_text_size">15sp</dimen>
+    <dimen name="login_text_input_size">20sp</dimen>
+    <dimen name="home_name_text_size">20sp</dimen>
+    <dimen name="header_text_big">35sp</dimen>
+    <dimen name="toolbar_marginTop">39sp</dimen>
+    <dimen name="location_textSize">16sp</dimen>
+    <dimen name="description_text_spacing">10dp</dimen>
+    <dimen name="materialCard_corner_radius">27dp</dimen>
+    <dimen name="smallest_text">12sp</dimen>
+    <dimen name="home_recyclerView_name">16sp</dimen>
+    <dimen name="home_recyclerView_subText">14sp</dimen>
+    <dimen name="card_large">25sp</dimen>
+    <dimen name="card_mid">20sp</dimen>
+    <dimen name="search_text">45sp</dimen>
+</resources>

@@ -6,15 +6,15 @@
     <color name="colorAccent">#f65a5b</color>
     <color name="colorSecondary">#e765b9</color>
     <color name="colorSecondaryVariant">#a254c7</color>
-    <color name="colorSurface">#ffffff</color>
-    <color name="borderColor">#FFFFFF</color>
-    <color name="colorTextDark">#000000</color>
+    <color name="colorSurface">#121212</color>
+    <color name="borderColor">#353535</color>
+    <color name="colorTextDark">#e1e1e1</color>
+    <color name="colorOnSurface">#3E3E3E</color>
     <color name="colorLightGrey">#e7e7e7</color>
-    <color name="colorOnSurface">#DCDBDB</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">
         @color/colorLightGrey
     </color>
-    <color name="colorMidDarkText">#262626</color>
+    <color name="colorMidDarkText">#e1e1e1</color>
     <color name="colorGrey">#757576</color>
     <color name="colorOnSurfaceFull">#f3f5f9</color>
 </resources>

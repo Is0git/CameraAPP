@@ -5,6 +5,7 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -50,12 +51,8 @@ class HomeFragment : DaggerFragment() {
         return binding.root
     }
 
-    private fun setViewPagerWithToolbar() {
-        viewPagerAdapter =
-            HomeViewPagerAdapter(
-                childFragmentManager,
-                activity?.applicationContext!!
-            )
+    private fun setViewPagerWithToolbar(counterNumber: Int) {
+        viewPagerAdapter = HomeViewPagerAdapter(childFragmentManager, activity?.applicationContext!!, counterNumber)
         (binding as HomeFragmentBinding).dataViewPager.let {
             it.adapter = viewPagerAdapter
             (binding as HomeFragmentBinding).tabLayout.setupWithViewPager(it)
@@ -88,13 +85,14 @@ class HomeFragment : DaggerFragment() {
             settingsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_settingsFragment) }
             mapsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_mapFragment) }
         }
-        setViewPagerWithToolbar()
+        setViewPagerWithToolbar(4)
     }
 
     fun setupForeignUser(inflater: LayoutInflater, container: ViewGroup?) {
 
         binding = HomeFragmentForeignBinding.inflate(inflater, container, false)
         (binding as HomeFragmentForeignBinding).userData = args.userData as UserCollection.User
+//        setViewPagerWithToolbar(2)
 
     }
 }

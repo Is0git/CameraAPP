@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_margin="1dp"
-        android:background="@color/colorPrimary2">
+        android:background="@color/colorSurface">
 
         <ImageView
             android:id="@+id/AuthorName"
