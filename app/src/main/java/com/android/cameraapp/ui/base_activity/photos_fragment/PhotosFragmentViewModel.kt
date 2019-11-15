@@ -17,12 +17,12 @@ import javax.inject.Inject
 class PhotosFragmentViewModel @Inject constructor(val repo: PhotosFragmentRepository) : ViewModel() {
     val mediatorLiveData : MediatorLiveData<List<DataFlat.PhotosWithUser>> = repo.mediatorLiveData
 
-    init {
-        repo.getData()
 
-        viewModelScope.launch { repo.getAllPhotos() }
+
+    fun init(userId:String?) {
+        repo.setListener(userId)
+        viewModelScope.launch { repo.getAllPhotos(userId) }
     }
-
     override fun onCleared() {
         super.onCleared()
         repo.clearListener()

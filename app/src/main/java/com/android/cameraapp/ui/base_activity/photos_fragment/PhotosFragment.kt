@@ -20,28 +20,30 @@ import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class PhotosFragment : DaggerFragment(), PhotosFragmentListeners {
+class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragmentListeners {
     lateinit var binding: PhotosFragmentBinding
     @Inject
     lateinit var factory: ViewModelFactory
     @Inject
     lateinit var adapter: PhotosAdapter
     lateinit var navController: NavController
+    @Inject lateinit var photosFragmentRepository: PhotosFragmentRepository
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewLifecycleOwner.lifecycle.addObserver(photosFragmentRepository)
         val viewModel =
-            ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java)
+            ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java).also { it.init(userId) }
         adapter.listeners = this
         binding = PhotosFragmentBinding.inflate(inflater, container, false)
         binding.photosRecyclerView.adapter = adapter
         viewModel.mediatorLiveData.observe(viewLifecycleOwner, Observer {
-           val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-            binding.tabLayout.getTabAt(0)?.text = """Photos
-                      |${it.size}
-                  """.trimMargin()
+            //           val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
+//            binding.tabLayout.getTabAt(0)?.text = """Photos
+//                      |${it.size}
+//                  """.trimMargin()
             adapter.addItems(it)
         })
         return binding.root
@@ -60,7 +62,6 @@ class PhotosFragment : DaggerFragment(), PhotosFragmentListeners {
             photoData.image_url,
             view.transitionName
         )
-
         navController.navigate(action, transitionExtras)
 
 

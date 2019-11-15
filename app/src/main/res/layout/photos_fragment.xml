@@ -5,11 +5,25 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/photos_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="40dp"
+            android:fontFamily="@font/myriadpro"
+            android:text="15 Photos"
+            android:textSize="50sp"
+            android:textColor="@color/colorTextUser"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photos_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/photos_count"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
             android:orientation="vertical"

@@ -5,7 +5,6 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -18,8 +17,12 @@ import com.android.cameraapp.databinding.HomeFragmentForeignBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.ui.base_activity.start_fragment.StartFragmentViewModel
 import com.android.nbaapp.data.vms.ViewModelFactory
+import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+
+const val AuthUser = 0
+const val ForeignUser = 1
 
 class HomeFragment : DaggerFragment() {
     @Inject
@@ -40,22 +43,50 @@ class HomeFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val parentFragmentViewModel: StartFragmentViewModel by navGraphViewModels(R.id.main_nav) { factory }
         parentFragmentViewModel.isForeign = isForeignUser()
         when (parentFragmentViewModel.isForeign) {
             false -> setupAuthUser(parentFragmentViewModel, inflater, container)
 
-            true ->  setupForeignUser(inflater, container)
+            true -> setupForeignUser(inflater, container)
         }
 
         return binding.root
     }
 
-    private fun setViewPagerWithToolbar(counterNumber: Int) {
-        viewPagerAdapter = HomeViewPagerAdapter(childFragmentManager, activity?.applicationContext!!, counterNumber)
-        (binding as HomeFragmentBinding).dataViewPager.let {
-            it.adapter = viewPagerAdapter
-            (binding as HomeFragmentBinding).tabLayout.setupWithViewPager(it)
+    private fun setViewPagerWithToolbar(counterNumber: Int, key: Int) {
+
+        when (key) {
+            AuthUser -> {
+                viewPagerAdapter = HomeViewPagerAdapter(
+                    childFragmentManager,
+                    activity!!.applicationContext,
+                    counterNumber,
+                    null
+                )
+
+                (binding as HomeFragmentBinding).dataViewPager.let {
+                    it.adapter = viewPagerAdapter
+                    (binding as HomeFragmentBinding).tabLayout.setupWithViewPager(it)
+                    setupIcons(key)
+                }
+            }
+            ForeignUser -> {
+                viewPagerAdapter = HomeViewPagerAdapter(
+                    childFragmentManager,
+                    activity!!.applicationContext,
+                    counterNumber,
+                    (args.userData as UserCollection.User).uid
+                )
+
+                (binding as HomeFragmentForeignBinding).dataViewPager.let {
+                    it.adapter = viewPagerAdapter
+                    (binding as HomeFragmentForeignBinding).tabLayout.setupWithViewPager(it)
+                    setupIcons(key)
+                }
+            }
+
         }
 
     }
@@ -75,7 +106,11 @@ class HomeFragment : DaggerFragment() {
 
     fun isForeignUser(): Boolean = args.userData != null
 
-    fun setupAuthUser(parentFragmentViewModel: StartFragmentViewModel, inflater: LayoutInflater, container: ViewGroup?) {
+    fun setupAuthUser(
+        parentFragmentViewModel: StartFragmentViewModel,
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         (binding as HomeFragmentBinding).apply {
             lifecycleOwner = viewLifecycleOwner
@@ -85,7 +120,7 @@ class HomeFragment : DaggerFragment() {
             settingsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_settingsFragment) }
             mapsButton.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_mapFragment) }
         }
-        setViewPagerWithToolbar(4)
+        setViewPagerWithToolbar(4, 0)
     }
 
     fun setupForeignUser(inflater: LayoutInflater, container: ViewGroup?) {
@@ -96,8 +131,33 @@ class HomeFragment : DaggerFragment() {
             avatarImage.transitionName = args.transitionName
             userName.transitionName = args.transitionName2
         }
-//        setViewPagerWithToolbar(2)
+        setViewPagerWithToolbar(2, 1)
+    }
 
+    fun setupIcons(key: Int) {
+        when (key) {
+            0 -> {
+                val tabLayout = (binding as HomeFragmentBinding).tabLayout
+                setIcons(tabLayout)
+            }
+            1 -> {
+                val tabLayout = (binding as HomeFragmentForeignBinding).tabLayout
+                setIcons(tabLayout)
+            }
+            else -> return
+
+        }
+    }
+
+    fun setIcons(tabLayout: TabLayout) {
+        (0 until tabLayout.tabCount).forEach {
+            when (it) {
+                0 -> tabLayout.getTabAt(it)?.setIcon(R.drawable.photo_gallery_icon)
+                1 -> tabLayout.getTabAt(it)?.setIcon(R.drawable.followers_icon)
+                2 -> tabLayout.getTabAt(it)?.setIcon(R.drawable.following_icon)
+                3 -> tabLayout.getTabAt(it)?.setIcon(R.drawable.likes_icon)
+            }
+        }
     }
 }
 

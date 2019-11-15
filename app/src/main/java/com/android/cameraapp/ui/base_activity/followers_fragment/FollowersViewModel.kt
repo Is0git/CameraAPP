@@ -15,9 +15,10 @@ class FollowersViewModel @Inject constructor(
 
     val mediatorFollowers = repo.mediatorLiveData
 
-    init {
-        repo.getData()
+    fun init(userId:String?) {
+        repo.queryUserID = userId
     }
+
     override fun onCleared() {
         super.onCleared()
         repo.clearListener()

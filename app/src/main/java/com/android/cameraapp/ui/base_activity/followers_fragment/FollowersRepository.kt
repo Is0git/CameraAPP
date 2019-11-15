@@ -1,8 +1,6 @@
 package com.android.cameraapp.ui.base_activity.followers_fragment
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
@@ -20,31 +18,40 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @FollowersFragmentScope
-class FollowersRepository @Inject constructor(val firebaseAuth: FirebaseAuth, val firestore: FirebaseFirestore, val adapter: FollowersAdapter) : EventListener<QuerySnapshot> {
+class FollowersRepository @Inject constructor(val firebaseAuth: FirebaseAuth, val firestore: FirebaseFirestore, val adapter: FollowersAdapter) : EventListener<QuerySnapshot>, LifecycleObserver {
     val follower = MutableLiveData<List<DataFlat.Followers>>()
     val followers = MutableLiveData<List<DataFlat.Followers>>()
     val mediatorLiveData = MediatorLiveData<List<DataFlat.Followers>>()
-    lateinit var job: Job
-    var listenerRegistration: ListenerRegistration = firestore.collection("$userCollection/${firebaseAuth.uid}/$userFollowersCollection")
-        .orderBy("following_time_long", Query.Direction.DESCENDING).addSnapshotListener(this)
+    var job: Job? = null
+    var listenerRegistration: ListenerRegistration? = null
+    var queryUserID: String? = null
 
     override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
-     job =   CoroutineScope(Dispatchers.Main).launch {
+        job =   CoroutineScope(Dispatchers.Main).launch {
 
-                if(p0?.documents?.isNotEmpty()!!) {
-                    val items = p0.toObjects(DataFlat.Followers::class.java)
+            if(p0?.documents?.isNotEmpty()!!) {
+                val items = p0.toObjects(DataFlat.Followers::class.java)
 //                    followers.value = items
-                    getAllFollowers(items)
-                    adapter.submitList(items)
-                }
+                getAllFollowers(items)
+                followers.value = items
             }
         }
-
-    fun getData() {
+    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun setListener() {
         mediatorLiveData.apply {
-            addSource(follower) { data -> mediatorLiveData.value = data }
             addSource(followers) { data -> mediatorLiveData.value = data }
         }
+        val queryID = queryUserID ?: firebaseAuth.uid
+        firestore.collection("$userCollection/${queryID}/$userFollowersCollection")
+            .orderBy("following_time_long", Query.Direction.DESCENDING).addSnapshotListener(this)
+    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun stopListener() {
+        mediatorLiveData.removeSource(followers)
+        listenerRegistration?.remove()
+        if(job?.isActive!!) job?.cancel()
+
     }
 
     suspend fun getAllFollowers(items: List<DataFlat.Followers>) {
@@ -66,8 +73,9 @@ class FollowersRepository @Inject constructor(val firebaseAuth: FirebaseAuth, va
 
 
 
+
     fun clearListener() {
-        listenerRegistration.remove()
-        if(job.isActive) job.cancel()
+        listenerRegistration?.remove()
+        if(job?.isActive!!) job?.cancel()
     }
 }

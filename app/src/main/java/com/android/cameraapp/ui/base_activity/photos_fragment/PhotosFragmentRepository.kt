@@ -1,9 +1,6 @@
 package com.android.cameraapp.ui.base_activity.photos_fragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
@@ -20,14 +17,19 @@ class PhotosFragmentRepository @Inject constructor(
     val firestore: FirebaseFirestore,
     val photosAdapter: PhotosAdapter,
     val photoFragment:PhotosFragment
-) : EventListener<QuerySnapshot> {
+) : EventListener<QuerySnapshot>, LifecycleObserver {
     val photo = MutableLiveData<List<DataFlat.PhotosWithUser>>()
     val photos = MutableLiveData<List<DataFlat.PhotosWithUser>>()
     val mediatorLiveData = MediatorLiveData<List<DataFlat.PhotosWithUser>>()
     var counter = 0
-    var listenerRegistration: ListenerRegistration = firestore.collection("$userCollection/${firebaseAuth.uid}/$userPhotosCollection")
-           .orderBy("time_in_long", Query.Direction.DESCENDING).limit(1).addSnapshotListener(this)
+    var listenerRegistration: ListenerRegistration? = null
 
+    fun setListener(userId:String?) {
+        val queryID = userId ?: firebaseAuth.uid
+        listenerRegistration = firestore.collection("$userCollection/${queryID}/$userPhotosCollection")
+            .orderBy("time_in_long", Query.Direction.DESCENDING).limit(1).addSnapshotListener(this)
+
+    }
     override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
         if (counter > 0) {
             if(p0?.documents?.isNotEmpty()!!) {
@@ -39,22 +41,33 @@ class PhotosFragmentRepository @Inject constructor(
         counter++
     }
 
-  suspend  fun getAllPhotos() {
-      val firstLoad =  firestore.collection("$userCollection/${firebaseAuth.uid}/$userPhotosCollection")
+    suspend  fun getAllPhotos(userId:String?) {
+        val queryID = userId ?: firebaseAuth.uid
+        val firstLoad =  firestore.collection("$userCollection/${queryID}/$userPhotosCollection")
             .orderBy("time_in_long", Query.Direction.DESCENDING).get().await()
-      val photosFirstLoad = firstLoad.toObjects(DataFlat.PhotosWithUser::class.java)
-      photosFirstLoad.forEachIndexed{i, o -> o.doc_id = firstLoad.documents[i].id}
-      photos.value = photosFirstLoad
+        val photosFirstLoad = firstLoad.toObjects(DataFlat.PhotosWithUser::class.java)
+        photosFirstLoad.forEachIndexed{i, o -> o.doc_id = firstLoad.documents[i].id}
+        photos.value = photosFirstLoad
     }
 
-    fun getData() {
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun addMediatorListeners() {
         mediatorLiveData.apply {
-            addSource(photo, Observer {data -> mediatorLiveData.value = data })
-            addSource(photos, Observer { data -> mediatorLiveData.value = data })
+            addSource(photo) { data -> mediatorLiveData.value = data }
+            addSource(photos) { data -> mediatorLiveData.value = data }
+        }
+    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun removeMediatorListeners() {
+        mediatorLiveData.apply {
+            removeSource(photo)
+            removeSource(photos)
         }
     }
 
+
     fun clearListener() {
-        listenerRegistration.remove()
+        listenerRegistration?.remove()
     }
 }

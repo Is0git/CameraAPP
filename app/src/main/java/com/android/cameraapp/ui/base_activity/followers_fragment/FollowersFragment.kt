@@ -20,11 +20,13 @@ import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class FollowersFragment : DaggerFragment(), HomeFragmentListener<UserCollection.User> {
+class FollowersFragment(val userId:String? = null) : DaggerFragment(), HomeFragmentListener<UserCollection.User> {
     @Inject
     lateinit var factory: ViewModelFactory
     @Inject
     lateinit var adapter: FollowersAdapter
+    @Inject
+    lateinit var repo: FollowersRepository
     lateinit var viewmodel: FollowersViewModel
     lateinit var binding: FollowersFragmentBinding
     lateinit var navController: NavController
@@ -33,16 +35,18 @@ class FollowersFragment : DaggerFragment(), HomeFragmentListener<UserCollection.
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FollowersFragmentBinding.inflate(inflater, container, false)
-        binding.followersRecyclerView.adapter = adapter
-        adapter.listener = this
-        viewmodel = ViewModelProviders.of(this, factory).get(FollowersViewModel::class.java)
+        viewLifecycleOwner.lifecycle.addObserver(repo)
+        binding = FollowersFragmentBinding.inflate(inflater, container, false).apply {
+            followersRecyclerView.adapter = adapter.also { it.listener = this@FollowersFragment }
+        }
+
+        viewmodel = ViewModelProviders.of(this, factory).get(FollowersViewModel::class.java).also { it.init(userId) }
         viewmodel.mediatorFollowers.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
-            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-            binding.tabLayout.getTabAt(1)?.text = """ME
-                      |${it.size}
-                  """.trimMargin()
+//            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
+//            binding.tabLayout.getTabAt(1)?.text = """ME
+//                      |${it.size}
+//                  """.trimMargin()
         })
         return binding.root
     }
