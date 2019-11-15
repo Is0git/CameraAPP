@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.DataFlat
+import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.LikesRecyclerviewBinding
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
+import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener
 import javax.inject.Inject
 
 @LikesFragmentScope
@@ -18,10 +20,11 @@ class LikesAdapter @Inject constructor(): ListAdapter<DataFlat.Likes, LikesAdapt
      class MyViewHolder(val binding: LikesRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
-
+    lateinit var listener: HomeFragmentListener<UserCollection.User>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikesAdapter.MyViewHolder {
                 val binding =
             LikesRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.listener = this.listener
         return MyViewHolder(
             binding
         )
