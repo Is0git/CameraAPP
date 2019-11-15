@@ -8,13 +8,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.android.cameraapp.data.data_models.DataFlat
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowersFragmentBinding
 import com.android.cameraapp.databinding.HomeFragmentBinding
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentDirections
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener
+import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -50,8 +51,12 @@ class FollowersFragment : DaggerFragment(), HomeFragmentListener<UserCollection.
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
     }
-    override fun onUserClick(userData: UserCollection.User) {
-            val directions = HomeFragmentDirections.actionHomeFragmentSelf2(userData)
-            navController.navigate(directions)
+
+    override fun onUserClick(userData: UserCollection.User, imageView: View, nameTextView: View) {
+        imageView.transitionName = "${getCurrentTime()}i"
+        nameTextView.transitionName = "${getCurrentTime()}t"
+        val extras = FragmentNavigatorExtras(imageView to imageView.transitionName, nameTextView to nameTextView.transitionName)
+        val directions = HomeFragmentDirections.actionHomeFragmentSelf2(userData, imageView.transitionName, nameTextView.transitionName)
+        navController.navigate(directions, extras)
     }
 }

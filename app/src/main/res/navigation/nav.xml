@@ -72,14 +72,22 @@
                 android:label="HomeFragment">
                 <argument
                     android:name="userData"
-                    app:nullable="true"
                     android:defaultValue="@null"
-                    app:argType="android.os.Parcelable" />
+                    app:argType="android.os.Parcelable"
+                    app:nullable="true" />
+
                 <argument
-                    android:name="foreign"
+                    android:name="transitionName"
                     app:nullable="true"
                     android:defaultValue="@null"
-                    app:argType="string"/>
+                    app:argType="string" />
+                <argument
+                    android:name="transitionName2"
+                    app:nullable="true"
+                    android:defaultValue="@null"
+                    app:argType="string" />
+
+
                 <action
                     android:id="@+id/action_homeFragment_to_settingsFragment"
                     app:destination="@id/settingsFragment" />
@@ -91,9 +99,9 @@
                     app:destination="@id/fullPictureFragment">
                     <argument
                         android:name="photosWithUsers"
-                        app:nullable="true"
                         android:defaultValue="@null"
-                        app:argType="android.os.Parcelable" />
+                        app:argType="android.os.Parcelable"
+                        app:nullable="true" />
 
                 </action>
                 <action
@@ -101,14 +109,20 @@
                     app:destination="@id/homeFragment">
                     <argument
                         android:name="userData"
-                        app:nullable="true"
                         android:defaultValue="@null"
-                        app:argType="android.os.Parcelable" />
+                        app:argType="android.os.Parcelable"
+                        app:nullable="true" />
                     <argument
-                        android:name="foreign"
+                        android:name="transitionName"
                         app:nullable="true"
                         android:defaultValue="@null"
-                        app:argType="string"/>
+                        app:argType="string" />
+
+                    <argument
+                        android:name="transitionName2"
+                        app:nullable="true"
+                        android:defaultValue="@null"
+                        app:argType="string" />
                 </action>
             </fragment>
             <fragment

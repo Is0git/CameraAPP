@@ -92,6 +92,10 @@ class HomeFragment : DaggerFragment() {
 
         binding = HomeFragmentForeignBinding.inflate(inflater, container, false)
         (binding as HomeFragmentForeignBinding).userData = args.userData as UserCollection.User
+        (binding as HomeFragmentForeignBinding).apply {
+            avatarImage.transitionName = args.transitionName
+            userName.transitionName = args.transitionName2
+        }
 //        setViewPagerWithToolbar(2)
 
     }

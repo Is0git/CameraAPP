@@ -10,11 +10,14 @@ import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowingRecyclerviewBinding
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragmentScope
+import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener
 import javax.inject.Inject
 
 @FollowingFragmentScope
 class FollowingAdapter @Inject constructor(): PagedListAdapter<DataFlat.Following, FollowingAdapter.MyViewHolder>(
     diffUtil) {
+
+    lateinit var listener: HomeFragmentListener<UserCollection.User>
     class MyViewHolder(val binding: FollowingRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -22,6 +25,7 @@ class FollowingAdapter @Inject constructor(): PagedListAdapter<DataFlat.Followin
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             val binding =
         FollowingRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.listener = listener
     return MyViewHolder(
         binding
     )
