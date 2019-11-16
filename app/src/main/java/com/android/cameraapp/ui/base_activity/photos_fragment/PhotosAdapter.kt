@@ -8,6 +8,10 @@ import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.PhotosListLayoutBinding
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @PhotoFragmentScope
@@ -33,7 +37,6 @@ class PhotosAdapter @Inject constructor() :
         }
 
     }
-
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = items[position]
         holder.binding.photoData = item
@@ -43,6 +46,24 @@ class PhotosAdapter @Inject constructor() :
 
     override fun getItemCount(): Int = items.size
 
+    suspend fun oldestFilter() = coroutineScope {
+        items.sortBy { it.time_in_long }
+        launch(Dispatchers.Main) { notifyDataSetChanged() }
+
+    }
+
+
+    suspend fun newestFilter() = coroutineScope {
+        items.sortByDescending { it.time_in_long }
+        launch(Dispatchers.Main) { notifyDataSetChanged() }
+
+    }
+
+    suspend fun mostPopularFilter() = coroutineScope {
+        items.sortByDescending { it.comments_number  }
+        launch(Dispatchers.Main) { notifyDataSetChanged() }
+
+    }
 }
 
 

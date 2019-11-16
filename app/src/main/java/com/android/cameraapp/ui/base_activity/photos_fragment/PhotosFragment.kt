@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.HomeFragmentBinding
 import com.android.cameraapp.databinding.PhotosFragmentBinding
@@ -18,6 +20,8 @@ import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentDirectio
 import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.photos_fragment.view.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragmentListeners {
@@ -44,8 +48,19 @@ class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragme
 //            binding.tabLayout.getTabAt(0)?.text = """Photos
 //                      |${it.size}
 //                  """.trimMargin()
+
             adapter.addItems(it)
         })
+        binding.chipGroup2.setOnCheckedChangeListener { c, i ->
+
+            lifecycleScope.launch {
+                when (i) {
+                    R.id.oldest_chip -> adapter.oldestFilter()
+                    R.id.newest_chip -> adapter.newestFilter()
+                    R.id.most_popular_chip -> adapter.mostPopularFilter()
+                }
+            }
+        }
         return binding.root
     }
 

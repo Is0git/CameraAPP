@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+       <KeyFrameSet>
+       </KeyFrameSet>
+        <OnClick motion:targetId="@id/materialCardView" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/arrow_down"
+            android:elevation="1dp"
+            motion:layout_constraintEnd_toEndOf="@+id/materialCardView"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+            android:layout_marginEnd="24dp"
+            motion:layout_constraintTop_toTopOf="@id/materialCardView"
+            android:rotation="-90" />
+        <Constraint
+            android:id="@+id/chipGroup2"
+            android:elevation="1dp"
+            motion:layout_constraintEnd_toStartOf="@id/arrow_down"
+            motion:layout_constraintStart_toEndOf="@id/photos_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@id/materialCardView"
+            motion:layout_constraintVertical_bias="0.5"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintTop_toTopOf="@id/materialCardView"
+            android:visibility="gone" >
+            <CustomAttribute
+                motion:attributeName="alpha"
+                motion:customFloatValue="0" />
+        </Constraint>
+        <Constraint
+            android:elevation="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@id/materialCardView"
+            motion:layout_constraintVertical_bias="0.5"
+            motion:layout_constraintTop_toTopOf="@id/materialCardView"
+            motion:layout_constraintStart_toStartOf="@id/materialCardView"
+            android:id="@+id/photos_count"
+            android:layout_marginStart="24dp" >
+            <CustomAttribute
+                motion:attributeName="alpha"
+                motion:customFloatValue="1" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/materialCardView"
+            android:elevation="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            motion:layout_constraintBottom_toTopOf="@id/photos_recyclerView"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:elevation="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@id/materialCardView"
+            motion:layout_constraintVertical_bias="0.5"
+            motion:layout_constraintTop_toTopOf="@id/materialCardView"
+            android:id="@+id/photos_count"
+            motion:layout_constraintEnd_toStartOf="parent" >
+            <CustomAttribute
+                motion:attributeName="alpha"
+                motion:customFloatValue="0" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/chipGroup2"
+            android:elevation="1dp"
+            motion:layout_constraintEnd_toStartOf="@id/arrow_down"
+            motion:layout_constraintStart_toEndOf="@id/photos_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@id/materialCardView"
+            motion:layout_constraintVertical_bias="0.5"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintTop_toTopOf="@id/materialCardView"
+            android:visibility="visible"
+            android:layout_marginStart="16dp" >
+            <CustomAttribute
+                motion:attributeName="alpha"
+                motion:customFloatValue="1" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/arrow_down"
+            android:elevation="1dp"
+            motion:layout_constraintEnd_toEndOf="@+id/materialCardView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+            android:layout_marginEnd="8dp"
+            motion:layout_constraintTop_toTopOf="@id/materialCardView"
+            android:visibility="visible"
+            android:rotation="90" />
+        <Constraint
+            android:id="@+id/materialCardView"
+            android:elevation="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            motion:layout_constraintBottom_toTopOf="@id/photos_recyclerView"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+</MotionScene>

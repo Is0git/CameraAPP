@@ -56,5 +56,8 @@
     <string name="dark_mode_theme">Dark mode theme</string>
     <string name="google_maps_key">AIzaSyAnmjhXYfpS_XUhdDkTzz3i3YxFEljrsHA</string>
     <string name="comments">%2$d comments</string>
+    <string name="newest">NEWEST</string>
+    <string name="oldest">OLDEST</string>
+    <string name="most_popular">MOST POPULAR</string>
 
 </resources>

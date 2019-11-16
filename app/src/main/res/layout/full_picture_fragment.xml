@@ -49,7 +49,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/base_card"
-            style="@style/fullScreenCard"
+            app:cardCornerRadius="0dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="300dp"
