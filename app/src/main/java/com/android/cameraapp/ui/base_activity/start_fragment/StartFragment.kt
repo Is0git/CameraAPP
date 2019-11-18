@@ -56,7 +56,6 @@ class StartFragment : DaggerFragment() {
             startViewModel = viewModel
             Log.d("TAG1", "HAPPENED")
         }
-        if (checkIfPermissionsGranted()) binding.cameraView.post { } else askForCameraPermissions()
         binding.homeButton.setOnClickListener { onHomeButtonClick() }
         binding.circleImageView.setOnClickListener {
             auth.signOut()
@@ -67,6 +66,7 @@ class StartFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navigation = Navigation.findNavController(view)
+        if (checkIfPermissionsGranted()) binding.cameraView.post { startCamera() } else askForCameraPermissions()
         Log.d("TAG", "NAV: ${navigation.graph}")
     }
 
@@ -98,13 +98,12 @@ class StartFragment : DaggerFragment() {
 
     fun startCamera() {
         val previewConfig = PreviewConfig.Builder().apply {
-            setTargetResolution(Size(640, 480))
+            setTargetResolution(Size(2160, 3840))
         }.build()
 
 
         // Build the viewfinder use case
         val preview = Preview(previewConfig)
-
         // Every time the viewfinder is updated, recompute layout
         preview.setOnPreviewOutputUpdateListener {
 
@@ -134,19 +133,20 @@ class StartFragment : DaggerFragment() {
         // try rebuilding the project or updating the appcompat dependency to
         // version 1.1.0 or higher.
         binding.takePhotoButton.setOnClickListener {
-            Log.d(TAG, "CLICKEDCAMERA")
-            val file = File(
-                "content://com.android.providers.media.documents/document",
-                "${System.currentTimeMillis()}.jpg"
-            )
-            imageCapture.takePicture(file, object : ImageCapture.OnImageSavedListener {
+            // Create temporary file
+            val fileName = System.currentTimeMillis().toString()
+            val fileFormat = ".jpg"
+            val imageFile = createTempFile(fileName, fileFormat)
+
+            imageCapture.takePicture(imageFile, object : ImageCapture.OnImageSavedListener {
                 override fun onImageSaved(file: File) {
-                    val msg = "Photo capture succeeded: ${file.absolutePath}"
-                    Log.d("CameraXApp", msg)
-                    binding.cameraView.post {
-                        Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT)
-                            .show()
-                    }
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "PICTURE TAKNE",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+
                 }
 
                 override fun onError(
@@ -156,10 +156,10 @@ class StartFragment : DaggerFragment() {
                 ) {
                     val msg = "Photo capture failed: $message"
                     Log.e("CameraXApp", msg)
-                    binding.cameraView.post {
-                        Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT)
-                            .show()
-                    }
+
+                    Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT)
+                        .show()
+
                 }
 
             })
@@ -207,6 +207,10 @@ class StartFragment : DaggerFragment() {
             "PERMISSIONS ARE NOT GRANTED"
         )
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }
