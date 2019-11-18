@@ -42,10 +42,10 @@ class FollowingFragment : DaggerFragment(), HomeFragmentListener<UserCollection.
         viewModel.pagelist.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
 
-            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-           binding.tabLayout.getTabAt(2)?.text = """FLW
-                      |${it.size}
-                  """.trimMargin()
+//            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
+//           binding.tabLayout.getTabAt(2)?.text = """FLW
+//                      |${it.size}
+//                  """.trimMargin()
         })
         return binding.root
     }

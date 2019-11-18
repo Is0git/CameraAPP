@@ -1,16 +1,19 @@
 package com.android.cameraapp.ui.base_activity.start_fragment
 
 import android.Manifest
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.pm.PackageManager
 import android.graphics.Matrix
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
+import android.util.Rational
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -97,8 +100,17 @@ class StartFragment : DaggerFragment() {
     }
 
     fun startCamera() {
+
+        val metrics = DisplayMetrics().also { binding.cameraView.display.getRealMetrics(it) }
+
+        val aspectRatio = Rational(metrics.widthPixels, metrics.heightPixels)
+        val rotation = binding.cameraView.display.rotation
+        val resolution = Size(metrics.widthPixels, metrics.heightPixels)
+
         val previewConfig = PreviewConfig.Builder().apply {
-            setTargetResolution(Size(2160, 3840))
+            setTargetResolution(resolution)
+            setTargetRotation(rotation)
+            setTargetAspectRatio(aspectRatio)
         }.build()
 
 
@@ -117,35 +129,53 @@ class StartFragment : DaggerFragment() {
         }
 
 
+        val analysisConfig = ImageAnalysisConfig.Builder()
+            .setTargetAspectRatio(aspectRatio)
+            .setTargetRotation(rotation)
+            .setTargetResolution(resolution)
+            .setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
+            .build()
+
+        val analysis = ImageAnalysis(analysisConfig)
+
+        analysis.setAnalyzer { image, rotationDegrees ->
+            val rect = image.cropRect
+            val format = image.format
+            val width = image.width
+            val height = image.height
+            val planes = image.planes
+        }
+
         // Create configuration object for the image capture use case
         val imageCaptureConfig = ImageCaptureConfig.Builder()
             .apply {
-                // We don't set a resolution for image capture; instead, we
-                // select a capture mode which will infer the appropriate
-                // resolution based on aspect ration and requested mode
+                setTargetAspectRatio(aspectRatio)
+                setTargetRotation(rotation)
+                setTargetResolution(resolution)
                 setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
             }.build()
 
         // Build the image capture use case and attach button click listener
-        val imageCapture = ImageCapture(imageCaptureConfig)
+
         // Bind use cases to lifecycle
         // If Android Studio complains about "this" being not a LifecycleOwner
         // try rebuilding the project or updating the appcompat dependency to
         // version 1.1.0 or higher.
+        val capture = ImageCapture(imageCaptureConfig)
+        CameraX.bindToLifecycle(this, capture, preview, analysis)
         binding.takePhotoButton.setOnClickListener {
+
             // Create temporary file
             val fileName = System.currentTimeMillis().toString()
             val fileFormat = ".jpg"
-            val imageFile = createTempFile(fileName, fileFormat)
+            val imageFile = File("${activity!!.applicationContext.filesDir}/$fileName$fileFormat")
 
-            imageCapture.takePicture(imageFile, object : ImageCapture.OnImageSavedListener {
+            // Store captured image in the temporary file
+            capture.takePicture(imageFile, object : ImageCapture.OnImageSavedListener {
                 override fun onImageSaved(file: File) {
-                    Toast.makeText(
-                        activity!!.applicationContext,
-                        "PICTURE TAKNE",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    preview.removePreviewOutputListener()
+                    saveAnimationEnd()
+                    ToastHandler.showToast(activity!!.application, file.absolutePath)
 
                 }
 
@@ -154,19 +184,12 @@ class StartFragment : DaggerFragment() {
                     message: String,
                     cause: Throwable?
                 ) {
-                    val msg = "Photo capture failed: $message"
-                    Log.e("CameraXApp", msg)
-
-                    Toast.makeText(activity!!.applicationContext, msg, Toast.LENGTH_SHORT)
-                        .show()
-
+                    print("SD")
                 }
-
             })
-
         }
 
-        CameraX.bindToLifecycle(this, preview)
+
     }
 
     private fun updateTransform() {
@@ -207,6 +230,10 @@ class StartFragment : DaggerFragment() {
             "PERMISSIONS ARE NOT GRANTED"
         )
 
+    }
+    fun saveAnimationEnd() {
+
+        ObjectAnimator.ofFloat(binding.save, "alpha", 0f, 1f).start()
     }
 
     override fun onDestroy() {

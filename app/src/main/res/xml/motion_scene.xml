@@ -23,7 +23,8 @@
         </KeyFrameSet>
 
     </Transition>
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/start"
+        app:layout_constraintEnd_toEndOf="parent">
         <Constraint
             android:id="@+id/circleImageView"
             android:layout_width="80dp"
@@ -42,10 +43,9 @@
             android:id="@+id/home_button"
             android:layout_width="0dp"
             android:layout_height="62dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="0dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline8"
             app:layout_constraintEnd_toStartOf="@+id/camera_button"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/bottomText">
 
@@ -119,6 +119,9 @@
             app:layout_constraintTop_toBottomOf="@+id/topText">
             <PropertySet android:alpha="1" />
         </Constraint>
+        <Constraint
+            android:id="@+id/save" />
+
 
     </ConstraintSet>
     <ConstraintSet android:id="@+id/end">
@@ -140,11 +143,12 @@
             android:id="@+id/home_button"
             android:layout_width="0dp"
             android:layout_height="62dp"
-            android:layout_marginTop="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bottomText"
             app:layout_constraintEnd_toStartOf="@+id/camera_button"
-            app:layout_constraintStart_toEndOf="@id/guideline">
+            app:layout_constraintTop_toTopOf="parent">
 
+            <CustomAttribute
+                app:attributeName="cornerRadius"
+                app:customIntegerValue="0" />
         </Constraint>
 
         <Constraint
@@ -158,7 +162,7 @@
             android:id="@+id/camera_button"
             android:layout_width="0dp"
             android:layout_height="63dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:elevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,6 +177,9 @@
             <CustomAttribute
                 app:attributeName="backgroundColor"
                 app:customColorValue="@color/colorHomeDark" />
+            <CustomAttribute
+                app:attributeName="cornerRadius"
+                app:customIntegerValue="0" />
 
 
         </Constraint>
@@ -208,7 +215,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="32dp" />
         <Constraint
             android:id="@+id/midText"
             android:layout_width="0dp"
@@ -219,6 +227,7 @@
             app:layout_constraintTop_toBottomOf="@+id/topText">
             <PropertySet android:alpha="0" />
         </Constraint>
+
 
     </ConstraintSet>
 

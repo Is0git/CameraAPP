@@ -39,10 +39,10 @@ class LikesFragment : DaggerFragment(), HomeFragmentListener<UserCollection.User
         binding.likesRecyclerView.adapter = adapter.also{it.listener = this@LikesFragment}
         viewmodel.likes.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
-            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-            binding.tabLayout.getTabAt(3)?.text = """Likes
-                      |${it.size}
-                  """.trimMargin()
+//            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
+//            binding.tabLayout.getTabAt(3)?.text = """Likes
+//                      |${it.size}
+//                  """.trimMargin()
         })
         return binding.root
 

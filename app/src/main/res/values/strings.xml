@@ -59,5 +59,7 @@
     <string name="newest">NEWEST</string>
     <string name="oldest">OLDEST</string>
     <string name="most_popular">MOST POPULAR</string>
+    <string name="home_screen">HOME SCREEN</string>
+    <string name="camera">CAMERA</string>
 
 </resources>

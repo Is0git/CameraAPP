@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.SettingsFragmentBinding
+import com.android.cameraapp.ui.base_activity.BaseActivity
 
 class SettingsFragment : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener {
@@ -28,6 +29,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        (activity as BaseActivity).apply {
+            BottomBarToInvisible()
+        }
+    }
     override fun onResume() {
         super.onResume()
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)

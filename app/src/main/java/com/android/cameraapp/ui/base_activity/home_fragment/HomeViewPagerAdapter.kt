@@ -28,21 +28,5 @@ class HomeViewPagerAdapter(manager: FragmentManager, val context: Context, val c
         return counterNumber
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-//            0 -> """Photos
-//              |0
-//          """.trimMargin()
-//
-//            1 -> """Flw
-//              |0
-//          """.trimMargin()
-//            2 -> """Fln
-//              |0""".trimMargin()
-//            3 -> """Likes
-//              |0
-//          """.trimMargin()
-            else -> null
-        }
-    }
+
 }

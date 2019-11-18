@@ -103,7 +103,7 @@
             android:layout_height="62dp"
             android:backgroundTint="@color/colorAccent2"
             android:fontFamily="@font/myriadpro"
-            android:text="HOME SCREEN"
+            android:text="@string/home_screen"
             app:layout_constraintBottom_toBottomOf="@id/guideline8"
             app:layout_constraintTop_toBottomOf="@+id/bottomText"
             tools:layout_editor_absoluteX="35dp" />
@@ -117,7 +117,7 @@
             android:gravity="top"
             android:outlineAmbientShadowColor="@color/colorHomeDark"
             android:outlineSpotShadowColor="@color/colorHomeDark"
-            android:text="CAMERA"
+            android:text="@string/camera"
             app:layout_constraintTop_toTopOf="@+id/home_button"
             tools:layout_editor_absoluteX="279dp" />
 
@@ -131,20 +131,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/take_photo_button"
             style="@style/AppButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:elevation="1dp"
             android:fontFamily="@font/myriadpro"
             android:gravity="top"
-            android:outlineAmbientShadowColor="@color/colorHomeDark"
-            android:outlineSpotShadowColor="@color/colorHomeDark"
-            android:text="CAMERA"
-            android:id="@+id/take_photo_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"/>
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:src="@drawable/camera_icon"
+                android:tint="@color/colorAccent2" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="180dp"
+            android:text="SAVE?"
+            android:alpha="0"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/colorAccent" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
