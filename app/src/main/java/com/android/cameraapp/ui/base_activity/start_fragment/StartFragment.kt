@@ -4,7 +4,9 @@ import android.Manifest
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.pm.PackageManager
+import android.graphics.Camera
 import android.graphics.Matrix
+import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -17,6 +19,7 @@ import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -42,7 +45,7 @@ class StartFragment : DaggerFragment() {
     lateinit var navigation: NavController
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
+    var imageUri: Uri? = null
     private val permissions = arrayOf(Manifest.permission.CAMERA)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,10 +62,12 @@ class StartFragment : DaggerFragment() {
             startViewModel = viewModel
             Log.d("TAG1", "HAPPENED")
         }
-        binding.homeButton.setOnClickListener { onHomeButtonClick() }
-        binding.circleImageView.setOnClickListener {
-            auth.signOut()
-            navigation.setGraph(R.navigation.auth_nav)
+        binding.apply {
+            homeButton.setOnClickListener { onHomeButtonClick() }
+            circleImageView.setOnClickListener {
+                auth.signOut()
+                navigation.setGraph(R.navigation.auth_nav)}
+            save.setOnClickListener { pictureCaptureNavigation() }
         }
         return binding.root
     }
@@ -86,6 +91,10 @@ class StartFragment : DaggerFragment() {
         )
     }
 
+    override fun onStop() {
+        super.onStop()
+        CameraX.unbindAll()
+    }
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {
@@ -174,6 +183,7 @@ class StartFragment : DaggerFragment() {
             capture.takePicture(imageFile, object : ImageCapture.OnImageSavedListener {
                 override fun onImageSaved(file: File) {
                     preview.removePreviewOutputListener()
+                    imageUri = file.toUri()
                     saveAnimationEnd()
                     ToastHandler.showToast(activity!!.application, file.absolutePath)
 
@@ -236,8 +246,19 @@ class StartFragment : DaggerFragment() {
         ObjectAnimator.ofFloat(binding.save, "alpha", 0f, 1f).start()
     }
 
+
+    fun pictureCaptureNavigation() {
+        imageUri?.let {
+            val destination = StartFragmentDirections.actionGlobalAddPhotoNav(it)
+            CameraX.unbindAll()
+            navigation.navigate(destination)
+        }
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+
     }
 
 }

@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
+import androidx.navigation.fragment.navArgs
+import com.android.cameraapp.AddPhotoNavArgs
 import com.android.cameraapp.databinding.AddPhotoFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
 
@@ -21,6 +23,7 @@ const val READ_PERMISSIONS_CODE = 2
 class AddFragmentOne : DaggerFragment() {
 
     lateinit var binding: AddPhotoFragmentBinding
+    val args: AddPhotoNavArgs by navArgs()
     var transitionState = true
     @Inject
     lateinit var navController: NavController
@@ -41,7 +44,7 @@ class AddFragmentOne : DaggerFragment() {
                 if(checkPermissions())   selectImage() else askForPermissions()
             }
         }
-
+        resolveArgs()
         return binding.root
     }
 
@@ -82,6 +85,16 @@ class AddFragmentOne : DaggerFragment() {
             binding.addPhotoImage.setImageURI(uri)
         }
         if (!transitionState) binding.constraintLayout.transitionToEnd() else binding.constraintLayout.transitionToStart()
+    }
+
+    fun resolveArgs() {
+        args.imageUri?.let {
+            //need to update binding cause it has logic for making button clickable/unclickable
+            binding.apply {
+                imageUri = it
+                addPhotoImage.setImageURI(it)
+            }
+        }
     }
 
     override fun onStart() {

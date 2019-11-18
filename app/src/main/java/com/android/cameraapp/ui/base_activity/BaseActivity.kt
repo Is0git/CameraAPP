@@ -1,5 +1,6 @@
 package com.android.cameraapp.ui.base_activity
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -38,7 +39,6 @@ class BaseActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         baseViewModel = ViewModelProviders.of(this, viewModelFactory).get(BaseViewModel::class.java)
-
 
         navController = findNavController(R.id.main_fragment_container)
         setSupportActionBar(binding.bar)

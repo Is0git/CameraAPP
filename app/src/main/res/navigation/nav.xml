@@ -31,7 +31,12 @@
             android:id="@+id/action_global_add_photo_nav"
             app:destination="@id/add_photo_nav"
             app:enterAnim="@anim/zoom_in_animation"
-            app:popEnterAnim="@anim/zoom_in_animation" />
+            app:popEnterAnim="@anim/zoom_in_animation">
+            <argument
+                android:name="imageUri"
+                app:argType="android.net.Uri"
+                app:nullable="true" />
+        </action>
         <navigation
             android:id="@+id/activityFragment"
             app:startDestination="@id/homeFragment">
@@ -78,14 +83,14 @@
 
                 <argument
                     android:name="transitionName"
-                    app:nullable="true"
                     android:defaultValue="@null"
-                    app:argType="string" />
+                    app:argType="string"
+                    app:nullable="true" />
                 <argument
                     android:name="transitionName2"
-                    app:nullable="true"
                     android:defaultValue="@null"
-                    app:argType="string" />
+                    app:argType="string"
+                    app:nullable="true" />
 
 
                 <action
@@ -114,15 +119,15 @@
                         app:nullable="true" />
                     <argument
                         android:name="transitionName"
-                        app:nullable="true"
                         android:defaultValue="@null"
-                        app:argType="string" />
+                        app:argType="string"
+                        app:nullable="true" />
 
                     <argument
                         android:name="transitionName2"
-                        app:nullable="true"
                         android:defaultValue="@null"
-                        app:argType="string" />
+                        app:argType="string"
+                        app:nullable="true" />
                 </action>
             </fragment>
             <fragment
@@ -159,6 +164,10 @@
     <navigation
         android:id="@+id/add_photo_nav"
         app:startDestination="@id/addFragmentOne">
+        <argument
+            android:name="imageUri"
+            app:argType="android.net.Uri"
+            app:nullable="true" />
         <fragment
             android:id="@+id/addFragmentTwo"
             android:name="com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.AddFragmentTwo"
