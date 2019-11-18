@@ -235,5 +235,14 @@
             android:layout_width="75dp"
             motion:layout_constraintTop_toBottomOf="parent"
             android:id="@+id/progressBar" />
+        <Constraint
+            android:id="@+id/title_layout"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guidline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            android:layout_marginTop="0dp"
+            motion:layout_constraintBottom_toTopOf="parent" />
     </ConstraintSet>
 </MotionScene>
