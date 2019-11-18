@@ -109,9 +109,7 @@ class StartFragment : DaggerFragment() {
     }
 
     fun startCamera() {
-
         val metrics = DisplayMetrics().also { binding.cameraView.display.getRealMetrics(it) }
-
         val aspectRatio = Rational(metrics.widthPixels, metrics.heightPixels)
         val rotation = binding.cameraView.display.rotation
         val resolution = Size(metrics.widthPixels, metrics.heightPixels)

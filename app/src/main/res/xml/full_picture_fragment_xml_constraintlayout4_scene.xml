@@ -1,121 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="1000">
-       <KeyFrameSet>
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_card"
-               motion:framePosition="17"
-               android:elevation="15dp"
-               android:scaleX="0.9" />
-           <KeyAttribute
-               motion:motionTarget="@+id/base_card"
-               motion:framePosition="10"
-               android:elevation="1dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/base_card"
-               motion:framePosition="0"
-               android:elevation="2dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_card"
-               motion:framePosition="0"
-               android:elevation="1dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_list"
-               motion:framePosition="0"
-               android:elevation="20dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_card"
-               motion:framePosition="100"
-               android:elevation="6dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_card"
-               motion:framePosition="100"
-               android:scaleX="1.0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/base_card"
-               motion:framePosition="20"
-               android:rotationX="-10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/base_card"
-               motion:framePosition="100"
-               android:rotationX="10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/photo_name"
-               motion:framePosition="20"
-               android:rotationX="-10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/photo_name"
-               motion:framePosition="100"
-               android:rotationX="10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/materialTextView"
-               motion:framePosition="20"
-               android:rotationX="-10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/materialTextView"
-               motion:framePosition="100"
-               android:rotationX="10" />
+        <KeyFrameSet>
+            <KeyAttribute
+                android:elevation="15dp"
+                android:scaleX="0.9"
+                motion:framePosition="17"
+                motion:motionTarget="@+id/comments_card" />
+            <KeyAttribute
+                android:elevation="1dp"
+                motion:framePosition="10"
+                motion:motionTarget="@+id/base_card" />
+            <KeyAttribute
+                android:elevation="2dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/base_card" />
+            <KeyAttribute
+                android:elevation="1dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/comments_card" />
+            <KeyAttribute
+                android:elevation="20dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/comments_list" />
+            <KeyAttribute
+                android:elevation="6dp"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/comments_card" />
+            <KeyAttribute
+                android:scaleX="1.0"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/comments_card" />
+            <KeyAttribute
+                android:rotationX="-10"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/base_card" />
+            <KeyAttribute
+                android:rotationX="10"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/base_card" />
+            <KeyAttribute
+                android:rotationX="-10"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/photo_name" />
+            <KeyAttribute
+                android:rotationX="10"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/photo_name" />
+            <KeyAttribute
+                android:rotationX="-10"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/materialTextView" />
+            <KeyAttribute
+                android:rotationX="10"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/materialTextView" />
 
-           <KeyAttribute
-               motion:motionTarget="@+id/materialTextView4"
-               motion:framePosition="20"
-               android:rotationX="-10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/materialTextView4"
-               motion:framePosition="100"
-               android:rotationX="10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/photo_description"
-               motion:framePosition="20"
-               android:rotationX="-10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/photo_description"
-               motion:framePosition="100"
-               android:rotationX="10" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_list"
-               motion:framePosition="17"
-               android:scaleX="0.9" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_list"
-               motion:framePosition="100"
-               android:scaleX="1" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_number"
-               motion:framePosition="10"
-               android:alpha="0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_card"
-               motion:framePosition="48"
-               android:elevation="15dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comments_number"
-               motion:framePosition="0"
-               android:elevation="10dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comment_layout"
-               motion:framePosition="80"
-               android:alpha="0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/comment_layout"
-               motion:framePosition="100"
-               android:alpha="1" />
-       </KeyFrameSet>
-        <OnSwipe motion:touchAnchorSide="top"
+            <KeyAttribute
+                android:rotationX="-10"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/materialTextView4" />
+            <KeyAttribute
+                android:rotationX="10"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/materialTextView4" />
+            <KeyAttribute
+                android:rotationX="-10"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/photo_description" />
+            <KeyAttribute
+                android:rotationX="10"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/photo_description" />
+            <KeyAttribute
+                android:scaleX="0.9"
+                motion:framePosition="17"
+                motion:motionTarget="@+id/comments_list" />
+            <KeyAttribute
+                android:scaleX="1"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/comments_list" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="10"
+                motion:motionTarget="@+id/comments_number" />
+            <KeyAttribute
+                android:elevation="15dp"
+                motion:framePosition="48"
+                motion:motionTarget="@+id/comments_card" />
+            <KeyAttribute
+                android:elevation="10dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/comments_number" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="80"
+                motion:motionTarget="@+id/comment_layout" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/comment_layout" />
+        </KeyFrameSet>
+        <OnSwipe
             motion:dragDirection="dragUp"
+            motion:maxAcceleration="10"
             motion:touchAnchorId="@id/comments_list"
-            motion:maxAcceleration="10" />
+            motion:touchAnchorSide="top" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
 
-
+        <Constraint
+            android:id="@+id/private_switch"
+            android:layout_height="wrap_content"
+            android:text="Private?"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
+            motion:layout_constraintStart_toEndOf="@id/circleImageView"
+            motion:layout_editor_absoluteY="271dp" >
+            <CustomAttribute
+                motion:attributeName="elevation"
+                motion:customDimension="80dp" />
+        </Constraint>
         <Constraint
             android:id="@+id/comments_card"
             android:layout_width="match_parent"
@@ -135,108 +145,123 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp"
-            motion:layout_constraintTop_toBottomOf="parent"
-            android:hint="@string/comment"/>
+            android:hint="@string/comment"
+            motion:layout_constraintTop_toBottomOf="parent" />
         <Constraint
             android:id="@+id/base_card"
-            motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="@+id/guideline15"
-            motion:layout_constraintStart_toStartOf="parent">
-        </Constraint>
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/guideline15"></Constraint>
         <Constraint
             android:id="@+id/base_card"
-            motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="@+id/guideline15"
-            motion:layout_constraintStart_toStartOf="parent"/>
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/guideline15" />
         <Constraint
             android:id="@+id/comments_number"
-            android:elevation="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/base_card"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
             android:layout_marginTop="16dp"
-            android:alpha="1" />
+            android:alpha="1"
+            android:elevation="10dp"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            motion:layout_constraintTop_toBottomOf="@+id/base_card" />
 
         <Constraint
             android:id="@+id/materialTextView"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toEndOf="@+id/circleImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/circleImageView"
-            motion:layout_constraintStart_toStartOf="@+id/circleImageView" >
+            android:elevation="3dp"
+            motion:layout_constraintEnd_toEndOf="@+id/circleImageView"
+            motion:layout_constraintStart_toStartOf="@+id/circleImageView"
+            motion:layout_constraintTop_toBottomOf="@+id/circleImageView">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
             android:id="@+id/materialTextView4"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toEndOf="@+id/materialTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/materialTextView"
-            motion:layout_constraintStart_toStartOf="@+id/materialTextView" >
+            android:elevation="3dp"
+            motion:layout_constraintEnd_toEndOf="@+id/materialTextView"
+            motion:layout_constraintStart_toStartOf="@+id/materialTextView"
+            motion:layout_constraintTop_toBottomOf="@+id/materialTextView">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
         <Constraint
             android:id="@+id/likes_button"
-            android:elevation="3dp"
-            motion:layout_constraintStart_toEndOf="@+id/liker_3"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_1"
             android:layout_marginStart="14dp"
+            android:elevation="3dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/liker_1"
+            motion:layout_constraintStart_toEndOf="@+id/liker_3"
             motion:layout_constraintTop_toTopOf="@+id/liker_1" />
         <Constraint
             android:id="@+id/photo_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:elevation="3dp"
             motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/user_divider"
-            android:layout_marginStart="8dp"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
-            android:layout_marginTop="16dp" />
+            motion:layout_constraintTop_toBottomOf="@+id/user_divider" />
         <Constraint
             android:id="@+id/photo_description"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/photo_name"
+            android:layout_marginTop="8dp"
+            android:elevation="3dp"
+            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             motion:layout_constraintStart_toStartOf="@+id/photo_name"
-            android:layout_marginTop="8dp" />
+            motion:layout_constraintTop_toBottomOf="@+id/photo_name" />
 
         <Constraint
             android:id="@+id/comments_list"
-            android:elevation="20dp"
-            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            motion:layout_constraintTop_toBottomOf="@id/comments_number"
+            android:elevation="20dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/comments_card"
+            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             motion:layout_constraintStart_toStartOf="@id/left_guideline"
-            motion:layout_constraintBottom_toBottomOf="@+id/comments_card" />
+            motion:layout_constraintTop_toBottomOf="@id/comments_number" />
         <Constraint
             android:id="@+id/circleImageView"
-            android:elevation="7dp"
-            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:alpha="0"
-            motion:layout_constraintTop_toTopOf="@+id/image_base"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline">
+            android:elevation="7dp"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            motion:layout_constraintTop_toTopOf="@+id/image_base">
             <CustomAttribute
                 motion:attributeName="elevation"
                 motion:customDimension="7dp" />
         </Constraint>
+        <Constraint
+            android:id="@+id/private_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
+            motion:layout_constraintStart_toEndOf="@id/circleImageView"
+            motion:layout_editor_absoluteY="271dp"
+            motion:layout_constraintTop_toTopOf="@+id/base_card" />
+        <Constraint
+            android:id="@+id/photo"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toTopOf="@+id/guideline15"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
 
     </ConstraintSet>
 
@@ -261,101 +286,112 @@
             android:id="@+id/comment_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="parent"
+            android:elevation="10dp"
             android:hint="@string/comment"
-            android:elevation="10dp" />
+            motion:layout_constraintBottom_toBottomOf="parent" />
         <Constraint
             android:id="@+id/comments_list"
-            android:elevation="20dp"
-            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            motion:layout_constraintTop_toBottomOf="@id/comments_number"
-            motion:layout_constraintStart_toStartOf="@id/left_guideline"
-            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="0dp"
+            android:elevation="20dp"
             motion:layout_constraintBottom_toTopOf="@id/comment_layout"
-            android:layout_marginBottom="0dp" />
+            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
+            motion:layout_constraintStart_toStartOf="@id/left_guideline"
+            motion:layout_constraintTop_toBottomOf="@id/comments_number"
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/base_card"
-            motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="@+id/guideline15"
-            motion:layout_constraintStart_toStartOf="parent"/>
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/guideline15" />
         <Constraint
             android:id="@+id/comments_number"
-            android:elevation="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/base_card"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
             android:layout_marginTop="16dp"
-            android:alpha="0" />
+            android:alpha="0"
+            android:elevation="4dp"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            motion:layout_constraintTop_toBottomOf="@+id/base_card" />
 
         <Constraint
             android:id="@+id/materialTextView"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toEndOf="@+id/circleImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/circleImageView"
-            motion:layout_constraintStart_toStartOf="@+id/circleImageView" >
+            android:elevation="3dp"
+            motion:layout_constraintEnd_toEndOf="@+id/circleImageView"
+            motion:layout_constraintStart_toStartOf="@+id/circleImageView"
+            motion:layout_constraintTop_toBottomOf="@+id/circleImageView">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
         </Constraint>
         <Constraint
             android:id="@+id/materialTextView4"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toEndOf="@+id/materialTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/materialTextView"
-            motion:layout_constraintStart_toStartOf="@+id/materialTextView" >
+            android:elevation="3dp"
+            motion:layout_constraintEnd_toEndOf="@+id/materialTextView"
+            motion:layout_constraintStart_toStartOf="@+id/materialTextView"
+            motion:layout_constraintTop_toBottomOf="@+id/materialTextView">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
         </Constraint>
         <Constraint
             android:id="@+id/likes_button"
-            android:elevation="3dp"
-            motion:layout_constraintStart_toEndOf="@+id/liker_3"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/liker_1"
             android:layout_marginStart="14dp"
+            android:elevation="3dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/liker_1"
+            motion:layout_constraintStart_toEndOf="@+id/liker_3"
             motion:layout_constraintTop_toTopOf="@+id/liker_1" />
         <Constraint
             android:id="@+id/photo_name"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/user_divider"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:elevation="3dp"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
-            android:layout_marginTop="16dp" />
+            motion:layout_constraintTop_toBottomOf="@+id/user_divider" />
         <Constraint
             android:id="@+id/photo_description"
-            android:elevation="3dp"
-            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/photo_name"
+            android:layout_marginTop="8dp"
+            android:elevation="3dp"
+            motion:layout_constraintEnd_toEndOf="@id/right_guideline"
             motion:layout_constraintStart_toStartOf="@+id/photo_name"
-            android:layout_marginTop="8dp" />
+            motion:layout_constraintTop_toBottomOf="@+id/photo_name" />
         <Constraint
             android:id="@+id/circleImageView"
-            android:elevation="7dp"
-            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:alpha="0"
-            motion:layout_constraintTop_toTopOf="@+id/image_base"
-            motion:layout_constraintStart_toStartOf="@+id/left_guideline" >
+            android:elevation="7dp"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
+            motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            motion:layout_constraintTop_toTopOf="@+id/image_base">
             <CustomAttribute
                 motion:attributeName="elevation"
                 motion:customDimension="2dp" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/private_switch"
+            android:layout_height="wrap_content"
+            android:text="Private?"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
+            motion:layout_constraintStart_toEndOf="@id/circleImageView"
+            motion:layout_constraintTop_toTopOf="@id/base_card" >
+            <CustomAttribute
+                motion:attributeName="elevation"
+                motion:customDimension="1dp" />
         </Constraint>
 
 

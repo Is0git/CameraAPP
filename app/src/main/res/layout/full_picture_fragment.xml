@@ -49,10 +49,10 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/base_card"
-            app:cardCornerRadius="0dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="300dp"
+            app:cardCornerRadius="0dp"
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,6 +173,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/liker_2"
             app:layout_constraintStart_toEndOf="@+id/liker_1"
             app:layout_constraintTop_toTopOf="@+id/liker_2" />
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/liker_4"
@@ -312,5 +313,12 @@
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/private_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Private?" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
