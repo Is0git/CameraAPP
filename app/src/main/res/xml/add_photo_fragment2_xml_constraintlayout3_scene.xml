@@ -129,14 +129,14 @@
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
             android:id="@+id/description_layout"
-            motion:layout_constraintEnd_toStartOf="@+id/right_guidline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             motion:layout_constraintBottom_toTopOf="@+id/private_checkBox"
-            motion:layout_constraintTop_toBottomOf="@+id/almost_done_text"
+            motion:layout_constraintEnd_toStartOf="@+id/right_guidline"
             motion:layout_constraintHorizontal_bias="0.0"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
+            motion:layout_constraintTop_toBottomOf="@+id/title_layout"
             android:layout_marginTop="20dp"
             motion:layout_constraintVertical_bias="0.0" />
     </ConstraintSet>

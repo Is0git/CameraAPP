@@ -238,7 +238,7 @@
             android:alpha="0"
             android:elevation="15dp"
             android:fontFamily="@font/youth"
-            android:text=" &quot;Almost perfect&quot;"
+            android:text="@{item.title}"
             android:textColor="@color/colorTextDark"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="@id/feedCard_shape"

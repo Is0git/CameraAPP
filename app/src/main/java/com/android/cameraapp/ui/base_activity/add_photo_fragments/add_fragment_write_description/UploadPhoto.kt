@@ -35,6 +35,7 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
     private val fireStorage = FirebaseStorage.getInstance()
     private var uri: String? = null
 
+
     override suspend fun doWork(): Result = coroutineScope {
 
         val jobs = launch {
@@ -130,7 +131,9 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
                 getCurrentTime(),
                 downloadURL[0],
                 downloadURL[1],
-                downloadURL[2]
+                downloadURL[2],
+                "",
+                inputData.getString("title")
             )
         )
             .await().get().apply {

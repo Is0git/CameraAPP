@@ -48,6 +48,30 @@
                 app:altSrc="@drawable/gradient_login_shape"
                 app:roundPercent="0" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/title_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Title"
+                app:counterEnabled="true"
+                app:counterTextColor="@color/colorSecondaryVariant"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toStartOf="@+id/right_guidline"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/almost_done_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/title_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/login_text_input_size" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/left_guideline"
                 android:layout_width="wrap_content"
@@ -105,7 +129,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/right_guidline"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/left_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/almost_done_text">
+                app:layout_constraintTop_toBottomOf="@+id/title_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/description_edit_text"

@@ -9,6 +9,6 @@ import javax.inject.Inject
 @AddPhotoFragmentsScope
 class AddFragmentsViewModel @Inject constructor(val repository: AddFragmentsRepository) : ViewModel() {
 
-    fun uploadPhoto(uri: Uri, description:String, isPrivate:Boolean) = viewModelScope.launch { repository.uploadPhoto(uri, description, isPrivate) }
+    fun uploadPhoto(uri: Uri, title: String, description:String, isPrivate:Boolean) = viewModelScope.launch { repository.uploadPhoto(uri, title, description, isPrivate) }
 
 }

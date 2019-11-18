@@ -147,7 +147,7 @@ class StartFragment : DaggerFragment() {
 
         val analysis = ImageAnalysis(analysisConfig)
 
-        analysis.setAnalyzer { image, rotationDegrees ->
+        analysis.setAnalyzer { image, _ ->
             val rect = image.cropRect
             val format = image.format
             val width = image.width

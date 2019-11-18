@@ -61,6 +61,7 @@ sealed class DataFlat {
         var doc_id: String? = "N/A",
         val mid_image_url: String? = "N/A",
         val low_image_url: String? = "N/A",
+        val title: String? = "",
         var user: UserCollection.User? = null
     ) : Parcelable, BaseObservable() {
         constructor(parcel: Parcel) : this(

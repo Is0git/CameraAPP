@@ -57,7 +57,8 @@ sealed class UserCollection {
         val image_url: String? = "N/A",
         val mid_image_url: String = "N/A",
         val low_image_url: String = "N/A",
-        var doc_id: String = "N/A"
+        var doc_id: String = "N/A",
+        var title: String? = ""
     )
 
     data class Comments(val comment_date: String? = "N/A",

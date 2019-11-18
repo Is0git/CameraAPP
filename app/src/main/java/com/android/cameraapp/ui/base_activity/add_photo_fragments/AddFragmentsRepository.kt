@@ -21,9 +21,9 @@ class AddFragmentsRepository @Inject constructor(
     val constraints: Constraints
 ) {
 
-    fun uploadPhoto(uri: Uri, description:String, isPrivate:Boolean) {
+    fun uploadPhoto(uri: Uri, title: String, description:String, isPrivate:Boolean) {
 
-        val data = workDataOf("image_uri" to uri.toString(), "description" to description, "isPrivate" to isPrivate)
+        val data = workDataOf("image_uri" to uri.toString(), "description" to description, "isPrivate" to isPrivate, "title" to title)
         val work = OneTimeWorkRequestBuilder<UploadPhoto>()
             .addTag("Upload Work")
             .setInputData(data)
