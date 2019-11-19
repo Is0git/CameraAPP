@@ -130,6 +130,9 @@
                         app:argType="string"
                         app:nullable="true" />
                 </action>
+                <action
+                    android:id="@+id/action_homeFragment_to_editProfileFragment"
+                    app:destination="@id/editProfileFragment" />
             </fragment>
             <fragment
                 android:id="@+id/fullPictureFragment"
@@ -160,6 +163,10 @@
                 android:id="@+id/mapFragment"
                 android:name="com.android.cameraapp.ui.base_activity.map_fragment.MapFragment"
                 android:label="MapFragment" />
+            <fragment
+                android:id="@+id/editProfileFragment"
+                android:name="com.android.cameraapp.ui.base_activity.edit_profile_fragment.EditProfileFragment"
+                android:label="EditProfileFragment" />
         </navigation>
     </navigation>
     <navigation

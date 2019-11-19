@@ -51,7 +51,6 @@ class HomeFragment : DaggerFragment() {
 
             true -> setupForeignUser(inflater, container)
         }
-
         return binding.root
     }
 
@@ -112,6 +111,7 @@ class HomeFragment : DaggerFragment() {
         container: ViewGroup?
     ) {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
+        (binding as HomeFragmentBinding).editProfile.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_editProfileFragment) }
         (binding as HomeFragmentBinding).apply {
             lifecycleOwner = viewLifecycleOwner
             parentViewModel = parentFragmentViewModel

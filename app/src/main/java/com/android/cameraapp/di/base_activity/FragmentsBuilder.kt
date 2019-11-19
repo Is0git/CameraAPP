@@ -3,6 +3,7 @@ package com.android.cameraapp.di.base_activity
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
+import com.android.cameraapp.di.base_activity.edit_profile_fragment.EditProfileScope
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentModule
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentViewModelModule
@@ -31,6 +32,7 @@ import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.search_fragment.SearchFragmentScope
 import com.android.cameraapp.di.base_activity.search_fragment.SearchViewModelModule
+import com.android.cameraapp.ui.base_activity.edit_profile_fragment.EditProfileFragment
 import com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
@@ -106,5 +108,9 @@ abstract class FragmentsBuilder {
     @ContributesAndroidInjector(modules = [SearchViewModelModule::class])
     @SearchFragmentScope
     abstract fun searchFragment() : SearchFragment
+
+    @ContributesAndroidInjector
+    @EditProfileScope
+    abstract fun editFragment() : EditProfileFragment
 
 }
