@@ -31,6 +31,8 @@ import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureV
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentModule
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentViewModelModule
+import com.android.cameraapp.di.base_activity.map_fragment.MapFragmentScope
+import com.android.cameraapp.di.base_activity.map_fragment.MapViewModelModule
 import com.android.cameraapp.di.base_activity.search_fragment.SearchFragmentScope
 import com.android.cameraapp.di.base_activity.search_fragment.SearchViewModelModule
 import com.android.cameraapp.ui.base_activity.edit_profile_fragment.EditProfileFragment
@@ -41,6 +43,7 @@ import com.android.cameraapp.ui.base_activity.full_picture_fragment.FullPictureF
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragment
 import com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment
+import com.android.cameraapp.ui.base_activity.map_fragment.MapFragment
 import com.android.cameraapp.ui.base_activity.photos_fragment.PhotosFragment
 import com.android.cameraapp.ui.base_activity.registration_fragment.RegistrationFragment
 import com.android.cameraapp.ui.base_activity.search_fragment.SearchFragment
@@ -113,5 +116,9 @@ abstract class FragmentsBuilder {
     @ContributesAndroidInjector(modules = [EditFragmentViewModelModule::class])
     @EditProfileScope
     abstract fun editFragment() : EditProfileFragment
+
+    @ContributesAndroidInjector(modules = [MapViewModelModule::class])
+    @MapFragmentScope
+    abstract fun mapFragment() : MapFragment
 
 }

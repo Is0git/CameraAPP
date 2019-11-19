@@ -19,10 +19,11 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import dagger.android.support.DaggerFragment
 
 const val permissionRequestCode = 205
 
-class MapFragment : Fragment() {
+class MapFragment : DaggerFragment() {
     lateinit var binding: MapsFragmentBinding
     lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
