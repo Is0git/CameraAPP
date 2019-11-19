@@ -1,6 +1,8 @@
 package com.android.cameraapp.data.data_models
 
 import android.os.Parcelable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import com.google.common.primitives.Chars
 import kotlinx.android.parcel.Parcelize
 
@@ -8,15 +10,16 @@ sealed class UserCollection {
     //Collection
     @Parcelize
     data class User constructor(
-        val description: Map<String, String> = mapOf(),
+        @get: Bindable var description: String? = "",
+        @get: Bindable  var quote: String? = "",
         val email: String? = "email",
         val is_active: Boolean? = true,
         val last_active: String? = "unknown",
         val last_active_int: Long? = 0,
         val username: String? = "unknown",
-        val photo_url: String? = "null",
+        @get: Bindable var photo_url: String? = "null",
         val uid: String? = "no id",
-        val username_array: List<String>? = listOf()) : Parcelable {
+        val username_array: List<String>? = listOf()) : Parcelable, BaseObservable() {
 
     }
 

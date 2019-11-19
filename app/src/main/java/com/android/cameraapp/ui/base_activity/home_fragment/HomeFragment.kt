@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.android.cameraapp.R
@@ -15,6 +16,7 @@ import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.HomeFragmentBinding
 import com.android.cameraapp.databinding.HomeFragmentForeignBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.cameraapp.ui.base_activity.edit_profile_fragment.EditProfileFragmentDirections
 import com.android.cameraapp.ui.base_activity.start_fragment.StartFragmentViewModel
 import com.android.nbaapp.data.vms.ViewModelFactory
 import com.google.android.material.tabs.TabLayout
@@ -111,7 +113,10 @@ class HomeFragment : DaggerFragment() {
         container: ViewGroup?
     ) {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
-        (binding as HomeFragmentBinding).editProfile.setOnClickListener { controller.navigate(R.id.action_homeFragment_to_editProfileFragment) }
+        (binding as HomeFragmentBinding).editProfile.setOnClickListener {
+            val destination = HomeFragmentDirections.actionHomeFragmentToEditProfileFragment(parentFragmentViewModel?.userData?.value!!)
+            controller.navigate(destination)
+        }
         (binding as HomeFragmentBinding).apply {
             lifecycleOwner = viewLifecycleOwner
             parentViewModel = parentFragmentViewModel

@@ -132,7 +132,11 @@
                 </action>
                 <action
                     android:id="@+id/action_homeFragment_to_editProfileFragment"
-                    app:destination="@id/editProfileFragment" />
+                    app:destination="@id/editProfileFragment">
+                    <argument
+                        android:name="user"
+                        app:argType="android.os.Parcelable" />
+                </action>
             </fragment>
             <fragment
                 android:id="@+id/fullPictureFragment"
@@ -166,7 +170,11 @@
             <fragment
                 android:id="@+id/editProfileFragment"
                 android:name="com.android.cameraapp.ui.base_activity.edit_profile_fragment.EditProfileFragment"
-                android:label="EditProfileFragment" />
+                android:label="EditProfileFragment">
+                <argument
+                    android:name="user"
+                    app:argType="android.os.Parcelable" />
+            </fragment>
         </navigation>
     </navigation>
     <navigation

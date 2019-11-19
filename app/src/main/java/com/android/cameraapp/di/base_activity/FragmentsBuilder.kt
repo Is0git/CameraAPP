@@ -3,6 +3,7 @@ package com.android.cameraapp.di.base_activity
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.add_photo_fragments.AddPhotoFragmentsScope
+import com.android.cameraapp.di.base_activity.edit_profile_fragment.EditFragmentViewModelModule
 import com.android.cameraapp.di.base_activity.edit_profile_fragment.EditProfileScope
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentModule
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
@@ -109,7 +110,7 @@ abstract class FragmentsBuilder {
     @SearchFragmentScope
     abstract fun searchFragment() : SearchFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [EditFragmentViewModelModule::class])
     @EditProfileScope
     abstract fun editFragment() : EditProfileFragment
 

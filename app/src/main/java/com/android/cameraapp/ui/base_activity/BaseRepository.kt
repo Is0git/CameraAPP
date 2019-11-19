@@ -149,10 +149,7 @@ class BaseRepository @Inject constructor(
        username?.forEach { usernameArray.add(it.toString()) }
         val result = firestore.document("$userCollection/${user?.uid}").set(
             UserCollection.User(
-                mapOf(
-                    "large_message" to "Your description",
-                    "shorter_message" to "Add something inspirational"
-                ), user?.email, true, date.await(), currentTime.await(), username, null, user?.uid, usernameArray)
+               "", "", user?.email, true, date.await(), currentTime.await(), username, null, user?.uid, usernameArray)
         ).addOnSuccessListener { controller.setGraph(R.navigation.nav) }
 
 

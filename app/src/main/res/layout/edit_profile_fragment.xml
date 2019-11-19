@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.android.cameraapp.data.data_models.UserCollection.User" />
+    </data>
     <ScrollView
         android:layout_width="match_parent"
         tools:background="@color/colorSurface"
@@ -24,7 +30,8 @@
                 android:id="@+id/userImage"
                 android:layout_width="match_parent"
                 android:layout_height="326dp"
-                android:background="@drawable/background"
+                android:transitionName="user_image"
+                app:loadImageFromUrl="@{user.photo_url}"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -45,15 +52,16 @@
                 android:id="@+id/user_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="@font/myriadpro"
                 android:singleLine="true"
-                android:text="@string/username"
+                android:text="@{user.username}"
                 android:textColor="@color/colorLightGrey"
                 android:textSize="@dimen/card_large"
+                android:transitionName="user_name"
                 app:layout_constraintBottom_toBottomOf="@+id/userImage"
                 app:layout_constraintEnd_toStartOf="@+id/add_image"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/left_guideline" />
 
 
@@ -62,6 +70,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:hint="@string/description"
                 app:layout_constraintEnd_toStartOf="@+id/right_guideline"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -71,6 +80,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/description_text_edit"
                     android:layout_width="match_parent"
+                    android:text="@{user.description}"
+                    android:singleLine="true"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -89,6 +100,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/quote_text_edit"
                     android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:text="@{user.quote}"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,8 +139,9 @@
                 android:id="@+id/new_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
-                android:hint="@string/new_password"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/new_password"
                 app:layout_constraintEnd_toStartOf="@+id/right_guideline"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/left_guideline"
@@ -136,6 +150,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/new_password_text_edit"
                     android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:inputType="textPassword"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -154,6 +170,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/repeat_password_text_edit"
                     android:layout_width="match_parent"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,10 +179,9 @@
                 android:id="@+id/confirm"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/checkmark_png"
                 android:backgroundTint="@color/colorAccent2"
-                android:layout_marginEnd="8dp"
-               android:background="@drawable/checkmark_png"
                 app:iconGravity="textStart"
                 app:layout_constraintEnd_toStartOf="@+id/right_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -173,11 +190,18 @@
                 android:id="@+id/add_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="32dp"
                 android:background="@drawable/add_image_icon"
                 app:iconGravity="textStart"
                 app:layout_constraintBottom_toBottomOf="@+id/user_name"
                 app:layout_constraintEnd_toStartOf="@+id/right_guideline" />
+
+            <ImageButton
+                android:id="@+id/cancel"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/cancel_icon"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toTopOf="@+id/confirm" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

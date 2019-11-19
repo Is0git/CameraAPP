@@ -64,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
-            android:text="@{userData.description.get(`shorter_message`)}"
+            android:text="@{userData.quote}"
             android:textAlignment="center"
             android:textColor="@color/colorHomeLightGrey"
             android:textSize="@dimen/location_textSize" />
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myriadpro"
             android:lineSpacingExtra="@dimen/description_text_spacing"
-            android:text="@{userData.description.get(`large_message`)}"
+            android:text="@{userData.description}"
             android:textAlignment="center"
             android:textColor="@color/colorHomeDark" />
 

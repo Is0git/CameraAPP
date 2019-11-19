@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/myriadpro"
-            android:text="@{startViewModel.userData.description.get(`shorter_message`)}"
+            android:text="@{startViewModel.userData.description}"
             android:textColor="@color/colorTextHeaderSmall"
             android:textSize="@dimen/regular_text_size"
             app:layout_constraintBottom_toTopOf="@+id/midText"

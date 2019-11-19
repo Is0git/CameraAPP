@@ -54,6 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
+            android:transitionName="user_name"
             android:text="@{parentViewModel.userData.username}"
             android:textAlignment="center"
             android:textColor="@color/colorTextUser"
@@ -64,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
-            android:text="@{parentViewModel.userData.description.get(`shorter_message`)}"
+            android:text="@{parentViewModel.userData.description}"
             android:textAlignment="center"
             android:textColor="@color/colorHomeLightGrey"
             android:textSize="@dimen/location_textSize" />
@@ -75,7 +76,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myriadpro"
             android:lineSpacingExtra="@dimen/description_text_spacing"
-            android:text="@{parentViewModel.userData.description.get(`large_message`)}"
+            android:text="@{parentViewModel.userData.quote}"
             android:textAlignment="center"
             android:textColor="@color/colorHomeDark" />
 
