@@ -13,6 +13,20 @@
             app:maxAcceleration="100"
             app:touchAnchorId="@id/on_top_card"
             app:touchAnchorSide="top" />
+        <KeyFrameSet >
+            <KeyAttribute
+                app:motionTarget="@+id/edit_profile"
+                app:framePosition="0"
+                android:alpha="0" />
+            <KeyAttribute
+                app:motionTarget="@+id/edit_profile"
+                app:framePosition="80"
+                android:alpha="0" />
+            <KeyAttribute
+                app:motionTarget="@+id/edit_profile"
+                app:framePosition="100"
+                android:alpha="1" />
+        </KeyFrameSet>
 
     </Transition>
 
@@ -136,6 +150,14 @@
                 app:attributeName="elevation"
                 app:customDimension="0dp" />
         </Constraint>
+        <Constraint
+            android:layout_height="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/avatar_image"
+            android:layout_width="25dp"
+            android:id="@+id/edit_profile"
+            app:layout_constraintTop_toTopOf="@+id/avatar_image"
+            app:layout_constraintStart_toEndOf="@+id/avatar_image"
+            android:layout_marginStart="16dp" />
 
     </ConstraintSet>
 
@@ -256,6 +278,14 @@
                 app:attributeName="elevation"
                 app:customDimension="9dp" />
         </Constraint>
+        <Constraint
+            android:layout_height="25dp"
+            android:layout_width="25dp"
+            android:id="@+id/edit_profile"
+            app:layout_constraintBottom_toTopOf="@+id/tab_layout"
+            app:layout_constraintTop_toTopOf="@+id/bg"
+            app:layout_constraintStart_toEndOf="@+id/avatar_image"
+            android:layout_marginStart="16dp" />
     </ConstraintSet>
 
 </MotionScene>

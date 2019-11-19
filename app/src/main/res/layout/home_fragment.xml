@@ -153,6 +153,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/maps_button"/>
 
+        <ImageButton
+            android:id="@+id/edit_profile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:backgroundTint="@color/colorAccent2"
+            android:background="@drawable/edit_icon"
+            android:elevation="10dp" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
