@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.android.cameraapp.R
+import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.MapsFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.nbaapp.data.vms.ViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,18 +23,27 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.android.support.DaggerFragment
+import java.util.concurrent.Executors
+import javax.inject.Inject
 
 const val permissionRequestCode = 205
 
 class MapFragment : DaggerFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: MapFragmentViewModel
     lateinit var binding: MapsFragmentBinding
     lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
+    lateinit var map: GoogleMap
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(MapFragmentViewModel::class.java)
         binding = MapsFragmentBinding.inflate(inflater, container, false)
 
 
@@ -40,7 +52,19 @@ class MapFragment : DaggerFragment() {
             permissions,
             permissionRequestCode
         )
+        viewModel.getPhotos().observe(viewLifecycleOwner, Observer {
+            if (::map.isInitialized && it != null) {
+                val executor = Executors.newSingleThreadExecutor()
+                executor.submit {
+                    for (i in it) {
+                        generateMarkers(map, i)
 
+                    }
+                }
+
+
+            }
+        })
         return binding.root
     }
 
@@ -64,10 +88,19 @@ class MapFragment : DaggerFragment() {
 //                            .title("Marker in Sydney")
 ////                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.background))
 //                    )
-
+                    map = it
                     getDeviceLocation(it)
                 }
             })
+    }
+
+    fun generateMarkers(map: GoogleMap, item: UserCollection.Photos) {
+        if (item.longitude != null && item.altitude != null) {
+            map.addMarker(
+                MarkerOptions().position(LatLng(item.altitude!!, item.longitude!!))
+                    .title(item.title)
+            )
+        }
     }
 
     fun getDeviceLocation(map: GoogleMap) {
