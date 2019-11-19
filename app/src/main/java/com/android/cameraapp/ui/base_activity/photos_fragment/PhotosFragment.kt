@@ -48,7 +48,7 @@ class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragme
 //            binding.tabLayout.getTabAt(0)?.text = """Photos
 //                      |${it.size}
 //                  """.trimMargin()
-
+            if(it != null) binding.size = it.size
             adapter.addItems(it)
         })
         binding.chipGroup2.setOnCheckedChangeListener { c, i ->

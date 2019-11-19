@@ -16,7 +16,15 @@
         android:background="@drawable/background"
         app:layoutDescription="@xml/motion_scene">
 
-
+        <ProgressBar
+            android:id="@+id/userImageProgressBar"
+            app:layout_constraintStart_toStartOf="@id/circleImageView"
+            app:layout_constraintEnd_toEndOf="@id/circleImageView"
+            app:layout_constraintTop_toTopOf="@id/circleImageView"
+            android:elevation="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/circleImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"
             android:layout_width="80dp"
@@ -25,10 +33,11 @@
             android:transitionName="user_image"
             app:civ_border_color="@color/borderColor"
             app:civ_border_width="5dp"
+            app:loadImageWithProgressBar="@{startViewModel.userData.photo_url}"
+            app:setProgressBar="@{userImageProgressBar}"
             app:layout_constraintBottom_toTopOf="@+id/topText"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:loadImageFromUrl="@{startViewModel.userData.photo_url}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

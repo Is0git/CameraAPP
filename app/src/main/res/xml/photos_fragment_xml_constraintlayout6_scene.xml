@@ -12,7 +12,9 @@
         <OnClick motion:targetId="@id/materialCardView" />
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/start"
+        android:layout_width="80dp"
+        android:layout_height="80dp">
         <Constraint
             android:id="@+id/arrow_down"
             android:elevation="1dp"

@@ -2,13 +2,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <data>
+        <variable
+            name="size"
+            type="Integer" />
+    </data>
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/constraintLayout6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/photos_fragment_xml_constraintlayout6_scene">
 
+        <View
+            android:id="@+id/noItems"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/no_products_found"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="1dp"
+            app:showPlaceHolder="@{size}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"

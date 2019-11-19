@@ -84,7 +84,6 @@ class MapFragment : Fragment() {
                     )
                 )
             } else {
-
                 map.uiSettings.isMyLocationButtonEnabled = false;
             }
         }

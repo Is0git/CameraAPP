@@ -15,6 +15,7 @@ import com.android.cameraapp.util.firebase.usersStoragePhotos
 import com.android.cameraapp.util.getCurrentDateInFormat
 import com.android.cameraapp.util.getCurrentTime
 import com.android.cameraapp.util.resize
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -117,6 +118,7 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
 
 
     suspend fun uploadPhotosToFireStore(document: DocumentSnapshot, downloadURL: List<String>) {
+        val  mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(applicationContext).lastLocation
         firestore.collection("$userCollection/${document.id}/$userPhotosCollection").add(
             UserCollection.Photos(
                 getCurrentDateInFormat(),
@@ -133,7 +135,9 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
                 downloadURL[1],
                 downloadURL[2],
                 "",
-                inputData.getString("title")
+                inputData.getString("title"),
+                mFusedLocationProviderClient.await().altitude,
+                mFusedLocationProviderClient.await().longitude
             )
         )
             .await().get().apply {
