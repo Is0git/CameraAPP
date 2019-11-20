@@ -25,6 +25,7 @@ import androidx.navigation.navGraphViewModels
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.StartFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.cameraapp.ui.base_activity.settings_fragment.SettingsResolver
 import com.android.cameraapp.util.ToastHandler
 import com.android.nbaapp.data.vms.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
@@ -60,6 +61,7 @@ class StartFragment : DaggerFragment() {
             startViewModel = viewModel
             Log.d("TAG1", "HAPPENED")
         }
+
         binding.apply {
             homeButton.setOnClickListener { onHomeButtonClick() }
             circleImageView.setOnClickListener {
@@ -68,6 +70,8 @@ class StartFragment : DaggerFragment() {
             }
             save.setOnClickListener { pictureCaptureNavigation() }
         }
+
+
         return binding.root
     }
 
@@ -100,6 +104,7 @@ class StartFragment : DaggerFragment() {
         (activity as BaseActivity).apply {
             BottomBarToInvisible()
         }
+
 
 
     }

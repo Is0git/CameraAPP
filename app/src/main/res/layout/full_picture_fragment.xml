@@ -41,7 +41,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/colorSurface"
-
             android:src="@drawable/image_placeholder"
             android:transitionName="photo"
             app:layout_constraintBottom_toTopOf="@+id/guideline15"
@@ -321,7 +320,9 @@
             android:id="@+id/private_switch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:visibility="invisible"
+            android:elevation="10dp"
+            android:checked="@{photoWithUserItem.private == true ? true : false}"
             android:text="Private?" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

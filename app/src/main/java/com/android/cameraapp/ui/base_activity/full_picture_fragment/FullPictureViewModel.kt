@@ -35,6 +35,9 @@ class FullPictureViewModel @Inject constructor(val repo: FullPictureRepository) 
         repo.addComment(dataFlat, comment)
     }
 
+    fun setUser(dataFlat: DataFlat.PhotosWithUser) {
+        repo.setUserData(dataFlat)
+    }
     override fun onCleared() {
         super.onCleared()
         repo.removeListeners(repo.job) { if (it.isActive) it.cancel() }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.tasks.await
 
 abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: FirebaseFirestore) :
     CurrentUser(firebaseAuth, fireStore), EventListener<QuerySnapshot> {
-    val userJob: Job by lazy { CoroutineScope(Dispatchers.Main).launch { user = getCurrentUser() } }
+    var userJob: Job? = Job()
     var user: UserCollection.User? = null
 
     companion object {
@@ -25,9 +25,9 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
     open suspend fun checkIfFollow(followerUID: String) {
         fireStore.collection("$userCollection/$followerUID/$userFollowersCollection")
             .whereEqualTo("follower_uid", firebaseAuth.uid).get().await().documents.apply {
-            when {
-                size == 1 -> isFollowing()
-                size == 0 -> isNotFollowing()
+            when (size) {
+                1 -> isFollowing()
+                0 -> isNotFollowing()
                 else -> throw CancellationException("Something went wrong with collection, query size can't be bigger than 1")
             }
         }
@@ -45,7 +45,7 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
 
     suspend fun followUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
         if (userUID != auth.uid) {
-            fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
+            fireStore.collection("$userCollection/${user?.uid}/$userFollowersCollection")
                 .add(
                     DataFlat.Followers(
                         user?.username!!,
@@ -56,7 +56,7 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
                     )
                 ).await()
             resolve(state)
-            fireStore.collection("$userCollection/${user?.uid}/$userFollowingCollection").add(
+            fireStore.collection("$userCollection/${auth.uid}/$userFollowingCollection").add(
                 UserCollection.Following(
                     getCurrentDateInFormat(), "", userUID, "N/A", getCurrentTime()
                 )
@@ -68,13 +68,13 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
     suspend fun unfollowUser(userUID: String, state: Int, resolve: (Int) -> Unit) = coroutineScope {
         if (userUID != auth.uid) {
             val followingDocId =
-                fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
+                fireStore.collection("$userCollection/${user?.uid}/$userFollowersCollection")
                     .whereEqualTo("follower_uid", user?.uid).get().await().let {
                         if (it.documents.isNotEmpty()) it.documents.first().id else throw CancellationException(
                             "EMPTY QUERY LIST"
                         )
                     }
-            fireStore.document("$userCollection/$userUID/$userFollowersCollection/$followingDocId")
+            fireStore.document("$userCollection/${user?.uid}/$userFollowersCollection/$followingDocId")
                 .delete().await()
             removeFollowing(userUID, user)
             resolve(state)
@@ -83,16 +83,16 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
     }
 
     suspend fun removeFollowing(userUID: String, user: UserCollection.User?) {
-        val docId = fireStore.collection("$userCollection/${user?.uid}/$userFollowingCollection")
+        val docId = fireStore.collection("$userCollection/${auth.uid}/$userFollowingCollection")
             .whereEqualTo("user_uid", userUID).get().await()
             .let { if (it.documents.size > 0) it.documents.first().id else CancellationException("NULL") }
-        fireStore.document("$userCollection/${user?.uid}/$userFollowingCollection/$docId").delete()
+        fireStore.document("$userCollection/${auth.uid}/$userFollowingCollection/$docId").delete()
     }
 
 
     inline fun removeListeners(job: Job, clearJob: (Job) -> Unit) {
         registration?.remove()
-        if (userJob.isActive) userJob.cancel()
+        if (userJob?.isActive!!) userJob?.cancel()
         clearJob(job)
     }
 }

@@ -141,4 +141,8 @@ class FullPictureRepository @Inject constructor(
             }
         }
     }
+
+    fun setUserData(dataFlat: DataFlat.PhotosWithUser) {
+        super.user = dataFlat.user
+    }
 }

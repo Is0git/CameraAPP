@@ -115,17 +115,8 @@
 
     <ConstraintSet android:id="@+id/start">
 
-        <Constraint
-            android:id="@+id/private_switch"
-            android:layout_height="wrap_content"
-            android:text="Private?"
-            motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
-            motion:layout_constraintStart_toEndOf="@id/circleImageView"
-            motion:layout_editor_absoluteY="271dp">
-            <CustomAttribute
-                motion:attributeName="elevation"
-                motion:customDimension="80dp" />
-        </Constraint>
+
+
         <Constraint
             android:id="@+id/comments_card"
             android:layout_width="match_parent"
@@ -250,10 +241,15 @@
             android:id="@+id/private_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            motion:visibilityMode="ignore"
             motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             motion:layout_constraintStart_toEndOf="@id/circleImageView"
             motion:layout_editor_absoluteY="271dp"
-            motion:layout_constraintTop_toTopOf="@+id/base_card" />
+            motion:layout_constraintTop_toTopOf="@+id/base_card" >
+            <CustomAttribute
+                motion:attributeName="elevation"
+                motion:customDimension="10dp" />
+        </Constraint>
         <Constraint
             android:id="@+id/photo"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -386,9 +382,11 @@
             android:id="@+id/private_switch"
             android:layout_height="wrap_content"
             android:text="Private?"
+            motion:visibilityMode="ignore"
             motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             motion:layout_constraintStart_toEndOf="@id/circleImageView"
-            motion:layout_constraintTop_toTopOf="@id/base_card">
+            motion:layout_constraintTop_toTopOf="@id/base_card"
+            android:layout_width="wrap_content">
             <CustomAttribute
                 motion:attributeName="elevation"
                 motion:customDimension="1dp" />

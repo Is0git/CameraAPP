@@ -22,9 +22,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
                     "dark_mode_preference",
                     false
                 ) == true
-            ) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) else AppCompatDelegate.setDefaultNightMode(
+            ) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES).also {
+                sharedPreferences.edit().putBoolean("dark_mode.preference", true).apply()
+            } else AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_NO
-            )
+            ).also { sharedPreferences?.edit()?.putBoolean("dark_mode.preference", false)?.apply() }
         }
 
     }

@@ -47,10 +47,6 @@ class PhotosFragment(val userId: String? = null) : DaggerFragment(), PhotosFragm
             state = viewModel
         }
         viewModel.mediatorLiveData.observe(viewLifecycleOwner, Observer {
-            //           val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-//            binding.tabLayout.getTabAt(0)?.text = """Photos
-//                      |${it.size}
-//                  """.trimMargin()
             if (it != null) binding.size = it.size
             adapter.addItems(it)
         })

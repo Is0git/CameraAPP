@@ -47,7 +47,8 @@ class FullPictureFragment : DaggerFragment() {
 
 
         viewmodel =
-            ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
+            ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java).also { it.setUser(args.photosWithUsers as DataFlat.PhotosWithUser) }
+
         binding = FullPictureFragmentBinding.inflate(inflater, container, false)
             .apply {
                 imageUrl = args.photoUrl
@@ -131,6 +132,7 @@ class FullPictureFragment : DaggerFragment() {
     fun handleUserAccess() {
         if ((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid == firebaseAuth.uid) {
             binding.FOLLOW.visibility = View.INVISIBLE
+            binding.privateSwitch.visibility = View.VISIBLE
         }
     }
 }

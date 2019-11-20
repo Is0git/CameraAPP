@@ -52,7 +52,9 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateL
             ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
         binding = FeedFragmentBinding.inflate(inflater, container, false)
         binding.feedRecyclerView.adapter = adapter.also { it.onClickHandler = this }
-        viewModel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        viewModel.pagedList.observe(viewLifecycleOwner, Observer {
+            if(it != null && it.size > 0) binding.mainSpinKit.visibility = View.INVISIBLE
+            adapter.submitList(it) })
 
         viewModel.states.observe(viewLifecycleOwner, Observer {
             when (it) {

@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:elevation="2dp"
             android:fontFamily="@font/myriadprolt"
-            android:text="12 photos"
+            android:text="@{size.toString() + ` photos`}"
             android:textColor="@color/colorTextUser"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/materialCardView"

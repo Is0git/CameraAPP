@@ -40,6 +40,7 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
     override suspend fun doWork(): Result = coroutineScope {
 
         val jobs = launch {
+            delay(1500)
             uri = inputData.getString("image_uri")
 
             val userUID = async { FirebaseAuth.getInstance().currentUser?.uid }

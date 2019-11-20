@@ -19,12 +19,13 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.android.cameraapp.R
 import com.android.cameraapp.databinding.ActivityMainBinding
+import com.android.cameraapp.ui.base_activity.settings_fragment.SettingsResolver
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class BaseActivity : DaggerAppCompatActivity() {
+class BaseActivity : DaggerAppCompatActivity(), SettingsResolver {
 
 
     lateinit var binding: ActivityMainBinding
@@ -37,6 +38,8 @@ class BaseActivity : DaggerAppCompatActivity() {
     var state: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        setSettings(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         baseViewModel = ViewModelProviders.of(this, viewModelFactory).get(BaseViewModel::class.java)
 
