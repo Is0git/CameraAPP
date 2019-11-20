@@ -1,9 +1,11 @@
 package com.android.cameraapp.ui.base_activity.following_fragment
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PositionalDataSource
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingFragmentScope
+import com.android.cameraapp.util.States
 import com.android.cameraapp.util.firebase.userCollection
 import com.android.cameraapp.util.firebase.userFollowingCollection
 import com.google.firebase.auth.FirebaseAuth
@@ -31,7 +33,7 @@ class FollowingDataSource @Inject constructor(
     val job: Job
 ) :
     PositionalDataSource<DataFlat.Following>() {
-
+    var taskState = MutableLiveData<States>()
     var lastDocument: DocumentSnapshot? = null
     override fun loadRange(
         params: LoadRangeParams,
@@ -40,7 +42,9 @@ class FollowingDataSource @Inject constructor(
         val list = mutableListOf<DataFlat.Following>()
         lastDocument?.let {
             CoroutineScope(Dispatchers.Main + job).launch {
+                taskState.postValue(States.START)
                 getFollowing(list, params)
+                taskState.postValue(States.FINISH)
                 callback.onResult(list)
             }
 
@@ -53,7 +57,9 @@ class FollowingDataSource @Inject constructor(
     ) {
         val list = mutableListOf<DataFlat.Following>()
         CoroutineScope(Dispatchers.Main + job).launch {
+            taskState.postValue(States.START)
             getFollowing(list, params)
+            taskState.postValue(States.FINISH)
             callback.onResult(list, 0, list.size)
         }
     }

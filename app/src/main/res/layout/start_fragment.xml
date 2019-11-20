@@ -31,10 +31,10 @@
             android:layout_height="80dp"
             android:src="@drawable/background"
             android:transitionName="user_image"
-            app:civ_border_color="@color/borderColor"
-            app:civ_border_width="5dp"
             app:loadImageWithProgressBar="@{startViewModel.userData.photo_url}"
             app:setProgressBar="@{userImageProgressBar}"
+            app:civ_border_color="@color/borderColor"
+            app:civ_border_width="5dp"
             app:layout_constraintBottom_toTopOf="@+id/topText"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />

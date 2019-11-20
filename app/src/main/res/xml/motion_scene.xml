@@ -23,7 +23,8 @@
         </KeyFrameSet>
 
     </Transition>
-    <ConstraintSet android:id="@+id/start"
+    <ConstraintSet
+        android:id="@+id/start"
         app:layout_constraintEnd_toEndOf="parent">
         <Constraint
             android:id="@+id/circleImageView"
@@ -50,6 +51,18 @@
             app:layout_constraintTop_toBottomOf="@+id/bottomText">
 
         </Constraint>
+
+
+        <Constraint
+            android:id="@+id/userImageProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/circleImageView"
+            app:layout_constraintEnd_toEndOf="@id/circleImageView"
+            app:layout_constraintStart_toStartOf="@id/circleImageView"
+            app:layout_constraintTop_toTopOf="@id/circleImageView"
+            app:visibilityMode="ignore" />
         <Constraint
             android:id="@+id/take_photo_button"
             android:layout_width="50dp"
@@ -119,18 +132,17 @@
             app:layout_constraintTop_toBottomOf="@+id/topText">
             <PropertySet android:alpha="1" />
         </Constraint>
-        <Constraint
-            android:id="@+id/save" />
+        <Constraint android:id="@+id/save" />
         <Constraint
             android:id="@+id/userImageProgressBar"
-            android:elevation="15dp"
-            app:layout_constraintEnd_toEndOf="@id/circleImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:elevation="15dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@id/circleImageView"
-            app:layout_constraintTop_toTopOf="@id/circleImageView"
+            app:layout_constraintEnd_toEndOf="@id/circleImageView"
             app:layout_constraintStart_toStartOf="@id/circleImageView"
-            android:visibility="visible" />
+            app:layout_constraintTop_toTopOf="@id/circleImageView" />
 
 
     </ConstraintSet>
@@ -222,11 +234,11 @@
             android:id="@+id/take_photo_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginBottom="32dp" />
+            app:layout_constraintRight_toRightOf="parent" />
         <Constraint
             android:id="@+id/midText"
             android:layout_width="0dp"
@@ -239,16 +251,25 @@
         </Constraint>
         <Constraint
             android:id="@+id/userImageProgressBar"
-            android:elevation="15dp"
-            app:layout_constraintEnd_toEndOf="@id/circleImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:elevation="15dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/circleImageView"
-            app:layout_constraintTop_toTopOf="@id/circleImageView"
+            app:layout_constraintEnd_toEndOf="@id/circleImageView"
             app:layout_constraintStart_toStartOf="@id/circleImageView"
-            android:visibility="invisible" />
+            app:layout_constraintTop_toTopOf="@id/circleImageView" />
 
-
+        <Constraint
+            android:id="@+id/userImageProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/circleImageView"
+            app:layout_constraintEnd_toEndOf="@id/circleImageView"
+            app:layout_constraintStart_toStartOf="@id/circleImageView"
+            app:layout_constraintTop_toTopOf="@id/circleImageView"
+            app:visibilityMode="ignore" />
     </ConstraintSet>
 
 

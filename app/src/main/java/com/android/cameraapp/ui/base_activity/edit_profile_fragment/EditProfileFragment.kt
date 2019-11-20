@@ -17,6 +17,7 @@ import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.EditProfileFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.cameraapp.util.States
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

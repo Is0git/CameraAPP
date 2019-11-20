@@ -37,15 +37,14 @@ class FollowingFragment : DaggerFragment(), HomeFragmentListener<UserCollection.
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProviders.of(this, factory).get(FollowingViewModel::class.java)
-        binding = FollowingFragmentBinding.inflate(inflater, container, false)
+        binding = FollowingFragmentBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+            state = viewModel
+        }
         binding.followingRecyclerView.adapter = adapter.also { it.listener = this }
         viewModel.pagelist.observe(viewLifecycleOwner, Observer {
+            if(it != null) binding.size = it.size
             adapter.submitList(it)
-
-//            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-//           binding.tabLayout.getTabAt(2)?.text = """FLW
-//                      |${it.size}
-//                  """.trimMargin()
         })
         return binding.root
     }

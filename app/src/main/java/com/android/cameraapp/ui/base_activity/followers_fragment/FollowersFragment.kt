@@ -11,8 +11,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.FollowersFragmentBinding
-import com.android.cameraapp.databinding.HomeFragmentBinding
-import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentDirections
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener
 import com.android.cameraapp.util.getCurrentTime
@@ -20,7 +18,8 @@ import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class FollowersFragment(val userId:String? = null) : DaggerFragment(), HomeFragmentListener<UserCollection.User> {
+class FollowersFragment(val userId: String? = null) : DaggerFragment(),
+    HomeFragmentListener<UserCollection.User> {
     @Inject
     lateinit var factory: ViewModelFactory
     @Inject
@@ -36,17 +35,19 @@ class FollowersFragment(val userId:String? = null) : DaggerFragment(), HomeFragm
         savedInstanceState: Bundle?
     ): View? {
         viewLifecycleOwner.lifecycle.addObserver(repo)
+        viewmodel = ViewModelProviders.of(this, factory).get(FollowersViewModel::class.java)
+            .also { it.init(userId) }
         binding = FollowersFragmentBinding.inflate(inflater, container, false).apply {
             followersRecyclerView.adapter = adapter.also { it.listener = this@FollowersFragment }
+            lifecycleOwner = viewLifecycleOwner
+            state = viewmodel
         }
 
-        viewmodel = ViewModelProviders.of(this, factory).get(FollowersViewModel::class.java).also { it.init(userId) }
+
         viewmodel.mediatorFollowers.observe(viewLifecycleOwner, Observer {
+            if (it != null) binding.size = it.size
             adapter.submitList(it)
-//            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-//            binding.tabLayout.getTabAt(1)?.text = """ME
-//                      |${it.size}
-//                  """.trimMargin()
+
         })
         return binding.root
     }
@@ -59,8 +60,15 @@ class FollowersFragment(val userId:String? = null) : DaggerFragment(), HomeFragm
     override fun onUserClick(userData: UserCollection.User, imageView: View, nameTextView: View) {
         imageView.transitionName = "${getCurrentTime()}i"
         nameTextView.transitionName = "${getCurrentTime()}t"
-        val extras = FragmentNavigatorExtras(imageView to imageView.transitionName, nameTextView to nameTextView.transitionName)
-        val directions = HomeFragmentDirections.actionHomeFragmentSelf2(userData, imageView.transitionName, nameTextView.transitionName)
+        val extras = FragmentNavigatorExtras(
+            imageView to imageView.transitionName,
+            nameTextView to nameTextView.transitionName
+        )
+        val directions = HomeFragmentDirections.actionHomeFragmentSelf2(
+            userData,
+            imageView.transitionName,
+            nameTextView.transitionName
+        )
         navController.navigate(directions, extras)
     }
 }

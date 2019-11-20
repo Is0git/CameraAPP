@@ -10,9 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.data.data_models.UserCollection
-import com.android.cameraapp.databinding.HomeFragmentBinding
 import com.android.cameraapp.databinding.LikesFragmentBinding
-import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentDirections
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener
 import com.android.cameraapp.util.getCurrentTime
@@ -35,14 +33,14 @@ class LikesFragment : DaggerFragment(), HomeFragmentListener<UserCollection.User
     ): View? {
         viewmodel =
             ViewModelProviders.of(this, viewmodelFactory).get(LikesFragmentViewModel::class.java)
-        binding = LikesFragmentBinding.inflate(inflater, container, false)
-        binding.likesRecyclerView.adapter = adapter.also{it.listener = this@LikesFragment}
+        binding = LikesFragmentBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+            state = viewmodel
+        }
+        binding.likesRecyclerView.adapter = adapter.also { it.listener = this@LikesFragment }
         viewmodel.likes.observe(viewLifecycleOwner, Observer {
+            if (it != null) binding.size = it.size
             adapter.submitList(it)
-//            val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
-//            binding.tabLayout.getTabAt(3)?.text = """Likes
-//                      |${it.size}
-//                  """.trimMargin()
         })
         return binding.root
 
@@ -52,11 +50,19 @@ class LikesFragment : DaggerFragment(), HomeFragmentListener<UserCollection.User
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
     }
+
     override fun onUserClick(userData: UserCollection.User, imageView: View, nameTextView: View) {
         imageView.transitionName = "${getCurrentTime()}i"
         nameTextView.transitionName = "${getCurrentTime()}t"
-        val extras = FragmentNavigatorExtras(imageView to imageView.transitionName, nameTextView to nameTextView.transitionName)
-        val directions = HomeFragmentDirections.actionHomeFragmentSelf2(userData, imageView.transitionName, nameTextView.transitionName)
+        val extras = FragmentNavigatorExtras(
+            imageView to imageView.transitionName,
+            nameTextView to nameTextView.transitionName
+        )
+        val directions = HomeFragmentDirections.actionHomeFragmentSelf2(
+            userData,
+            imageView.transitionName,
+            nameTextView.transitionName
+        )
         navController.navigate(directions, extras)
     }
 }

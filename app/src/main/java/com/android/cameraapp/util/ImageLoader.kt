@@ -31,6 +31,7 @@ object ImageLoader {
                 target: Target<Drawable>?,
                 isFirstResource: Boolean
             ): Boolean {
+                progressBar.visibility = View.INVISIBLE
                 return false
             }
 

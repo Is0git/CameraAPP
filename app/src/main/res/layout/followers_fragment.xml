@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="size"
+            type="Integer" />
 
+        <variable
+            name="state"
+            type="com.android.cameraapp.ui.base_activity.followers_fragment.FollowersViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            style="@style/SpinKitView.Large.MultiplePulse"
+            android:elevation="1dp"
+            app:resolveProgress="@{state.statesLiveData.getValue()}"
+            android:id="@+id/spin_kit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:SpinKit_Color="@color/colorAccent" />
+
+        <View
+            android:id="@+id/noItems"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:resolveEmpty="@{size}"
+            app:setState="@{state.statesLiveData.getValue()}"
+            android:background="@drawable/no_products_found"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/followers_recyclerView"

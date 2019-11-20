@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
+import com.android.cameraapp.util.States
 import com.android.cameraapp.util.firebase.userCollection
 import com.android.cameraapp.util.firebase.userFollowersCollection
 import com.android.cameraapp.util.firebase.userPhotosCollection
@@ -25,15 +26,17 @@ class FollowersRepository @Inject constructor(val firebaseAuth: FirebaseAuth, va
     var job: Job? = null
     var listenerRegistration: ListenerRegistration? = null
     var queryUserID: String? = null
+    val taskState = MutableLiveData<States>()
 
     override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
         job =   CoroutineScope(Dispatchers.Main).launch {
-
+            taskState.postValue(States.START)
             if(p0?.documents?.isNotEmpty()!!) {
                 val items = p0.toObjects(DataFlat.Followers::class.java)
 //                    followers.value = items
                 getAllFollowers(items)
                 followers.value = items
+                taskState.postValue(States.FINISH)
             }
         }
     }

@@ -7,12 +7,12 @@ import android.provider.MediaStore
 import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.edit_profile_fragment.EditProfileScope
+import com.android.cameraapp.util.States
 import com.android.cameraapp.util.firebase.userCollection
 import com.android.cameraapp.util.firebase.usersStorage
 import com.android.cameraapp.util.firebase.usersStoragePhotos
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.coroutineScope

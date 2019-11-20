@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
+import com.android.cameraapp.util.States
 import com.android.cameraapp.util.firebase.userCollection
 import com.android.cameraapp.util.firebase.userLikesCollection
 import com.google.firebase.auth.FirebaseAuth
@@ -26,17 +27,19 @@ class LikesFragmentRepository @Inject constructor(
     val adapter: LikesAdapter
 ) : EventListener<QuerySnapshot> {
     lateinit var job: Job
+    val taskState = MutableLiveData<States>()
     val liveLikeList = MutableLiveData<List<DataFlat.Likes>>()
     var listenerRegistration: ListenerRegistration = firestore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection")
     .orderBy("time_in_long", Query.Direction.DESCENDING).addSnapshotListener(this)
 
     override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
         job = CoroutineScope(Dispatchers.Main).launch {
-
+            taskState.postValue(States.START)
             if (p0?.documents?.isNotEmpty()!!) {
                 val items = p0.toObjects(DataFlat.Likes::class.java)
                 getLikers(items)
                 liveLikeList.value = items
+                taskState.postValue(States.FINISH)
             }
         }
     }

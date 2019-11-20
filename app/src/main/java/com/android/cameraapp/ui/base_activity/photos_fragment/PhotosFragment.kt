@@ -41,8 +41,11 @@ class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragme
         val viewModel =
             ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java).also { it.init(userId) }
         adapter.listeners = this
-        binding = PhotosFragmentBinding.inflate(inflater, container, false)
-        binding.photosRecyclerView.adapter = adapter
+        binding = PhotosFragmentBinding.inflate(inflater, container, false).apply {
+            photosRecyclerView.adapter = adapter
+            lifecycleOwner = viewLifecycleOwner
+            state = viewModel
+        }
         viewModel.mediatorLiveData.observe(viewLifecycleOwner, Observer {
             //           val binding = (parentFragment as HomeFragment).binding as HomeFragmentBinding
 //            binding.tabLayout.getTabAt(0)?.text = """Photos
