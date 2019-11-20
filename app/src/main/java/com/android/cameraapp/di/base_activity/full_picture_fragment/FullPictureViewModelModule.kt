@@ -14,5 +14,5 @@ abstract class FullPictureViewModelModule {
     @IntoMap
     @FullPictureScope
     @ViewModelKey(FullPictureViewModel::class)
-    abstract fun getFullPictureViewModel(viewModel : FullPictureViewModel) : ViewModel
+    abstract fun getFullPictureViewModel(viewModel: FullPictureViewModel): ViewModel
 }

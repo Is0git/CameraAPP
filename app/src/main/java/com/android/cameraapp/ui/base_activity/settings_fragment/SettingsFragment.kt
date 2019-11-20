@@ -36,6 +36,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
             BottomBarToInvisible()
         }
     }
+
     override fun onResume() {
         super.onResume()
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)

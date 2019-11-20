@@ -69,7 +69,10 @@ class FollowersDataSource @Inject constructor(
                     .limit(params.requestedLoadSize.toLong())
                     .orderBy("following_time_long", Query.Direction.DESCENDING)
                     .get().await().also {
-                        lastDocument = if(it?.documents != null && it?.documents.size > 0) it.documents.last() else throw CancellationException("Empty")
+                        lastDocument =
+                            if (it?.documents != null && it?.documents.size > 0) it.documents.last() else throw CancellationException(
+                                "Empty"
+                            )
                     }.toObjects(DataFlat.Followers::class.java)
             }
 
@@ -79,7 +82,10 @@ class FollowersDataSource @Inject constructor(
                     .startAfter(lastDocument!!)
                     .limit(params.loadSize.toLong())
                     .get().await().also {
-                        lastDocument = if(it?.documents != null && it?.documents.size > 0) it.documents.last() else throw CancellationException("Empty")
+                        lastDocument =
+                            if (it?.documents != null && it?.documents.size > 0) it.documents.last() else throw CancellationException(
+                                "Empty"
+                            )
                     }.toObjects(DataFlat.Followers::class.java)
             }
             else -> null
@@ -104,7 +110,7 @@ class FollowersDataSource @Inject constructor(
     }
 
     fun cancelJobs() {
-        if(jobs.isActive) {
+        if (jobs.isActive) {
             jobs.cancel()
         }
     }

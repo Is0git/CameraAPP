@@ -29,8 +29,9 @@ class LikesFragmentRepository @Inject constructor(
     lateinit var job: Job
     val taskState = MutableLiveData<States>()
     val liveLikeList = MutableLiveData<List<DataFlat.Likes>>()
-    var listenerRegistration: ListenerRegistration = firestore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection")
-    .orderBy("time_in_long", Query.Direction.DESCENDING).addSnapshotListener(this)
+    var listenerRegistration: ListenerRegistration =
+        firestore.collection("$userCollection/${firebaseAuth.uid}/$userLikesCollection")
+            .orderBy("time_in_long", Query.Direction.DESCENDING).addSnapshotListener(this)
 
     override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
         job = CoroutineScope(Dispatchers.Main).launch {
@@ -62,9 +63,8 @@ class LikesFragmentRepository @Inject constructor(
     }
 
 
-
     fun clearListener() {
         listenerRegistration.remove()
-        if(job.isActive) job.cancel()
+        if (job.isActive) job.cancel()
     }
 }

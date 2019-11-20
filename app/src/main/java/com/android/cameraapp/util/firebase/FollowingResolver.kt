@@ -11,14 +11,15 @@ import kotlinx.coroutines.tasks.await
 
 abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: FirebaseFirestore) :
     CurrentUser(firebaseAuth, fireStore), EventListener<QuerySnapshot> {
-    val userJob: Job by lazy { CoroutineScope(Dispatchers.Main).launch { user = getCurrentUser() }}
+    val userJob: Job by lazy { CoroutineScope(Dispatchers.Main).launch { user = getCurrentUser() } }
     var user: UserCollection.User? = null
 
     companion object {
         const val IS_FOLLOWING: Int = 1
         const val IS_NOT_FOLLOWING: Int = 0
     }
-    lateinit var photoDocID:String
+
+    lateinit var photoDocID: String
     var registration: ListenerRegistration? = null
 
     open suspend fun checkIfFollow(followerUID: String) {
@@ -31,9 +32,13 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
             }
         }
     }
-  open fun getComments(photo: DataFlat.PhotosWithUser) {
-        registration = fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photoCommentsCollection").orderBy("comment_date_long", Query.Direction.ASCENDING).addSnapshotListener(this)
+
+    open fun getComments(photo: DataFlat.PhotosWithUser) {
+        registration =
+            fireStore.collection("$userCollection/${photo.user_uid}/$userPhotosCollection/${photo.doc_id}/$photoCommentsCollection")
+                .orderBy("comment_date_long", Query.Direction.ASCENDING).addSnapshotListener(this)
     }
+
     abstract fun isFollowing()
 
     abstract fun isNotFollowing()
@@ -64,7 +69,11 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
         if (userUID != auth.uid) {
             val followingDocId =
                 fireStore.collection("$userCollection/$userUID/$userFollowersCollection")
-                    .whereEqualTo("follower_uid", user?.uid).get().await().let {  if(it.documents.isNotEmpty()) it.documents.first().id else throw CancellationException("EMPTY QUERY LIST")}
+                    .whereEqualTo("follower_uid", user?.uid).get().await().let {
+                        if (it.documents.isNotEmpty()) it.documents.first().id else throw CancellationException(
+                            "EMPTY QUERY LIST"
+                        )
+                    }
             fireStore.document("$userCollection/$userUID/$userFollowersCollection/$followingDocId")
                 .delete().await()
             removeFollowing(userUID, user)
@@ -75,14 +84,15 @@ abstract class FollowingResolver(val firebaseAuth: FirebaseAuth, val fireStore: 
 
     suspend fun removeFollowing(userUID: String, user: UserCollection.User?) {
         val docId = fireStore.collection("$userCollection/${user?.uid}/$userFollowingCollection")
-            .whereEqualTo("user_uid", userUID).get().await().let { if(it.documents.size > 0) it.documents.first().id else CancellationException("NULL")}
+            .whereEqualTo("user_uid", userUID).get().await()
+            .let { if (it.documents.size > 0) it.documents.first().id else CancellationException("NULL") }
         fireStore.document("$userCollection/${user?.uid}/$userFollowingCollection/$docId").delete()
     }
 
 
     inline fun removeListeners(job: Job, clearJob: (Job) -> Unit) {
         registration?.remove()
-        if(userJob.isActive) userJob.cancel()
+        if (userJob.isActive) userJob.cancel()
         clearJob(job)
     }
 }

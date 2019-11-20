@@ -14,8 +14,10 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class SearchFragment : DaggerFragment() {
-    @Inject lateinit var viewmodelFactory: ViewModelFactory
-    @Inject lateinit var adapter: SearchAdapter
+    @Inject
+    lateinit var viewmodelFactory: ViewModelFactory
+    @Inject
+    lateinit var adapter: SearchAdapter
     lateinit var viewModel: SearchViewModel
     lateinit var binding: SearchFragmentBinding
     override fun onCreateView(
@@ -26,22 +28,24 @@ class SearchFragment : DaggerFragment() {
         viewModel = ViewModelProviders.of(this, viewmodelFactory).get(SearchViewModel::class.java)
         binding = SearchFragmentBinding.inflate(inflater, container, false)
         binding.searchList.adapter = adapter
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener  {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-               newText?.let {
-                   adapter.submitList(null)
-                   viewModel.getSearchQueries(newText)
-               }
+                newText?.let {
+                    adapter.submitList(null)
+                    viewModel.getSearchQueries(newText)
+                }
                 return false
             }
 
         })
-        viewModel.searchQueries.observe(viewLifecycleOwner, Observer { adapter.submitList(it)
-        binding.searchList.scrollToPosition(0)})
+        viewModel.searchQueries.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+            binding.searchList.scrollToPosition(0)
+        })
         return binding.root
     }
 }

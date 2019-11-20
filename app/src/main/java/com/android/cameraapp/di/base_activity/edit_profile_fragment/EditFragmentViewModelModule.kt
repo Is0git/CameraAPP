@@ -6,11 +6,12 @@ import com.android.cameraapp.ui.base_activity.edit_profile_fragment.EditProfileV
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+
 @Module
 abstract class EditFragmentViewModelModule {
     @Binds
     @EditProfileScope
     @IntoMap
     @ViewModelKey(EditProfileViewModel::class)
-    abstract fun getEditViewModel(viewModel: EditProfileViewModel) : ViewModel
+    abstract fun getEditViewModel(viewModel: EditProfileViewModel): ViewModel
 }

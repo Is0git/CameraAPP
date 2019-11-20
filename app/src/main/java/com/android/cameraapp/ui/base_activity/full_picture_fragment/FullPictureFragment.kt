@@ -18,7 +18,6 @@ import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FullPictureFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
-import com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment
 import com.android.nbaapp.data.vms.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import dagger.android.support.DaggerFragment
@@ -31,7 +30,8 @@ class FullPictureFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
     lateinit var adapter: CommentsListAdapter
-    @Inject  lateinit var firebaseAuth: FirebaseAuth
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
     lateinit var viewmodel: FullPictureViewModel
     val args: FullPictureFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +46,8 @@ class FullPictureFragment : DaggerFragment() {
     ): View? {
 
 
-
-        viewmodel = ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
+        viewmodel =
+            ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
         binding = FullPictureFragmentBinding.inflate(inflater, container, false)
             .apply {
                 imageUrl = args.photoUrl
@@ -108,7 +108,10 @@ class FullPictureFragment : DaggerFragment() {
     }
 
     fun onEndIconClick() {
-        (activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(activity!!.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        (activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+            activity!!.currentFocus?.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
         val commentText = binding.commentEditText.text.toString()
         if (commentText.isNotBlank()) viewmodel.addComment(
             args.photosWithUsers as DataFlat.PhotosWithUser,
@@ -126,6 +129,8 @@ class FullPictureFragment : DaggerFragment() {
     }
 
     fun handleUserAccess() {
-        if((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid == firebaseAuth.uid ) { binding.FOLLOW.visibility = View.INVISIBLE }
+        if ((args.photosWithUsers as DataFlat.PhotosWithUser).user_uid == firebaseAuth.uid) {
+            binding.FOLLOW.visibility = View.INVISIBLE
+        }
     }
 }

@@ -7,7 +7,10 @@ import com.android.cameraapp.util.States
 import javax.inject.Inject
 
 @FollowingFragmentScope
-class FollowingViewModel @Inject constructor(val repo: FollowingRepository, val dataSource: FollowingDataSource) : ViewModel() {
+class FollowingViewModel @Inject constructor(
+    val repo: FollowingRepository,
+    val dataSource: FollowingDataSource
+) : ViewModel() {
     val pagelist = repo.pagedList
     val statesLiveData: LiveData<States> = repo.statesLiveData
     override fun onCleared() {

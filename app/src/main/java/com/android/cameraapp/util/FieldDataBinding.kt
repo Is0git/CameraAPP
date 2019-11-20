@@ -7,7 +7,7 @@ import com.android.cameraapp.data.data_models.DataFlat
 object FieldDataBinding {
     @JvmStatic
     @BindingAdapter("app:setComments")
-    fun setComments(textView: TextView, item:DataFlat.PhotosWithUser) {
+    fun setComments(textView: TextView, item: DataFlat.PhotosWithUser) {
 
     }
 }

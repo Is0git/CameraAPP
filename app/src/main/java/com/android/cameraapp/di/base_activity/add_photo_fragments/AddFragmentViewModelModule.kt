@@ -13,5 +13,5 @@ abstract class AddFragmentViewModelModule {
     @IntoMap
     @AddPhotoFragmentsScope
     @ViewModelKey(AddFragmentsViewModel::class)
-    abstract fun getAddFragmentsViewmodel(viewmodel: AddFragmentsViewModel) : ViewModel
+    abstract fun getAddFragmentsViewmodel(viewmodel: AddFragmentsViewModel): ViewModel
 }

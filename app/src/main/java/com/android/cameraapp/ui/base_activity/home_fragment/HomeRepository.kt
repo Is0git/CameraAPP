@@ -9,11 +9,16 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HomeFragmentScope
-class HomeRepository @Inject constructor(val firebaseAuth: FirebaseAuth, val firestore: FirebaseFirestore) {
+class HomeRepository @Inject constructor(
+    val firebaseAuth: FirebaseAuth,
+    val firestore: FirebaseFirestore
+) {
 
-  suspend fun getCounts() {
+    suspend fun getCounts() {
         var countsArray = IntArray(4)
-        val photosCount = firestore.collection("$userCollection/${firebaseAuth.uid}/$userPhotosCollection").get().await().size()
+        val photosCount =
+            firestore.collection("$userCollection/${firebaseAuth.uid}/$userPhotosCollection").get()
+                .await().size()
 
     }
 }

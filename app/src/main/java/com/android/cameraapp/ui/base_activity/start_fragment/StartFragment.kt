@@ -2,9 +2,7 @@ package com.android.cameraapp.ui.base_activity.start_fragment
 
 import android.Manifest
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.content.pm.PackageManager
-import android.graphics.Camera
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
@@ -66,7 +64,8 @@ class StartFragment : DaggerFragment() {
             homeButton.setOnClickListener { onHomeButtonClick() }
             circleImageView.setOnClickListener {
                 auth.signOut()
-                navigation.setGraph(R.navigation.auth_nav)}
+                navigation.setGraph(R.navigation.auth_nav)
+            }
             save.setOnClickListener { pictureCaptureNavigation() }
         }
         return binding.root
@@ -95,6 +94,7 @@ class StartFragment : DaggerFragment() {
         super.onStop()
         CameraX.unbindAll()
     }
+
     override fun onStart() {
         super.onStart()
         (activity as BaseActivity).apply {
@@ -239,6 +239,7 @@ class StartFragment : DaggerFragment() {
         )
 
     }
+
     fun saveAnimationEnd() {
 
         ObjectAnimator.ofFloat(binding.save, "alpha", 0f, 1f).start()

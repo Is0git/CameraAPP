@@ -19,7 +19,9 @@ import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.util.ToastHandler
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+
 const val READ_PERMISSIONS_CODE = 2
+
 class AddFragmentOne : DaggerFragment() {
 
     lateinit var binding: AddPhotoFragmentBinding
@@ -41,7 +43,7 @@ class AddFragmentOne : DaggerFragment() {
             nextButton.setOnClickListener { navigateToNext() }
             cancelButton.setOnClickListener { navigateBack() }
             addPhotoImage.setOnClickListener {
-                if(checkPermissions())   selectImage() else askForPermissions()
+                if (checkPermissions()) selectImage() else askForPermissions()
             }
         }
         resolveArgs()
@@ -50,7 +52,8 @@ class AddFragmentOne : DaggerFragment() {
 
     private fun navigateToNext() {
         binding.imageUri?.let {
-            AddFragmentOneDirections.actionAddFragmentOneToAddFragmentTwo(it).also {   navController.navigate(it)  }
+            AddFragmentOneDirections.actionAddFragmentOneToAddFragmentTwo(it)
+                .also { navController.navigate(it) }
         }
 
 
@@ -103,17 +106,25 @@ class AddFragmentOne : DaggerFragment() {
             BottomBarToInvisible()
         }
     }
+
     fun askForPermissions() {
         ActivityCompat.requestPermissions(activity!!, permissions, READ_PERMISSIONS_CODE)
     }
 
-    fun checkPermissions() = ActivityCompat.checkSelfPermission(activity!!, permissions[0]) ==  PackageManager.PERMISSION_GRANTED
+    fun checkPermissions() = ActivityCompat.checkSelfPermission(
+        activity!!,
+        permissions[0]
+    ) == PackageManager.PERMISSION_GRANTED
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == READ_PERMISSIONS_CODE && checkPermissions()) selectImage() else ToastHandler.showToast(activity!!.application, "NO READ PERMISSIONS")
+        if (requestCode == READ_PERMISSIONS_CODE && checkPermissions()) selectImage() else ToastHandler.showToast(
+            activity!!.application,
+            "NO READ PERMISSIONS"
+        )
     }
 }

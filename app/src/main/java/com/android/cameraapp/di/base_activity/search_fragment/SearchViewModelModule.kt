@@ -13,5 +13,5 @@ abstract class SearchViewModelModule {
     @IntoMap
     @SearchFragmentScope
     @ViewModelKey(SearchViewModel::class)
-    abstract fun getSearchViewModel(searchViewModel: SearchViewModel) : ViewModel
+    abstract fun getSearchViewModel(searchViewModel: SearchViewModel): ViewModel
 }

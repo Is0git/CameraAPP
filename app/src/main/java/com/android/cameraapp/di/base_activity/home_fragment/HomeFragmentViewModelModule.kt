@@ -13,5 +13,5 @@ abstract class HomeFragmentViewModelModule {
     @IntoMap
     @HomeFragmentScope
     @ViewModelKey(PhotosFragmentViewModel::class)
-    abstract fun getHomeViewModel(viewModel: PhotosFragmentViewModel) : ViewModel
+    abstract fun getHomeViewModel(viewModel: PhotosFragmentViewModel): ViewModel
 }

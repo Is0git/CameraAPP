@@ -1,10 +1,7 @@
 package com.android.cameraapp.util
 
-import android.util.Log
 import android.view.View
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.databinding.BindingAdapter
-import com.android.cameraapp.R
 
 object LoadVisibilityHandler {
 //    @BindingAdapter("app:resolveProgress")
@@ -22,14 +19,15 @@ object LoadVisibilityHandler {
     @BindingAdapter("app:resolveProgress")
     @JvmStatic
     fun resolveProgress(view: View, state: States?) {
-        if(state == null || state == States.START) view.visibility = View.VISIBLE else view.visibility = View.INVISIBLE
+        if (state == null || state == States.START) view.visibility =
+            View.VISIBLE else view.visibility = View.INVISIBLE
     }
 
     @BindingAdapter("app:resolveEmpty", "app:setState")
     @JvmStatic
-    fun resolveEmpty(view: View, size: Int?,  state: States?) {
-        if(size == 0 && state == States.FINISH) {
-           view.visibility = View.VISIBLE
+    fun resolveEmpty(view: View, size: Int?, state: States?) {
+        if (size == 0 && state == States.FINISH) {
+            view.visibility = View.VISIBLE
         } else view.visibility = View.INVISIBLE
     }
 }

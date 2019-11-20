@@ -12,11 +12,11 @@ object FirebaseFirestoreModule {
     @Provides
     @Singleton
     @JvmStatic
-    fun fireStoreInstance() : FirebaseFirestore = FirebaseFirestore.getInstance()
+    fun fireStoreInstance(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
     @Provides
     @Singleton
     @JvmStatic
-    fun fireStorage() : FirebaseStorage = FirebaseStorage.getInstance()
+    fun fireStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 
 }

@@ -118,7 +118,8 @@ class UploadPhoto(appContext: Context, workerParams: WorkerParameters) :
 
 
     suspend fun uploadPhotosToFireStore(document: DocumentSnapshot, downloadURL: List<String>) {
-        val  mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(applicationContext).lastLocation
+        val mFusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(applicationContext).lastLocation
         firestore.collection("$userCollection/${document.id}/$userPhotosCollection").add(
             UserCollection.Photos(
                 getCurrentDateInFormat(),

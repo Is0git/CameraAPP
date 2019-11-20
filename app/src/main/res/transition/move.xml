@@ -4,9 +4,7 @@
 
     <changeBounds />
     <changeTransform />
-    <fade/>
-
-
+    <fade />
 
 
 </transitionSet>

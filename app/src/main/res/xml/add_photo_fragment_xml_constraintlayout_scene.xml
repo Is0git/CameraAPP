@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="600">
-       <KeyFrameSet>
-           <KeyAttribute
-               motion:motionTarget="@+id/add_photo_image"
-               motion:framePosition="0"
-               android:alpha="1" />
-           <KeyAttribute
-               motion:motionTarget="@+id/add_photo_image"
-               motion:framePosition="0"
-               android:alpha="0.5" />
-           <KeyAttribute
-               motion:motionTarget="@+id/add_photo_image"
-               motion:framePosition="50"
-               android:alpha="0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/add_photo_image"
-               motion:framePosition="100"
-               android:alpha="1" />
-       </KeyFrameSet>
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:motionTarget="@+id/add_photo_image"
+                motion:framePosition="0"
+                android:alpha="1" />
+            <KeyAttribute
+                motion:motionTarget="@+id/add_photo_image"
+                motion:framePosition="0"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/add_photo_image"
+                motion:framePosition="50"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/add_photo_image"
+                motion:framePosition="100"
+                android:alpha="1" />
+        </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">

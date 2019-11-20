@@ -13,5 +13,5 @@ abstract class PhotoFragmentViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(PhotosFragmentViewModel::class)
-    abstract fun getViewModel(viewModel: PhotosFragmentViewModel) : ViewModel
+    abstract fun getViewModel(viewModel: PhotosFragmentViewModel): ViewModel
 }

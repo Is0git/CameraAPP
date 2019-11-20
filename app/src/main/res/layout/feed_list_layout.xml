@@ -2,8 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="com.android.cameraapp.util.FollowingTimeResolveAdapter"/>
+
+        <import type="com.android.cameraapp.util.FollowingTimeResolveAdapter" />
+
         <variable
             name="item"
             type="com.android.cameraapp.data.data_models.DataFlat.PhotosWithUser" />
@@ -43,7 +46,7 @@
             android:outlineProvider="none"
             android:src="@drawable/background"
             app:civ_border_color="@color/borderColor"
-            app:civ_border_width="5dp"
+            app:civ_border_width="3dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/left_guideline"

@@ -11,7 +11,9 @@ import com.android.cameraapp.ui.base_activity.BaseActivity
 import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.UploadPhoto
 import com.android.cameraapp.util.ToastHandler
 import javax.inject.Inject
+
 const val TAG = "AddFragmentRepository"
+
 @AddPhotoFragmentsScope
 class AddFragmentsRepository @Inject constructor(
     val application: Application,
@@ -21,9 +23,14 @@ class AddFragmentsRepository @Inject constructor(
     val constraints: Constraints
 ) {
 
-    fun uploadPhoto(uri: Uri, title: String, description:String, isPrivate:Boolean) {
+    fun uploadPhoto(uri: Uri, title: String, description: String, isPrivate: Boolean) {
 
-        val data = workDataOf("image_uri" to uri.toString(), "description" to description, "isPrivate" to isPrivate, "title" to title)
+        val data = workDataOf(
+            "image_uri" to uri.toString(),
+            "description" to description,
+            "isPrivate" to isPrivate,
+            "title" to title
+        )
         val work = OneTimeWorkRequestBuilder<UploadPhoto>()
             .addTag("Upload Work")
             .setInputData(data)
@@ -37,7 +44,7 @@ class AddFragmentsRepository @Inject constructor(
                 workInfo?.state?.let {
                     when (it) {
                         WorkInfo.State.SUCCEEDED -> activity.binding.constraintLayout2.transitionToStart()
-                        WorkInfo.State.FAILED, WorkInfo.State.CANCELLED-> {
+                        WorkInfo.State.FAILED, WorkInfo.State.CANCELLED -> {
                             activity.binding.constraintLayout2.transitionToStart()
                             Log.i(TAG, "FAIL: $it")
                             ToastHandler.showToast(application, "Image was not uploaded!")

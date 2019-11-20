@@ -12,15 +12,17 @@ import com.android.cameraapp.di.base_activity.search_fragment.SearchFragmentScop
 import javax.inject.Inject
 
 @SearchFragmentScope
-class SearchAdapter @Inject constructor() : ListAdapter<UserCollection.User, SearchAdapter.MyViewHolder>(
-    callback
-){
+class SearchAdapter @Inject constructor() :
+    ListAdapter<UserCollection.User, SearchAdapter.MyViewHolder>(
+        callback
+    ) {
     class MyViewHolder(val binding: SearchUserListBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-       val binding = SearchUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            SearchUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(
             binding
         )
@@ -37,6 +39,7 @@ val callback = object : DiffUtil.ItemCallback<UserCollection.User>() {
         oldItem: UserCollection.User,
         newItem: UserCollection.User
     ): Boolean = oldItem.uid == newItem.uid
+
     override fun areContentsTheSame(
         oldItem: UserCollection.User,
         newItem: UserCollection.User

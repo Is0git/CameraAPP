@@ -13,11 +13,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.databinding.FeedFragmentBinding
 import com.android.cameraapp.ui.base_activity.BaseActivity
+import com.android.cameraapp.ui.base_activity.edit_profile_fragment.OnTaskStateListener
 import com.android.cameraapp.util.FeedFragmentOnClickListener
+import com.android.cameraapp.util.States
 import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -25,7 +29,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
+class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
@@ -44,10 +48,33 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
         binding = FeedFragmentBinding.inflate(inflater, container, false)
         binding.feedRecyclerView.adapter = adapter.also { it.onClickHandler = this }
         viewModel.pagedList.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+
+        viewModel.states.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                States.START -> onTaskStart()
+                States.FINISH -> onTaskFinish()
+                else -> onTaskFinish()
+            }
+        })
+
+        binding.feedRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            var firstScrolled = false
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                super.onScrolled(recyclerView, dx, dy)
+                if ((recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() == 0 && firstScrolled) {
+                    viewModel.getFirstDocument()
+                }
+
+                firstScrolled = true
+            }
+
+        })
         return binding.root
     }
 
@@ -96,5 +123,21 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener {
             BottomBarVisible()
         }
 
+    }
+
+    override fun onTaskStart() {
+        (binding.root as MotionLayout).transitionToEnd()
+    }
+
+    override fun onTaskFailed() {
+
+    }
+
+    override fun onTaskSuccess() {
+
+    }
+
+    override fun onTaskFinish() {
+        (binding.root as MotionLayout).transitionToStart()
     }
 }

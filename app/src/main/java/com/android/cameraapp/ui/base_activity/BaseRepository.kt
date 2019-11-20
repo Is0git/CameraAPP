@@ -7,8 +7,11 @@ import androidx.navigation.NavController
 import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.BaseActivityScope
-import com.android.cameraapp.util.*
+import com.android.cameraapp.util.ToastHandler
+import com.android.cameraapp.util.UserAuthStates
 import com.android.cameraapp.util.firebase.userCollection
+import com.android.cameraapp.util.getCurrentDateInFormat
+import com.android.cameraapp.util.getCurrentTime
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -40,7 +43,7 @@ class BaseRepository @Inject constructor(
     val jobs: Job = Job()
 
 
-    fun checkIfUserLoggedIN() : Boolean = auth.currentUser != null
+    fun checkIfUserLoggedIN(): Boolean = auth.currentUser != null
 
     fun logIn(email: String?, password: String?, rememberUser: Boolean = true) {
         this.rememberUser = rememberUser
@@ -49,8 +52,10 @@ class BaseRepository @Inject constructor(
             "You need to fill all fields"
         ) else {
             auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener { controller.setGraph(R.navigation.nav)
-                    ToastHandler.showToast(application, "LOGGED IN")  }
+                .addOnSuccessListener {
+                    controller.setGraph(R.navigation.nav)
+                    ToastHandler.showToast(application, "LOGGED IN")
+                }
                 .addOnFailureListener { ToastHandler.showToast(application, "${it.message}") }
         }
     }
@@ -146,10 +151,20 @@ class BaseRepository @Inject constructor(
         val date = async { getCurrentDateInFormat() }
         val currentTime = async { getCurrentTime() }
         val usernameArray = mutableListOf<String>()
-       username?.forEach { usernameArray.add(it.toString()) }
+        username?.forEach { usernameArray.add(it.toString()) }
         val result = firestore.document("$userCollection/${user?.uid}").set(
             UserCollection.User(
-               "", "", user?.email, true, date.await(), currentTime.await(), username, null, user?.uid, usernameArray)
+                "",
+                "",
+                user?.email,
+                true,
+                date.await(),
+                currentTime.await(),
+                username,
+                null,
+                user?.uid,
+                usernameArray
+            )
         ).addOnSuccessListener { controller.setGraph(R.navigation.nav) }
 
 
@@ -170,6 +185,7 @@ class BaseRepository @Inject constructor(
         }
 
     }
+
     // we cancel all jobs in view model on cleared to prevent memory leaks... and can't use viewModelScope in this situation
     fun cancelJobs() {
         if (jobs.isActive) jobs.cancel()

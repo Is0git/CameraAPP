@@ -37,7 +37,6 @@ class FollowersAdapter @Inject constructor() :
     }
 
 
-
 }
 
 val callback = object : DiffUtil.ItemCallback<DataFlat.Followers>() {

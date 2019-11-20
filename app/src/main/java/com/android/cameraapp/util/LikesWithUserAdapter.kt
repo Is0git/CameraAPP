@@ -7,14 +7,19 @@ import androidx.databinding.BindingAdapter
 import com.android.cameraapp.data.data_models.DataFlat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import de.hdodenhof.circleimageview.CircleImageView
 
 object LikesWithUserAdapter {
     @JvmStatic
     @BindingAdapter("app:resolveLikers", "resolveLiker2", "resolveLiker3", "resolveLiker4")
-    fun resolveLikers(image: ImageView, likesWithUser: List<DataFlat.Likes>?, image2: ImageView, image3:ImageView, image4: ImageView) {
+    fun resolveLikers(
+        image: ImageView,
+        likesWithUser: List<DataFlat.Likes>?,
+        image2: ImageView,
+        image3: ImageView,
+        image4: ImageView
+    ) {
         val requestOptions = RequestOptions().centerCrop()
-        when(likesWithUser?.size) {
+        when (likesWithUser?.size) {
             1 -> {
                 image.visibility = View.VISIBLE
                 loadImage(image, likesWithUser, requestOptions, 0)
@@ -55,7 +60,13 @@ object LikesWithUserAdapter {
     }
 
     @JvmStatic
-    fun loadImage(image: ImageView, likesWithUser: List<DataFlat.Likes>, requestOptions: RequestOptions, position: Int) {
-        Glide.with(image).load(likesWithUser[position].user?.photo_url).centerCrop().apply(requestOptions).into(image)
+    fun loadImage(
+        image: ImageView,
+        likesWithUser: List<DataFlat.Likes>,
+        requestOptions: RequestOptions,
+        position: Int
+    ) {
+        Glide.with(image).load(likesWithUser[position].user?.photo_url).centerCrop()
+            .apply(requestOptions).into(image)
     }
 }

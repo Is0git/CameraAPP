@@ -11,9 +11,9 @@ private class LuminosityAnalyzer : ImageAnalysis.Analyzer {
 
     */
 /**
-     * Helper extension function used to extract a byte array from an
-     * image plane buffer
-     *//*
+ * Helper extension function used to extract a byte array from an
+ * image plane buffer
+ *//*
 
     private fun ByteBu
     ffer.toByteArray(): ByteArray

@@ -121,7 +121,7 @@
             android:text="Private?"
             motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             motion:layout_constraintStart_toEndOf="@id/circleImageView"
-            motion:layout_editor_absoluteY="271dp" >
+            motion:layout_editor_absoluteY="271dp">
             <CustomAttribute
                 motion:attributeName="elevation"
                 motion:customDimension="80dp" />
@@ -388,7 +388,7 @@
             android:text="Private?"
             motion:layout_constraintEnd_toStartOf="@+id/right_guideline"
             motion:layout_constraintStart_toEndOf="@id/circleImageView"
-            motion:layout_constraintTop_toTopOf="@id/base_card" >
+            motion:layout_constraintTop_toTopOf="@id/base_card">
             <CustomAttribute
                 motion:attributeName="elevation"
                 motion:customDimension="1dp" />

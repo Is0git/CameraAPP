@@ -78,22 +78,25 @@ class LikesFragmentDataSource @Inject constructor(
 
     }
 
-    suspend fun mapUsers(list: MutableList<DataFlat.Likes>): Flow<DataFlat.Likes> = flow { for (a in list) emit(a) }
+    suspend fun mapUsers(list: MutableList<DataFlat.Likes>): Flow<DataFlat.Likes> =
+        flow { for (a in list) emit(a) }
 
 
     suspend fun getUsers(i: DataFlat.Likes): DataFlat.Likes {
         val userObject: UserCollection.User? = i.liker_id?.let {
             firestore.document("$userCollection/${i.liker_id}").get().await()
                 .let {
-                    if (it != null) it.toObject(UserCollection.User::class.java) else throw CancellationException("PROB EMTY")
+                    if (it != null) it.toObject(UserCollection.User::class.java) else throw CancellationException(
+                        "PROB EMTY"
+                    )
                 }
         }
         i.user = userObject
         return i
     }
 
-   fun cancelJob() {
-        if(job.isActive) {
+    fun cancelJob() {
+        if (job.isActive) {
             job.cancel()
         }
     }

@@ -57,7 +57,7 @@ class EditProfileRepository @Inject constructor(
 
             uri?.let {
                 launch {
-                   val url = uploadUserImage(it)
+                    val url = uploadUserImage(it)
                     uploadToFirestore(url)
                     user.photo_url = url
                 }
@@ -97,6 +97,7 @@ class EditProfileRepository @Inject constructor(
     suspend fun uploadToFirestore(url: String) {
         firestore.document("$userCollection/${firebaseAuth.uid}").update("photo_url", url).await()
     }
+
     suspend fun updateDescription(
         description: String?,
         user: UserCollection.User

@@ -13,7 +13,7 @@
             app:maxAcceleration="100"
             app:touchAnchorId="@id/on_top_card"
             app:touchAnchorSide="top" />
-        <KeyFrameSet >
+        <KeyFrameSet>
             <KeyAttribute
                 app:motionTarget="@+id/edit_profile"
                 app:framePosition="0"
@@ -40,8 +40,7 @@
             app:civ_border_color="@color/colorSecondaryVariant"
             app:layout_constraintTop_toBottomOf="@+id/user_description"
             android:elevation="1dp">
-            <CustomAttribute
-                app:attributeName="backgroundColor" />
+            <CustomAttribute app:attributeName="backgroundColor" />
             <CustomAttribute
                 app:attributeName="radius"
                 app:customDimension="0dp" />

@@ -8,18 +8,6 @@ import com.android.cameraapp.di.base_activity.edit_profile_fragment.EditProfileS
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentModule
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentViewModelModule
-import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentModule
-import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
-import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
-import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
-import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentViewModelModule
-import com.android.cameraapp.di.base_activity.registration_fragment.RegistrationFragmentScope
-import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
-import com.android.cameraapp.di.base_activity.start_fragment.StartViewModelModule
-import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_choose_photo.AddFragmentOne
-import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_done.AddFragmentThree
-import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.AddFragmentTwo
-import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentModule
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
 import com.android.cameraapp.di.base_activity.followers_fragment.FollowersViewModelModule
@@ -28,15 +16,26 @@ import com.android.cameraapp.di.base_activity.following_fragment.FollowingModule
 import com.android.cameraapp.di.base_activity.following_fragment.FollowingViewModelModule
 import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureScope
 import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureViewModelModule
+import com.android.cameraapp.di.base_activity.home_fragment.HomeFragmentScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentModule
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentScope
 import com.android.cameraapp.di.base_activity.likes_fragment.LikesFragmentViewModelModule
+import com.android.cameraapp.di.base_activity.login_fragment.LoginFragmentScope
 import com.android.cameraapp.di.base_activity.map_fragment.MapFragmentScope
 import com.android.cameraapp.di.base_activity.map_fragment.MapViewModelModule
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentModule
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
+import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentViewModelModule
+import com.android.cameraapp.di.base_activity.registration_fragment.RegistrationFragmentScope
 import com.android.cameraapp.di.base_activity.search_fragment.SearchFragmentScope
 import com.android.cameraapp.di.base_activity.search_fragment.SearchViewModelModule
+import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
+import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_choose_photo.AddFragmentOne
+import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_done.AddFragmentThree
+import com.android.cameraapp.ui.base_activity.add_photo_fragments.add_fragment_write_description.AddFragmentTwo
 import com.android.cameraapp.ui.base_activity.edit_profile_fragment.EditProfileFragment
 import com.android.cameraapp.ui.base_activity.feed_fragment.FeedFragment
+import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersFragment
 import com.android.cameraapp.ui.base_activity.following_fragment.FollowingFragment
 import com.android.cameraapp.ui.base_activity.forgot_password_fragment.ForgotPasswordFragment
 import com.android.cameraapp.ui.base_activity.full_picture_fragment.FullPictureFragment
@@ -91,34 +90,34 @@ abstract class FragmentsBuilder {
 
     @ContributesAndroidInjector
     @AddPhotoFragmentsScope
-    abstract fun addFragmentOne() : AddFragmentOne
+    abstract fun addFragmentOne(): AddFragmentOne
 
     @ContributesAndroidInjector(modules = [AddFragmentViewModelModule::class, AddFragmentModule::class])
     @AddPhotoFragmentsScope
-    abstract fun addFragmentTwo() : AddFragmentTwo
+    abstract fun addFragmentTwo(): AddFragmentTwo
 
     @ContributesAndroidInjector
     @AddPhotoFragmentsScope
-    abstract fun addFragmentThree() : AddFragmentThree
+    abstract fun addFragmentThree(): AddFragmentThree
 
     @ContributesAndroidInjector(modules = [FeedFragmentModule::class, FeedFragmentViewModelModule::class])
     @FeedFragmentScope
-    abstract fun feedFragment() : FeedFragment
+    abstract fun feedFragment(): FeedFragment
 
     @ContributesAndroidInjector(modules = [FullPictureViewModelModule::class])
     @FullPictureScope
-    abstract fun fullPictureFragment() : FullPictureFragment
+    abstract fun fullPictureFragment(): FullPictureFragment
 
     @ContributesAndroidInjector(modules = [SearchViewModelModule::class])
     @SearchFragmentScope
-    abstract fun searchFragment() : SearchFragment
+    abstract fun searchFragment(): SearchFragment
 
     @ContributesAndroidInjector(modules = [EditFragmentViewModelModule::class])
     @EditProfileScope
-    abstract fun editFragment() : EditProfileFragment
+    abstract fun editFragment(): EditProfileFragment
 
     @ContributesAndroidInjector(modules = [MapViewModelModule::class])
     @MapFragmentScope
-    abstract fun mapFragment() : MapFragment
+    abstract fun mapFragment(): MapFragment
 
 }

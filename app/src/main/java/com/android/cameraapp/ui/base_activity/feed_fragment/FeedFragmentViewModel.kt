@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @FeedFragmentScope
 class FeedFragmentViewModel @Inject constructor(val repo: FeedFragmentRepository) : ViewModel() {
-
+    val states = repo.states
     val pagedList = repo.pagedList
 
     override fun onCleared() {
@@ -19,9 +19,13 @@ class FeedFragmentViewModel @Inject constructor(val repo: FeedFragmentRepository
         repo.dataSource.cancelJob()
     }
 
-    fun likePhoto(data: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) = viewModelScope.launch {
-        repo.likePhoto(data, likesCount, icon)
-    }
+    fun likePhoto(data: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) =
+        viewModelScope.launch {
+            repo.likePhoto(data, likesCount, icon)
+        }
 
-    fun removeLike(data: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) = viewModelScope.launch { repo.dislikePhoto(data, likesCount, icon) }
+    fun getFirstDocument() = viewModelScope.launch { repo.getFirstDocument() }
+
+    fun removeLike(data: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) =
+        viewModelScope.launch { repo.dislikePhoto(data, likesCount, icon) }
 }

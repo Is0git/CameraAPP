@@ -6,7 +6,8 @@ import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
 import javax.inject.Inject
 
 @FeedFragmentScope
-class PhotosWithUserFactory @Inject constructor(val dataSource: PhotosWithUserDataSource) : DataSource.Factory<Int, DataFlat.PhotosWithUser>() {
+class PhotosWithUserFactory @Inject constructor(val dataSource: PhotosWithUserDataSource) :
+    DataSource.Factory<Int, DataFlat.PhotosWithUser>() {
     override fun create(): DataSource<Int, DataFlat.PhotosWithUser> {
         return dataSource
     }

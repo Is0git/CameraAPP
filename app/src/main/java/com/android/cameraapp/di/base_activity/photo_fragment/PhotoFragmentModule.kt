@@ -14,7 +14,7 @@ object PhotoFragmentModule {
     @PhotoFragmentScope
     @Provides
     @JvmStatic
-    fun pagedConfig() : PagedList.Config{
+    fun pagedConfig(): PagedList.Config {
         return PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(9)
@@ -25,7 +25,10 @@ object PhotoFragmentModule {
     @PhotoFragmentScope
     @Provides
     @JvmStatic
-    fun getPagedListLiveData(dataSourceFactory: PhotoDataFactory, config: PagedList.Config) : LiveData<PagedList<UserCollection.Photos>> {
-       return LivePagedListBuilder(dataSourceFactory, config).build()
+    fun getPagedListLiveData(
+        dataSourceFactory: PhotoDataFactory,
+        config: PagedList.Config
+    ): LiveData<PagedList<UserCollection.Photos>> {
+        return LivePagedListBuilder(dataSourceFactory, config).build()
     }
 }

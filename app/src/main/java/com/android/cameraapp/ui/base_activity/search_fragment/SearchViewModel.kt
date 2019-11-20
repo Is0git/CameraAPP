@@ -10,7 +10,7 @@ import javax.inject.Inject
 @SearchFragmentScope
 class SearchViewModel @Inject constructor(val repo: SearchRepository) : ViewModel() {
 
-   val searchQueries = repo.searchResults
+    val searchQueries = repo.searchResults
 
     fun getSearchQueries(stringKey: String) {
         viewModelScope.launch(Dispatchers.Main) {

@@ -133,16 +133,7 @@
             <PropertySet android:alpha="1" />
         </Constraint>
         <Constraint android:id="@+id/save" />
-        <Constraint
-            android:id="@+id/userImageProgressBar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:elevation="15dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@id/circleImageView"
-            app:layout_constraintEnd_toEndOf="@id/circleImageView"
-            app:layout_constraintStart_toStartOf="@id/circleImageView"
-            app:layout_constraintTop_toTopOf="@id/circleImageView" />
+
 
 
     </ConstraintSet>
@@ -254,22 +245,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:elevation="15dp"
-            android:visibility="invisible"
+            app:visibilityMode="ignore"
             app:layout_constraintBottom_toBottomOf="@id/circleImageView"
             app:layout_constraintEnd_toEndOf="@id/circleImageView"
             app:layout_constraintStart_toStartOf="@id/circleImageView"
             app:layout_constraintTop_toTopOf="@id/circleImageView" />
 
-        <Constraint
-            android:id="@+id/userImageProgressBar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:elevation="15dp"
-            app:layout_constraintBottom_toBottomOf="@id/circleImageView"
-            app:layout_constraintEnd_toEndOf="@id/circleImageView"
-            app:layout_constraintStart_toStartOf="@id/circleImageView"
-            app:layout_constraintTop_toTopOf="@id/circleImageView"
-            app:visibilityMode="ignore" />
     </ConstraintSet>
 
 

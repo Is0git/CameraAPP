@@ -77,42 +77,44 @@ class BaseActivity : DaggerAppCompatActivity() {
 
         if (state) {
             (supportFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment).navController.setGraph(
-                R.navigation.nav)
+                R.navigation.nav
+            )
             navController.setGraph(R.navigation.nav)
         } else {
             (supportFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment).navController.setGraph(
-                R.navigation.auth_nav)
+                R.navigation.auth_nav
+            )
             navController.setGraph(R.navigation.auth_nav)
         }
 
-        }
-
-
-        override fun onDestroy() {
-            super.onDestroy()
-            Log.d("TAGS", "DESTROY")
-        }
-
-
-        fun BottomBarToInvisible() {
-            if (binding.bar.isVisible) binding.apply {
-                bar.performHide().also { bar.visibility = View.INVISIBLE }
-                fab.hide()
-
-            }
-        }
-
-
-        fun BottomBarVisible() {
-            if (binding.bar.visibility == View.INVISIBLE) {
-                binding.apply {
-                    bar.visibility = View.VISIBLE
-                    bar.performShow()
-                    fab.show()
-                }
-            }
-        }
-
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TAGS", "DESTROY")
+    }
+
+
+    fun BottomBarToInvisible() {
+        if (binding.bar.isVisible) binding.apply {
+            bar.performHide().also { bar.visibility = View.INVISIBLE }
+            fab.hide()
+
+        }
+    }
+
+
+    fun BottomBarVisible() {
+        if (binding.bar.visibility == View.INVISIBLE) {
+            binding.apply {
+                bar.visibility = View.VISIBLE
+                bar.performShow()
+                fab.show()
+            }
+        }
+    }
+
+}
 //TO DO FIGURE OUT how to inject nav controller in repository cause AndroidInjector is before setContentView and NavController needs a view.
 // Implementing HasInjector and putting  injector after setContentView makes Dagger act weird!!!

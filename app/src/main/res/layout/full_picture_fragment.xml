@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="photoViewModel"
             type="com.android.cameraapp.ui.base_activity.full_picture_fragment.FullPictureViewModel" />
+
         <variable
             name="image_url"
             type="String" />
+
         <variable
             name="photoWithUserItem"
             type="com.android.cameraapp.data.data_models.DataFlat.PhotosWithUser" />

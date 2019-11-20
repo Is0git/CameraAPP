@@ -19,6 +19,15 @@ class EditProfileViewModel @Inject constructor(val repo: EditProfileRepository) 
         repeatedPassword: String?,
         uri: Uri?
     ) {
-        viewModelScope.launch { repo.updateProfile(description, quote, user, password, repeatedPassword, uri) }
+        viewModelScope.launch {
+            repo.updateProfile(
+                description,
+                quote,
+                user,
+                password,
+                repeatedPassword,
+                uri
+            )
+        }
     }
 }

@@ -24,7 +24,7 @@ class PhotosDataSource @Inject constructor(
     val currentUser: FirebaseAuth,
     val activity: BaseActivity
 
-    ) : PositionalDataSource<UserCollection.Photos>() {
+) : PositionalDataSource<UserCollection.Photos>() {
     var triggered: Boolean = false
     var listener: EventListener<QuerySnapshot>? = null
     lateinit var lastDocument: DocumentSnapshot
@@ -58,7 +58,7 @@ class PhotosDataSource @Inject constructor(
         fireStore.collection("$userCollection/${auth.uid}/$userPhotosCollection")
             .limit(params.requestedLoadSize.toLong()).get().addOnCompleteListener { task ->
                 when {
-                    task.isSuccessful  && task.result?.size() != 0 -> {
+                    task.isSuccessful && task.result?.size() != 0 -> {
                         task.result?.also { lastDocument = it.documents.last() }
                             ?.toObjects(UserCollection.Photos::class.java).let {
                                 callback.onResult(it!!, 0, it.size)

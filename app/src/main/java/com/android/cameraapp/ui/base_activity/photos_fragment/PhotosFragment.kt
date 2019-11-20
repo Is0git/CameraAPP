@@ -13,25 +13,24 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
-import com.android.cameraapp.databinding.HomeFragmentBinding
 import com.android.cameraapp.databinding.PhotosFragmentBinding
-import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragment
 import com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentDirections
 import com.android.cameraapp.util.getCurrentTime
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.photos_fragment.view.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragmentListeners {
+class PhotosFragment(val userId: String? = null) : DaggerFragment(), PhotosFragmentListeners {
     lateinit var binding: PhotosFragmentBinding
     @Inject
     lateinit var factory: ViewModelFactory
     @Inject
     lateinit var adapter: PhotosAdapter
     lateinit var navController: NavController
-    @Inject lateinit var photosFragmentRepository: PhotosFragmentRepository
+    @Inject
+    lateinit var photosFragmentRepository: PhotosFragmentRepository
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +38,8 @@ class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragme
     ): View? {
         viewLifecycleOwner.lifecycle.addObserver(photosFragmentRepository)
         val viewModel =
-            ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java).also { it.init(userId) }
+            ViewModelProviders.of(this, factory).get(PhotosFragmentViewModel::class.java)
+                .also { it.init(userId) }
         adapter.listeners = this
         binding = PhotosFragmentBinding.inflate(inflater, container, false).apply {
             photosRecyclerView.adapter = adapter
@@ -51,7 +51,7 @@ class PhotosFragment(val userId:String? = null) : DaggerFragment(), PhotosFragme
 //            binding.tabLayout.getTabAt(0)?.text = """Photos
 //                      |${it.size}
 //                  """.trimMargin()
-            if(it != null) binding.size = it.size
+            if (it != null) binding.size = it.size
             adapter.addItems(it)
         })
         binding.chipGroup2.setOnCheckedChangeListener { c, i ->

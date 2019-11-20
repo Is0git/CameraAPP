@@ -5,11 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.cameraapp.data.data_models.DataFlat
-import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.databinding.PhotosListLayoutBinding
 import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,7 +23,7 @@ class PhotosAdapter @Inject constructor() :
         return MyViewHolder(binding)
     }
 
-     lateinit var listeners:PhotosFragmentListeners
+    lateinit var listeners: PhotosFragmentListeners
     fun addItems(item: List<DataFlat.PhotosWithUser>) {
 
         if (item.size == 1) {
@@ -37,6 +35,7 @@ class PhotosAdapter @Inject constructor() :
         }
 
     }
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = items[position]
         holder.binding.photoData = item
@@ -60,7 +59,7 @@ class PhotosAdapter @Inject constructor() :
     }
 
     suspend fun mostPopularFilter() = coroutineScope {
-        items.sortByDescending { it.comments_number  }
+        items.sortByDescending { it.comments_number }
         launch(Dispatchers.Main) { notifyDataSetChanged() }
 
     }

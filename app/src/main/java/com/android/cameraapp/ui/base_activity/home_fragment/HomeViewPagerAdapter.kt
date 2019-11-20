@@ -10,7 +10,12 @@ import com.android.cameraapp.ui.base_activity.likes_fragment.LikesFragment
 import com.android.cameraapp.ui.base_activity.login_fragment.LoginFragment
 import com.android.cameraapp.ui.base_activity.photos_fragment.PhotosFragment
 
-class HomeViewPagerAdapter(manager: FragmentManager, val context: Context, val counterNumber: Int = 0, val userId:String?) :
+class HomeViewPagerAdapter(
+    manager: FragmentManager,
+    val context: Context,
+    val counterNumber: Int = 0,
+    val userId: String?
+) :
     FragmentPagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
 

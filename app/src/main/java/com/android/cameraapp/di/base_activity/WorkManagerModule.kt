@@ -12,5 +12,5 @@ object WorkManagerModule {
     @Provides
     @JvmStatic
     @Singleton
-    fun getWorkManager(application:Application ) : WorkManager = WorkManager.getInstance(application)
+    fun getWorkManager(application: Application): WorkManager = WorkManager.getInstance(application)
 }

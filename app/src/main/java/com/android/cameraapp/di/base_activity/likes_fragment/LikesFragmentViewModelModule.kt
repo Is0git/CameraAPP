@@ -13,5 +13,5 @@ abstract class LikesFragmentViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(LikesFragmentViewModel::class)
-    abstract fun getLikesFragmentViewmodel(viewmodel: LikesFragmentViewModel) : ViewModel
+    abstract fun getLikesFragmentViewmodel(viewmodel: LikesFragmentViewModel): ViewModel
 }

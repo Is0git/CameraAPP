@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
-        <import type="com.android.cameraapp.util.FollowingTimeResolveAdapter"/>
+
+        <import type="com.android.cameraapp.util.FollowingTimeResolveAdapter" />
+
         <variable
             name="item"
             type="com.android.cameraapp.data.data_models.DataFlat.Following" />
+
         <variable
             name="listener"
             type="com.android.cameraapp.ui.base_activity.home_fragment.HomeFragmentListener" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"

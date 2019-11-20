@@ -1,16 +1,11 @@
 package com.android.cameraapp.ui.base_activity
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.android.cameraapp.di.base_activity.BaseActivityScope
-import com.android.cameraapp.util.UserAuthStates
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @BaseActivityScope
 class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewModel() {
-
 
 
     fun logIn(email: String?, password: String?, rememberUser: Boolean) =
@@ -20,7 +15,7 @@ class BaseViewModel @Inject constructor(val repository: BaseRepository) : ViewMo
     fun <T> loginWithThirdPartyAccount(account: T, loginIdentifier: Int) =
         repository.logInWithCredentials(account, loginIdentifier)
 
-    fun checkIfUserLoggedIn() : Boolean = repository.checkIfUserLoggedIN()
+    fun checkIfUserLoggedIn(): Boolean = repository.checkIfUserLoggedIN()
     override fun onCleared() {
         repository.forgetOneSessionUser()
         repository.cancelJobs()

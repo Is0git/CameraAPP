@@ -3,7 +3,6 @@ package com.android.cameraapp.data.data_models
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.google.common.primitives.Chars
 import kotlinx.android.parcel.Parcelize
 
 sealed class UserCollection {
@@ -11,7 +10,7 @@ sealed class UserCollection {
     @Parcelize
     data class User constructor(
         @get: Bindable var description: String? = "",
-        @get: Bindable  var quote: String? = "",
+        @get: Bindable var quote: String? = "",
         val email: String? = "email",
         val is_active: Boolean? = true,
         val last_active: String? = "unknown",
@@ -19,10 +18,10 @@ sealed class UserCollection {
         val username: String? = "unknown",
         @get: Bindable var photo_url: String? = "null",
         val uid: String? = "no id",
-        val username_array: List<String>? = listOf()) : Parcelable, BaseObservable() {
+        val username_array: List<String>? = listOf()
+    ) : Parcelable, BaseObservable() {
 
     }
-
 
 
     //SubCollection
@@ -56,7 +55,7 @@ sealed class UserCollection {
         val width: String? = "N/A",
         val height: String? = "N/A",
         val likes_number: Int? = 0,
-        val time_in_long : Long? = 0,
+        val time_in_long: Long? = 0,
         val image_url: String? = "N/A",
         val mid_image_url: String = "N/A",
         val low_image_url: String = "N/A",
@@ -66,14 +65,24 @@ sealed class UserCollection {
         var longitude: Double? = null
     )
 
-    data class Comments(val comment_date: String? = "N/A",
-                        val comment_id: String? = "N/A",
-                        val comment_date_long: Long = 0,
-                        val photo_id: String? = "N/A",
-                        val user_uid: String? = "N/A",
-                        val post_user_uid: String? = "N/A",
-                        val description: String? = "N/A",
-                        val likes_number: Int? = 0)
+    data class Comments(
+        val comment_date: String? = "N/A",
+        val comment_id: String? = "N/A",
+        val comment_date_long: Long = 0,
+        val photo_id: String? = "N/A",
+        val user_uid: String? = "N/A",
+        val post_user_uid: String? = "N/A",
+        val description: String? = "N/A",
+        val likes_number: Int? = 0
+    )
+
     //SubCollection
-    data class PictureLikes(val liker_id: String?, val name:String?, val when_liked: String?, val photo_id: String?, val time_in_long: Long?, val first_time_liked: Boolean = false)
+    data class PictureLikes(
+        val liker_id: String?,
+        val name: String?,
+        val when_liked: String?,
+        val photo_id: String?,
+        val time_in_long: Long?,
+        val first_time_liked: Boolean = false
+    )
 }

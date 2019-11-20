@@ -12,23 +12,25 @@ import com.android.cameraapp.di.base_activity.full_picture_fragment.FullPictureS
 import javax.inject.Inject
 
 @FullPictureScope
-class CommentsListAdapter @Inject constructor() : ListAdapter<DataFlat.CommentsWithUser, CommentsListAdapter.MyViewHolder>(
-    asyncDiffUtil) {
+class CommentsListAdapter @Inject constructor() :
+    ListAdapter<DataFlat.CommentsWithUser, CommentsListAdapter.MyViewHolder>(
+        asyncDiffUtil
+    ) {
     class MyViewHolder(val binding: FullPhotoListBinding) : RecyclerView.ViewHolder(binding.root)
-
 
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): MyViewHolder {
-        val binding = FullPhotoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            FullPhotoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            val item = getItem(position)
-            holder.binding.item = item
+        val item = getItem(position)
+        holder.binding.item = item
     }
 }
 
@@ -37,6 +39,7 @@ val callback = object : DiffUtil.ItemCallback<DataFlat.CommentsWithUser>() {
         oldItem: DataFlat.CommentsWithUser,
         newItem: DataFlat.CommentsWithUser
     ): Boolean = oldItem.comment_id == newItem.comment_id
+
     override fun areContentsTheSame(
         oldItem: DataFlat.CommentsWithUser,
         newItem: DataFlat.CommentsWithUser

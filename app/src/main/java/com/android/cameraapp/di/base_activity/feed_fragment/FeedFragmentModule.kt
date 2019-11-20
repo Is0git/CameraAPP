@@ -4,11 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.android.cameraapp.data.data_models.DataFlat
-import com.android.cameraapp.di.base_activity.followers_fragment.FollowersFragmentScope
-import com.android.cameraapp.di.base_activity.photo_fragment.PhotoFragmentScope
-import com.android.cameraapp.ui.base_activity.feed_fragment.PhotosWithUserDataSource
 import com.android.cameraapp.ui.base_activity.feed_fragment.PhotosWithUserFactory
-import com.android.cameraapp.ui.base_activity.followers_fragment.FollowersDataSourceFactory
 import dagger.Module
 import dagger.Provides
 
@@ -19,7 +15,9 @@ object FeedFragmentModule {
     @FeedFragmentScope
     @JvmStatic
     fun getPageConfig(): PagedList.Config =
-        PagedList.Config.Builder().setPageSize(3).setInitialLoadSizeHint(4).setEnablePlaceholders(false).build()
+        PagedList.Config.Builder().setPageSize(3).setInitialLoadSizeHint(4).setEnablePlaceholders(
+            false
+        ).build()
 
     @Provides
     @FeedFragmentScope

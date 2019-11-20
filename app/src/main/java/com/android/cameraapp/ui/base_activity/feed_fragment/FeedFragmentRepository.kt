@@ -6,12 +6,14 @@ import android.os.Build
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import androidx.work.WorkManager
 import com.android.cameraapp.R
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
+import com.android.cameraapp.util.States
 import com.android.cameraapp.util.firebase.photosLikesCollection
 import com.android.cameraapp.util.firebase.userCollection
 import com.android.cameraapp.util.firebase.userLikesCollection
@@ -19,10 +21,11 @@ import com.android.cameraapp.util.firebase.userPhotosCollection
 import com.android.cameraapp.util.getCurrentDateInFormat
 import com.android.cameraapp.util.getCurrentTime
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -35,9 +38,11 @@ data class FeedFragmentRepository @Inject constructor(
     val firebaseAuth: FirebaseAuth,
     val fireStore: FirebaseFirestore,
     val application: Application,
-    val work: WorkManager
+    val work: WorkManager,
+    var checkNewDataJob: Job?,
+    val adapter: PhotosWithUserAdapter
 ) {
-
+    var states = MutableLiveData<States>()
     suspend fun likePhoto(photo: DataFlat.PhotosWithUser, likesCount: TextView, icon: View) =
         coroutineScope {
             launch(Dispatchers.Main) { increaseCounterUI(photo, icon) }
@@ -101,8 +106,25 @@ data class FeedFragmentRepository @Inject constructor(
     }
 
 
-    suspend fun getLikeDocument(id: String, photoDocument: DocumentSnapshot): DocumentSnapshot =
-        fireStore.document("$userCollection/${photoDocument.get("user_uid")}/$userPhotosCollection/${photoDocument.id}/$userLikesCollection/${id}").get().await()
+    suspend fun getFirstDocument() = coroutineScope {
+        states.postValue(States.START)
+        if (checkNewDataJob?.isActive != null && checkNewDataJob?.isActive!!) {
+            checkNewDataJob?.cancel()
+        }
+        checkNewDataJob = launch {
+            val result = fireStore.collectionGroup("photos")
+                .orderBy("time_in_long", Query.Direction.DESCENDING)
+                .whereEqualTo("private", false)
+                .limit(1).get().await().toObjects(DataFlat.PhotosWithUser::class.java)
+
+            if (adapter.currentList?.get(0)?.photo_id == result[0].photo_id) {
+
+                dataSource.invalidate()
+            }
+        }
+        checkNewDataJob!!.join()
+        states.postValue(States.FINISH)
+    }
 
 
     suspend fun resolveLikedFirstTime(id: String, photo: DataFlat.PhotosWithUser) = coroutineScope {
@@ -122,7 +144,6 @@ data class FeedFragmentRepository @Inject constructor(
             )
         }
     }
-
 
 
     fun decreaseCounterUI(photo: DataFlat.PhotosWithUser, icon: View) {

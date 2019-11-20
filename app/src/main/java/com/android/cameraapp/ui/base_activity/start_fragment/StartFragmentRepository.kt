@@ -1,11 +1,8 @@
 package com.android.cameraapp.ui.base_activity.start_fragment
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.BaseActivityScope
-import com.android.cameraapp.di.base_activity.start_fragment.StartFragmentScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +26,7 @@ class StartFragmentRepository @Inject constructor(
             val documents = firestore.collection("users").whereEqualTo("uid", uid).get().await()
             launch(Dispatchers.Main) {
                 documents.documents.firstOrNull()?.toObject(UserCollection.User::class.java).also {
-                    data.setValue (it)
+                    data.setValue(it)
                 }
             }
         }

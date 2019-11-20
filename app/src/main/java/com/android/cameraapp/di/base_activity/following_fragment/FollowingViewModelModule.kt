@@ -8,10 +8,10 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract  class FollowingViewModelModule {
+abstract class FollowingViewModelModule {
     @FollowingFragmentScope
     @Binds
     @IntoMap
     @ViewModelKey(FollowingViewModel::class)
-    abstract fun getFollowingViewModel(viewModel: FollowingViewModel) : ViewModel
+    abstract fun getFollowingViewModel(viewModel: FollowingViewModel): ViewModel
 }

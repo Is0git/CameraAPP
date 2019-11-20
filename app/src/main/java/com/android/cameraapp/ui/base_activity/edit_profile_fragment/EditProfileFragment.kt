@@ -21,7 +21,9 @@ import com.android.cameraapp.util.States
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+
 const val IMAGE_REQUEST_CODE = 105
+
 class EditProfileFragment : DaggerFragment(),
     OnTaskStateListener {
     lateinit var binding: EditProfileFragmentBinding
@@ -90,7 +92,7 @@ class EditProfileFragment : DaggerFragment(),
     fun onAddImageClick() {
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
             type = "image/*"
-        }.also { startActivityForResult(it, IMAGE_REQUEST_CODE ) }
+        }.also { startActivityForResult(it, IMAGE_REQUEST_CODE) }
 
     }
 
@@ -126,6 +128,7 @@ class EditProfileFragment : DaggerFragment(),
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) uri = data?.data!!.also { binding.userImage.setImageURI(it) }
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) uri =
+            data?.data!!.also { binding.userImage.setImageURI(it) }
     }
 }

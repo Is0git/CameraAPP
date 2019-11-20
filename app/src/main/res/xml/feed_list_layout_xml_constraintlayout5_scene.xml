@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:motion="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="urn:oasis:names:tc:xliff:document:1.2">
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -58,7 +56,7 @@
             android:elevation="2dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="@id/feedCard_shape"
-            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"/>
+            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape" />
 
         <Constraint
             android:id="@+id/line"
@@ -66,7 +64,7 @@
             android:elevation="2dp"
             android:layout_height="1dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
-            motion:layout_constraintTop_toTopOf="@+id/feedCard_shape" >
+            motion:layout_constraintTop_toTopOf="@+id/feedCard_shape">
             <CustomAttribute
                 motion:attributeName="backgroundColor"
                 motion:customColorValue="@color/colorSecondary" />
@@ -134,7 +132,7 @@
             motion:layout_constraintTop_toTopOf="@+id/comment_icon"
             motion:layout_constraintEnd_toStartOf="@id/share_icon"
             motion:layout_constraintStart_toEndOf="@id/comment_icon"
-            motion:layout_constraintVertical_bias="0.0" >
+            motion:layout_constraintVertical_bias="0.0">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
@@ -151,7 +149,7 @@
             android:layout_width="15dp"
             android:layout_marginStart="8dp"
             android:id="@+id/comment_icon"
-            android:layout_marginEnd="60dp" >
+            android:layout_marginEnd="60dp">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
@@ -224,7 +222,7 @@
             motion:layout_constraintTop_toBottomOf="@+id/user_image"
             motion:layout_constraintStart_toStartOf="@id/left_guideline"
             android:layout_marginTop="4dp"
-            motion:layout_constraintBottom_toTopOf="@id/comment_icon" >
+            motion:layout_constraintBottom_toTopOf="@id/comment_icon">
             <CustomAttribute
                 motion:attributeName="radius"
                 motion:customDimension="15dp" />
@@ -348,7 +346,7 @@
             motion:layout_constraintTop_toBottomOf="@id/line"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintStart_toEndOf="@id/arrow_icon"
-            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"/>
+            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape" />
 
         <Constraint
             android:id="@+id/line"
@@ -357,7 +355,7 @@
             android:elevation="15dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
             motion:layout_constraintStart_toStartOf="@id/feedCard_shape"
-            motion:layout_constraintTop_toBottomOf="@id/title" >
+            motion:layout_constraintTop_toBottomOf="@id/title">
             <CustomAttribute
                 motion:attributeName="backgroundColor"
                 motion:customColorValue="@color/colorAccent" />
@@ -500,7 +498,7 @@
             android:elevation="2dp"
             motion:layout_editor_absoluteX="202dp"
             motion:layout_constraintEnd_toEndOf="@id/guideline18"
-            motion:layout_constraintStart_toStartOf="@id/left_guideline" >
+            motion:layout_constraintStart_toStartOf="@id/left_guideline">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
@@ -511,7 +509,7 @@
             android:layout_width="15dp"
             android:elevation="2dp"
             android:id="@+id/love_icon"
-            motion:layout_editor_absoluteX="41dp" >
+            motion:layout_editor_absoluteX="41dp">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />
@@ -538,7 +536,7 @@
             android:layout_marginBottom="10dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="@id/feedCard_shape"
-            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape"/>
+            motion:layout_constraintBottom_toBottomOf="@id/feedCard_shape" />
 
         <Constraint
             android:id="@+id/line"
@@ -546,7 +544,7 @@
             android:elevation="2dp"
             android:layout_height="1dp"
             motion:layout_constraintEnd_toEndOf="@id/feedCard_shape"
-            motion:layout_constraintTop_toTopOf="@+id/feedCard_shape" >
+            motion:layout_constraintTop_toTopOf="@+id/feedCard_shape">
             <CustomAttribute
                 motion:attributeName="backgroundColor"
                 motion:customColorValue="@color/colorSecondary" />
@@ -559,7 +557,7 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="@+id/left_guideline"
             android:layout_marginTop="36dp"
-            android:layout_marginStart="30dp" >
+            android:layout_marginStart="30dp">
             <CustomAttribute
                 motion:attributeName="rotation"
                 motion:customDimension="90dp" />
@@ -603,7 +601,7 @@
             android:elevation="2dp"
             android:layout_marginStart="8dp"
             android:id="@+id/comment_icon"
-            android:layout_marginEnd="60dp" >
+            android:layout_marginEnd="60dp">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0" />

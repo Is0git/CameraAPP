@@ -28,20 +28,17 @@
             tools:context=".ui.base_activity.BaseActivity">
 
 
-
-                <fragment
-                    android:id="@+id/main_fragment_container"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:defaultNavHost="true"
-                    app:navGraph="@navigation/nav" />
-
-
+            <fragment
+                android:id="@+id/main_fragment_container"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/nav" />
 
 
             <com.google.android.material.bottomappbar.BottomAppBar
@@ -72,7 +69,7 @@
                 app:elevation="10dp"
                 app:tint="@color/colorAccent"
                 android:layout_height="wrap_content"
-                app:layout_anchor="@id/bar"/>
+                app:layout_anchor="@id/bar" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -99,7 +96,6 @@
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
-
 
 
 </layout>

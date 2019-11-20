@@ -6,11 +6,12 @@ import com.android.cameraapp.ui.base_activity.map_fragment.MapFragmentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+
 @Module
 abstract class MapViewModelModule {
     @MapFragmentScope
     @Binds
     @IntoMap
     @ViewModelKey(MapFragmentViewModel::class)
-    abstract fun getMapViewModel(viewModel: MapFragmentViewModel) : ViewModel
+    abstract fun getMapViewModel(viewModel: MapFragmentViewModel): ViewModel
 }

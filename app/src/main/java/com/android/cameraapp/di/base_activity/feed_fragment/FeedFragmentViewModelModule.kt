@@ -13,5 +13,5 @@ abstract class FeedFragmentViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(FeedFragmentViewModel::class)
-    abstract fun getFeedViewModel(viewModel: FeedFragmentViewModel) : ViewModel
+    abstract fun getFeedViewModel(viewModel: FeedFragmentViewModel): ViewModel
 }

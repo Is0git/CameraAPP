@@ -15,7 +15,7 @@ fun resize(bmpFile: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap? {
         } else {
             finalHeight = (maxWidth.toFloat() / ratioBitmap).toInt()
         }
-        val bitmap : Bitmap = Bitmap.createScaledBitmap(bmpFile, finalWidth, finalHeight, true)
+        val bitmap: Bitmap = Bitmap.createScaledBitmap(bmpFile, finalWidth, finalHeight, true)
         bitmap
     } else {
         bmpFile

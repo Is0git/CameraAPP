@@ -11,10 +11,16 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @MapFragmentScope
-class MapRepository @Inject constructor(val firebaseAuth: FirebaseAuth, val fireStore: FirebaseFirestore) {
+class MapRepository @Inject constructor(
+    val firebaseAuth: FirebaseAuth,
+    val fireStore: FirebaseFirestore
+) {
 
     val photos = MutableLiveData<List<UserCollection.Photos>>()
 
-    suspend fun getPhotos() = fireStore.collection("$userCollection/${firebaseAuth.uid}/$userPhotosCollection").get().await().toObjects(UserCollection.Photos::class.java).also { photos.postValue(it) }
+    suspend fun getPhotos() =
+        fireStore.collection("$userCollection/${firebaseAuth.uid}/$userPhotosCollection").get().await().toObjects(
+            UserCollection.Photos::class.java
+        ).also { photos.postValue(it) }
 
 }

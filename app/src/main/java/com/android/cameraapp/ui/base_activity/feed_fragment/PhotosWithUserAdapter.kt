@@ -2,8 +2,6 @@ package com.android.cameraapp.ui.base_activity.feed_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.view.postDelayed
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -43,8 +41,8 @@ class PhotosWithUserAdapter @Inject constructor() :
 
     override fun onViewRecycled(holder: MyViewHolder) {
         super.onViewRecycled(holder)
-        if(holder.binding.constraintLayout5.currentState == R.id.end2)
-        holder.binding.constraintLayout5.progress = 0f
+        if (holder.binding.constraintLayout5.currentState == R.id.end2)
+            holder.binding.constraintLayout5.progress = 0f
     }
 }
 

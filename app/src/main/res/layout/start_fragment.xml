@@ -22,9 +22,11 @@
             app:layout_constraintEnd_toEndOf="@id/circleImageView"
             app:layout_constraintTop_toTopOf="@id/circleImageView"
             android:elevation="15dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/circleImageView"
             android:layout_width="0dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"
             android:layout_width="80dp"
