@@ -70,7 +70,11 @@
                 </action>
                 <action
                     android:id="@+id/action_feedFragment_to_homeFragment"
-                    app:destination="@id/homeFragment" />
+                    app:destination="@id/homeFragment"
+                    app:enterAnim="@android:anim/fade_in"
+                    app:exitAnim="@android:anim/fade_out"
+                    app:popEnterAnim="@android:anim/fade_in"
+                    app:popExitAnim="@android:anim/fade_out" />
             </fragment>
             <fragment
                 android:id="@+id/homeFragment"
@@ -96,13 +100,25 @@
 
                 <action
                     android:id="@+id/action_homeFragment_to_settingsFragment"
-                    app:destination="@id/settingsFragment" />
+                    app:destination="@id/settingsFragment"
+                    app:enterAnim="@android:anim/fade_in"
+                    app:exitAnim="@android:anim/fade_out"
+                    app:popEnterAnim="@android:anim/fade_in"
+                    app:popExitAnim="@android:anim/fade_out" />
                 <action
                     android:id="@+id/action_homeFragment_to_mapFragment"
-                    app:destination="@id/mapFragment" />
+                    app:destination="@id/mapFragment"
+                    app:enterAnim="@android:anim/fade_in"
+                    app:exitAnim="@android:anim/fade_out"
+                    app:popEnterAnim="@android:anim/fade_in"
+                    app:popExitAnim="@android:anim/fade_out" />
                 <action
                     android:id="@+id/action_homeFragment_to_fullPictureFragment"
-                    app:destination="@id/fullPictureFragment">
+                    app:destination="@id/fullPictureFragment"
+                    app:enterAnim="@android:anim/fade_in"
+                    app:exitAnim="@android:anim/fade_out"
+                    app:popEnterAnim="@android:anim/fade_in"
+                    app:popExitAnim="@android:anim/fade_out">
                     <argument
                         android:name="photosWithUsers"
                         android:defaultValue="@null"
@@ -112,7 +128,10 @@
                 </action>
                 <action
                     android:id="@+id/action_homeFragment_self2"
-                    app:destination="@id/homeFragment">
+                    app:destination="@id/homeFragment"
+                    app:enterAnim="@android:anim/fade_in"
+                    app:exitAnim="@android:anim/fade_out"
+                    app:popEnterAnim="@android:anim/fade_in">
                     <argument
                         android:name="userData"
                         android:defaultValue="@null"
@@ -132,7 +151,11 @@
                 </action>
                 <action
                     android:id="@+id/action_homeFragment_to_editProfileFragment"
-                    app:destination="@id/editProfileFragment">
+                    app:destination="@id/editProfileFragment"
+                    app:enterAnim="@android:anim/fade_in"
+                    app:exitAnim="@android:anim/fade_out"
+                    app:popEnterAnim="@android:anim/fade_in"
+                    app:popExitAnim="@android:anim/fade_out">
                     <argument
                         android:name="user"
                         app:argType="android.os.Parcelable" />

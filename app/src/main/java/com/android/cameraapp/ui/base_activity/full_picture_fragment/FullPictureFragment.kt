@@ -34,10 +34,6 @@ class FullPictureFragment : DaggerFragment() {
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var viewmodel: FullPictureViewModel
     val args: FullPictureFragmentArgs by navArgs()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,6 +63,7 @@ class FullPictureFragment : DaggerFragment() {
                 adapter.submitList(it)
                 binding.commentsNumber.text = getString(R.string.comments, it.size, it.size)
                 (args.photosWithUsers as DataFlat.PhotosWithUser).comments_number = it.size
+
             })
         binding.FOLLOW.setOnClickListener {
             if (binding.FOLLOW.text == "FOLLOW") viewmodel.followUser(

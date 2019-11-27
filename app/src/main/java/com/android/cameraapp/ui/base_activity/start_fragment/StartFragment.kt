@@ -188,7 +188,6 @@ class StartFragment : DaggerFragment() {
                     preview.removePreviewOutputListener()
                     imageUri = file.toUri()
                     saveAnimationEnd()
-                    ToastHandler.showToast(activity!!.application, file.absolutePath)
 
                 }
 
@@ -197,7 +196,7 @@ class StartFragment : DaggerFragment() {
                     message: String,
                     cause: Throwable?
                 ) {
-                    print("SD")
+
                 }
             })
         }

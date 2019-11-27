@@ -12,10 +12,10 @@ class SearchViewModel @Inject constructor(val repo: SearchRepository) : ViewMode
 
     val searchQueries = repo.searchResults
 
-    fun getSearchQueries(stringKey: String) {
-        viewModelScope.launch(Dispatchers.Main) {
+    suspend fun getSearchQueries(stringKey: String) {
+
             repo.searchForUsers(stringKey)
-        }
+
     }
 
 }

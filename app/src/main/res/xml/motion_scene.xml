@@ -50,6 +50,9 @@
             app:layout_constraintStart_toStartOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/bottomText">
 
+            <CustomAttribute
+                app:attributeName="cornerRadius"
+                app:customIntegerValue="50" />
         </Constraint>
 
 
@@ -97,17 +100,16 @@
             android:layout_height="63dp"
             android:layout_marginStart="10dp"
             android:elevation="0dp"
-            android:translationZ="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/home_button"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toEndOf="@+id/home_button"
             app:layout_constraintTop_toTopOf="@+id/home_button">
             <CustomAttribute
-                app:attributeName="gravity"
-                app:customIntegerValue="17" />
-            <CustomAttribute
                 app:attributeName="backgroundColor"
                 app:customColorValue="@color/colorSecondaryVariant2" />
+            <CustomAttribute
+                app:attributeName="cornerRadius"
+                app:customIntegerValue="100" />
         </Constraint>
 
         <Constraint
@@ -180,12 +182,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <CustomAttribute
-                app:attributeName="gravity"
-                app:customIntegerValue="3" />
-            <CustomAttribute
-                app:attributeName="gravity"
-                app:customIntegerValue="16" />
 
             <CustomAttribute
                 app:attributeName="backgroundColor"

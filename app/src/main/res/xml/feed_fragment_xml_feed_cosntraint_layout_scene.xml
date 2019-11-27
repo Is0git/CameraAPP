@@ -22,6 +22,7 @@
         <Constraint
             android:id="@+id/spin_kit"
             android:elevation="1dp"
+            motion:visibilityMode="ignore"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,6 +60,7 @@
             android:elevation="1dp"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
+            motion:visibilityMode="ignore"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"

@@ -1,9 +1,11 @@
 package com.android.cameraapp.ui.base_activity.feed_fragment
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PositionalDataSource
 import com.android.cameraapp.data.data_models.DataFlat
 import com.android.cameraapp.data.data_models.UserCollection
 import com.android.cameraapp.di.base_activity.feed_fragment.FeedFragmentScope
+import com.android.cameraapp.util.States
 import com.android.cameraapp.util.firebase.photosLikesCollection
 import com.android.cameraapp.util.firebase.userCollection
 import com.android.cameraapp.util.firebase.userPhotosCollection
@@ -26,6 +28,7 @@ class PhotosWithUserDataSource @Inject constructor(
     val job: Job
 ) : PositionalDataSource<DataFlat.PhotosWithUser>() {
     var document: DocumentSnapshot? = null
+    val state = MutableLiveData<States>()
     override fun loadRange(
         params: LoadRangeParams,
         callback: LoadRangeCallback<DataFlat.PhotosWithUser>
@@ -33,8 +36,10 @@ class PhotosWithUserDataSource @Inject constructor(
         document?.let {
             val list = mutableListOf<DataFlat.PhotosWithUser>()
             CoroutineScope(Dispatchers.Main + job).launch {
+                state.value = States.START
                 getPhotos(list, params)
                 callback.onResult(list)
+                state.value = States.FINISH
             }
         }
 
@@ -46,8 +51,10 @@ class PhotosWithUserDataSource @Inject constructor(
     ) {
         val list = mutableListOf<DataFlat.PhotosWithUser>()
         CoroutineScope(Dispatchers.Main + job).launch {
+            state.value = States.START
             getPhotos(list, params)
             callback.onResult(list, 0, list.size)
+            state.value = States.FINISH
         }
 
     }

@@ -8,9 +8,11 @@ import androidx.appcompat.widget.SearchView
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import com.android.cameraapp.databinding.SearchFragmentBinding
 import com.android.nbaapp.data.vms.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchFragment : DaggerFragment() {
@@ -36,7 +38,10 @@ class SearchFragment : DaggerFragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
                     adapter.submitList(null)
-                    viewModel.getSearchQueries(newText)
+                    lifecycleScope.launch {
+                        viewModel.getSearchQueries(newText)
+                        binding.searchList.smoothScrollToPosition(0)
+                    }
                 }
                 return false
             }

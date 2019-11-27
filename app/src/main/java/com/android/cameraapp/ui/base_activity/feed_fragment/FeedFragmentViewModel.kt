@@ -13,6 +13,7 @@ import javax.inject.Inject
 class FeedFragmentViewModel @Inject constructor(val repo: FeedFragmentRepository) : ViewModel() {
     val states = repo.states
     val pagedList = repo.pagedList
+    val loadStates = repo.dataSource.state
 
     override fun onCleared() {
         super.onCleared()

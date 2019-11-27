@@ -9,12 +9,10 @@ class App : DaggerApplication() {
 
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        Log.d("APPTEST", "2")
         return DaggerAppComponent.builder().application(this).build()
     }
 
     override fun onCreate() {
-        Log.d("APPTEST", "1")
         super.onCreate()
     }
 

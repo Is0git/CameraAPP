@@ -6,7 +6,5 @@
             app:key="@string/dark_mode_preference"
             app:title="@string/dark_mode_theme" />
     </PreferenceCategory>
-    <Preference
-        android:key="notification"
-        android:title="Do you want to have your notifications on?" />
+
 </PreferenceScreen>

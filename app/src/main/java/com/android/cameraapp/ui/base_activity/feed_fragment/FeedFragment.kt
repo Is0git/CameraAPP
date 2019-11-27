@@ -38,23 +38,27 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateL
     lateinit var binding: FeedFragmentBinding
     lateinit var navController: NavController
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        viewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
         binding = FeedFragmentBinding.inflate(inflater, container, false)
         binding.feedRecyclerView.adapter = adapter.also { it.onClickHandler = this }
+
+        observeData()
+        handleScrolls()
+
+        return binding.root
+    }
+
+
+    fun observeData() {
         viewModel.pagedList.observe(viewLifecycleOwner, Observer {
-            if(it != null && it.size > 0) binding.mainSpinKit.visibility = View.INVISIBLE
-            adapter.submitList(it) })
+            adapter.submitList(it)
+        })
 
         viewModel.states.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -64,6 +68,17 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateL
             }
         })
 
+        viewModel.loadStates.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                States.START -> binding.mainSpinKit.visibility = View.VISIBLE
+                States.FINISH -> binding.mainSpinKit.visibility = View.INVISIBLE
+                else -> binding.mainSpinKit.visibility = View.INVISIBLE
+            }
+        })
+
+    }
+
+    fun handleScrolls() {
         binding.feedRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var firstScrolled = false
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -77,7 +92,6 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateL
             }
 
         })
-        return binding.root
     }
 
     override fun imageOnClick(
@@ -107,10 +121,8 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateL
     }
 
     override fun likeOrUnlikePhoto(icon: View, dataFlat: DataFlat.PhotosWithUser, likes: TextView) {
-        Log.d("FEEDFRAGMENT", "CLICKED ON ICON, OH BOY!")
         if (dataFlat.me_liked) {
             dataFlat.me_liked = false
-            dataFlat.likes_number = 20
             viewModel.removeLike(dataFlat, likes, icon)
         } else {
             dataFlat.me_liked = true
@@ -131,13 +143,9 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateL
         (binding.root as MotionLayout).transitionToEnd()
     }
 
-    override fun onTaskFailed() {
+    override fun onTaskFailed() {}
 
-    }
-
-    override fun onTaskSuccess() {
-
-    }
+    override fun onTaskSuccess() {}
 
     override fun onTaskFinish() {
         (binding.root as MotionLayout).transitionToStart()
