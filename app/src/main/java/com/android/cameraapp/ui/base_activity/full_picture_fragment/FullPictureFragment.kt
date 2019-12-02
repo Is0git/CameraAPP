@@ -43,7 +43,8 @@ class FullPictureFragment : DaggerFragment() {
 
 
         viewmodel =
-            ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java).also { it.setUser(args.photosWithUsers as DataFlat.PhotosWithUser) }
+            ViewModelProviders.of(this, viewModelFactory).get(FullPictureViewModel::class.java)
+                .also { it.setUser(args.photosWithUsers as DataFlat.PhotosWithUser) }
 
         binding = FullPictureFragmentBinding.inflate(inflater, container, false)
             .apply {

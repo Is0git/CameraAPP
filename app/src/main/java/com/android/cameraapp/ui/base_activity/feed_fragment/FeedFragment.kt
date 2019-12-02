@@ -1,7 +1,6 @@
 package com.android.cameraapp.ui.base_activity.feed_fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +43,8 @@ class FeedFragment : DaggerFragment(), FeedFragmentOnClickListener, OnTaskStateL
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(FeedFragmentViewModel::class.java)
         binding = FeedFragmentBinding.inflate(inflater, container, false)
         binding.feedRecyclerView.adapter = adapter.also { it.onClickHandler = this }
 

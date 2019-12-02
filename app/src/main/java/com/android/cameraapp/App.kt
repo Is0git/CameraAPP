@@ -1,6 +1,5 @@
 package com.android.cameraapp
 
-import android.util.Log
 import com.android.cameraapp.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication

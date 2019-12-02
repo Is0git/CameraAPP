@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/feed_fragment_xml_feed_cosntraint_layout_scene">
+
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spin_kit"
             style="@style/SpinKitView.Large.ThreeBounce"
@@ -52,7 +53,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/topMaterialCard"
             tools:layout_editor_absoluteX="0dp"
-            tools:listitem="@layout/feed_list_layout"/>
+            tools:listitem="@layout/feed_list_layout" />
 
         <ProgressBar
             android:id="@+id/main_spin_kit"

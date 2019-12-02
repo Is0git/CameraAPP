@@ -109,7 +109,7 @@
                 android:id="@+id/user_name_layout"
                 style="@style/TextInputStyle"
                 android:layout_marginTop="30dp"
-                android:hint="@string/username"
+                android:hint="@string/email"
                 app:counterTextColor="@color/colorSecondaryVariant"
                 app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
                 app:endIconMode="custom"

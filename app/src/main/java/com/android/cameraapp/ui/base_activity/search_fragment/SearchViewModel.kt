@@ -1,10 +1,7 @@
 package com.android.cameraapp.ui.base_activity.search_fragment
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.android.cameraapp.di.base_activity.search_fragment.SearchFragmentScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @SearchFragmentScope
@@ -14,7 +11,7 @@ class SearchViewModel @Inject constructor(val repo: SearchRepository) : ViewMode
 
     suspend fun getSearchQueries(stringKey: String) {
 
-            repo.searchForUsers(stringKey)
+        repo.searchForUsers(stringKey)
 
     }
 
