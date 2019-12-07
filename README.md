@@ -1,10 +1,10 @@
-# CameraAPP
+# CameraAPP ...Not finished
 <img class='header-img' src='https://i.ibb.co/Q83YfkZ/camera-APP.png' />
 
 
 
 <p>Simple shopping app using MVVM architecture, android dagger and jetpack architecture components, material design(somewhat)</p>
-<h1><a href='https://streamable.com/3firm' target='_blank'>DEMO</a></h1>
+<h1><a href='https://streamable.com/9xdr0' target='_blank'>DEMO</a></h1>
 
 
 <h2><strong>Essential libraries I used:</h2>
