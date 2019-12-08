@@ -10,7 +10,7 @@
 <h2><strong>Essential libraries I used:</h2>
 <ol>
 <li>
-<p><strong>Dagger 2</strong></p>
+<p><strong>Android dagger</strong></p>
 </li>
 
 <li>
@@ -23,11 +23,13 @@
 
 
 <li>
-<p><strong>Glide image loader</strong></p>
+<p><strong>Firebase auth,
+FireStore, RealTime Database, FirebaseStorage</strong></p>
 </li>
 
+
 <li>
-<p><strong>For testing: JUNIT, Mockito, Espresso, Hamcrest</strong></p>
+<p><strong>Glide image loader, Picasso</strong></p>
 </li>
 
 <p><strong>And more..</strong></p>
