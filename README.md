@@ -29,6 +29,18 @@ FireStore, RealTime Database, FirebaseStorage</strong></p>
 
 
 <li>
+<p><strong>CameraX</strong></p>
+</li>
+
+<li>
+<p><strong>Jetpack preferences</strong></p>
+</li>
+
+<li>
+<p><strong>Google services Maps</strong></p>
+</li>
+
+<li>
 <p><strong>Glide image loader, Picasso</strong></p>
 </li>
 
