@@ -1,10 +1,13 @@
-# CameraAPP ...Not finished
+# CameraAPP
+<p>Camera app is made for people who like to share their photos and want to find new inspirations and ideas for their photo gallery. App based on firebase components. That is to say, there is heavy use of firestore, auth, storage. Application has a custom camera made with jetpack CameraX therefore users are able to take quick photos and share them directly through thre app.</p>
 <img class='header-img' src='https://i.ibb.co/Q83YfkZ/camera-APP.png' />
-
-
-
-<p>Simple shopping app using MVVM architecture, android dagger and jetpack architecture components, material design</p>
 <h1><a href='https://streamable.com/9xdr0' target='_blank'>DEMO</a></h1>
+      <li>browse newest photos added by users </li>
+                        <li>create your own account with customizable profile</li>
+                        <li>take photos and share them instantly</li>
+                        <li>find photos locations</li>
+                        <li>check other users profiles with ability to follow</li>
+                        <li>comment/like other users posts</li>
 
 
 <h2><strong>Essential libraries I used:</h2>
